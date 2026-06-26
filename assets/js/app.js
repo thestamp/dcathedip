@@ -228,10 +228,10 @@ const tfsaLimits = {
 };
 
 function calculateTfsaRoom() {
-  const birthYear = +document.getElementById("birthYear").value;
+  const eligibilityYear = +document.getElementById("eligibilityYear").value;
   const contributed = +document.getElementById("tfsaContributed").value || 0;
   const withdrawals = +document.getElementById("tfsaWithdrawals").value || 0;
-  const firstEligibleYear = Math.max(2009, birthYear + 18);
+  const firstEligibleYear = Math.max(2009, eligibilityYear);
   const totalLimit = Object.entries(tfsaLimits)
     .filter(([year]) => +year >= firstEligibleYear)
     .reduce((sum, [, limit]) => sum + limit, 0);

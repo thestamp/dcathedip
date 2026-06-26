@@ -109,7 +109,7 @@ The site must include a simple TFSA contribution room calculator.
 
 Inputs:
 
-- Birth year
+- Eligibility year: the later of the year the user turned 18 or the year the user became a Canadian resident
 - Total TFSA contributions already made
 - Withdrawals made last year
 
@@ -119,9 +119,9 @@ Outputs:
 - Total possible contribution room to the current modeled year
 - Estimated remaining contribution room
 
-Assumptions:
+Assumptions and notes:
 
-- User was a Canadian resident and eligible from age 18 onward.
+- TFSA eligibility begins in the later of 2009, the year the user turned 18, or the year the user became a Canadian resident.
 - Calculator is an estimate only.
 - TFSA annual limits must be represented in JavaScript and kept current over time.
 

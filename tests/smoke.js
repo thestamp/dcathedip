@@ -56,13 +56,14 @@ function createServer() {
     });
     await page.locator('[data-region="us"]').click();
     await page.locator('#tfsa').scrollIntoViewIfNeeded();
-    await page.locator('#birthYear').fill('1990');
+    await page.locator('#eligibilityYear').fill('2011');
     await page.locator('#tfsaContributed').fill('25000');
     await page.locator('#tfsaWithdrawals').fill('5000');
     const vtVisible = await page.locator('text=VT').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
+    const eligibilityCopy = /Eligibility year/i.test(bodyText) && /later of the year you turned 18/i.test(bodyText) && /became a Canadian resident/i.test(bodyText);
     const marginCopy = /\bmargin\b/i.test(bodyText);
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const unitsRule = /More units on down days/i.test(bodyText) && /future compounding/i.test(bodyText);
@@ -81,6 +82,7 @@ function createServer() {
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
     if (!taxFreeCopy) throw new Error('Expected TFSA tax-free copy to be visible.');
+    if (!eligibilityCopy) throw new Error('Expected TFSA calculator eligibility-year explanation.');
     if (!recurringTip) throw new Error('Expected Wealthsimple recurring investment tip with $1/day copy.');
     if (!recurringGuide) throw new Error('Expected Wealthsimple recurring investment guide link.');
     if (!unitsRule) throw new Error('Expected top simple rule to mention units and future compounding.');
@@ -95,7 +97,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 11) throw new Error(`Expected at least 11 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, withdrawFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, withdrawFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
