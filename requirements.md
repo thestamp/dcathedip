@@ -124,7 +124,18 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
 - Link the recurring investing tip to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
-## 9. Technical requirements
+## 9. Lump sum FAQ
+
+The FAQ should address what to do if someone suddenly has a large amount of money to invest.
+
+- Explain that lump-sum investing can win if markets rise immediately, but some investors may prefer to reduce timing risk by deploying the money gradually.
+- Recommend a temporary higher fixed DCA rate for new lump-sum cash, not variable buying based on drawdowns.
+- Example: spread $10,000 across one month by investing $500 per trading day, 5 days per week.
+- Mention that Wealthsimple supports multiple cash accounts, so a user can create a dedicated “lump sum” cash account and gradually invest from it without touching their main cash account.
+- Include the Wealthsimple referral link in this FAQ for users who need to set up an account.
+- Keep the explanation educational and avoid presenting it as personalized financial advice.
+
+## 10. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
 - Main config: `_config.yml`
@@ -134,7 +145,7 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 10. Verification requirements
+## 11. Verification requirements
 
 Before finalizing changes, run:
 
@@ -152,7 +163,7 @@ The test must:
 - Verify ETF region switching.
 - Verify TFSA calculator rendering.
 
-## 11. Current limitations
+## 12. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.

@@ -66,6 +66,8 @@ function createServer() {
     const marginCopy = /\bmargin\b/i.test(bodyText);
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const unitsRule = /More units on down days/i.test(bodyText) && /future compounding/i.test(bodyText);
+    const lumpSumFaq = /large amount to invest/i.test(bodyText) && /\$10,000 lump sum/i.test(bodyText) && /\$500 per trading day/i.test(bodyText);
+    const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
     const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 1);
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
@@ -76,10 +78,12 @@ function createServer() {
     if (!recurringTip) throw new Error('Expected Wealthsimple recurring investment tip with $1/day copy.');
     if (!recurringGuide) throw new Error('Expected Wealthsimple recurring investment guide link.');
     if (!unitsRule) throw new Error('Expected top simple rule to mention units and future compounding.');
+    if (!lumpSumFaq) throw new Error('Expected FAQ for deploying a large lump sum with $10,000 / $500 per trading day example.');
+    if (!faqReferral) throw new Error('Expected Wealthsimple referral link inside the lump sum FAQ.');
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 11) throw new Error(`Expected at least 11 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, recurringTip, recurringGuide, unitsRule, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
