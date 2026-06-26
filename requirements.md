@@ -124,7 +124,28 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
 - Link the recurring investing tip to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
-## 9. Lump sum FAQ
+## 9. Timing risk section and FAQs
+
+The site should include a section and FAQ content explaining why the strategy does not simply tell users to “buy the dip” or invest a lump sum immediately.
+
+### Why not just buy the dip?
+
+- Plain-language framing: if most people were consistently good at calling bottoms, they would be professional traders rather than fitting investing around regular jobs.
+- Explain that timing dips is difficult, and cite Barber, Lee, Liu, and Odean, “Do Individual Day Traders Make Money?”, which found that in a typical six-month period, more than eight out of ten day traders lose money after costs.
+- Contrast day traders with long-term investors: the day trader often needs profit quickly; the long-term index investor’s advantage is time.
+- Explain that DCA spreads the risk of one big buy over time instead of pretending to identify the exact bottom.
+
+### Why not just buy lump sum?
+
+- Explain that lump-sum investing can win if markets rise immediately, and cite Vanguard research showing lump sum historically outperformed cost averaging roughly two-thirds of the time.
+- Explain the one-time entry risk: a lump sum exposes all money to the market immediately, including the risk of investing right before a drop.
+- Explain that DCA can reduce regret and short-term downside risk by spreading deployment over time, while acknowledging it may reduce expected return because some money waits in cash temporarily.
+- Include a simple chart comparing lump sum versus DCA timing risk. Required chart points:
+  - Lump sum has 100% day-one exposure.
+  - A one-month DCA has about 50% average exposure during deployment.
+  - Vanguard found lump sum historically outperformed cost averaging roughly two-thirds of the time.
+
+### Lump sum FAQ
 
 The FAQ should address what to do if someone suddenly has a large amount of money to invest.
 
@@ -134,6 +155,13 @@ The FAQ should address what to do if someone suddenly has a large amount of mone
 - Mention that Wealthsimple supports multiple cash accounts, so a user can create a dedicated “lump sum” cash account and gradually invest from it without touching their main cash account.
 - Include the Wealthsimple referral link in this FAQ for users who need to set up an account.
 - Keep the explanation educational and avoid presenting it as personalized financial advice.
+
+### Withdrawal FAQ
+
+- Add an FAQ: “When is the best time to withdraw?”
+- Recommended answer: withdraw when the money has a real-life purpose or life event, such as a vacation, a new car, a home goal, or another genuine need.
+- Encourage users to keep DCA’ing if the plan still fits and withdraw only when they actually need the money.
+- Do not frame normal market volatility as a reason to stop the investing habit.
 
 ## 10. Technical requirements
 
