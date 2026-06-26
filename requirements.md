@@ -43,19 +43,21 @@ The comparison should explain that each schedule can invest the same total amoun
 
 ## 5. Interactive DCA chart
 
-The site must include an interactive chart that compares:
+The site must include an interactive chart that compares a one-time annual investment against five recurring DCA schedules over one full year.
 
-- Lump sum
+Compared schedules:
+
+- One-time annual investment (lump sum comparator)
 - Daily DCA
-- Weekly DCA
-- Biweekly DCA
-- Monthly DCA
-- Quarterly DCA
+- Weekly DCA (5× daily amount per contribution)
+- Biweekly DCA (10× daily)
+- Monthly DCA (20× daily)
+- Quarterly DCA (60× daily)
 
 User-adjustable assumptions:
 
-- Initial capital
-- DCA deployment window
+- One-time annual investment amount (default $1,200)
+- Daily recurring amount (default $10)
 
 Fixed model assumptions displayed on the chart:
 
@@ -63,10 +65,20 @@ Fixed model assumptions displayed on the chart:
 - 30 days falling
 - 30 days recovering
 - 10% annual growth after recovery
+- Deployment window: always 365 days (one full year)
 
-The chart should show each DCA schedule's percentage boost or shortfall versus lump sum in a single stat card per schedule, plus the lump sum ending value. Remove individual schedule ending-value boxes and the daily-vs-quarterly comparison.
+The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No "vs lump sum" or deployment-window slider.
 
-## 6. ETF suggestions by region
+## 6. Timing risk section
+
+The site must include a "Why not just buy the dip?" section with:
+
+- Day-trading loss statistics from Barber, Lee, Liu & Odean.
+- A psychology benefit summary: easier to start, easier psychologically, builds a habit.
+- A DCA-vs-lump-sum comparison table (budget, emotion, expected return, best for).
+- RBC GAM research note (1990–2025) explaining that lump sum historically outperforms but emotions often drive the better behavioral choice.
+
+## 7. ETF suggestions by region
 
 The site must suggest ETFs based on user-selected or detected region.
 
@@ -95,7 +107,7 @@ The site must suggest ETFs based on user-selected or detected region.
 - AVGE
 - QQQM
 
-## 7. Canadian account guidance
+## 8. Canadian account guidance
 
 If the user is in Canada or selects Canada, the site should explain that a TFSA is often the best account for this strategy when contribution room is available because profits and investment growth can be withdrawn tax-free.
 
@@ -106,7 +118,7 @@ The TFSA copy must include caveats:
 - Overcontributions can be penalized.
 - Users should verify official contribution room with CRA My Account.
 
-## 8. TFSA contribution room calculator
+## 9. TFSA contribution room calculator
 
 The site must include a simple TFSA contribution room calculator.
 
@@ -128,7 +140,7 @@ Assumptions and notes:
 - Calculator is an estimate only.
 - TFSA annual limits must be represented in JavaScript and kept current over time.
 
-## 9. Wealthsimple referral
+## 10. Wealthsimple referral
 
 For Canadian users, the site should include a Wealthsimple referral callout.
 
@@ -138,46 +150,34 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
 - Link the recurring investing tip to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
-## 10. Timing risk section and FAQs
+## 11. FAQs
 
-The site should include a section and FAQ content explaining why the strategy does not simply tell users to “buy the dip” or invest a lump sum immediately.
+The site should include FAQ content:
 
 ### Why not just buy the dip?
 
 - Plain-language framing: if most people were consistently good at calling bottoms, they would be professional traders rather than fitting investing around regular jobs.
-- Explain that timing dips is difficult, and cite Barber, Lee, Liu, and Odean, “Do Individual Day Traders Make Money?”, which found that in a typical six-month period, more than eight out of ten day traders lose money after costs.
-- Contrast day traders with long-term investors: the day trader often needs profit quickly; the long-term index investor’s advantage is time.
-- Explain that DCA spreads the risk of one big buy over time instead of pretending to identify the exact bottom.
+- Cite Barber, Lee, Liu, and Odean: more than eight out of ten day traders lose money after costs in a typical six-month period.
 
-### Why not just buy lump sum?
+### What if I suddenly have a large amount to invest?
 
-- Explain that lump-sum investing can win if markets rise immediately, and cite Vanguard research showing lump sum historically outperformed cost averaging roughly two-thirds of the time.
-- Explain the one-time entry risk: a lump sum exposes all money to the market immediately, including the risk of investing right before a drop.
-- Explain that DCA does not guarantee better returns; it removes the single-date gamble risk of buying at the wrong time by spreading deployment over time, while acknowledging it may reduce expected return because some money waits in cash temporarily.
-- Include a simple chart comparing lump sum versus DCA timing risk. Required chart points:
-  - Lump sum has 100% day-one exposure.
-  - A one-month DCA has about 50% average exposure during deployment.
-  - Vanguard found lump sum historically outperformed cost averaging roughly two-thirds of the time.
+- Recommends temporary higher fixed DCA rate for new lump-sum cash.
+- Example: spread $10,000 across one month at $500 per trading day, 5 days per week.
+- Mention Wealthsimple multiple cash accounts for a dedicated "lump sum" account.
+- Include the Wealthsimple referral link.
 
-### Lump sum FAQ
+### Why highlight the TFSA for Canadians?
 
-The FAQ should address what to do if someone suddenly has a large amount of money to invest.
+- TFSA lets eligible Canadian investors withdraw growth tax-free.
+- Often the cleanest account for long-term ETF DCA when contribution room is available.
 
-- Explain that lump-sum investing can win if markets rise immediately, but some investors may prefer to reduce timing risk by deploying the money gradually.
-- Recommend a temporary higher fixed DCA rate for new lump-sum cash, not variable buying based on drawdowns.
-- Example: spread $10,000 across one month by investing $500 per trading day, 5 days per week.
-- Mention that Wealthsimple supports multiple cash accounts, so a user can create a dedicated “lump sum” cash account and gradually invest from it without touching their main cash account.
-- Include the Wealthsimple referral link in this FAQ for users who need to set up an account.
-- Keep the explanation educational and avoid presenting it as personalized financial advice.
+### Which ETF is best?
 
-### Withdrawal FAQ
+- Broad, low-cost index ETFs are a common starting point.
+- Canadian examples: XEQT, VEQT.
+- U.S./global examples: VT, VTI, VOO, QQQM.
 
-- Add an FAQ: “When is the best time to withdraw?”
-- Recommended answer: withdraw when the money has a real-life purpose or life event, such as a vacation, a new car, a home goal, or another genuine need.
-- Encourage users to keep DCA’ing if the plan still fits and withdraw only when they actually need the money.
-- Do not frame normal market volatility as a reason to stop the investing habit.
-
-## 11. Technical requirements
+## 12. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
 - Main config: `_config.yml`
@@ -187,7 +187,7 @@ The FAQ should address what to do if someone suddenly has a large amount of mone
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 12. Verification requirements
+## 13. Verification requirements
 
 Before finalizing changes, run:
 
@@ -205,7 +205,7 @@ The test must:
 - Verify ETF region switching.
 - Verify TFSA calculator rendering.
 
-## 13. Current limitations
+## 14. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.

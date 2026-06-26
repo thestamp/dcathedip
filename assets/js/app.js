@@ -38,7 +38,6 @@ function money(value) {
 function setOutputs() {
   const fields = [
     ["capital", v => money(+v)],
-    ["deployDays", v => `${v} days`],
     ["recurring", v => money(+v)]
   ];
   fields.forEach(([id, render]) => {
@@ -80,7 +79,7 @@ function contributionDays(every, deployDays, totalDays) {
 }
 
 function simulateSchedule(prices, frequency) {
-  const deployDays = +document.getElementById("deployDays").value;
+  const deployDays = 365;
   const recurringAmount = +document.getElementById("recurring").value;
   const installment = recurringAmount * frequency.multiplier;
   const days = contributionDays(frequency.every, deployDays, prices.length - 1);
@@ -154,10 +153,11 @@ function updateChart() {
   }
 
   document.getElementById("stats").innerHTML = `
-    <div class="stat"><small>Lump sum ending value</small><strong>${money(result.lumpEnd)}</strong></div>
+    <div class="stat"><small>One-time annual investment</small><strong>${money(result.lumpEnd)}</strong></div>
     ${result.schedules.map(s => {
-      const pct = ((s.end - result.lumpEnd) / result.lumpEnd * 100);
-      return `<div class="stat ${pct >= 0 ? "good" : "warn"}"><small>${s.label}</small><strong>${pct >= 0 ? "+" : ""}${pct.toFixed(1)}% vs lump sum</strong></div>`;
+      const diff = s.end - result.lumpEnd;
+      const pct = (diff / result.lumpEnd * 100);
+      return `<div class="stat ${diff >= 0 ? "good" : "warn"}"><small>${s.label} (1 year)</small><strong>${money(s.end)} <span>${diff >= 0 ? "+" : ""}${pct.toFixed(1)}%</span></strong></div>`;
     }).join("")}
   `;
 }
