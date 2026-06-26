@@ -22,10 +22,12 @@ The site should include a section explaining how much to DCA.
 
 - Recommended amount: whatever the user can budget sustainably without needing to withdraw because they overextended themselves.
 - Emphasize that the habit only works if it survives real life.
-- Use a coffee example: $5/day equals $35/week, about $152/month, or $1,825/year.
+- Use a coffee example with trading-day/4-week math: $5/day equals $25/week, $100/month, or $1,200/year.
 - Compare to a $5 weekly lottery ticket, which equals $260/year.
 - Explain that DCA is not guaranteed, but it puts money into productive assets rather than a long-shot bet.
 - Remind users not to invest bill money, emergency savings, or cash they expect to need soon.
+- The two budget cards should be laid out as a balanced two-column row on desktop; do not leave a two-card row in a three-column grid.
+- The "Invest within your means" section should be a full-width band/separator with a wrapped inner content grid, not a wrapped section whose separator line stops short of the page edges.
 
 ## 4. DCA schedule comparison
 
@@ -151,7 +153,7 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Copy should state that new signups using the referral link get $25, if that remains accurate.
 - Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
 - In the interactive chart copy, advertise Wealthsimple as the automation option and mention that recurring investing can be as little as $1 per day.
-- Include a dedicated Wealthsimple promo box with the Wealthsimple logo, referral CTA, and setup copy for daily or weekly recurring investments right from a linked bank account, and mention that recurring investing can be as little as $1 per day.
+- Include a dedicated Wealthsimple promo box with the Wealthsimple logo, referral CTA, and setup copy for daily or weekly recurring investments right from a linked bank account, and mention that recurring investing can be as little as $1 per day. Keep CTA button labels short enough to lay out cleanly.
 - The Canadian investors brokerage callout should keep the referral CTA, but should not include the recurring-investing guide link; recurring-investing setup links belong in the other promo boxes that discuss automation.
 - Link the recurring-investing setup copy to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 

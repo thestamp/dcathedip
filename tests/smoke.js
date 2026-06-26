@@ -59,6 +59,20 @@ function createServer() {
       const result = simulate();
       return result.lumpValues[0] > 0 && result.schedules.every(schedule => schedule.values[0] > 0);
     });
+    const layoutChecks = await page.evaluate(() => {
+      const budgetGrid = document.querySelector('.budget-grid');
+      const budgetCols = getComputedStyle(budgetGrid).gridTemplateColumns.split(' ').length;
+      const meansRect = document.querySelector('#means').getBoundingClientRect();
+      const longPromoCta = [...document.querySelectorAll('.wealthsimple-promo-actions .button')]
+        .some(button => button.textContent.trim().length > 25);
+      const externalLogoImage = Boolean(document.querySelector('.wealthsimple-logo-lockup img'));
+      return {
+        budgetTwoColumns: budgetCols === 2,
+        meansFullWidth: Math.abs(meansRect.left) < 2 && Math.abs(meansRect.width - window.innerWidth) < 2,
+        shortPromoCtas: !longPromoCta,
+        noExternalLogoImage: !externalLogoImage
+      };
+    });
     const vtVisible = await page.locator('text=VT').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
@@ -87,6 +101,10 @@ function createServer() {
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
+    if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
+    if (!layoutChecks.meansFullWidth) throw new Error('Expected invest-within-your-means section separator/background to span full viewport width.');
+    if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
+    if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
     if (!taxFreeCopy) throw new Error('Expected TFSA tax-free copy to be visible.');
     if (!eligibilityCopy) throw new Error('Expected TFSA calculator eligibility-year explanation.');
@@ -109,7 +127,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, dayZeroInvested, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, dayZeroInvested, layoutChecks, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
