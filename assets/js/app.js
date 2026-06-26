@@ -21,11 +21,11 @@ const etfs = {
 };
 
 const frequencies = [
-  { key: "daily", label: "Daily DCA", every: 1, color: "#53e6a0" },
-  { key: "weekly", label: "Weekly DCA", every: 7, color: "#6aa8ff" },
-  { key: "biweekly", label: "Biweekly DCA", every: 14, color: "#ffd166" },
-  { key: "monthly", label: "Monthly DCA", every: 30, color: "#b892ff" },
-  { key: "quarterly", label: "Quarterly DCA", every: 91, color: "#ff8fab" }
+  { key: "daily", label: "Daily DCA", every: 1, multiplier: 1, color: "#53e6a0" },
+  { key: "weekly", label: "Weekly DCA", every: 7, multiplier: 5, color: "#6aa8ff" },
+  { key: "biweekly", label: "Biweekly DCA", every: 14, multiplier: 10, color: "#ffd166" },
+  { key: "monthly", label: "Monthly DCA", every: 30, multiplier: 20, color: "#b892ff" },
+  { key: "quarterly", label: "Quarterly DCA", every: 91, multiplier: 60, color: "#ff8fab" }
 ];
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -38,7 +38,8 @@ function money(value) {
 function setOutputs() {
   const fields = [
     ["capital", v => money(+v)],
-    ["deployDays", v => `${v} days`]
+    ["deployDays", v => `${v} days`],
+    ["recurring", v => money(+v)]
   ];
   fields.forEach(([id, render]) => {
     document.getElementById(`${id}Out`).value = render(document.getElementById(id).value);
@@ -79,24 +80,21 @@ function contributionDays(every, deployDays, totalDays) {
 }
 
 function simulateSchedule(prices, frequency) {
-  const capital = +document.getElementById("capital").value;
   const deployDays = +document.getElementById("deployDays").value;
+  const recurringAmount = +document.getElementById("recurring").value;
+  const installment = recurringAmount * frequency.multiplier;
   const days = contributionDays(frequency.every, deployDays, prices.length - 1);
-  const installment = capital / days.length;
-  let cash = capital;
   let shares = 0;
   const values = [];
 
   prices.forEach((price, day) => {
-    if (days.includes(day) && cash > 0) {
-      const buy = Math.min(cash, installment);
-      shares += buy / price;
-      cash -= buy;
+    if (days.includes(day)) {
+      shares += installment / price;
     }
-    values.push(shares * price + cash);
+    values.push(shares * price);
   });
 
-  return { ...frequency, values, shares, cash, installment, contributions: days.length, end: values.at(-1) };
+  return { ...frequency, values, shares, installment, contributions: days.length, end: values.at(-1) };
 }
 
 function simulate() {
@@ -155,7 +153,6 @@ function updateChart() {
     });
   }
 
-  const dailyVsLump = daily.end - result.lumpEnd;
   document.getElementById("stats").innerHTML = `
     <div class="stat"><small>Lump sum ending value</small><strong>${money(result.lumpEnd)}</strong></div>
     ${result.schedules.map(s => {

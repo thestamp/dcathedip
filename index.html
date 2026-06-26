@@ -105,7 +105,7 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
             <small>How much of the money faces market risk immediately</small>
           </div>
           <div class="bar-pair" aria-label="Lump sum 100 percent, one-month DCA about 50 percent average during deployment">
-            <span class="bar lump" style="--w:100%">Lump sum 100%</span>
+            <span class="bar lump risk" style="--w:100%">Lump sum 100%</span>
             <span class="bar dca" style="--w:50%">1-month DCA ~50% avg.</span>
           </div>
         </div>
@@ -117,6 +117,16 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
           <div class="bar-pair" aria-label="Lump sum about 67 percent, DCA about 33 percent historical outperformance odds">
             <span class="bar lump" style="--w:67%">Lump sum ~67%</span>
             <span class="bar dca" style="--w:33%">DCA ~33%</span>
+          </div>
+        </div>
+        <div class="risk-row">
+          <div>
+            <strong>When it pays off</strong>
+            <small>Typical outcome in each scenario (Vanguard, 60/40 portfolio)</small>
+          </div>
+          <div class="bar-pair profit-pair">
+            <span class="profit-bar lump" style="--w:40%">LS wins <span>~+1.8% more wealth after 1 yr</span></span>
+            <span class="profit-bar dca" style="--w:25%">CA wins <span>~+1.4% less downside in worst markets</span></span>
           </div>
         </div>
         <p class="chart-note">
@@ -142,15 +152,21 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         <form class="controls" id="dcaForm">
           <label>
             Initial capital
-            <input type="range" id="capital" min="1000" max="100000" step="1000" value="12000" />
+            <input type="range" id="capital" min="100" max="50000" step="100" value="100" />
             <output id="capitalOut"></output>
           </label>
           <label>
             DCA deployment window
-            <input type="range" id="deployDays" min="30" max="730" step="30" value="365" />
+            <input type="range" id="deployDays" min="1" max="90" step="1" value="30" />
             <output id="deployDaysOut"></output>
           </label>
-          <p class="chart-assumptions">Model assumes a 25% dip over 30 days, 30-day recovery, and 10% annual growth after recovery.</p>
+          <label>
+            Daily recurring amount
+            <input type="range" id="recurring" min="1" max="100" step="1" value="10" />
+            <output id="recurringOut"></output>
+          </label>
+          <p class="chart-assumptions">Model assumes a 25% dip over 30 days, 30-day recovery, and 10% annual growth after recovery. Weekly = 5× daily, biweekly = 10×, monthly = 20×, quarterly = 60×.</p>
+          <p class="chart-assumptions">Wealthsimple offers <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">recurring investments</a> right from your bank account, so you can focus on your family, not the markets.</p>
         </form>
 
         <div class="chart-card">
@@ -280,30 +296,6 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
   </section>
 
 
-  <section id="faq" class="wrap section faq">
-    <div class="section-heading center">
-      <p class="eyebrow">FAQ</p>
-      <h2>Common DCA questions</h2>
-    </div>
-    <details open>
-      <summary>Why not just buy the dip?</summary>
-      <p>Because reliably timing the dip is trading, and trading is hard. Barber, Lee, Liu, and Odean found that more than eight out of ten day traders lost money in a typical six-month period after costs. DCA is the opposite habit: instead of trying to be the person who calls the bottom, you spread buys over time and let a long horizon do the work.</p>
-    </details>
-    <details>
-      <summary>What if I suddenly have a large amount to invest?</summary>
-      <p>If you receive a lump sum and want to reduce timing risk, you can temporarily DCA it at a higher fixed rate over a short period. For example, a $10,000 lump sum could be spread across one month by investing $500 per trading day, 5 days a week. This is not about investing more because the market is down — it is about turning one big decision into a planned series of consistent buys.</p>
-      <p>Wealthsimple lets you create multiple cash accounts, so you could keep a dedicated "lump sum" cash account and draw recurring investments from it without touching your main cash account. If you need an account, you can use the <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Wealthsimple referral link</a>.</p>
-    </details>
-    <details>
-      <summary>Why highlight the TFSA for Canadians?</summary>
-      <p>A TFSA lets eligible Canadian investors withdraw investment growth and profits tax-free. It is not automatically better for every situation, but it is often the cleanest account for long-term ETF DCA when contribution room is available.</p>
-    </details>
-    <details>
-      <summary>Which ETF is "best"?</summary>
-      <p>Broad, low-cost index ETFs are a common starting point. Canadians often use all-in-one ETFs such as XEQT or VEQT. U.S. investors often use VT, VTI, VOO, or QQQM depending on goals and risk tolerance.</p>
-    </details>
-  </section>
-
   <section id="withdraw" class="wrap section split withdraw-section">
     <div>
       <p class="eyebrow">When to withdraw</p>
@@ -330,9 +322,9 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         <p>Home down payment, education, a planned purchase. A defined goal is the right reason.</p>
       </div>
       <div class="pillar">
-        <span class="icon">📅</span>
-        <h3>A planned timeline</h3>
-        <p>Withdrawing on a planned schedule — not in reaction to prices — keeps the decision rational.</p>
+        <span class="icon">🆘</span>
+        <h3>During emergencies</h3>
+        <p>When you need cash for an urgent, unexpected expense. That is what emergency funds are for.</p>
       </div>
       <div class="pillar">
         <span class="icon">🚫</span>
@@ -340,6 +332,30 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         <p>If the only reason to withdraw is that the market fell, that is not a withdrawal — that is panic selling.</p>
       </div>
     </div>
+  </section>
+
+  <section id="faq" class="wrap section faq">
+    <div class="section-heading center">
+      <p class="eyebrow">FAQ</p>
+      <h2>Common DCA questions</h2>
+    </div>
+    <details open>
+      <summary>Why not just buy the dip?</summary>
+      <p>Because reliably timing the dip is trading, and trading is hard. Barber, Lee, Liu, and Odean found that more than eight out of ten day traders lost money in a typical six-month period after costs. DCA is the opposite habit: instead of trying to be the person who calls the bottom, you spread buys over time and let a long horizon do the work.</p>
+    </details>
+    <details>
+      <summary>What if I suddenly have a large amount to invest?</summary>
+      <p>If you receive a lump sum and want to reduce timing risk, you can temporarily DCA it at a higher fixed rate over a short period. For example, a $10,000 lump sum could be spread across one month by investing $500 per trading day, 5 days a week. This is not about investing more because the market is down — it is about turning one big decision into a planned series of consistent buys.</p>
+      <p>Wealthsimple lets you create multiple cash accounts, so you could keep a dedicated "lump sum" cash account and draw recurring investments from it without touching your main cash account. If you need an account, you can use the <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Wealthsimple referral link</a>.</p>
+    </details>
+    <details>
+      <summary>Why highlight the TFSA for Canadians?</summary>
+      <p>A TFSA lets eligible Canadian investors withdraw investment growth and profits tax-free. It is not automatically better for every situation, but it is often the cleanest account for long-term ETF DCA when contribution room is available.</p>
+    </details>
+    <details>
+      <summary>Which ETF is "best"?</summary>
+      <p>Broad, low-cost index ETFs are a common starting point. Canadians often use all-in-one ETFs such as XEQT or VEQT. U.S. investors often use VT, VTI, VOO, or QQQM depending on goals and risk tolerance.</p>
+    </details>
   </section>
 </main>
 

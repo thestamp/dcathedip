@@ -69,11 +69,11 @@ function createServer() {
     const lumpSumRiskFaq = /single-date gamble risk of buying at the wrong time/i.test(bodyText) && !/roughly one-third of the time/i.test(bodyText) && !/more in your favor behaviorally/i.test(bodyText);
     const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$35 a week/i.test(bodyText) && /\$1,825 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
-    const withdrawSection = /When the money has a job to do/i.test(bodyText) && /panic selling/i.test(bodyText) && /A real goal/i.test(bodyText) && /A planned timeline/i.test(bodyText) && /Not market reaction/i.test(bodyText);
+    const withdrawSection = /When the money has a job to do/i.test(bodyText) && /panic selling/i.test(bodyText) && /A real goal/i.test(bodyText) && /During emergencies/i.test(bodyText) && /Not market reaction/i.test(bodyText);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
     const removedDailyMonthlyFaq = !/Why recommend daily instead of monthly\?/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
-    const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 1);
+    const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count >= 2);
     const timingSources = await page.locator('#timing a[href*="barber-lee-liu-odean.pdf"], #timing a[href*="vanguard.com/content/dam/corp/research/pdf/cost_averaging"]').count();
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
