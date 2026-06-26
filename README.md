@@ -1,10 +1,10 @@
 # DCA the Dip
 
-A static educational website for **DCATheDip.com / DCATheDip.ca**.
+A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 
 ## Features
 
-- Beautiful responsive landing page
+- Beautiful responsive Jekyll landing page
 - Interactive DCA-through-a-dip calculator using Chart.js
 - Lump sum vs daily DCA comparison
 - Drawdown-based contribution accelerator rules
@@ -12,9 +12,18 @@ A static educational website for **DCATheDip.com / DCATheDip.ca**.
 - Optional browser geolocation for region selection
 - Wealthsimple referral link as a JavaScript variable
 
+## Structure
+
+- `_config.yml` — Jekyll site settings
+- `_layouts/default.html` — shared HTML shell
+- `index.html` — homepage content with Jekyll front matter
+- `assets/css/styles.css` — site styling
+- `assets/js/app.js` — calculator, ETF picker, and referral config
+- `CNAME` — GitHub Pages custom domain (`dcathedip.com`)
+
 ## Configure referral link
 
-Edit `app.js`:
+Edit `assets/js/app.js`:
 
 ```js
 const WEALTHSIMPLE_REFERRAL_URL = "https://www.wealthsimple.com/invite/YOUR_REFERRAL_CODE";
@@ -22,23 +31,29 @@ const WEALTHSIMPLE_REFERRAL_URL = "https://www.wealthsimple.com/invite/YOUR_REFE
 
 ## Local development
 
-Install dependencies and run verification:
+Install Ruby and Node dependencies:
 
 ```bash
+bundle install
 npm install
+```
+
+Run locally with Jekyll:
+
+```bash
+bundle exec jekyll serve
+```
+
+Then open <http://localhost:4000>.
+
+## Verification
+
+```bash
 npm run test
 ```
 
-Serve locally with any static server, for example:
+The test command uses a lightweight local renderer for CI/smoke testing when Ruby/Jekyll is unavailable, then opens the built site in Playwright.
 
-```bash
-python3 -m http.server 8080
-```
+## Deploy with GitHub Pages
 
-Then open <http://localhost:8080>.
-
-## Deploy
-
-This repository is ready for GitHub Pages as a static site.
-
-Because the initial GitHub token did not include the `workflow` scope, no GitHub Actions workflow is committed. In GitHub repo settings, configure Pages to deploy from the `main` branch root, or add a Pages workflow later with a token that has workflow permissions.
+This repo is configured as a GitHub Pages-compatible Jekyll site. In GitHub repo settings, choose Pages deployment from the `main` branch root, or use GitHub's default Jekyll Pages build.

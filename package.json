@@ -1,10 +1,10 @@
 {
   "name": "dcathedip",
   "version": "1.0.0",
-  "description": "A static educational website for DCATheDip.com / DCATheDip.ca.",
+  "description": "A Jekyll educational website for DCATheDip.com / DCATheDip.ca.",
   "private": true,
   "scripts": {
-    "test": "node --check app.js && node tests/smoke.js"
+    "test": "node tests/render-jekyll-lite.js && node --check assets/js/app.js && node tests/smoke.js"
   },
   "devDependencies": {
     "playwright": "^1.61.1"

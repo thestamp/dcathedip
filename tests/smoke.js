@@ -3,7 +3,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('playwright');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '..', '_site');
 const mime = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -15,7 +15,8 @@ function createServer() {
   return http.createServer((req, res) => {
     const requested = new URL(req.url, 'http://localhost').pathname;
     const safePath = path.normalize(requested).replace(/^\/+/, '');
-    const filePath = path.join(root, safePath || 'index.html');
+    let filePath = path.join(root, safePath || 'index.html');
+    if (!path.extname(filePath)) filePath = path.join(filePath, 'index.html');
     if (!filePath.startsWith(root)) {
       res.writeHead(403);
       res.end('Forbidden');
