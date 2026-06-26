@@ -9,7 +9,7 @@ DCA the Dip explains the benefits of consistent dollar-cost averaging for long-t
 ## 2. Core positioning
 
 - Primary message: invest consistently through every market.
-- Recommended cadence: daily DCA, because it creates the most entry points and more chances to participate in short-lived dip opportunities.
+- Recommended cadence: daily DCA, because it gives contributions the most chances to buy more units during short-lived dip opportunities; when prices fall, the same dollar amount buys more units.
 - Strategy must use consistent contribution amounts only.
 - Do not recommend increasing contributions during drawdowns.
 - Do not discuss or recommend margin.
