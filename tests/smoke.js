@@ -62,17 +62,24 @@ function createServer() {
     const vtVisible = await page.locator('text=VT').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
-    const marginCopy = await page.locator('body').textContent().then(text => /\bmargin\b/i.test(text));
+    const bodyText = await page.locator('body').textContent();
+    const marginCopy = /\bmargin\b/i.test(bodyText);
+    const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
+    const unitsRule = /More units on down days/i.test(bodyText) && /future compounding/i.test(bodyText);
+    const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 1);
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
     if (!taxFreeCopy) throw new Error('Expected TFSA tax-free copy to be visible.');
+    if (!recurringTip) throw new Error('Expected Wealthsimple recurring investment tip with $1/day copy.');
+    if (!recurringGuide) throw new Error('Expected Wealthsimple recurring investment guide link.');
+    if (!unitsRule) throw new Error('Expected top simple rule to mention units and future compounding.');
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 11) throw new Error(`Expected at least 11 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, recurringTip, recurringGuide, unitsRule, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

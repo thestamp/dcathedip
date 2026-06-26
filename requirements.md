@@ -10,6 +10,7 @@ DCA the Dip explains the benefits of consistent dollar-cost averaging for long-t
 
 - Primary message: invest consistently through every market.
 - Recommended cadence: daily DCA, because it gives contributions the most chances to buy more units during short-lived dip opportunities; when prices fall, the same dollar amount buys more units.
+- Top simple rule should communicate two ideas in plain-language, investment-appropriate terms: daily DCA can buy more units at lower prices during dips, and if broad indexes grow over the long run, those extra units can help future compounding without requiring market timing.
 - Strategy must use consistent contribution amounts only.
 - Do not recommend increasing contributions during drawdowns.
 - Do not discuss or recommend margin.
@@ -117,9 +118,11 @@ Assumptions:
 
 For Canadian users, the site should include a Wealthsimple referral callout.
 
-- Referral URL is stored as a JavaScript variable.
-- Current referral URL: `https://wealthsimple.com/invite/V-MKNQ`
-- Copy should mention that new signups using the referral link get $25.
+- Referral URL should be managed in JavaScript as `WEALTHSIMPLE_REFERRAL_URL`.
+- Current referral URL: `https://wealthsimple.com/invite/V-MKNQ`.
+- Copy should state that new signups using the referral link get $25, if that remains accurate.
+- Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
+- Link the recurring investing tip to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
 ## 9. Technical requirements
 

@@ -132,6 +132,8 @@ h3 { font-size: 1.35rem; }
 .ticker-card p { margin-bottom: 0; }
 .wealthsimple { margin-top: 24px; padding: 24px; display: flex; justify-content: space-between; gap: 24px; align-items: center; box-shadow: none; }
 .wealthsimple h3 { margin-bottom: 8px; }
+.wealthsimple .tip { color: var(--text); font-weight: 800; margin-top: 12px; }
+.wealthsimple-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
 
 .tfsa-section { align-items: stretch; }
 .tfsa-card { padding: 28px; box-shadow: none; }
@@ -163,4 +165,5 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .grid-3, .ticker-grid, .stats { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .wealthsimple { align-items: stretch; flex-direction: column; }
+  .wealthsimple-actions { justify-content: flex-start; }
 }
