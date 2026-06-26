@@ -69,7 +69,7 @@ function createServer() {
     const lumpSumFaq = /large amount to invest/i.test(bodyText) && /\$10,000 lump sum/i.test(bodyText) && /\$500 per trading day/i.test(bodyText);
     const timingSection = /Why not just buy the dip\?/i.test(bodyText) && /more than eight out of ten day traders lose money/i.test(bodyText);
     const riskChart = /Day-one exposure/i.test(bodyText) && /Lump sum 100%/i.test(bodyText) && /1-month DCA ~50% avg\./i.test(bodyText) && /Lump sum ~67%/i.test(bodyText);
-    const lumpSumRiskFaq = /one-date timing gamble/i.test(bodyText) && /roughly one-third of the time/i.test(bodyText) && /more in your favor behaviorally/i.test(bodyText);
+    const lumpSumRiskFaq = /single-date gamble risk of buying at the wrong time/i.test(bodyText) && !/roughly one-third of the time/i.test(bodyText) && !/more in your favor behaviorally/i.test(bodyText);
     const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$35 a week/i.test(bodyText) && /\$1,825 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);

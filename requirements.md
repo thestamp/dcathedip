@@ -149,9 +149,8 @@ The site should include a section and FAQ content explaining why the strategy do
 ### Why not just buy lump sum?
 
 - Explain that lump-sum investing can win if markets rise immediately, and cite Vanguard research showing lump sum historically outperformed cost averaging roughly two-thirds of the time.
-- Add the caveat that if lump sum wins roughly two-thirds of the time, cost averaging still wins roughly one-third of the time; the investor does not know ahead of time which outcome they will get.
 - Explain the one-time entry risk: a lump sum exposes all money to the market immediately, including the risk of investing right before a drop.
-- Explain that DCA removes the single-date gamble and can make the process more favorable behaviorally by spreading deployment over time, while acknowledging it may reduce expected return because some money waits in cash temporarily and does not guarantee better returns.
+- Explain that DCA does not guarantee better returns; it removes the single-date gamble risk of buying at the wrong time by spreading deployment over time, while acknowledging it may reduce expected return because some money waits in cash temporarily.
 - Include a simple chart comparing lump sum versus DCA timing risk. Required chart points:
   - Lump sum has 100% day-one exposure.
   - A one-month DCA has about 50% average exposure during deployment.
