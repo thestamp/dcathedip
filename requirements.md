@@ -95,12 +95,13 @@ The site must suggest ETFs based on user-selected or detected region.
 
 ### Canada ETF examples
 
-- XEQT.TO
-- VEQT.TO
-- CAGE.TO
-- XUU.TO
-- XIC.TO
-- XEF.TO
+For the Canadian region, show ETFs as a grid with rows for market exposure and columns for cap-based versus growth-based choices. Each ETF cell must show the ticker, name, and a quick description of what the fund covers and why it fits that column.
+
+| Market exposure | Cap-based | Growth-based |
+|---|---|---|
+| U.S. | ZSP.TO — BMO S&P 500 Index ETF, cap-based U.S. large-cap S&P 500 exposure | ZQQ.TO — BMO Nasdaq 100 Index ETF, growth-tilted U.S. Nasdaq exposure |
+| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF, cap-based large Canadian company exposure | XCG.TO — iShares Canadian Growth Index ETF, Canadian companies selected for growth characteristics |
+| World | XEQT.TO — iShares Core Equity ETF Portfolio, cap-based global all-equity portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF, factor-tilted global all-equity growth-oriented core |
 
 ### U.S. ETF examples
 

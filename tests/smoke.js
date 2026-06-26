@@ -74,6 +74,20 @@ function createServer() {
       };
     });
     const vtVisible = await page.locator('text=VT').first().isVisible();
+    await page.locator('[data-region="canada"]').click();
+    const canadaEtfGrid = await page.evaluate(() => {
+      const grid = document.querySelector('#tickerGrid');
+      const text = grid.textContent;
+      return grid.classList.contains('etf-matrix')
+        && /Cap-based/i.test(text)
+        && /Growth-based/i.test(text)
+        && /ZSP\.TO/i.test(text)
+        && /ZQQ\.TO/i.test(text)
+        && /ZIU\.TO/i.test(text)
+        && /XCG\.TO/i.test(text)
+        && /XEQT\.TO/i.test(text)
+        && /CAGE\.TO/i.test(text);
+    });
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
@@ -100,6 +114,7 @@ function createServer() {
     const chartCanvas = await page.locator('#dcaChart').isVisible();
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
+    if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with cap-based and growth-based choices for U.S., Canada, and World.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
     if (!layoutChecks.meansFullWidth) throw new Error('Expected invest-within-your-means section separator/background to span full viewport width.');
@@ -127,7 +142,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, dayZeroInvested, layoutChecks, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

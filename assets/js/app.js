@@ -3,12 +3,21 @@ const WEALTHSIMPLE_REFERRAL_URL = "https://wealthsimple.com/invite/V-MKNQ";
 
 const etfs = {
   canada: [
-    { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Simple all-equity global index core for Canadian investors." },
-    { ticker: "VEQT.TO", name: "Vanguard All-Equity ETF Portfolio", use: "Another broad all-equity global allocation with Vanguard’s methodology." },
-    { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Factor-tilted global equity exposure using value and profitability screens." },
-    { ticker: "XUU.TO", name: "iShares Core S&P U.S. Total Market ETF", use: "Broad U.S. total-market sleeve for investors who want extra U.S. exposure." },
-    { ticker: "XIC.TO", name: "iShares Core S&P/TSX Capped Composite ETF", use: "Canadian equity sleeve for home-market exposure." },
-    { ticker: "XEF.TO", name: "iShares Core MSCI EAFE IMI Index ETF", use: "Developed international equity sleeve outside North America." }
+    {
+      market: "U.S.",
+      cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Cap-based S&P 500 exposure to large U.S. companies." },
+      growth: { ticker: "ZQQ.TO", name: "BMO Nasdaq 100 Index ETF", use: "Growth-tilted U.S. exposure through Nasdaq-listed innovators." }
+    },
+    {
+      market: "Canada",
+      cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Cap-based exposure to 60 large Canadian companies." },
+      growth: { ticker: "XCG.TO", name: "iShares Canadian Growth Index ETF", use: "Canadian companies selected for long-term growth characteristics." }
+    },
+    {
+      market: "World",
+      cap: { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Cap-based global all-equity portfolio across Canada, U.S., international, and emerging markets." },
+      growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Factor-tilted global all-equity portfolio for a more aggressive growth-oriented core." }
+    }
   ],
   us: [
     { ticker: "VT", name: "Vanguard Total World Stock ETF", use: "One-ticket global equity market exposure." },
@@ -162,15 +171,41 @@ function updateChart() {
   `;
 }
 
-function renderTickers(region) {
-  const grid = document.getElementById("tickerGrid");
-  grid.innerHTML = etfs[region].map(item => `
-    <article class="ticker-card">
+function renderEtfCell(item, type) {
+  return `
+    <div class="etf-cell ${type}">
       <span class="ticker">${item.ticker}</span>
       <h3>${item.name}</h3>
       <p>${item.use}</p>
-    </article>
-  `).join("");
+    </div>
+  `;
+}
+
+function renderTickers(region) {
+  const grid = document.getElementById("tickerGrid");
+  grid.classList.toggle("etf-matrix", region === "canada");
+  grid.classList.toggle("ticker-grid", region !== "canada");
+
+  if (region === "canada") {
+    grid.innerHTML = `
+      <div class="etf-matrix-header market-label">Market</div>
+      <div class="etf-matrix-header">Cap-based</div>
+      <div class="etf-matrix-header">Growth-based</div>
+      ${etfs.canada.map(row => `
+        <div class="market-label">${row.market}</div>
+        ${renderEtfCell(row.cap, "cap")}
+        ${renderEtfCell(row.growth, "growth")}
+      `).join("")}
+    `;
+  } else {
+    grid.innerHTML = etfs.us.map(item => `
+      <article class="ticker-card">
+        <span class="ticker">${item.ticker}</span>
+        <h3>${item.name}</h3>
+        <p>${item.use}</p>
+      </article>
+    `).join("");
+  }
 
   document.querySelectorAll("[data-region]").forEach(btn => btn.classList.toggle("active", btn.dataset.region === region));
   document.getElementById("wealthsimpleBox").style.display = region === "canada" ? "flex" : "none";
