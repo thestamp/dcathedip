@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="DCA the Dip explains daily dollar-cost averaging with interactive charts, drawdown strategies, and ETF ideas for Canadian and U.S. investors." />
+    <meta property="og:title" content="DCA the Dip" />
+    <meta property="og:description" content="Buy consistently. Buy more when it’s cheaper." />
+    <meta property="og:type" content="website" />
+    <meta name="theme-color" content="#10192f" />
+    <title>DCA the Dip — Buy consistently. Buy more when it’s cheaper.</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav wrap" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="DCA the Dip home">
+          <span class="brand-mark">↘</span>
+          <span>DCA the Dip</span>
+        </a>
+        <div class="nav-links">
+          <a href="#calculator">Calculator</a>
+          <a href="#strategy">Strategy</a>
+          <a href="#tickers">Tickers</a>
+          <a href="#faq">FAQ</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero wrap">
+        <div class="hero-copy">
+          <p class="eyebrow">A rules-based investing playbook</p>
+          <h1>Buy consistently. <span>Buy more when it’s cheaper.</span></h1>
+          <p class="lede">
+            DCA the Dip turns market drawdowns into a plan: invest daily, stay diversified,
+            and use deeper discounts as a signal to increase contributions — without guessing the bottom.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#calculator">Try the dip calculator</a>
+            <a class="button ghost" href="#strategy">See the DCA ladder</a>
+          </div>
+          <div class="trust-row" aria-label="Core principles">
+            <span>Daily investing</span>
+            <span>Index ETFs</span>
+            <span>Drawdown rules</span>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="DCA summary card">
+          <div class="card-glow"></div>
+          <p class="card-label">Today’s rule</p>
+          <h2 id="todayRule">1.5× daily buy</h2>
+          <p>When the index is down 10–19%, increase your planned contribution by 50%.</p>
+          <div class="mini-bars" aria-hidden="true">
+            <span style="height: 35%"></span>
+            <span style="height: 50%"></span>
+            <span style="height: 70%"></span>
+            <span style="height: 92%"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap section grid-3" aria-labelledby="why-title">
+        <div class="section-heading wide">
+          <p class="eyebrow">Why DCA daily?</p>
+          <h2 id="why-title">It makes a hard decision automatic.</h2>
+        </div>
+        <article class="benefit-card">
+          <span class="icon">⏱</span>
+          <h3>Removes timing pressure</h3>
+          <p>Daily DCA spreads entries across noisy markets, so you don’t need to pick the perfect day.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="icon">🧠</span>
+          <h3>Reduces panic decisions</h3>
+          <p>A preset drawdown ladder turns scary red days into scheduled actions instead of emotional choices.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="icon">📉</span>
+          <h3>Buys more shares lower</h3>
+          <p>If prices fall while you keep buying, the same dollars accumulate more units at better prices.</p>
+        </article>
+      </section>
+
+      <section id="calculator" class="section calculator-section">
+        <div class="wrap">
+          <div class="section-heading center">
+            <p class="eyebrow">Interactive chart</p>
+            <h2>DCA through a dip vs lump sum</h2>
+            <p>
+              Model a market that falls, recovers, then compounds. Adjust the dip and contribution rules to see how
+              buying through weakness changes shares accumulated and ending value.
+            </p>
+          </div>
+
+          <div class="calculator-layout">
+            <form class="controls" id="dcaForm">
+              <label>
+                Initial capital
+                <input type="range" id="capital" min="1000" max="100000" step="1000" value="12000" />
+                <output id="capitalOut"></output>
+              </label>
+              <label>
+                Base daily DCA
+                <input type="range" id="daily" min="5" max="500" step="5" value="50" />
+                <output id="dailyOut"></output>
+              </label>
+              <label>
+                Dip depth
+                <input type="range" id="dip" min="5" max="60" step="1" value="35" />
+                <output id="dipOut"></output>
+              </label>
+              <label>
+                Days falling
+                <input type="range" id="fallDays" min="10" max="250" step="5" value="90" />
+                <output id="fallDaysOut"></output>
+              </label>
+              <label>
+                Days recovering
+                <input type="range" id="recoverDays" min="10" max="500" step="5" value="180" />
+                <output id="recoverDaysOut"></output>
+              </label>
+              <label>
+                Annual growth after recovery
+                <input type="range" id="growth" min="0" max="15" step="0.25" value="7" />
+                <output id="growthOut"></output>
+              </label>
+              <label>
+                Dip accelerator
+                <select id="accelerator">
+                  <option value="steady">Steady daily DCA</option>
+                  <option value="balanced" selected>Balanced: up to 3×</option>
+                  <option value="aggressive">Aggressive: up to 5×</option>
+                </select>
+              </label>
+            </form>
+
+            <div class="chart-card">
+              <canvas id="dcaChart" aria-label="DCA vs lump sum ending value chart"></canvas>
+              <div class="stats" id="stats"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategy" class="wrap section split">
+        <div>
+          <p class="eyebrow">Drawdown ladder</p>
+          <h2>A simple rule for buying more</h2>
+          <p>
+            Start with a base daily buy you can sustain. Increase only when the ETF is below its recent or all-time high.
+            The goal is not to predict the bottom — it is to have more buying power when expected returns are more attractive.
+          </p>
+        </div>
+        <div class="ladder" role="table" aria-label="DCA accelerator ladder">
+          <div role="row"><span>Drawdown</span><strong>Daily buy</strong></div>
+          <div role="row"><span>0% to -9%</span><strong>1.0×</strong></div>
+          <div role="row"><span>-10% to -19%</span><strong>1.5×</strong></div>
+          <div role="row"><span>-20% to -29%</span><strong>2.0×</strong></div>
+          <div role="row"><span>-30% to -39%</span><strong>2.5×</strong></div>
+          <div role="row"><span>-40% or worse</span><strong>3.0×</strong></div>
+        </div>
+      </section>
+
+      <section id="tickers" class="section ticker-section">
+        <div class="wrap">
+          <div class="section-heading center">
+            <p class="eyebrow">ETF ideas</p>
+            <h2>Pick your market</h2>
+            <p>
+              Use location to suggest Canadian-listed or U.S.-listed tickers. Location stays in your browser and is only used
+              to choose this list. You can also select manually.
+            </p>
+          </div>
+
+          <div class="region-picker" role="group" aria-label="Choose ETF market">
+            <button class="button primary" id="detectLocation" type="button">Use my location</button>
+            <button class="button ghost active" data-region="canada" type="button">Canada</button>
+            <button class="button ghost" data-region="us" type="button">United States / elsewhere</button>
+            <button class="button ghost" id="declineLocation" type="button">No location</button>
+          </div>
+          <p class="location-note" id="locationNote">Showing Canadian-listed ETF ideas.</p>
+
+          <div class="ticker-grid" id="tickerGrid"></div>
+
+          <aside class="wealthsimple" id="wealthsimpleBox">
+            <div>
+              <p class="eyebrow">Canadian investors</p>
+              <h3>Need a brokerage?</h3>
+              <p>Wealthsimple is a common low-friction option for Canadian ETF investors. Referral link is configurable.</p>
+            </div>
+            <a class="button primary" id="wealthsimpleLink" href="#" rel="nofollow noopener">Wealthsimple referral</a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="faq" class="wrap section faq">
+        <div class="section-heading center">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common DCA questions</h2>
+        </div>
+        <details open>
+          <summary>Is daily DCA always better than lump sum?</summary>
+          <p>No. If markets rise immediately, lump sum often wins. DCA shines when you value behavioral consistency, cashflow investing, or buying through drawdowns without timing the bottom.</p>
+        </details>
+        <details>
+          <summary>Should I use margin?</summary>
+          <p>Margin can amplify returns and losses. A drawdown is only a discount if you can keep buying and avoid forced liquidation. Keep leverage conservative and rules-based.</p>
+        </details>
+        <details>
+          <summary>Which ETF is “best”?</summary>
+          <p>Broad, low-cost index ETFs are a common starting point. Canadians often use all-in-one ETFs such as XEQT or VEQT. U.S. investors often use VT, VTI, VOO, or QQQM depending on goals and risk tolerance.</p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <div>
+          <a class="brand" href="#top"><span class="brand-mark">↘</span><span>DCA the Dip</span></a>
+          <p>Educational content only. Not financial advice. Investing involves risk, including possible loss of principal.</p>
+        </div>
+        <div>
+          <strong>Build your rules. Follow them.</strong>
+          <p>Daily DCA, broad ETFs, and drawdown accelerators for long-term investors.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
