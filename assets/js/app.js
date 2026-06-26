@@ -34,7 +34,8 @@ const frequencies = [
   { key: "weekly", label: "Weekly DCA", contributions: 52, color: "#6aa8ff" },
   { key: "biweekly", label: "Biweekly DCA", contributions: 26, color: "#ffd166" },
   { key: "monthly", label: "Monthly DCA", contributions: 13, color: "#b892ff" },
-  { key: "quarterly", label: "Quarterly DCA", contributions: 4, color: "#ff8fab" }
+  { key: "quarterly", label: "Quarterly DCA", contributions: 4, color: "#ff8fab" },
+  { key: "annual", label: "Annual DCA", contributions: 1, color: "#f4f7fb" }
 ];
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -94,11 +95,12 @@ function simulateSchedule(prices, frequency) {
   const annualTotal = recurringAmount * 5 * 52;
   const installment = annualTotal / frequency.contributions;
   const days = contributionDays(frequency.contributions, prices.length - 1);
+  const contributionSet = new Set(days);
   let shares = 0;
   const values = [];
 
   prices.forEach((price, day) => {
-    if (days.includes(day)) {
+    if (contributionSet.has(day)) {
       shares += installment / price;
     }
     values.push(shares * price);
@@ -115,6 +117,27 @@ function simulate() {
   const lumpValues = prices.map(p => lumpShares * p);
   const schedules = frequencies.map(freq => simulateSchedule(prices, freq));
   return { prices, lumpShares, lumpValues, lumpEnd: lumpValues.at(-1), schedules };
+}
+
+function renderDailyTable(result) {
+  const visibleSchedules = result.schedules.filter(schedule => schedule.key !== "biweekly");
+  const headers = ["Day", "Lump sum", ...visibleSchedules.map(schedule => schedule.label.replace(" DCA", ""))];
+  const rows = result.prices.map((_, day) => `
+    <tr>
+      <th scope="row">${day}</th>
+      <td>${money(result.lumpValues[day])}</td>
+      ${visibleSchedules.map(schedule => `<td>${money(schedule.values[day])}</td>`).join("")}
+    </tr>
+  `).join("");
+
+  document.getElementById("dailyTable").innerHTML = `
+    <table>
+      <thead>
+        <tr>${headers.map(header => `<th scope="col">${header}</th>`).join("")}</tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
 }
 
 function updateChart() {
@@ -172,6 +195,8 @@ function updateChart() {
       return `<div class="stat ${diff >= 0 ? "good" : "warn"}"><small>${s.label} (1 year)</small><strong>${money(s.end)} <span>${diff >= 0 ? "+" : ""}${pct.toFixed(1)}%</span></strong></div>`;
     }).join("")}
   `;
+
+  renderDailyTable(result);
 }
 
 function renderEtfCell(item, type) {

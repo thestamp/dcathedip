@@ -77,6 +77,8 @@ The first contribution for every modeled strategy must happen on day 0 so the vi
 
 All modeled DCA schedules must invest the same total annual dollars as the one-time annual investment. If dip depth is 0% and annual gain/loss is 0%, every DCA schedule and the one-time annual investment should end at the same value. The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No deployment-window slider.
 
+The chart must include an expandable day-by-day comparison table. The table should be collapsed by default, show roughly the first 10 rows in a scrollable container when expanded, and update whenever the sliders change. It should compare daily values for lump sum, daily, weekly, monthly, quarterly, and annual investing. With 0% dip and 0% annual gain/loss, the final-day values in the table must match across every displayed approach.
+
 ## 6. Timing risk section
 
 The site must include a "Why not just buy the dip?" section with:

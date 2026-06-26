@@ -160,6 +160,41 @@ h3 { font-size: 1.35rem; }
 .stat strong { font-size: 1.25rem; }
 .stat.good strong { color: var(--green); }
 .stat.warn strong { color: var(--gold); }
+.daily-comparison {
+  margin-top: 18px;
+  padding: 16px 18px;
+}
+.daily-comparison p {
+  margin: 10px 0 14px;
+  font-size: 0.9rem;
+}
+.daily-table-wrap {
+  max-height: 430px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.daily-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+  font-size: 0.86rem;
+}
+.daily-table-wrap th, .daily-table-wrap td {
+  padding: 10px 12px;
+  text-align: right;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  white-space: nowrap;
+}
+.daily-table-wrap th:first-child, .daily-table-wrap td:first-child { text-align: left; }
+.daily-table-wrap thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #152036;
+  color: var(--green);
+}
+.daily-table-wrap tbody tr:nth-child(even) { background: rgba(255,255,255,0.035); }
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
 .ladder { padding: 16px; box-shadow: none; }
