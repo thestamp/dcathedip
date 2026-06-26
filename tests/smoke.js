@@ -55,6 +55,10 @@ function createServer() {
     await page.locator('#eligibilityYear').fill('2011');
     await page.locator('#tfsaContributed').fill('25000');
     await page.locator('#tfsaWithdrawals').fill('5000');
+    const dayZeroInvested = await page.evaluate(() => {
+      const result = simulate();
+      return result.lumpValues[0] > 0 && result.schedules.every(schedule => schedule.values[0] > 0);
+    });
     const vtVisible = await page.locator('text=VT').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
@@ -62,6 +66,7 @@ function createServer() {
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /later of the year you turned 18/i.test(bodyText) && /became a Canadian resident/i.test(bodyText);
     const marginCopy = /\bmargin\b/i.test(bodyText);
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
+    const wealthsimplePromo = /Automate investing instead of gambling on the odds/i.test(bodyText) && /right from your bank account/i.test(bodyText);
     const unitsRule = /More units on down days/i.test(bodyText) && /future compounding/i.test(bodyText);
     const lumpSumFaq = /large amount to invest/i.test(bodyText) && /\$10,000 lump sum/i.test(bodyText) && /\$500 per trading day/i.test(bodyText);
     const timingSection = /Why not just buy the dip\?/i.test(bodyText) && /more than eight out of ten day traders lose money/i.test(bodyText);
@@ -80,10 +85,12 @@ function createServer() {
     const chartCanvas = await page.locator('#dcaChart').isVisible();
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
+    if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
     if (!taxFreeCopy) throw new Error('Expected TFSA tax-free copy to be visible.');
     if (!eligibilityCopy) throw new Error('Expected TFSA calculator eligibility-year explanation.');
     if (!recurringTip) throw new Error('Expected Wealthsimple recurring investment tip with $1/day copy.');
+    if (!wealthsimplePromo) throw new Error('Expected dedicated Wealthsimple automation promo box with bank-account setup copy.');
     if (!recurringGuide) throw new Error('Expected Wealthsimple recurring investment guide link.');
     if (!unitsRule) throw new Error('Expected top simple rule to mention units and future compounding.');
     if (!lumpSumFaq) throw new Error('Expected FAQ for deploying a large lump sum with $10,000 / $500 per trading day example.');
@@ -100,7 +107,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, dayZeroInvested, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

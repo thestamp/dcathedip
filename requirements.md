@@ -67,6 +67,8 @@ Fixed model assumptions displayed on the chart:
 - 10% annual growth after recovery
 - Deployment window: always 365 days (one full year)
 
+The first contribution for every modeled strategy must happen on day 0 so the visual starts when the plan starts.
+
 The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No "vs lump sum" or deployment-window slider.
 
 ## 6. Timing risk section
@@ -148,7 +150,9 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Current referral URL: `https://wealthsimple.com/invite/V-MKNQ`.
 - Copy should state that new signups using the referral link get $25, if that remains accurate.
 - Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
-- Link the recurring investing tip to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
+- In the interactive chart copy, advertise Wealthsimple as the automation option.
+- Include a dedicated Wealthsimple promo box with the Wealthsimple logo, referral CTA, and setup copy for daily or weekly recurring investments right from a linked bank account.
+- Link the recurring-investing setup copy to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
 ## 11. FAQs
 

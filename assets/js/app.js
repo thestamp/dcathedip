@@ -72,10 +72,10 @@ function buildPrices() {
 }
 
 function contributionDays(every, deployDays, totalDays) {
+  const lastDay = Math.min(deployDays, totalDays);
   const days = [];
-  for (let day = 0; day <= Math.min(deployDays, totalDays); day += every) days.push(day);
-  if (!days.includes(Math.min(deployDays, totalDays))) days.push(Math.min(deployDays, totalDays));
-  return [...new Set(days)].sort((a, b) => a - b);
+  for (let day = 0; day <= lastDay; day += every) days.push(day);
+  return days;
 }
 
 function simulateSchedule(prices, frequency) {
