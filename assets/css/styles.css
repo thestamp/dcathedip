@@ -75,7 +75,7 @@ h3 { font-size: 1.35rem; }
 .trust-row { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
 .trust-row span { border: 1px solid var(--border); border-radius: 999px; padding: 8px 12px; color: var(--muted); background: rgba(255,255,255,0.05); }
 
-.hero-card, .benefit-card, .chart-card, .controls, .wealthsimple, details, .ladder, .tfsa-card, .risk-card {
+.hero-card, .benefit-card, .chart-card, .controls, .wealthsimple, details, .ladder, .tfsa-card, .risk-card, .budget-card {
   background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055));
   border: 1px solid var(--border);
   border-radius: 28px;
@@ -147,6 +147,11 @@ h3 { font-size: 1.35rem; }
 .ladder div:first-child { color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.78rem; }
 .ladder strong { color: var(--green); }
 
+.budget-section { padding-top: 36px; }
+.budget-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.budget-card { padding: 24px; box-shadow: none; }
+.budget-card p { margin-bottom: 0; }
+
 .ticker-section { background: rgba(255,255,255,0.035); }
 .region-picker { justify-content: center; }
 .location-note { text-align: center; margin-top: 14px; }
@@ -186,7 +191,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid { grid-template-columns: 1fr; }
   .nav-links { display: none; }
   .wealthsimple { align-items: stretch; flex-direction: column; }
   .wealthsimple-actions { justify-content: flex-start; }

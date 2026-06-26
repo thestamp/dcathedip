@@ -69,7 +69,8 @@ function createServer() {
     const lumpSumFaq = /large amount to invest/i.test(bodyText) && /\$10,000 lump sum/i.test(bodyText) && /\$500 per trading day/i.test(bodyText);
     const timingSection = /Why not just buy the dip\?/i.test(bodyText) && /more than eight out of ten day traders lose money/i.test(bodyText);
     const riskChart = /Day-one exposure/i.test(bodyText) && /Lump sum 100%/i.test(bodyText) && /1-month DCA ~50% avg\./i.test(bodyText) && /Lump sum ~67%/i.test(bodyText);
-    const lumpSumRiskFaq = /one-time entry risk/i.test(bodyText) && /roughly two-thirds of the time/i.test(bodyText);
+    const lumpSumRiskFaq = /one-date timing gamble/i.test(bodyText) && /roughly one-third of the time/i.test(bodyText) && /more in your favor behaviorally/i.test(bodyText);
+    const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$35 a week/i.test(bodyText) && /\$1,825 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
     const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 1);
@@ -87,13 +88,14 @@ function createServer() {
     if (!timingSection) throw new Error('Expected why-not-buy-the-dip timing section with day-trading loss statistic.');
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected lump sum FAQ to mention one-time entry risk and Vanguard two-thirds statistic.');
+    if (!budgetSection) throw new Error('Expected sustainable DCA amount section with coffee and lottery examples.');
     if (!withdrawFaq) throw new Error('Expected withdrawal FAQ with life-event guidance.');
     if (!faqReferral) throw new Error('Expected Wealthsimple referral link inside the lump sum FAQ.');
     if (timingSources !== 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 11) throw new Error(`Expected at least 11 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, withdrawFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, withdrawFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

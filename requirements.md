@@ -16,7 +16,18 @@ DCA the Dip explains the benefits of consistent dollar-cost averaging for long-t
 - Do not discuss or recommend margin.
 - Do not present content as financial advice.
 
-## 3. DCA schedule comparison
+## 3. Sustainable DCA amount
+
+The site should include a section explaining how much to DCA.
+
+- Recommended amount: whatever the user can budget sustainably without needing to withdraw because they overextended themselves.
+- Emphasize that the habit only works if it survives real life.
+- Use a coffee example: $5/day equals $35/week, about $152/month, or $1,825/year.
+- Compare to a $5 weekly lottery ticket, which equals $260/year.
+- Explain that DCA is not guaranteed, but it puts money into productive assets rather than a long-shot bet.
+- Remind users not to invest bill money, emergency savings, or cash they expect to need soon.
+
+## 4. DCA schedule comparison
 
 The site must compare these contribution schedules:
 
@@ -30,7 +41,7 @@ The site must compare these contribution schedules:
 
 The comparison should explain that each schedule can invest the same total amount; only timing changes.
 
-## 4. Interactive DCA chart
+## 5. Interactive DCA chart
 
 The site must include an interactive chart that compares:
 
@@ -52,7 +63,7 @@ User-adjustable assumptions:
 
 The chart should show ending value/stat cards and make daily DCA visually prominent.
 
-## 5. ETF suggestions by region
+## 6. ETF suggestions by region
 
 The site must suggest ETFs based on user-selected or detected region.
 
@@ -81,7 +92,7 @@ The site must suggest ETFs based on user-selected or detected region.
 - AVGE
 - QQQM
 
-## 6. Canadian account guidance
+## 7. Canadian account guidance
 
 If the user is in Canada or selects Canada, the site should explain that a TFSA is often the best account for this strategy when contribution room is available because profits and investment growth can be withdrawn tax-free.
 
@@ -92,7 +103,7 @@ The TFSA copy must include caveats:
 - Overcontributions can be penalized.
 - Users should verify official contribution room with CRA My Account.
 
-## 7. TFSA contribution room calculator
+## 8. TFSA contribution room calculator
 
 The site must include a simple TFSA contribution room calculator.
 
@@ -114,7 +125,7 @@ Assumptions:
 - Calculator is an estimate only.
 - TFSA annual limits must be represented in JavaScript and kept current over time.
 
-## 8. Wealthsimple referral
+## 9. Wealthsimple referral
 
 For Canadian users, the site should include a Wealthsimple referral callout.
 
@@ -124,7 +135,7 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
 - Link the recurring investing tip to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
-## 9. Timing risk section and FAQs
+## 10. Timing risk section and FAQs
 
 The site should include a section and FAQ content explaining why the strategy does not simply tell users to “buy the dip” or invest a lump sum immediately.
 
@@ -138,8 +149,9 @@ The site should include a section and FAQ content explaining why the strategy do
 ### Why not just buy lump sum?
 
 - Explain that lump-sum investing can win if markets rise immediately, and cite Vanguard research showing lump sum historically outperformed cost averaging roughly two-thirds of the time.
+- Add the caveat that if lump sum wins roughly two-thirds of the time, cost averaging still wins roughly one-third of the time; the investor does not know ahead of time which outcome they will get.
 - Explain the one-time entry risk: a lump sum exposes all money to the market immediately, including the risk of investing right before a drop.
-- Explain that DCA can reduce regret and short-term downside risk by spreading deployment over time, while acknowledging it may reduce expected return because some money waits in cash temporarily.
+- Explain that DCA removes the single-date gamble and can make the process more favorable behaviorally by spreading deployment over time, while acknowledging it may reduce expected return because some money waits in cash temporarily and does not guarantee better returns.
 - Include a simple chart comparing lump sum versus DCA timing risk. Required chart points:
   - Lump sum has 100% day-one exposure.
   - A one-month DCA has about 50% average exposure during deployment.
@@ -163,7 +175,7 @@ The FAQ should address what to do if someone suddenly has a large amount of mone
 - Encourage users to keep DCA’ing if the plan still fits and withdraw only when they actually need the money.
 - Do not frame normal market volatility as a reason to stop the investing habit.
 
-## 10. Technical requirements
+## 11. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
 - Main config: `_config.yml`
@@ -173,7 +185,7 @@ The FAQ should address what to do if someone suddenly has a large amount of mone
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 11. Verification requirements
+## 12. Verification requirements
 
 Before finalizing changes, run:
 
@@ -191,7 +203,7 @@ The test must:
 - Verify ETF region switching.
 - Verify TFSA calculator rendering.
 
-## 12. Current limitations
+## 13. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
