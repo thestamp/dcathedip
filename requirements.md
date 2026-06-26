@@ -58,20 +58,24 @@ Compared schedules:
 
 User-adjustable assumptions:
 
-- One-time annual investment amount (default $1,200)
 - Daily recurring amount (default $10)
+- Dip depth slider (default 25%, can be set to 0%)
+- Annual gain/loss slider after recovery (default +10%, range -10% to +10%, can be set to 0%)
+
+Derived value:
+
+- One-time annual investment is not an independent slider. It must be calculated as daily recurring amount × 5 trading days × 52 weeks. This makes the lump-sum comparator equal to the total annual amount a weekly investor would contribute.
 
 Fixed model assumptions displayed on the chart:
 
-- 25% dip depth
 - 30 days falling
 - 30 days recovering
-- 10% annual growth after recovery
+- Then compounding through day 365 at the selected annual gain/loss
 - Deployment window: always 365 days (one full year)
 
 The first contribution for every modeled strategy must happen on day 0 so the visual starts when the plan starts.
 
-The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No "vs lump sum" or deployment-window slider.
+All modeled DCA schedules must invest the same total annual dollars as the one-time annual investment. If dip depth is 0% and annual gain/loss is 0%, every DCA schedule and the one-time annual investment should end at the same value. The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No deployment-window slider.
 
 ## 6. Timing risk section
 

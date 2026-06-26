@@ -147,25 +147,35 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         <p class="eyebrow">Interactive chart</p>
         <h2>Daily vs weekly vs biweekly vs monthly vs quarterly</h2>
         <p>
-          Model a market that falls, recovers, then compounds. Each DCA schedule invests the same total dollars —
-          only the timing changes. Daily buys usually catch more dip opportunities because they create more entries.
+          Model a market that dips, then compounds over one year. Each DCA schedule and the one-time annual investment
+          invest the same total dollars — only the timing changes. Set dip and annual gain to 0% to see every approach end equal.
         </p>
       </div>
 
       <div class="calculator-layout">
         <form class="controls" id="dcaForm">
           <label>
-            One-time annual investment
-            <input type="range" id="capital" min="100" max="50000" step="100" value="1200" />
-            <output id="capitalOut"></output>
-          </label>
-          <label>
             Daily recurring amount
             <input type="range" id="recurring" min="1" max="100" step="1" value="10" />
             <output id="recurringOut"></output>
           </label>
-          <p class="chart-assumptions">Model assumes a 25% dip over 30 days, 30-day recovery, and 10% annual growth after recovery. Each schedule runs for one full year.</p>
-          <p class="chart-assumptions">Weekly = 5× daily &middot; biweekly = 10× &middot; monthly = 20× &middot; quarterly = 60×. <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Use Wealthsimple to automate this</a>, and <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">click here for setup details</a>. Recurring investments can run daily or weekly from your bank account, for as little as $1 a day.</p>
+          <label>
+            Dip depth
+            <input type="range" id="dip" min="0" max="50" step="1" value="25" />
+            <output id="dipOut"></output>
+          </label>
+          <label>
+            Annual gain after recovery
+            <input type="range" id="growth" min="-10" max="10" step="1" value="10" />
+            <output id="growthOut"></output>
+          </label>
+          <div class="derived-total">
+            <small>One-time annual investment</small>
+            <strong><output id="capitalOut"></output></strong>
+            <span>Calculated as daily amount × 5 trading days × 52 weeks.</span>
+          </div>
+          <p class="chart-assumptions">Model assumes a 30-day dip and 30-day recovery, then compounds at the selected annual gain/loss through day 365. At 0% dip and 0% gain, the one-time annual investment and every DCA schedule end at the same value.</p>
+          <p class="chart-assumptions">Weekly = 5× daily for 52 weeks. Biweekly/monthly/quarterly are scaled so every schedule invests the same annual total. <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Use Wealthsimple to automate this</a>, and <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">click here for setup details</a>. Recurring investments can run daily or weekly from your bank account, for as little as $1 a day.</p>
         </form>
 
         <div class="chart-card">

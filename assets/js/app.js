@@ -30,11 +30,11 @@ const etfs = {
 };
 
 const frequencies = [
-  { key: "daily", label: "Daily DCA", every: 1, multiplier: 1, color: "#53e6a0" },
-  { key: "weekly", label: "Weekly DCA", every: 7, multiplier: 5, color: "#6aa8ff" },
-  { key: "biweekly", label: "Biweekly DCA", every: 14, multiplier: 10, color: "#ffd166" },
-  { key: "monthly", label: "Monthly DCA", every: 30, multiplier: 20, color: "#b892ff" },
-  { key: "quarterly", label: "Quarterly DCA", every: 91, multiplier: 60, color: "#ff8fab" }
+  { key: "daily", label: "Daily DCA", contributions: 260, color: "#53e6a0" },
+  { key: "weekly", label: "Weekly DCA", contributions: 52, color: "#6aa8ff" },
+  { key: "biweekly", label: "Biweekly DCA", contributions: 26, color: "#ffd166" },
+  { key: "monthly", label: "Monthly DCA", contributions: 13, color: "#b892ff" },
+  { key: "quarterly", label: "Quarterly DCA", contributions: 4, color: "#ff8fab" }
 ];
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -45,22 +45,25 @@ function money(value) {
 }
 
 function setOutputs() {
+  const recurringAmount = +document.getElementById("recurring").value;
+  const annualTotal = recurringAmount * 5 * 52;
   const fields = [
-    ["capital", v => money(+v)],
-    ["recurring", v => money(+v)]
+    ["recurring", v => money(+v)],
+    ["dip", v => `${v}%`],
+    ["growth", v => `${+v > 0 ? "+" : ""}${v}%`]
   ];
   fields.forEach(([id, render]) => {
     document.getElementById(`${id}Out`).value = render(document.getElementById(id).value);
   });
+  document.getElementById("capitalOut").value = money(annualTotal);
 }
 
 function buildPrices() {
-  const dipDepth = 0.25;
+  const dipDepth = +document.getElementById("dip").value / 100;
   const fallDays = 30;
   const recoverDays = 30;
-  const growth = 0.10;
-  const afterDays = 365;
-  const totalDays = fallDays + recoverDays + afterDays;
+  const growth = +document.getElementById("growth").value / 100;
+  const totalDays = 365;
   const startPrice = 100;
   const prices = [];
 
@@ -72,7 +75,7 @@ function buildPrices() {
       const t = (day - fallDays) / recoverDays;
       price = startPrice * (1 - dipDepth + dipDepth * t);
     } else {
-      const t = (day - fallDays - recoverDays) / 365;
+      const t = (day - fallDays - recoverDays) / (totalDays - fallDays - recoverDays);
       price = startPrice * Math.pow(1 + growth, t);
     }
     prices.push(price);
@@ -80,18 +83,17 @@ function buildPrices() {
   return prices;
 }
 
-function contributionDays(every, deployDays, totalDays) {
-  const lastDay = Math.min(deployDays, totalDays);
-  const days = [];
-  for (let day = 0; day <= lastDay; day += every) days.push(day);
-  return days;
+function contributionDays(count, totalDays) {
+  if (count === 1) return [0];
+  const interval = totalDays / count;
+  return Array.from({ length: count }, (_, i) => Math.min(totalDays, Math.round(i * interval)));
 }
 
 function simulateSchedule(prices, frequency) {
-  const deployDays = 365;
   const recurringAmount = +document.getElementById("recurring").value;
-  const installment = recurringAmount * frequency.multiplier;
-  const days = contributionDays(frequency.every, deployDays, prices.length - 1);
+  const annualTotal = recurringAmount * 5 * 52;
+  const installment = annualTotal / frequency.contributions;
+  const days = contributionDays(frequency.contributions, prices.length - 1);
   let shares = 0;
   const values = [];
 
@@ -106,7 +108,8 @@ function simulateSchedule(prices, frequency) {
 }
 
 function simulate() {
-  const capital = +document.getElementById("capital").value;
+  const recurringAmount = +document.getElementById("recurring").value;
+  const capital = recurringAmount * 5 * 52;
   const prices = buildPrices();
   const lumpShares = capital / prices[0];
   const lumpValues = prices.map(p => lumpShares * p);

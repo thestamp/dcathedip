@@ -50,6 +50,15 @@ function createServer() {
   try {
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
     await page.locator('#calculator').scrollIntoViewIfNeeded();
+    await page.locator('#dip').fill('0');
+    await page.locator('#growth').fill('0');
+    const zeroCaseEqual = await page.evaluate(() => {
+      const result = simulate();
+      const annualTotal = +document.getElementById('recurring').value * 5 * 52;
+      return Math.abs(result.lumpEnd - annualTotal) < 0.01
+        && result.schedules.every(schedule => Math.abs(schedule.end - annualTotal) < 0.01)
+        && document.getElementById('capitalOut').value.includes('2,600');
+    });
     await page.locator('[data-region="us"]').click();
     await page.locator('#tfsa').scrollIntoViewIfNeeded();
     await page.locator('#eligibilityYear').fill('2011');
@@ -113,6 +122,7 @@ function createServer() {
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
+    if (!zeroCaseEqual) throw new Error('Expected 0% dip and 0% annual gain to make all DCA schedules equal the one-time annual investment.');
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with cap-based and growth-based choices for U.S., Canada, and World.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
@@ -142,7 +152,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
