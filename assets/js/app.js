@@ -34,8 +34,7 @@ const frequencies = [
   { key: "weekly", label: "Weekly DCA", contributions: 52, color: "#6aa8ff" },
   { key: "biweekly", label: "Biweekly DCA", contributions: 26, color: "#ffd166" },
   { key: "monthly", label: "Monthly DCA", contributions: 13, color: "#b892ff" },
-  { key: "quarterly", label: "Quarterly DCA", contributions: 4, color: "#ff8fab" },
-  { key: "annual", label: "Annual DCA", contributions: 1, color: "#f4f7fb" }
+  { key: "quarterly", label: "Quarterly DCA", contributions: 4, color: "#ff8fab" }
 ];
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
@@ -50,7 +49,9 @@ function setOutputs() {
   const annualTotal = recurringAmount * 5 * 52;
   const fields = [
     ["recurring", v => money(+v)],
-    ["dip", v => `${v}%`],
+    ["earlyDip", v => `${+v > 0 ? "+" : ""}${v}%`],
+    ["midDip", v => `${+v > 0 ? "+" : ""}${v}%`],
+    ["lateDip", v => `${+v > 0 ? "+" : ""}${v}%`],
     ["growth", v => `${+v > 0 ? "+" : ""}${v}%`]
   ];
   fields.forEach(([id, render]) => {
@@ -59,26 +60,36 @@ function setOutputs() {
   document.getElementById("capitalOut").value = money(annualTotal);
 }
 
+function moveFactor(day, startDay, bottomDay, recoverDay, move) {
+  if (day < startDay) return 1;
+  const bottomFactor = 1 + move;
+
+  if (day <= bottomDay) {
+    const t = (day - startDay) / (bottomDay - startDay);
+    return 1 + move * t;
+  }
+
+  if (recoverDay === null || day >= recoverDay) return recoverDay === null ? bottomFactor : 1;
+
+  const t = (day - bottomDay) / (recoverDay - bottomDay);
+  return bottomFactor + (1 - bottomFactor) * t;
+}
+
 function buildPrices() {
-  const dipDepth = +document.getElementById("dip").value / 100;
-  const fallDays = 30;
-  const recoverDays = 30;
+  const earlyMove = +document.getElementById("earlyDip").value / 100;
+  const midMove = +document.getElementById("midDip").value / 100;
+  const lateMove = +document.getElementById("lateDip").value / 100;
   const growth = +document.getElementById("growth").value / 100;
   const totalDays = 365;
   const startPrice = 100;
   const prices = [];
 
   for (let day = 0; day <= totalDays; day += 1) {
-    let price;
-    if (day <= fallDays) {
-      price = startPrice * (1 - dipDepth * (day / fallDays));
-    } else if (day <= fallDays + recoverDays) {
-      const t = (day - fallDays) / recoverDays;
-      price = startPrice * (1 - dipDepth + dipDepth * t);
-    } else {
-      const t = (day - fallDays - recoverDays) / (totalDays - fallDays - recoverDays);
-      price = startPrice * Math.pow(1 + growth, t);
-    }
+    const annualGrowthFactor = Math.pow(1 + growth, day / totalDays);
+    const earlyFactor = moveFactor(day, 2, 10, 20, earlyMove);
+    const midFactor = moveFactor(day, 173, 183, 193, midMove);
+    const lateFactor = moveFactor(day, 355, 365, null, lateMove);
+    const price = startPrice * annualGrowthFactor * earlyFactor * midFactor * lateFactor;
     prices.push(price);
   }
   return prices;

@@ -59,8 +59,10 @@ Compared schedules:
 User-adjustable assumptions:
 
 - Daily recurring amount (default $10)
-- Dip depth slider (default 25%, can be set to 0%)
-- Annual gain/loss slider after recovery (default +10%, range -10% to +10%, can be set to 0%)
+- Early-year move slider (default -25%, range -30% to +30%): starts on day 2, bottoms on day 10, and recovers by day 20
+- Mid-year move slider (default 0%, range -30% to +30%): falls over 10 days and recovers over the next 10 days around the middle of the year
+- Late-year move slider (default 0%, range -30% to +30%): happens over the final 10 days and does not recover
+- Annualized gain/loss slider (default +10%, range -10% to +10%) that compounds across the entire year, not just non-dip days
 
 Derived value:
 
@@ -68,16 +70,15 @@ Derived value:
 
 Fixed model assumptions displayed on the chart:
 
-- 30 days falling
-- 30 days recovering
-- Then compounding through day 365 at the selected annual gain/loss
 - Deployment window: always 365 days (one full year)
+- Market move sliders can represent either drawdowns (negative values) or rallies (positive values)
+- Do not show an "Annual DCA" series or stat card because it is the same as the one-time annual investment
 
 The first contribution for every modeled strategy must happen on day 0 so the visual starts when the plan starts.
 
-All modeled DCA schedules must invest the same total annual dollars as the one-time annual investment. If dip depth is 0% and annual gain/loss is 0%, every DCA schedule and the one-time annual investment should end at the same value. The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No deployment-window slider.
+All modeled DCA schedules must invest the same total annual dollars as the one-time annual investment. If all move sliders are 0% and annual gain/loss is 0%, every DCA schedule and the one-time annual investment should end at the same value. The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No deployment-window slider.
 
-The chart must include an expandable day-by-day comparison table. The table should be collapsed by default, show roughly the first 10 rows in a scrollable container when expanded, and update whenever the sliders change. It should compare daily values for lump sum, daily, weekly, monthly, quarterly, and annual investing. With 0% dip and 0% annual gain/loss, the final-day values in the table must match across every displayed approach.
+The chart must include an expandable day-by-day comparison table. The table should be collapsed by default, show roughly the first 10 rows in a scrollable container when expanded, and update whenever the sliders change. It should compare daily values for lump sum, daily, weekly, monthly, and quarterly investing. With all move sliders at 0% and annual gain/loss at 0%, the final-day values in the table must match across every displayed approach.
 
 ## 6. Timing risk section
 

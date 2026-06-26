@@ -147,8 +147,8 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         <p class="eyebrow">Interactive chart</p>
         <h2>Daily vs weekly vs biweekly vs monthly vs quarterly</h2>
         <p>
-          Model a market that dips, then compounds over one year. Each DCA schedule and the one-time annual investment
-          invest the same total dollars — only the timing changes. Set dip and annual gain to 0% to see every approach end equal.
+          Model a market with separate early, middle, and late-year moves while annualized gain or loss compounds across the whole year.
+          Each DCA schedule and the one-time annual investment invest the same total dollars — only the timing changes.
         </p>
       </div>
 
@@ -160,12 +160,22 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
             <output id="recurringOut"></output>
           </label>
           <label>
-            Dip depth
-            <input type="range" id="dip" min="0" max="50" step="1" value="25" />
-            <output id="dipOut"></output>
+            Early-year move (days 2–20)
+            <input type="range" id="earlyDip" min="-30" max="30" step="1" value="-25" />
+            <output id="earlyDipOut"></output>
           </label>
           <label>
-            Annual gain after recovery
+            Mid-year move (10 down, 10 recover)
+            <input type="range" id="midDip" min="-30" max="30" step="1" value="0" />
+            <output id="midDipOut"></output>
+          </label>
+          <label>
+            Late-year move (last 10 days, no recovery)
+            <input type="range" id="lateDip" min="-30" max="30" step="1" value="0" />
+            <output id="lateDipOut"></output>
+          </label>
+          <label>
+            Annualized gain/loss
             <input type="range" id="growth" min="-10" max="10" step="1" value="10" />
             <output id="growthOut"></output>
           </label>
@@ -174,7 +184,7 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
             <strong><output id="capitalOut"></output></strong>
             <span>Calculated as daily amount × 5 trading days × 52 weeks.</span>
           </div>
-          <p class="chart-assumptions">Model assumes a 30-day dip and 30-day recovery, then compounds at the selected annual gain/loss through day 365. At 0% dip and 0% gain, the one-time annual investment and every DCA schedule end at the same value.</p>
+          <p class="chart-assumptions">Annual gain/loss compounds across the full year. Move sliders range from -30% drawdowns to +30% rallies: early-year starts day 2, bottoms day 10, and recovers by day 20; mid-year falls over 10 days and recovers over the next 10; late-year happens over the last 10 days and does not recover. Set every move and annual gain to 0% to see every approach end equal.</p>
           <p class="chart-assumptions">Weekly = 5× daily for 52 weeks. Biweekly/monthly/quarterly are scaled so every schedule invests the same annual total. <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Use Wealthsimple to automate this</a>, and <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">click here for setup details</a>. Recurring investments can run daily or weekly from your bank account, for as little as $1 a day.</p>
         </form>
 
@@ -183,7 +193,7 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
           <div class="stats" id="stats"></div>
           <details class="daily-comparison">
             <summary>Expand day-by-day comparison table</summary>
-            <p>Scroll the table to compare the daily value of lump sum, daily, weekly, monthly, quarterly, and annual investing. The table updates whenever you move the sliders.</p>
+            <p>Scroll the table to compare the daily value of lump sum, daily, weekly, monthly, and quarterly investing. The table updates whenever you move the sliders.</p>
             <div class="daily-table-wrap" id="dailyTable" aria-live="polite"></div>
           </details>
         </div>

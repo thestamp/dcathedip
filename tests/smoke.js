@@ -50,7 +50,9 @@ function createServer() {
   try {
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
     await page.locator('#calculator').scrollIntoViewIfNeeded();
-    await page.locator('#dip').fill('0');
+    await page.locator('#earlyDip').fill('0');
+    await page.locator('#midDip').fill('0');
+    await page.locator('#lateDip').fill('0');
     await page.locator('#growth').fill('0');
     const zeroCaseEqual = await page.evaluate(() => {
       const result = simulate();
@@ -69,18 +71,38 @@ function createServer() {
       details.open = true;
       const headers = [...document.querySelectorAll('#dailyTable thead th')].map(th => th.textContent.trim());
       const wrapper = document.querySelector('.daily-table-wrap');
-      const before = document.querySelector('#dailyTable tbody tr:nth-child(31) td:nth-child(2)').textContent.trim();
-      document.getElementById('dip').value = 25;
-      document.getElementById('dip').dispatchEvent(new Event('input', { bubbles: true }));
-      const after = document.querySelector('#dailyTable tbody tr:nth-child(31) td:nth-child(2)').textContent.trim();
+      const before = document.querySelector('#dailyTable tbody tr:nth-child(11) td:nth-child(2)').textContent.trim();
+      document.getElementById('earlyDip').value = -25;
+      document.getElementById('earlyDip').dispatchEvent(new Event('input', { bubbles: true }));
+      const after = document.querySelector('#dailyTable tbody tr:nth-child(11) td:nth-child(2)').textContent.trim();
       return {
         collapsedByDefault,
-        hasExpectedHeaders: ['Day', 'Lump sum', 'Daily', 'Weekly', 'Monthly', 'Quarterly', 'Annual'].every(header => headers.includes(header)),
+        hasExpectedHeaders: ['Day', 'Lump sum', 'Daily', 'Weekly', 'Monthly', 'Quarterly'].every(header => headers.includes(header)) && !headers.includes('Annual'),
         scrollable: wrapper.scrollHeight > wrapper.clientHeight,
         updatesOnSlider: before !== after
       };
     });
-    await page.locator('#dip').fill('0');
+    const chartMoveControls = await page.evaluate(() => {
+      document.getElementById('earlyDip').value = 0;
+      document.getElementById('midDip').value = 0;
+      document.getElementById('lateDip').value = 0;
+      document.getElementById('growth').value = 10;
+      updateChart();
+      const prices = buildPrices();
+      const body = document.body.textContent;
+      return {
+        ranges: ['earlyDip', 'midDip', 'lateDip'].every(id => {
+          const el = document.getElementById(id);
+          return el.min === '-30' && el.max === '30';
+        }),
+        wholeYearGrowth: prices[182] > 100 && Math.abs(prices.at(-1) - 110) < 0.01,
+        noAnnualDca: !/Annual DCA/i.test(body)
+      };
+    });
+    await page.locator('#earlyDip').fill('0');
+    await page.locator('#midDip').fill('0');
+    await page.locator('#lateDip').fill('0');
+    await page.locator('#growth').fill('0');
     await page.locator('[data-region="us"]').click();
     await page.locator('#tfsa').scrollIntoViewIfNeeded();
     await page.locator('#eligibilityYear').fill('2011');
@@ -146,9 +168,12 @@ function createServer() {
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!zeroCaseEqual) throw new Error('Expected 0% dip and 0% annual gain to make all DCA schedules equal the one-time annual investment and final table row.');
     if (!dailyComparisonTable.collapsedByDefault) throw new Error('Expected day-by-day comparison table to be collapsed by default.');
-    if (!dailyComparisonTable.hasExpectedHeaders) throw new Error('Expected day-by-day comparison table headers for lump, daily, weekly, monthly, quarterly, and annual.');
+    if (!dailyComparisonTable.hasExpectedHeaders) throw new Error('Expected day-by-day comparison table headers for lump, daily, weekly, monthly, and quarterly only.');
     if (!dailyComparisonTable.scrollable) throw new Error('Expected day-by-day comparison table to be scrollable.');
     if (!dailyComparisonTable.updatesOnSlider) throw new Error('Expected day-by-day comparison table to update when sliders change.');
+    if (!chartMoveControls.ranges) throw new Error('Expected all three move sliders to range from -30% to +30%.');
+    if (!chartMoveControls.wholeYearGrowth) throw new Error('Expected annualized gain/loss to compound across the whole year.');
+    if (!chartMoveControls.noAnnualDca) throw new Error('Expected Annual DCA series/stat/table column to be removed.');
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with cap-based and growth-based choices for U.S., Canada, and World.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
@@ -178,7 +203,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveControls, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
