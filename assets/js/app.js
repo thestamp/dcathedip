@@ -52,7 +52,8 @@ function setOutputs() {
     ["earlyDip", v => `${+v > 0 ? "+" : ""}${v}%`],
     ["midDip", v => `${+v > 0 ? "+" : ""}${v}%`],
     ["lateDip", v => `${+v > 0 ? "+" : ""}${v}%`],
-    ["growth", v => `${+v > 0 ? "+" : ""}${v}%`]
+    ["growth", v => `${+v > 0 ? "+" : ""}${v}%`],
+    ["variation", v => `${v}%`]
   ];
   fields.forEach(([id, render]) => {
     document.getElementById(`${id}Out`).value = render(document.getElementById(id).value);
@@ -75,13 +76,33 @@ function moveFactor(day, startDay, bottomDay, recoverDay, move) {
   return bottomFactor + (1 - bottomFactor) * t;
 }
 
+function seededDailyMove(day) {
+  const raw = Math.sin(day * 12.9898 + 78.233) * 43758.5453;
+  return (raw - Math.floor(raw)) * 2 - 1;
+}
+
+function dailyVariationFactors(totalDays, variationPct) {
+  const factors = [1];
+  let cumulative = 1;
+
+  for (let day = 1; day <= totalDays; day += 1) {
+    cumulative *= 1 + (seededDailyMove(day) * variationPct / 100);
+    factors.push(cumulative);
+  }
+
+  const endFactor = factors.at(-1);
+  return factors.map((factor, day) => factor / Math.pow(endFactor, day / totalDays));
+}
+
 function buildPrices() {
   const earlyMove = +document.getElementById("earlyDip").value / 100;
   const midMove = +document.getElementById("midDip").value / 100;
   const lateMove = +document.getElementById("lateDip").value / 100;
   const growth = +document.getElementById("growth").value / 100;
+  const variation = +document.getElementById("variation").value;
   const totalDays = 365;
   const startPrice = 100;
+  const variationFactors = dailyVariationFactors(totalDays, variation);
   const prices = [];
 
   for (let day = 0; day <= totalDays; day += 1) {
@@ -89,7 +110,7 @@ function buildPrices() {
     const earlyFactor = moveFactor(day, 2, 10, 20, earlyMove);
     const midFactor = moveFactor(day, 173, 183, 193, midMove);
     const lateFactor = moveFactor(day, 355, 365, null, lateMove);
-    const price = startPrice * annualGrowthFactor * earlyFactor * midFactor * lateFactor;
+    const price = startPrice * annualGrowthFactor * earlyFactor * midFactor * lateFactor * variationFactors[day];
     prices.push(price);
   }
   return prices;

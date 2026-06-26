@@ -154,7 +154,7 @@ h3 { font-size: 1.35rem; }
 .controls output { color: var(--green); font-weight: 900; }
 .chart-card { padding: 22px; min-height: 520px; }
 #dcaChart { max-height: 390px; }
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
 .stat { border: 1px solid var(--border); border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.055); }
 .stat small { display: block; color: var(--muted); font-weight: 800; margin-bottom: 6px; }
 .stat strong { font-size: 1.25rem; }

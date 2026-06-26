@@ -54,6 +54,7 @@ function createServer() {
     await page.locator('#midDip').fill('0');
     await page.locator('#lateDip').fill('0');
     await page.locator('#growth').fill('0');
+    await page.locator('#variation').fill('0');
     const zeroCaseEqual = await page.evaluate(() => {
       const result = simulate();
       const annualTotal = +document.getElementById('recurring').value * 5 * 52;
@@ -86,6 +87,7 @@ function createServer() {
       document.getElementById('earlyDip').value = 0;
       document.getElementById('midDip').value = 0;
       document.getElementById('lateDip').value = 0;
+      document.getElementById('variation').value = 0;
       document.getElementById('growth').value = 10;
       updateChart();
       const prices = buildPrices();
@@ -99,10 +101,31 @@ function createServer() {
         noAnnualDca: !/Annual DCA/i.test(body)
       };
     });
+    const dailyVariationControl = await page.evaluate(() => {
+      document.getElementById('earlyDip').value = 0;
+      document.getElementById('midDip').value = 0;
+      document.getElementById('lateDip').value = 0;
+      document.getElementById('growth').value = 10;
+      document.getElementById('variation').value = 0;
+      updateChart();
+      const noVariation = buildPrices();
+      document.getElementById('variation').value = 3;
+      updateChart();
+      const withVariation = buildPrices();
+      const variation = document.getElementById('variation');
+      const statsCols = getComputedStyle(document.querySelector('.stats')).gridTemplateColumns.split(' ').length;
+      return {
+        range: variation.min === '0' && variation.max === '3',
+        changesPath: Math.abs(noVariation[100] - withVariation[100]) > 0.01,
+        preservesAnnualEnd: Math.abs(withVariation.at(-1) - 110) < 0.01,
+        statGridThreeColumns: statsCols === 3
+      };
+    });
     await page.locator('#earlyDip').fill('0');
     await page.locator('#midDip').fill('0');
     await page.locator('#lateDip').fill('0');
     await page.locator('#growth').fill('0');
+    await page.locator('#variation').fill('0');
     await page.locator('[data-region="us"]').click();
     await page.locator('#tfsa').scrollIntoViewIfNeeded();
     await page.locator('#eligibilityYear').fill('2011');
@@ -174,6 +197,10 @@ function createServer() {
     if (!chartMoveControls.ranges) throw new Error('Expected all three move sliders to range from -30% to +30%.');
     if (!chartMoveControls.wholeYearGrowth) throw new Error('Expected annualized gain/loss to compound across the whole year.');
     if (!chartMoveControls.noAnnualDca) throw new Error('Expected Annual DCA series/stat/table column to be removed.');
+    if (!dailyVariationControl.range) throw new Error('Expected daily variation slider to range from 0% to 3%.');
+    if (!dailyVariationControl.changesPath) throw new Error('Expected daily variation to add daily up/down movement to the price path.');
+    if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
+    if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with cap-based and growth-based choices for U.S., Canada, and World.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
@@ -203,7 +230,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveControls, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveControls, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
