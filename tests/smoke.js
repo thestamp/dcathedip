@@ -77,10 +77,12 @@ function createServer() {
       document.getElementById('dipRecover').checked = true;
       document.getElementById('addDip').click();
       const after = document.querySelector('#dailyTable tbody tr:nth-child(11) td:nth-child(2)').textContent.trim();
+      const firstColumnWidth = document.querySelector('#dailyTable thead th:first-child').getBoundingClientRect().width;
       return {
         collapsedByDefault,
         hasExpectedHeaders: ['Day', 'Lump sum', 'Daily', 'Weekly', 'Monthly', 'Quarterly'].every(header => headers.includes(header)) && !headers.includes('Annual'),
         scrollable: wrapper.scrollHeight > wrapper.clientHeight,
+        fitsFrame: wrapper.scrollWidth <= wrapper.clientWidth + 1 && firstColumnWidth <= 60,
         updatesOnSlider: before !== after
       };
     });
@@ -167,9 +169,9 @@ function createServer() {
         && /Cap-based/i.test(text)
         && /Growth-based/i.test(text)
         && /ZSP\.TO/i.test(text)
-        && /ZQQ\.TO/i.test(text)
+        && /CAUS\.TO/i.test(text)
         && /ZIU\.TO/i.test(text)
-        && /XCG\.TO/i.test(text)
+        && /CACE\.TO/i.test(text)
         && /XEQT\.TO/i.test(text)
         && /CAGE\.TO/i.test(text);
     });
@@ -190,6 +192,11 @@ function createServer() {
     const meansSection = /Invest within your means/i.test(bodyText) && /Do not risk what you cannot afford/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /3–6 months of living expenses/i.test(bodyText) && /Invest only what is extra/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
     const withdrawSection = /When the money has a job to do/i.test(bodyText) && /panic selling/i.test(bodyText) && /A real goal/i.test(bodyText) && /During emergencies/i.test(bodyText) && /Not market reaction/i.test(bodyText);
+    const broadEtfSection = /Broad index ETFs beat concentrated bets/i.test(bodyText)
+      && /broad-market ETFs/i.test(bodyText)
+      && /Industry ETFs/i.test(bodyText)
+      && /Individual stocks/i.test(bodyText)
+      && /company-specific risk/i.test(bodyText);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
     const removedDailyMonthlyFaq = !/Why recommend daily instead of monthly\?/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
@@ -202,6 +209,7 @@ function createServer() {
     if (!dailyComparisonTable.collapsedByDefault) throw new Error('Expected day-by-day comparison table to be collapsed by default.');
     if (!dailyComparisonTable.hasExpectedHeaders) throw new Error('Expected day-by-day comparison table headers for lump, daily, weekly, monthly, and quarterly only.');
     if (!dailyComparisonTable.scrollable) throw new Error('Expected day-by-day comparison table to be scrollable.');
+    if (!dailyComparisonTable.fitsFrame) throw new Error('Expected day-by-day comparison table to fit inside its frame with a narrow Day column.');
     if (!dailyComparisonTable.updatesOnSlider) throw new Error('Expected day-by-day comparison table to update when sliders change.');
     if (!chartMoveEditor.editorVisible) throw new Error('Expected chart to include a market move editor.');
     if (!chartMoveEditor.noStaticSliders) throw new Error('Expected three static market move sliders to be removed.');
@@ -236,6 +244,7 @@ function createServer() {
     if (!lumpSumRiskFaq) throw new Error('Expected RBC GAM research note with emotions/behavioral-choice language.');
     if (!budgetSection) throw new Error('Expected sustainable DCA amount section with coffee and lottery examples.');
     if (!meansSection) throw new Error('Expected invest-within-your-means section with safety net guidance.');
+    if (!broadEtfSection) throw new Error('Expected broad index ETF safety section comparing broad ETFs, industry ETFs, and individual stocks.');
     if (!withdrawSection) throw new Error('Expected when-to-withdraw section with panic selling warning and three pillars.');
     if (!removedDailyFaq) throw new Error('Expected "Is daily DCA always better than lump sum?" FAQ to be removed.');
     if (!removedDailyMonthlyFaq) throw new Error('Expected "Why recommend daily instead of monthly?" FAQ to be removed.');
@@ -244,7 +253,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, broadEtfSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

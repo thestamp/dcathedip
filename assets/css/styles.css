@@ -94,6 +94,8 @@ h3 { font-size: 1.35rem; }
 .wide { grid-column: 1 / -1; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .benefit-card { padding: 28px; box-shadow: none; }
+.benefit-card.caution-card { border-color: rgba(255, 209, 102, 0.38); }
+.benefit-card.danger-card { border-color: rgba(255, 107, 107, 0.42); }
 .icon { font-size: 2.2rem; display: inline-block; margin-bottom: 16px; }
 
 .timing-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); }
@@ -224,23 +226,27 @@ h3 { font-size: 1.35rem; }
 }
 .daily-table-wrap {
   max-height: 430px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   border: 1px solid var(--border);
   border-radius: 18px;
+  max-width: 100%;
 }
 .daily-table-wrap table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 760px;
-  font-size: 0.86rem;
+  table-layout: fixed;
+  font-size: 0.78rem;
 }
 .daily-table-wrap th, .daily-table-wrap td {
-  padding: 10px 12px;
+  padding: 8px 6px;
   text-align: right;
   border-bottom: 1px solid rgba(255,255,255,0.09);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.daily-table-wrap th:first-child, .daily-table-wrap td:first-child { text-align: left; }
+.daily-table-wrap th:first-child, .daily-table-wrap td:first-child { text-align: left; width: 48px; }
 .daily-table-wrap thead th {
   position: sticky;
   top: 0;

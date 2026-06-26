@@ -6,12 +6,12 @@ const etfs = {
     {
       market: "U.S.",
       cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Cap-based S&P 500 exposure to large U.S. companies." },
-      growth: { ticker: "ZQQ.TO", name: "BMO Nasdaq 100 Index ETF", use: "Growth-tilted U.S. exposure through Nasdaq-listed innovators." }
+      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Growth-oriented broad U.S. equity exposure across market capitalizations." }
     },
     {
       market: "Canada",
       cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Cap-based exposure to 60 large Canadian companies." },
-      growth: { ticker: "XCG.TO", name: "iShares Canadian Growth Index ETF", use: "Canadian companies selected for long-term growth characteristics." }
+      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Growth-oriented Canadian equity exposure across market capitalizations." }
     },
     {
       market: "World",
@@ -40,9 +40,12 @@ const frequencies = [
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 let chart;
 let marketMoves = [
-  { id: 1, startDay: 2, height: -25, width: 8, recovers: true }
+  { id: 1, startDay: 50,  height: -10, width: 20, recovers: false },
+  { id: 2, startDay: 125, height: -10, width: 20, recovers: false },
+  { id: 3, startDay: 150, height: -10, width: 20, recovers: false },
+  { id: 4, startDay: 250, height: -10, width: 20, recovers: false }
 ];
-let nextMoveId = 2;
+let nextMoveId = 5;
 
 function money(value) {
   return fmt.format(value);

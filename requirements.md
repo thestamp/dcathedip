@@ -64,6 +64,11 @@ User-adjustable assumptions:
   - Height (default example -25%, range -30% to +30%): negative values model drawdowns/dips; positive values model rallies
   - Width in days each direction (1 to 365): days from start to the bottom/top, and the same width again for recovery when recovery is enabled
   - Recovery checkbox: if checked, the move returns to the annualized path after the second width period; if unchecked, the move remains unrecovered through year-end
+- The editor must ship with four predefined unrecovered dips so the chart demonstrates timing risk on page load. The four initial moves are:
+  - Start day 50, reaches -10% by day 70, does not recover
+  - Start day 125, reaches -10% by day 145, does not recover
+  - Start day 150, reaches -10% by day 170, does not recover
+  - Start day 250, reaches -10% by day 270, does not recover
 - Annualized gain/loss slider (default +10%, range -10% to +10%) that compounds across the entire year, not just non-dip days
 - Daily variation slider (default 0%, range 0% to 3%) that adds a deterministic random-looking sequence of daily up/down movements around the annualized path, while keeping slider changes stable and reproducible
 
@@ -110,8 +115,8 @@ For the Canadian region, show ETFs as a grid with rows for market exposure and c
 
 | Market exposure | Cap-based | Growth-based |
 |---|---|---|
-| U.S. | ZSP.TO — BMO S&P 500 Index ETF, cap-based U.S. large-cap S&P 500 exposure | ZQQ.TO — BMO Nasdaq 100 Index ETF, growth-tilted U.S. Nasdaq exposure |
-| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF, cap-based large Canadian company exposure | XCG.TO — iShares Canadian Growth Index ETF, Canadian companies selected for growth characteristics |
+| U.S. | ZSP.TO — BMO S&P 500 Index ETF, cap-based U.S. large-cap S&P 500 exposure | CAUS.TO — Avantis CIBC U.S. All-Cap Equity ETF, growth-oriented broad U.S. equity exposure |
+| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF, cap-based large Canadian company exposure | CACE.TO — Avantis CIBC Canadian Equity ETF, growth-oriented broad Canadian equity exposure |
 | World | XEQT.TO — iShares Core Equity ETF Portfolio, cap-based global all-equity portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF, factor-tilted global all-equity growth-oriented core |
 
 ### U.S. ETF examples
@@ -123,7 +128,16 @@ For the Canadian region, show ETFs as a grid with rows for market exposure and c
 - AVGE
 - QQQM
 
-## 8. Canadian account guidance
+## 8. Broad index ETF safety framing
+
+The site should include a standalone section explaining that broad index-based ETFs are usually safer building blocks for DCA than concentrated bets.
+
+- Explain that broad-market/index ETFs spread money across many companies and sectors.
+- Warn that industry-specific ETFs are more concentrated and can lag the broad market for long periods.
+- Warn that individual stocks carry the highest company-specific risk and can overwhelm a DCA habit.
+- Keep the language educational and avoid promising safety or guaranteed returns.
+
+## 9. Canadian account guidance
 
 If the user is in Canada or selects Canada, the site should explain that a TFSA is often the best account for this strategy when contribution room is available because profits and investment growth can be withdrawn tax-free.
 
@@ -134,7 +148,7 @@ The TFSA copy must include caveats:
 - Overcontributions can be penalized.
 - Users should verify official contribution room with CRA My Account.
 
-## 9. TFSA contribution room calculator
+## 10. TFSA contribution room calculator
 
 The site must include a simple TFSA contribution room calculator.
 
@@ -156,7 +170,7 @@ Assumptions and notes:
 - Calculator is an estimate only.
 - TFSA annual limits must be represented in JavaScript and kept current over time.
 
-## 10. Wealthsimple referral
+## 11. Wealthsimple referral
 
 For Canadian users, the site should include a Wealthsimple referral callout.
 
@@ -169,7 +183,7 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - The Canadian investors brokerage callout should keep the referral CTA, but should not include the recurring-investing guide link; recurring-investing setup links belong in the other promo boxes that discuss automation.
 - Link the recurring-investing setup copy to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
-## 11. FAQs
+## 12. FAQs
 
 The site should include FAQ content:
 
@@ -196,7 +210,7 @@ The site should include FAQ content:
 - Canadian examples: XEQT, VEQT.
 - U.S./global examples: VT, VTI, VOO, QQQM.
 
-## 12. Technical requirements
+## 13. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
 - Main config: `_config.yml`
@@ -206,7 +220,7 @@ The site should include FAQ content:
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 13. Verification requirements
+## 14. Verification requirements
 
 Before finalizing changes, run:
 
@@ -224,7 +238,7 @@ The test must:
 - Verify ETF region switching.
 - Verify TFSA calculator rendering.
 
-## 14. Current limitations
+## 15. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
