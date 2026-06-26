@@ -50,10 +50,6 @@ function createServer() {
   try {
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
     await page.locator('#calculator').scrollIntoViewIfNeeded();
-    await page.locator('#dip').evaluate(el => {
-      el.value = 45;
-      el.dispatchEvent(new Event('input', { bubbles: true }));
-    });
     await page.locator('[data-region="us"]').click();
     await page.locator('#tfsa').scrollIntoViewIfNeeded();
     await page.locator('#eligibilityYear').fill('2011');
@@ -100,7 +96,7 @@ function createServer() {
     if (!faqReferral) throw new Error('Expected Wealthsimple referral link inside the lump sum FAQ.');
     if (timingSources !== 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
     if (marginCopy) throw new Error('The page should not contain margin copy.');
-    if (statCards < 11) throw new Error(`Expected at least 11 stat cards including TFSA results, found ${statCards}.`);
+    if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
     console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {

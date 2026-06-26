@@ -56,12 +56,15 @@ User-adjustable assumptions:
 
 - Initial capital
 - DCA deployment window
-- Dip depth
-- Days falling
-- Days recovering
-- Annual growth after recovery
 
-The chart should show ending value/stat cards and make daily DCA visually prominent.
+Fixed model assumptions displayed on the chart:
+
+- 25% dip depth
+- 30 days falling
+- 30 days recovering
+- 10% annual growth after recovery
+
+The chart should show each DCA schedule's percentage boost or shortfall versus lump sum in a single stat card per schedule, plus the lump sum ending value. Remove individual schedule ending-value boxes and the daily-vs-quarterly comparison.
 
 ## 6. ETF suggestions by region
 

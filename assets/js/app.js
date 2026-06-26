@@ -38,11 +38,7 @@ function money(value) {
 function setOutputs() {
   const fields = [
     ["capital", v => money(+v)],
-    ["deployDays", v => `${v} days`],
-    ["dip", v => `${v}%`],
-    ["fallDays", v => `${v} days`],
-    ["recoverDays", v => `${v} days`],
-    ["growth", v => `${v}%`]
+    ["deployDays", v => `${v} days`]
   ];
   fields.forEach(([id, render]) => {
     document.getElementById(`${id}Out`).value = render(document.getElementById(id).value);
@@ -50,10 +46,10 @@ function setOutputs() {
 }
 
 function buildPrices() {
-  const dipDepth = +document.getElementById("dip").value / 100;
-  const fallDays = +document.getElementById("fallDays").value;
-  const recoverDays = +document.getElementById("recoverDays").value;
-  const growth = +document.getElementById("growth").value / 100;
+  const dipDepth = 0.25;
+  const fallDays = 30;
+  const recoverDays = 30;
+  const growth = 0.10;
   const afterDays = 365;
   const totalDays = fallDays + recoverDays + afterDays;
   const startPrice = 100;
@@ -118,7 +114,6 @@ function updateChart() {
   const labels = result.prices.map((_, i) => i);
   const best = [...result.schedules].sort((a, b) => b.end - a.end)[0];
   const daily = result.schedules.find(s => s.key === "daily");
-  const quarterly = result.schedules.find(s => s.key === "quarterly");
 
   const data = {
     labels,
@@ -161,16 +156,12 @@ function updateChart() {
   }
 
   const dailyVsLump = daily.end - result.lumpEnd;
-  const dailyVsQuarterly = daily.end - quarterly.end;
   document.getElementById("stats").innerHTML = `
-    <div class="stat good"><small>Best DCA schedule</small><strong>${best.label}</strong></div>
-    <div class="stat"><small>Daily ending value</small><strong>${money(daily.end)}</strong></div>
-    <div class="stat"><small>Weekly ending value</small><strong>${money(result.schedules.find(s => s.key === "weekly").end)}</strong></div>
-    <div class="stat"><small>Biweekly ending value</small><strong>${money(result.schedules.find(s => s.key === "biweekly").end)}</strong></div>
-    <div class="stat"><small>Monthly ending value</small><strong>${money(result.schedules.find(s => s.key === "monthly").end)}</strong></div>
-    <div class="stat"><small>Quarterly ending value</small><strong>${money(quarterly.end)}</strong></div>
-    <div class="stat ${dailyVsLump >= 0 ? "good" : "warn"}"><small>Daily vs lump sum</small><strong>${money(dailyVsLump)}</strong></div>
-    <div class="stat ${dailyVsQuarterly >= 0 ? "good" : "warn"}"><small>Daily vs quarterly</small><strong>${money(dailyVsQuarterly)}</strong></div>
+    <div class="stat"><small>Lump sum ending value</small><strong>${money(result.lumpEnd)}</strong></div>
+    ${result.schedules.map(s => {
+      const pct = ((s.end - result.lumpEnd) / result.lumpEnd * 100);
+      return `<div class="stat ${pct >= 0 ? "good" : "warn"}"><small>${s.label}</small><strong>${pct >= 0 ? "+" : ""}${pct.toFixed(1)}% vs lump sum</strong></div>`;
+    }).join("")}
   `;
 }
 
