@@ -26,7 +26,7 @@ A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 Edit `assets/js/app.js`:
 
 ```js
-const WEALTHSIMPLE_REFERRAL_URL = "https://www.wealthsimple.com/invite/YOUR_REFERRAL_CODE";
+const WEALTHSIMPLE_REFERRAL_URL = "https://wealthsimple.com/invite/V-MKNQ";
 ```
 
 ## Local development

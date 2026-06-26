@@ -1,5 +1,5 @@
 // DCA the Dip configuration
-const WEALTHSIMPLE_REFERRAL_URL = "https://www.wealthsimple.com/invite/YOUR_REFERRAL_CODE";
+const WEALTHSIMPLE_REFERRAL_URL = "https://wealthsimple.com/invite/V-MKNQ";
 
 const etfs = {
   canada: [
