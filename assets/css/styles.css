@@ -75,7 +75,7 @@ h3 { font-size: 1.35rem; }
 .trust-row { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 12px; }
 .trust-row span { border: 1px solid var(--border); border-radius: 999px; padding: 8px 12px; color: var(--muted); background: rgba(255,255,255,0.05); }
 
-.hero-card, .benefit-card, .chart-card, .controls, .wealthsimple, details, .ladder {
+.hero-card, .benefit-card, .chart-card, .controls, .wealthsimple, details, .ladder, .tfsa-card {
   background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055));
   border: 1px solid var(--border);
   border-radius: 28px;
@@ -132,6 +132,23 @@ h3 { font-size: 1.35rem; }
 .ticker-card p { margin-bottom: 0; }
 .wealthsimple { margin-top: 24px; padding: 24px; display: flex; justify-content: space-between; gap: 24px; align-items: center; box-shadow: none; }
 .wealthsimple h3 { margin-bottom: 8px; }
+
+.tfsa-section { align-items: stretch; }
+.tfsa-card { padding: 28px; box-shadow: none; }
+.tfsa-card h3 { margin-bottom: 10px; }
+.calculator-note { margin-top: 8px; }
+.tfsa-form { display: grid; gap: 14px; margin-top: 20px; }
+.tfsa-form label { display: grid; gap: 8px; font-weight: 800; color: #d9e5f8; }
+.tfsa-form input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(8,17,31,0.85);
+  color: var(--text);
+  padding: 12px;
+}
+.tfsa-result { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 18px; }
+.tfsa-result p { margin: 0; }
 
 .faq { max-width: 900px; }
 details { box-shadow: none; padding: 20px 24px; margin-bottom: 14px; }

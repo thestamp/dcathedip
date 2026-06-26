@@ -14,6 +14,7 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
       <a href="#calculator">Calculator</a>
       <a href="#strategy">Strategy</a>
       <a href="#tickers">Tickers</a>
+      <a href="#tfsa">TFSA</a>
       <a href="#faq">FAQ</a>
     </div>
   </nav>
@@ -179,6 +180,42 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
     </div>
   </section>
 
+  <section id="tfsa" class="wrap section split tfsa-section">
+    <div>
+      <p class="eyebrow">For Canadian investors</p>
+      <h2>Use your TFSA first</h2>
+      <p>
+        If you are eligible in Canada, a TFSA is often the best account for a long-term DCA strategy because
+        investment growth and profits can be withdrawn tax-free. That makes it a strong home for consistent
+        ETF investing, especially when your time horizon is long.
+      </p>
+      <p>
+        Withdrawals are generally added back to your contribution room in the next calendar year. Overcontributions
+        can be penalized, so confirm your official room with CRA My Account before contributing.
+      </p>
+    </div>
+    <div class="tfsa-card">
+      <h3>Simple TFSA room calculator</h3>
+      <p class="calculator-note">Estimate only. Assumes you were a Canadian resident and eligible from age 18 onward.</p>
+      <form class="tfsa-form" id="tfsaForm">
+        <label>
+          Birth year
+          <input type="number" id="birthYear" min="1900" max="2026" value="1995" />
+        </label>
+        <label>
+          Total TFSA contributions made
+          <input type="number" id="tfsaContributed" min="0" step="100" value="0" />
+        </label>
+        <label>
+          Withdrawals made last year
+          <input type="number" id="tfsaWithdrawals" min="0" step="100" value="0" />
+        </label>
+      </form>
+      <div class="tfsa-result" id="tfsaResult" aria-live="polite"></div>
+    </div>
+  </section>
+
+
   <section id="faq" class="wrap section faq">
     <div class="section-heading center">
       <p class="eyebrow">FAQ</p>
@@ -191,6 +228,10 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
     <details>
       <summary>Why recommend daily instead of monthly?</summary>
       <p>Monthly investing is still excellent. Daily investing simply creates more entry points, which can matter during volatile markets where dips and rebounds happen quickly.</p>
+    </details>
+    <details>
+      <summary>Why highlight the TFSA for Canadians?</summary>
+      <p>A TFSA lets eligible Canadian investors withdraw investment growth and profits tax-free. It is not automatically better for every situation, but it is often the cleanest account for long-term ETF DCA when contribution room is available.</p>
     </details>
     <details>
       <summary>Which ETF is “best”?</summary>

@@ -55,14 +55,24 @@ function createServer() {
       el.dispatchEvent(new Event('input', { bubbles: true }));
     });
     await page.locator('[data-region="us"]').click();
+    await page.locator('#tfsa').scrollIntoViewIfNeeded();
+    await page.locator('#birthYear').fill('1990');
+    await page.locator('#tfsaContributed').fill('25000');
+    await page.locator('#tfsaWithdrawals').fill('5000');
     const vtVisible = await page.locator('text=VT').first().isVisible();
+    const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
+    const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
+    const marginCopy = await page.locator('body').textContent().then(text => /\bmargin\b/i.test(text));
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
-    if (statCards < 8) throw new Error(`Expected at least 8 stat cards, found ${statCards}.`);
+    if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
+    if (!taxFreeCopy) throw new Error('Expected TFSA tax-free copy to be visible.');
+    if (marginCopy) throw new Error('The page should not contain margin copy.');
+    if (statCards < 11) throw new Error(`Expected at least 11 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

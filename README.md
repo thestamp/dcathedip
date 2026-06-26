@@ -8,6 +8,7 @@ A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 - Interactive DCA-through-a-dip calculator using Chart.js
 - Lump sum vs daily, weekly, biweekly, monthly, and quarterly DCA comparison
 - Frequency guide with benefits and drawbacks for each schedule
+- Canadian TFSA account guidance and simple contribution room calculator
 - Canadian vs U.S. ETF suggestions
 - Optional browser geolocation for region selection
 - Wealthsimple referral link as a JavaScript variable
@@ -18,7 +19,8 @@ A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 - `_layouts/default.html` — shared HTML shell
 - `index.html` — homepage content with Jekyll front matter
 - `assets/css/styles.css` — site styling
-- `assets/js/app.js` — calculator, ETF picker, and referral config
+- `assets/js/app.js` — calculator, ETF picker, TFSA calculator, and referral config
+- `requirements.md` — product/content requirements for future updates
 - `CNAME` — GitHub Pages custom domain (`dcathedip.com`)
 
 ## Configure referral link

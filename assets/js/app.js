@@ -206,8 +206,48 @@ function detectLocation() {
   }, { timeout: 8000, maximumAge: 60 * 60 * 1000 });
 }
 
+const tfsaLimits = {
+  2009: 5000,
+  2010: 5000,
+  2011: 5000,
+  2012: 5000,
+  2013: 5500,
+  2014: 5500,
+  2015: 10000,
+  2016: 5500,
+  2017: 5500,
+  2018: 5500,
+  2019: 6000,
+  2020: 6000,
+  2021: 6000,
+  2022: 6000,
+  2023: 6500,
+  2024: 7000,
+  2025: 7000,
+  2026: 7000
+};
+
+function calculateTfsaRoom() {
+  const birthYear = +document.getElementById("birthYear").value;
+  const contributed = +document.getElementById("tfsaContributed").value || 0;
+  const withdrawals = +document.getElementById("tfsaWithdrawals").value || 0;
+  const firstEligibleYear = Math.max(2009, birthYear + 18);
+  const totalLimit = Object.entries(tfsaLimits)
+    .filter(([year]) => +year >= firstEligibleYear)
+    .reduce((sum, [, limit]) => sum + limit, 0);
+  const estimatedRoom = Math.max(0, totalLimit + withdrawals - contributed);
+
+  document.getElementById("tfsaResult").innerHTML = `
+    <div class="stat good"><small>First eligible year</small><strong>${firstEligibleYear}</strong></div>
+    <div class="stat"><small>Total possible room to 2026</small><strong>${money(totalLimit)}</strong></div>
+    <div class="stat"><small>Estimated room remaining</small><strong>${money(estimatedRoom)}</strong></div>
+    <p>Estimate only. Residency, previous withdrawals, overcontributions, and CRA adjustments can change your actual room.</p>
+  `;
+}
+
 function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));
+  document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   document.querySelectorAll("[data-region]").forEach(btn => btn.addEventListener("click", () => renderTickers(btn.dataset.region)));
   document.getElementById("detectLocation").addEventListener("click", detectLocation);
   document.getElementById("declineLocation").addEventListener("click", () => {
@@ -217,6 +257,7 @@ function init() {
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
   renderTickers("canada");
   updateChart();
+  calculateTfsaRoom();
 }
 
 document.addEventListener("DOMContentLoaded", init);
