@@ -50,9 +50,7 @@ function createServer() {
   try {
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
     await page.locator('#calculator').scrollIntoViewIfNeeded();
-    await page.locator('#earlyDip').fill('0');
-    await page.locator('#midDip').fill('0');
-    await page.locator('#lateDip').fill('0');
+    await page.evaluate(() => clearMarketMoves());
     await page.locator('#growth').fill('0');
     await page.locator('#variation').fill('0');
     const zeroCaseEqual = await page.evaluate(() => {
@@ -73,8 +71,11 @@ function createServer() {
       const headers = [...document.querySelectorAll('#dailyTable thead th')].map(th => th.textContent.trim());
       const wrapper = document.querySelector('.daily-table-wrap');
       const before = document.querySelector('#dailyTable tbody tr:nth-child(11) td:nth-child(2)').textContent.trim();
-      document.getElementById('earlyDip').value = -25;
-      document.getElementById('earlyDip').dispatchEvent(new Event('input', { bubbles: true }));
+      document.getElementById('dipStart').value = 2;
+      document.getElementById('dipHeight').value = -25;
+      document.getElementById('dipWidth').value = 8;
+      document.getElementById('dipRecover').checked = true;
+      document.getElementById('addDip').click();
       const after = document.querySelector('#dailyTable tbody tr:nth-child(11) td:nth-child(2)').textContent.trim();
       return {
         collapsedByDefault,
@@ -83,28 +84,38 @@ function createServer() {
         updatesOnSlider: before !== after
       };
     });
-    const chartMoveControls = await page.evaluate(() => {
-      document.getElementById('earlyDip').value = 0;
-      document.getElementById('midDip').value = 0;
-      document.getElementById('lateDip').value = 0;
+    const chartMoveEditor = await page.evaluate(() => {
+      clearMarketMoves();
       document.getElementById('variation').value = 0;
       document.getElementById('growth').value = 10;
       updateChart();
-      const prices = buildPrices();
+      const noMoves = buildPrices();
+      document.getElementById('dipStart').value = 100;
+      document.getElementById('dipHeight').value = -30;
+      document.getElementById('dipWidth').value = 10;
+      document.getElementById('dipRecover').checked = false;
+      document.getElementById('addDip').click();
+      const unrecoveredDip = buildPrices();
+      const listedMove = document.querySelector('#dipList').textContent;
+      const removeButton = document.querySelector('[data-remove-move]');
+      removeButton.click();
+      const removed = marketMoves.length === 0;
       const body = document.body.textContent;
+      const height = document.getElementById('dipHeight');
+      const width = document.getElementById('dipWidth');
       return {
-        ranges: ['earlyDip', 'midDip', 'lateDip'].every(id => {
-          const el = document.getElementById(id);
-          return el.min === '-30' && el.max === '30';
-        }),
-        wholeYearGrowth: prices[182] > 100 && Math.abs(prices.at(-1) - 110) < 0.01,
+        editorVisible: Boolean(document.querySelector('#dipEditor')),
+        noStaticSliders: !document.getElementById('earlyDip') && !document.getElementById('midDip') && !document.getElementById('lateDip'),
+        ranges: height.min === '-30' && height.max === '30' && width.min === '1' && width.max === '365',
+        canAddUnrecoveredMove: marketMoves.length === 1 || /does not recover/i.test(listedMove),
+        unrecoveredAffectsEnd: unrecoveredDip.at(-1) < noMoves.at(-1),
+        canRemoveMove: removed,
+        wholeYearGrowth: noMoves[182] > 100 && Math.abs(noMoves.at(-1) - 110) < 0.01,
         noAnnualDca: !/Annual DCA/i.test(body)
       };
     });
     const dailyVariationControl = await page.evaluate(() => {
-      document.getElementById('earlyDip').value = 0;
-      document.getElementById('midDip').value = 0;
-      document.getElementById('lateDip').value = 0;
+      clearMarketMoves();
       document.getElementById('growth').value = 10;
       document.getElementById('variation').value = 0;
       updateChart();
@@ -121,9 +132,7 @@ function createServer() {
         statGridThreeColumns: statsCols === 3
       };
     });
-    await page.locator('#earlyDip').fill('0');
-    await page.locator('#midDip').fill('0');
-    await page.locator('#lateDip').fill('0');
+    await page.evaluate(() => clearMarketMoves());
     await page.locator('#growth').fill('0');
     await page.locator('#variation').fill('0');
     await page.locator('[data-region="us"]').click();
@@ -194,9 +203,14 @@ function createServer() {
     if (!dailyComparisonTable.hasExpectedHeaders) throw new Error('Expected day-by-day comparison table headers for lump, daily, weekly, monthly, and quarterly only.');
     if (!dailyComparisonTable.scrollable) throw new Error('Expected day-by-day comparison table to be scrollable.');
     if (!dailyComparisonTable.updatesOnSlider) throw new Error('Expected day-by-day comparison table to update when sliders change.');
-    if (!chartMoveControls.ranges) throw new Error('Expected all three move sliders to range from -30% to +30%.');
-    if (!chartMoveControls.wholeYearGrowth) throw new Error('Expected annualized gain/loss to compound across the whole year.');
-    if (!chartMoveControls.noAnnualDca) throw new Error('Expected Annual DCA series/stat/table column to be removed.');
+    if (!chartMoveEditor.editorVisible) throw new Error('Expected chart to include a market move editor.');
+    if (!chartMoveEditor.noStaticSliders) throw new Error('Expected three static market move sliders to be removed.');
+    if (!chartMoveEditor.ranges) throw new Error('Expected market move editor height to range -30% to +30% and width to range 1 to 365 days.');
+    if (!chartMoveEditor.canAddUnrecoveredMove) throw new Error('Expected market move editor to add an unrecovered move.');
+    if (!chartMoveEditor.unrecoveredAffectsEnd) throw new Error('Expected unrecovered market move to affect the year-end path.');
+    if (!chartMoveEditor.canRemoveMove) throw new Error('Expected market move editor rows to be removable.');
+    if (!chartMoveEditor.wholeYearGrowth) throw new Error('Expected annualized gain/loss to compound across the whole year.');
+    if (!chartMoveEditor.noAnnualDca) throw new Error('Expected Annual DCA series/stat/table column to be removed.');
     if (!dailyVariationControl.range) throw new Error('Expected daily variation slider to range from 0% to 3%.');
     if (!dailyVariationControl.changesPath) throw new Error('Expected daily variation to add daily up/down movement to the price path.');
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
@@ -230,7 +244,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveControls, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

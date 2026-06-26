@@ -152,6 +152,60 @@ h3 { font-size: 1.35rem; }
   padding: 10px;
 }
 .controls output { color: var(--green); font-weight: 900; }
+.dip-editor {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 14px;
+  margin-bottom: 18px;
+  background: rgba(255,255,255,0.055);
+}
+.dip-editor-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 14px;
+}
+.control-title { display: block; font-weight: 900; color: #d9e5f8; margin-bottom: 4px; }
+.dip-editor-head small { color: var(--muted); line-height: 1.35; }
+.button.compact { padding: 9px 12px; font-size: 0.8rem; white-space: nowrap; }
+.dip-input-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.controls .dip-input-grid label { margin-bottom: 0; font-size: 0.86rem; }
+.checkbox-label {
+  display: flex !important;
+  align-items: center;
+  gap: 8px !important;
+  align-self: end;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(8,17,31,0.55);
+}
+.checkbox-label input { width: auto; }
+.dip-list { display: grid; gap: 8px; margin-top: 14px; }
+.dip-pill {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 10px;
+  background: rgba(8,17,31,0.55);
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+.dip-pill button {
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 800;
+}
+.empty-dips { margin: 0; font-size: 0.82rem; }
 .chart-card { padding: 22px; min-height: 520px; }
 #dcaChart { max-height: 390px; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
@@ -331,7 +385,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
   .nav-links { display: none; }

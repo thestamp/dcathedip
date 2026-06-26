@@ -159,21 +159,35 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
             <input type="range" id="recurring" min="1" max="100" step="1" value="10" />
             <output id="recurringOut"></output>
           </label>
-          <label>
-            Early-year move (days 2–20)
-            <input type="range" id="earlyDip" min="-30" max="30" step="1" value="-25" />
-            <output id="earlyDipOut"></output>
-          </label>
-          <label>
-            Mid-year move (10 down, 10 recover)
-            <input type="range" id="midDip" min="-30" max="30" step="1" value="0" />
-            <output id="midDipOut"></output>
-          </label>
-          <label>
-            Late-year move (last 10 days, no recovery)
-            <input type="range" id="lateDip" min="-30" max="30" step="1" value="0" />
-            <output id="lateDipOut"></output>
-          </label>
+          <div class="dip-editor" id="dipEditor">
+            <div class="dip-editor-head">
+              <div>
+                <span class="control-title">Market move editor</span>
+                <small>Add drawdowns or rallies. Negative values dip; positive values rally.</small>
+              </div>
+              <button class="button ghost compact" type="button" id="addDip">Add move</button>
+            </div>
+            <div class="dip-input-grid">
+              <label>
+                Start day
+                <input type="number" id="dipStart" min="0" max="365" step="1" value="2" />
+              </label>
+              <label>
+                Height
+                <input type="range" id="dipHeight" min="-30" max="30" step="1" value="-25" />
+                <output id="dipHeightOut"></output>
+              </label>
+              <label>
+                Width each direction
+                <input type="number" id="dipWidth" min="1" max="365" step="1" value="8" />
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="dipRecover" checked />
+                Recovers after the move
+              </label>
+            </div>
+            <div class="dip-list" id="dipList" aria-live="polite"></div>
+          </div>
           <label>
             Annualized gain/loss
             <input type="range" id="growth" min="-10" max="10" step="1" value="10" />
@@ -189,7 +203,7 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
             <strong><output id="capitalOut"></output></strong>
             <span>Calculated as daily amount × 5 trading days × 52 weeks.</span>
           </div>
-          <p class="chart-assumptions">Annual gain/loss compounds across the full year. Daily variation adds a deterministic pattern of random-looking up/down moves around that annualized path, from 0% to 3% daily movement, so the chart stays stable while sliders change. Move sliders range from -30% drawdowns to +30% rallies: early-year starts day 2, bottoms day 10, and recovers by day 20; mid-year falls over 10 days and recovers over the next 10; late-year happens over the last 10 days and does not recover. Set every move, daily variation, and annual gain to 0% to see every approach end equal.</p>
+          <p class="chart-assumptions">Annual gain/loss compounds across the full year. Daily variation adds a deterministic pattern of random-looking up/down moves around that annualized path, from 0% to 3% daily movement, so the chart stays stable while sliders change. Use the market move editor to add any number of dips or rallies: choose a start day, height from -30% to +30%, a width from 1 to 365 days in each direction, and whether the move recovers. Set every move, daily variation, and annual gain to 0% to see every approach end equal.</p>
           <p class="chart-assumptions">Weekly = 5× daily for 52 weeks. Biweekly/monthly/quarterly are scaled so every schedule invests the same annual total. <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Use Wealthsimple to automate this</a>, and <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">click here for setup details</a>. Recurring investments can run daily or weekly from your bank account, for as little as $1 a day.</p>
         </form>
 

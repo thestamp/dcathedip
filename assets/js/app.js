@@ -39,9 +39,71 @@ const frequencies = [
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 let chart;
+let marketMoves = [
+  { id: 1, startDay: 2, height: -25, width: 8, recovers: true }
+];
+let nextMoveId = 2;
 
 function money(value) {
   return fmt.format(value);
+}
+
+function clampNumber(value, min, max) {
+  const number = Number(value);
+  if (Number.isNaN(number)) return min;
+  return Math.min(max, Math.max(min, number));
+}
+
+function formatPct(value) {
+  return `${value > 0 ? "+" : ""}${value}%`;
+}
+
+function renderDipList() {
+  const list = document.getElementById("dipList");
+  if (!marketMoves.length) {
+    list.innerHTML = `<p class="empty-dips">No custom moves yet. Add a dip or rally to test timing risk.</p>`;
+    return;
+  }
+
+  list.innerHTML = marketMoves.map(move => {
+    const bottomDay = Math.min(365, move.startDay + move.width);
+    const recoveryDay = move.recovers ? Math.min(365, bottomDay + move.width) : null;
+    const pathText = move.recovers
+      ? `starts day ${move.startDay}, reaches ${formatPct(move.height)} by day ${bottomDay}, recovers by day ${recoveryDay}`
+      : `starts day ${move.startDay}, reaches ${formatPct(move.height)} by day ${bottomDay}, does not recover`;
+    return `
+      <div class="dip-pill" data-move-id="${move.id}">
+        <span>${pathText}</span>
+        <button type="button" aria-label="Remove market move ${move.id}" data-remove-move="${move.id}">Remove</button>
+      </div>
+    `;
+  }).join("");
+
+  list.querySelectorAll("[data-remove-move]").forEach(button => {
+    button.addEventListener("click", () => {
+      const id = Number(button.dataset.removeMove);
+      marketMoves = marketMoves.filter(move => move.id !== id);
+      updateChart();
+    });
+  });
+}
+
+function addMarketMove() {
+  const move = {
+    id: nextMoveId,
+    startDay: clampNumber(document.getElementById("dipStart").value, 0, 365),
+    height: clampNumber(document.getElementById("dipHeight").value, -30, 30),
+    width: clampNumber(document.getElementById("dipWidth").value, 1, 365),
+    recovers: document.getElementById("dipRecover").checked
+  };
+  nextMoveId += 1;
+  marketMoves.push(move);
+  updateChart();
+}
+
+function clearMarketMoves() {
+  marketMoves = [];
+  updateChart();
 }
 
 function setOutputs() {
@@ -49,11 +111,9 @@ function setOutputs() {
   const annualTotal = recurringAmount * 5 * 52;
   const fields = [
     ["recurring", v => money(+v)],
-    ["earlyDip", v => `${+v > 0 ? "+" : ""}${v}%`],
-    ["midDip", v => `${+v > 0 ? "+" : ""}${v}%`],
-    ["lateDip", v => `${+v > 0 ? "+" : ""}${v}%`],
     ["growth", v => `${+v > 0 ? "+" : ""}${v}%`],
-    ["variation", v => `${v}%`]
+    ["variation", v => `${v}%`],
+    ["dipHeight", v => `${+v > 0 ? "+" : ""}${v}%`]
   ];
   fields.forEach(([id, render]) => {
     document.getElementById(`${id}Out`).value = render(document.getElementById(id).value);
@@ -66,14 +126,24 @@ function moveFactor(day, startDay, bottomDay, recoverDay, move) {
   const bottomFactor = 1 + move;
 
   if (day <= bottomDay) {
-    const t = (day - startDay) / (bottomDay - startDay);
+    const span = Math.max(1, bottomDay - startDay);
+    const t = (day - startDay) / span;
     return 1 + move * t;
   }
 
   if (recoverDay === null || day >= recoverDay) return recoverDay === null ? bottomFactor : 1;
 
-  const t = (day - bottomDay) / (recoverDay - bottomDay);
+  const span = Math.max(1, recoverDay - bottomDay);
+  const t = (day - bottomDay) / span;
   return bottomFactor + (1 - bottomFactor) * t;
+}
+
+function marketMoveFactor(day, move) {
+  const startDay = clampNumber(move.startDay, 0, 365);
+  const width = clampNumber(move.width, 1, 365);
+  const bottomDay = Math.min(365, startDay + width);
+  const recoveryDay = move.recovers ? Math.min(365, bottomDay + width) : null;
+  return moveFactor(day, startDay, bottomDay, recoveryDay, clampNumber(move.height, -30, 30) / 100);
 }
 
 function seededDailyMove(day) {
@@ -95,9 +165,6 @@ function dailyVariationFactors(totalDays, variationPct) {
 }
 
 function buildPrices() {
-  const earlyMove = +document.getElementById("earlyDip").value / 100;
-  const midMove = +document.getElementById("midDip").value / 100;
-  const lateMove = +document.getElementById("lateDip").value / 100;
   const growth = +document.getElementById("growth").value / 100;
   const variation = +document.getElementById("variation").value;
   const totalDays = 365;
@@ -107,10 +174,8 @@ function buildPrices() {
 
   for (let day = 0; day <= totalDays; day += 1) {
     const annualGrowthFactor = Math.pow(1 + growth, day / totalDays);
-    const earlyFactor = moveFactor(day, 2, 10, 20, earlyMove);
-    const midFactor = moveFactor(day, 173, 183, 193, midMove);
-    const lateFactor = moveFactor(day, 355, 365, null, lateMove);
-    const price = startPrice * annualGrowthFactor * earlyFactor * midFactor * lateFactor * variationFactors[day];
+    const customMoveFactor = marketMoves.reduce((factor, move) => factor * marketMoveFactor(day, move), 1);
+    const price = startPrice * annualGrowthFactor * customMoveFactor * variationFactors[day];
     prices.push(price);
   }
   return prices;
@@ -174,6 +239,7 @@ function renderDailyTable(result) {
 
 function updateChart() {
   setOutputs();
+  renderDipList();
   const result = simulate();
   const labels = result.prices.map((_, i) => i);
   const best = [...result.schedules].sort((a, b) => b.end - a.end)[0];
@@ -330,6 +396,7 @@ function calculateTfsaRoom() {
 
 function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));
+  document.getElementById("addDip").addEventListener("click", addMarketMove);
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   document.querySelectorAll("[data-region]").forEach(btn => btn.addEventListener("click", () => renderTickers(btn.dataset.region)));
   document.getElementById("detectLocation").addEventListener("click", detectLocation);
