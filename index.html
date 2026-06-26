@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "DCA the Dip — Buy consistently. Buy more when it’s cheaper."
-description: "DCA the Dip explains daily dollar-cost averaging with interactive charts, drawdown strategies, and ETF ideas for Canadian and U.S. investors."
+title: "DCA the Dip — Daily dollar-cost averaging through every market"
+description: "DCA the Dip explains consistent daily dollar-cost averaging with interactive charts comparing daily, weekly, biweekly, monthly, and quarterly investing schedules."
 ---
 
 <header class="site-header">
@@ -23,26 +23,26 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
   <section class="hero wrap">
     <div class="hero-copy">
       <p class="eyebrow">A rules-based investing playbook</p>
-      <h1>Buy consistently. <span>Buy more when it’s cheaper.</span></h1>
+      <h1>Invest consistently. <span>Let dips work for you.</span></h1>
       <p class="lede">
-        DCA the Dip turns market drawdowns into a plan: invest daily, stay diversified,
-        and use deeper discounts as a signal to increase contributions — without guessing the bottom.
+        DCA the Dip turns volatility into a routine: invest the same planned amount on a consistent schedule,
+        stay diversified, and let regular buying naturally catch more prices during market dips.
       </p>
       <div class="hero-actions">
-        <a class="button primary" href="#calculator">Try the dip calculator</a>
-        <a class="button ghost" href="#strategy">See the DCA ladder</a>
+        <a class="button primary" href="#calculator">Compare DCA schedules</a>
+        <a class="button ghost" href="#strategy">See frequency tradeoffs</a>
       </div>
       <div class="trust-row" aria-label="Core principles">
         <span>Daily investing</span>
         <span>Index ETFs</span>
-        <span>Drawdown rules</span>
+        <span>No market timing</span>
       </div>
     </div>
     <div class="hero-card" aria-label="DCA summary card">
       <div class="card-glow"></div>
-      <p class="card-label">Today’s rule</p>
-      <h2 id="todayRule">1.5× daily buy</h2>
-      <p>When the index is down 10–19%, increase your planned contribution by 50%.</p>
+      <p class="card-label">Simple rule</p>
+      <h2 id="todayRule">Same amount. Every day.</h2>
+      <p>Daily DCA creates more purchase points, giving your plan more chances to buy during short-lived dips.</p>
       <div class="mini-bars" aria-hidden="true">
         <span style="height: 35%"></span>
         <span style="height: 50%"></span>
@@ -65,12 +65,12 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
     <article class="benefit-card">
       <span class="icon">🧠</span>
       <h3>Reduces panic decisions</h3>
-      <p>A preset drawdown ladder turns scary red days into scheduled actions instead of emotional choices.</p>
+      <p>A consistent schedule turns scary red days into ordinary buy days instead of emotional choices.</p>
     </article>
     <article class="benefit-card">
       <span class="icon">📉</span>
-      <h3>Buys more shares lower</h3>
-      <p>If prices fall while you keep buying, the same dollars accumulate more units at better prices.</p>
+      <h3>Finds more dip days</h3>
+      <p>More frequent purchases mean more chances for some of your planned buys to land near temporary lows.</p>
     </article>
   </section>
 
@@ -78,10 +78,10 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
     <div class="wrap">
       <div class="section-heading center">
         <p class="eyebrow">Interactive chart</p>
-        <h2>DCA through a dip vs lump sum</h2>
+        <h2>Daily vs weekly vs biweekly vs monthly vs quarterly</h2>
         <p>
-          Model a market that falls, recovers, then compounds. Adjust the dip and contribution rules to see how
-          buying through weakness changes shares accumulated and ending value.
+          Model a market that falls, recovers, then compounds. Each DCA schedule invests the same total dollars —
+          only the timing changes. Daily buys usually catch more dip opportunities because they create more entries.
         </p>
       </div>
 
@@ -93,9 +93,9 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
             <output id="capitalOut"></output>
           </label>
           <label>
-            Base daily DCA
-            <input type="range" id="daily" min="5" max="500" step="5" value="50" />
-            <output id="dailyOut"></output>
+            DCA deployment window
+            <input type="range" id="deployDays" min="30" max="730" step="30" value="365" />
+            <output id="deployDaysOut"></output>
           </label>
           <label>
             Dip depth
@@ -117,14 +117,7 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
             <input type="range" id="growth" min="0" max="15" step="0.25" value="7" />
             <output id="growthOut"></output>
           </label>
-          <label>
-            Dip accelerator
-            <select id="accelerator">
-              <option value="steady">Steady daily DCA</option>
-              <option value="balanced" selected>Balanced: up to 3×</option>
-              <option value="aggressive">Aggressive: up to 5×</option>
-            </select>
-          </label>
+
         </form>
 
         <div class="chart-card">
@@ -137,20 +130,20 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
 
   <section id="strategy" class="wrap section split">
     <div>
-      <p class="eyebrow">Drawdown ladder</p>
-      <h2>A simple rule for buying more</h2>
+      <p class="eyebrow">Frequency guide</p>
+      <h2>Same dollars, different rhythm</h2>
       <p>
-        Start with a base daily buy you can sustain. Increase only when the ETF is below its recent or all-time high.
-        The goal is not to predict the bottom — it is to have more buying power when expected returns are more attractive.
+        The best DCA schedule is the one you will actually automate and keep. Daily is my preferred default for this site:
+        it is smooth, boring, and gives your plan the most chances to participate in short-lived dip opportunities.
       </p>
     </div>
-    <div class="ladder" role="table" aria-label="DCA accelerator ladder">
-      <div role="row"><span>Drawdown</span><strong>Daily buy</strong></div>
-      <div role="row"><span>0% to -9%</span><strong>1.0×</strong></div>
-      <div role="row"><span>-10% to -19%</span><strong>1.5×</strong></div>
-      <div role="row"><span>-20% to -29%</span><strong>2.0×</strong></div>
-      <div role="row"><span>-30% to -39%</span><strong>2.5×</strong></div>
-      <div role="row"><span>-40% or worse</span><strong>3.0×</strong></div>
+    <div class="ladder" role="table" aria-label="DCA frequency comparison">
+      <div role="row"><span>Frequency</span><strong>Benefit / drawback</strong></div>
+      <div role="row"><span>Daily</span><strong>Most dip opportunities and smoothest entries / more transactions</strong></div>
+      <div role="row"><span>Weekly</span><strong>Simple automation with frequent buys / can miss fast dips</strong></div>
+      <div role="row"><span>Biweekly</span><strong>Matches paycheques and budgeting / fewer entry points than daily</strong></div>
+      <div role="row"><span>Monthly</span><strong>Low effort and common payroll fit / chunkier timing risk</strong></div>
+      <div role="row"><span>Quarterly</span><strong>Simplest administration / least responsive to dip opportunities</strong></div>
     </div>
   </section>
 
@@ -193,11 +186,11 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
     </div>
     <details open>
       <summary>Is daily DCA always better than lump sum?</summary>
-      <p>No. If markets rise immediately, lump sum often wins. DCA shines when you value behavioral consistency, cashflow investing, or buying through drawdowns without timing the bottom.</p>
+      <p>No. If markets rise immediately, lump sum often wins. Daily DCA shines when you value behavioral consistency, cashflow investing, and more chances to buy during dips without timing the bottom.</p>
     </details>
     <details>
-      <summary>Should I use margin?</summary>
-      <p>Margin can amplify returns and losses. A drawdown is only a discount if you can keep buying and avoid forced liquidation. Keep leverage conservative and rules-based.</p>
+      <summary>Why recommend daily instead of monthly?</summary>
+      <p>Monthly investing is still excellent. Daily investing simply creates more entry points, which can matter during volatile markets where dips and rebounds happen quickly.</p>
     </details>
     <details>
       <summary>Which ETF is “best”?</summary>
@@ -213,8 +206,8 @@ description: "DCA the Dip explains daily dollar-cost averaging with interactive 
       <p>Educational content only. Not financial advice. Investing involves risk, including possible loss of principal.</p>
     </div>
     <div>
-      <strong>Build your rules. Follow them.</strong>
-      <p>Daily DCA, broad ETFs, and drawdown accelerators for long-term investors.</p>
+      <strong>Automate the habit. Ignore the noise.</strong>
+      <p>Daily DCA, broad ETFs, and consistent investing for long-term investors.</p>
     </div>
   </div>
 </footer>

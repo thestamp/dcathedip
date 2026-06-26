@@ -20,8 +20,15 @@ const etfs = {
   ]
 };
 
+const frequencies = [
+  { key: "daily", label: "Daily DCA", every: 1, color: "#53e6a0" },
+  { key: "weekly", label: "Weekly DCA", every: 7, color: "#6aa8ff" },
+  { key: "biweekly", label: "Biweekly DCA", every: 14, color: "#ffd166" },
+  { key: "monthly", label: "Monthly DCA", every: 30, color: "#b892ff" },
+  { key: "quarterly", label: "Quarterly DCA", every: 91, color: "#ff8fab" }
+];
+
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
-const pct = new Intl.NumberFormat(undefined, { style: "percent", maximumFractionDigits: 1 });
 let chart;
 
 function money(value) {
@@ -31,7 +38,7 @@ function money(value) {
 function setOutputs() {
   const fields = [
     ["capital", v => money(+v)],
-    ["daily", v => money(+v)],
+    ["deployDays", v => `${v} days`],
     ["dip", v => `${v}%`],
     ["fallDays", v => `${v} days`],
     ["recoverDays", v => `${v} days`],
@@ -42,30 +49,11 @@ function setOutputs() {
   });
 }
 
-function multiplier(drawdown, mode) {
-  if (mode === "steady") return 1;
-  if (mode === "aggressive") {
-    if (drawdown >= 0.4) return 5;
-    if (drawdown >= 0.3) return 4;
-    if (drawdown >= 0.2) return 3;
-    if (drawdown >= 0.1) return 2;
-    return 1;
-  }
-  if (drawdown >= 0.4) return 3;
-  if (drawdown >= 0.3) return 2.5;
-  if (drawdown >= 0.2) return 2;
-  if (drawdown >= 0.1) return 1.5;
-  return 1;
-}
-
-function simulate() {
-  const capital = +document.getElementById("capital").value;
-  const baseDaily = +document.getElementById("daily").value;
+function buildPrices() {
   const dipDepth = +document.getElementById("dip").value / 100;
   const fallDays = +document.getElementById("fallDays").value;
   const recoverDays = +document.getElementById("recoverDays").value;
   const growth = +document.getElementById("growth").value / 100;
-  const mode = document.getElementById("accelerator").value;
   const afterDays = 365;
   const totalDays = fallDays + recoverDays + afterDays;
   const startPrice = 100;
@@ -84,39 +72,68 @@ function simulate() {
     }
     prices.push(price);
   }
+  return prices;
+}
 
-  const lumpShares = capital / prices[0];
-  const lumpValues = prices.map(p => lumpShares * p);
+function contributionDays(every, deployDays, totalDays) {
+  const days = [];
+  for (let day = 0; day <= Math.min(deployDays, totalDays); day += every) days.push(day);
+  if (!days.includes(Math.min(deployDays, totalDays))) days.push(Math.min(deployDays, totalDays));
+  return [...new Set(days)].sort((a, b) => a - b);
+}
 
-  let dcaCash = capital;
-  let dcaShares = 0;
-  const dcaValues = [];
-  const dailyBuys = [];
-  const sharesSeries = [];
+function simulateSchedule(prices, frequency) {
+  const capital = +document.getElementById("capital").value;
+  const deployDays = +document.getElementById("deployDays").value;
+  const days = contributionDays(frequency.every, deployDays, prices.length - 1);
+  const installment = capital / days.length;
+  let cash = capital;
+  let shares = 0;
+  const values = [];
 
-  prices.forEach(price => {
-    const drawdown = Math.max(0, 1 - price / startPrice);
-    const buy = Math.min(dcaCash, baseDaily * multiplier(drawdown, mode));
-    dcaShares += buy / price;
-    dcaCash -= buy;
-    dcaValues.push(dcaShares * price + dcaCash);
-    dailyBuys.push(buy);
-    sharesSeries.push(dcaShares);
+  prices.forEach((price, day) => {
+    if (days.includes(day) && cash > 0) {
+      const buy = Math.min(cash, installment);
+      shares += buy / price;
+      cash -= buy;
+    }
+    values.push(shares * price + cash);
   });
 
-  return { prices, lumpValues, dcaValues, dailyBuys, sharesSeries, lumpShares, dcaShares, dcaCash, totalDays };
+  return { ...frequency, values, shares, cash, installment, contributions: days.length, end: values.at(-1) };
+}
+
+function simulate() {
+  const capital = +document.getElementById("capital").value;
+  const prices = buildPrices();
+  const lumpShares = capital / prices[0];
+  const lumpValues = prices.map(p => lumpShares * p);
+  const schedules = frequencies.map(freq => simulateSchedule(prices, freq));
+  return { prices, lumpShares, lumpValues, lumpEnd: lumpValues.at(-1), schedules };
 }
 
 function updateChart() {
   setOutputs();
   const result = simulate();
   const labels = result.prices.map((_, i) => i);
+  const best = [...result.schedules].sort((a, b) => b.end - a.end)[0];
+  const daily = result.schedules.find(s => s.key === "daily");
+  const quarterly = result.schedules.find(s => s.key === "quarterly");
+
   const data = {
     labels,
     datasets: [
-      { label: "DCA strategy value", data: result.dcaValues, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
-      { label: "Lump sum value", data: result.lumpValues, borderColor: "#6aa8ff", backgroundColor: "rgba(106,168,255,0.10)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
-      { label: "Index price", data: result.prices.map(p => p * (result.lumpValues[0] / 100)), borderColor: "rgba(255,209,102,0.85)", borderDash: [6, 6], tension: 0.25, pointRadius: 0, borderWidth: 2 }
+      ...result.schedules.map(schedule => ({
+        label: schedule.label,
+        data: schedule.values,
+        borderColor: schedule.color,
+        backgroundColor: `${schedule.color}22`,
+        fill: schedule.key === "daily",
+        tension: 0.25,
+        pointRadius: 0,
+        borderWidth: schedule.key === "daily" ? 3 : 2
+      })),
+      { label: "Lump sum", data: result.lumpValues, borderColor: "rgba(255,255,255,0.72)", borderDash: [7, 7], tension: 0.25, pointRadius: 0, borderWidth: 2 }
     ]
   };
 
@@ -143,19 +160,17 @@ function updateChart() {
     });
   }
 
-  const dcaEnd = result.dcaValues.at(-1);
-  const lumpEnd = result.lumpValues.at(-1);
-  const advantage = dcaEnd - lumpEnd;
-  const totalInvested = +document.getElementById("capital").value - result.dcaCash;
+  const dailyVsLump = daily.end - result.lumpEnd;
+  const dailyVsQuarterly = daily.end - quarterly.end;
   document.getElementById("stats").innerHTML = `
-    <div class="stat good"><small>DCA ending value</small><strong>${money(dcaEnd)}</strong></div>
-    <div class="stat"><small>Lump sum ending value</small><strong>${money(lumpEnd)}</strong></div>
-    <div class="stat ${advantage >= 0 ? "good" : "warn"}"><small>DCA advantage</small><strong>${money(advantage)}</strong></div>
-    <div class="stat"><small>DCA shares accumulated</small><strong>${result.dcaShares.toFixed(1)}</strong></div>
-    <div class="stat"><small>Total deployed</small><strong>${money(totalInvested)}</strong></div>
-    <div class="stat"><small>Cash remaining</small><strong>${money(result.dcaCash)}</strong></div>
-    <div class="stat"><small>Lowest model price</small><strong>${money(Math.min(...result.prices))}</strong></div>
-    <div class="stat"><small>Lump sum shares</small><strong>${result.lumpShares.toFixed(1)}</strong></div>
+    <div class="stat good"><small>Best DCA schedule</small><strong>${best.label}</strong></div>
+    <div class="stat"><small>Daily ending value</small><strong>${money(daily.end)}</strong></div>
+    <div class="stat"><small>Weekly ending value</small><strong>${money(result.schedules.find(s => s.key === "weekly").end)}</strong></div>
+    <div class="stat"><small>Biweekly ending value</small><strong>${money(result.schedules.find(s => s.key === "biweekly").end)}</strong></div>
+    <div class="stat"><small>Monthly ending value</small><strong>${money(result.schedules.find(s => s.key === "monthly").end)}</strong></div>
+    <div class="stat"><small>Quarterly ending value</small><strong>${money(quarterly.end)}</strong></div>
+    <div class="stat ${dailyVsLump >= 0 ? "good" : "warn"}"><small>Daily vs lump sum</small><strong>${money(dailyVsLump)}</strong></div>
+    <div class="stat ${dailyVsQuarterly >= 0 ? "good" : "warn"}"><small>Daily vs quarterly</small><strong>${money(dailyVsQuarterly)}</strong></div>
   `;
 }
 
@@ -183,7 +198,6 @@ function detectLocation() {
   note.textContent = "Requesting location permission…";
   navigator.geolocation.getCurrentPosition(async pos => {
     const { latitude, longitude } = pos.coords;
-    // Coarse Canada bounding box. This avoids sending coordinates to a third-party geocoder.
     const isCanada = latitude >= 41 && latitude <= 84 && longitude >= -141 && longitude <= -52;
     renderTickers(isCanada ? "canada" : "us");
     note.textContent = isCanada ? "Location suggests Canada. Showing Canadian-listed ETF ideas." : "Location suggests outside Canada. Showing U.S.-listed ETF ideas.";

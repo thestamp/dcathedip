@@ -6,8 +6,8 @@ A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 
 - Beautiful responsive Jekyll landing page
 - Interactive DCA-through-a-dip calculator using Chart.js
-- Lump sum vs daily DCA comparison
-- Drawdown-based contribution accelerator rules
+- Lump sum vs daily, weekly, biweekly, monthly, and quarterly DCA comparison
+- Frequency guide with benefits and drawbacks for each schedule
 - Canadian vs U.S. ETF suggestions
 - Optional browser geolocation for region selection
 - Wealthsimple referral link as a JavaScript variable
