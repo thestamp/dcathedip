@@ -67,7 +67,8 @@ function createServer() {
     const timingSection = /Why not just buy the dip\?/i.test(bodyText) && /more than eight out of ten day traders lose money/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Small, regular amounts/i.test(bodyText) && /Large one-time sum/i.test(bodyText) && /Paycheque investors building a habit/i.test(bodyText);
     const lumpSumRiskFaq = /RBC GAM research/i.test(bodyText) && /emotions do/i.test(bodyText) && /behavioral choice/i.test(bodyText);
-    const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$35 a week/i.test(bodyText) && /\$1,825 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
+    const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
+    const meansSection = /Invest within your means/i.test(bodyText) && /Do not risk what you cannot afford/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /3–6 months of living expenses/i.test(bodyText) && /Invest only what is extra/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
     const withdrawSection = /When the money has a job to do/i.test(bodyText) && /panic selling/i.test(bodyText) && /A real goal/i.test(bodyText) && /During emergencies/i.test(bodyText) && /Not market reaction/i.test(bodyText);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
@@ -90,6 +91,7 @@ function createServer() {
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected RBC GAM research note with emotions/behavioral-choice language.');
     if (!budgetSection) throw new Error('Expected sustainable DCA amount section with coffee and lottery examples.');
+    if (!meansSection) throw new Error('Expected invest-within-your-means section with safety net guidance.');
     if (!withdrawSection) throw new Error('Expected when-to-withdraw section with panic selling warning and three pillars.');
     if (!removedDailyFaq) throw new Error('Expected "Is daily DCA always better than lump sum?" FAQ to be removed.');
     if (!removedDailyMonthlyFaq) throw new Error('Expected "Why recommend daily instead of monthly?" FAQ to be removed.');
@@ -98,7 +100,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, vtVisible, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

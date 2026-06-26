@@ -163,6 +163,13 @@ h3 { font-size: 1.35rem; }
 .budget-card { padding: 24px; box-shadow: none; }
 .budget-card p { margin-bottom: 0; }
 
+.means-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); padding-bottom: 84px; }
+.means-cards { display: grid; gap: 16px; }
+.means-card { border: 1px solid var(--border); border-radius: 24px; padding: 22px; background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055)); }
+.means-card .icon { font-size: 1.8rem; margin-bottom: 10px; }
+.means-card h3 { margin-bottom: 8px; font-size: 1.1rem; }
+.means-card p { margin: 0; }
+
 .ticker-section { background: rgba(255,255,255,0.035); }
 .region-picker { justify-content: center; }
 .location-note { text-align: center; margin-top: 14px; }
