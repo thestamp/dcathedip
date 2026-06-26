@@ -39,6 +39,6 @@ Then open <http://localhost:8080>.
 
 ## Deploy
 
-The included GitHub Actions workflow deploys the static files to GitHub Pages from `main`.
+This repository is ready for GitHub Pages as a static site.
 
-In GitHub repo settings, set Pages source to **GitHub Actions** if needed.
+Because the initial GitHub token did not include the `workflow` scope, no GitHub Actions workflow is committed. In GitHub repo settings, configure Pages to deploy from the `main` branch root, or add a Pages workflow later with a token that has workflow permissions.
