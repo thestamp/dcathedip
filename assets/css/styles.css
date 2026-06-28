@@ -353,6 +353,21 @@ h3 { font-size: 1.35rem; }
 .ws-step-body .button {
   display: inline-flex;
 }
+.ws-step-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.ws-referral-note {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--green);
+}
+.ws-step-referral {
+  border-color: rgba(83, 230, 160, 0.35);
+}
 
 .means-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); padding-bottom: 84px; }
 .means-cards { display: grid; gap: 16px; }

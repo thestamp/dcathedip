@@ -188,15 +188,17 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 The site must include a standalone step-by-step section walking Canadian users through setting up Wealthsimple for automated DCA.
 
 - Section title: "Wealthsimple step-by-step" with eyebrow "Get started".
-- Include a referral promo box advertising the $25 bonus on first deposit.
-- Four numbered steps, each with a heading, explanation, and an external link that opens in a new tab:
+- The nav menu at the top of the page must include a "Step-by-step" link pointing to `#wealthsimple-guide`.
+- Four numbered steps, each with a heading, explanation, and external links that open in new tabs:
 
-  1. **Set up your Wealthsimple profile** — link to `https://help.wealthsimple.com/hc/en-ca/articles/1500003505241-Set-up-a-Wealthsimple-profile`
-  2. **Open a Cash account and a Trading account** — recommend opening both; Cash account for e-transfers, interest, and free ATM withdrawals with the physical card; Trading account for holding ETFs. Link to `https://help.wealthsimple.com/hc/en-ca/articles/360056590534-Choose-an-account-to-open`
+  1. **Set up your Wealthsimple profile** — includes the referral sign-up button ("Sign up with referral") and a note about the $25 bonus. The help guide button uses a "Guide:" prefix so users know it links to a help article, not the actual signup. Link to `https://help.wealthsimple.com/hc/en-ca/articles/1500003505241-Set-up-a-Wealthsimple-profile`, referral to `https://wealthsimple.com/invite/V-MKNQ`.
+  2. **Open a Cash account (optional)** — explain that users can link a bank account directly to the Trading account and skip this step, but a Cash account is simpler, quicker, and keeps bank accounts completely separate for security-conscious users. Also mention competitive interest and free ATM withdrawals anywhere in Canada with the physical card. Link to `https://help.wealthsimple.com/hc/en-ca/articles/360056590534-Choose-an-account-to-open`.
   3. **Open a TFSA trading account** — explain TFSA tax benefits. Link to the same account-choosing article.
-  4. **Set up a recurring investment** — pick a recommended ETF, set daily/weekly amount, keep Cash account topped up or link a bank account. Link to `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`
+  4. **Set up a recurring investment** — include a link to the ETF ticker section (`#tickers`) so users can jump to recommended ETFs. Keep Cash account topped up or link a bank account. Link to `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
+- All help guide buttons must use a "Guide:" prefix (e.g., "Guide: Set up a Wealthsimple profile ↗").
 - All links must use `target="_blank" rel="nofollow noopener"` so they open in a new tab.
+- The ETF ticker section must include a link back to the step-by-step guide (`← Back to Wealthsimple step-by-step setup`).
 
 ## 12. FAQs
 

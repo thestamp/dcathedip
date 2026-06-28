@@ -199,11 +199,13 @@ function createServer() {
       && /company-specific risk/i.test(bodyText);
     const wealthsimpleGuide = /Wealthsimple step-by-step/i.test(bodyText)
       && /Set up your Wealthsimple profile/i.test(bodyText)
-      && /Open a Cash account and a Trading account/i.test(bodyText)
+      && /Open a Cash account \(optional\)/i.test(bodyText)
       && /TFSA trading account/i.test(bodyText)
       && /Set up a recurring investment/i.test(bodyText);
     const referralPromo = /extra .25 when you make your first deposit/i.test(bodyText)
       && /Sign up with referral/i.test(bodyText);
+    const stepByStepNav = await page.locator('.nav-links a[href="#wealthsimple-guide"]').count().then(count => count === 1);
+    const etfToStepsLink = await page.locator('a[href="#wealthsimple-guide"]').count().then(count => count >= 2);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
     const removedDailyMonthlyFaq = !/Why recommend daily instead of monthly\?/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
@@ -254,6 +256,8 @@ function createServer() {
     if (!broadEtfSection) throw new Error('Expected broad index ETF safety section comparing broad ETFs, industry ETFs, and individual stocks.');
     if (!wealthsimpleGuide) throw new Error('Expected Wealthsimple step-by-step guide with four numbered steps.');
     if (!referralPromo) throw new Error('Expected referral promo box with extra $25 language.');
+    if (!stepByStepNav) throw new Error('Expected nav menu to include a Step-by-step link pointing to the Wealthsimple guide section.');
+    if (!etfToStepsLink) throw new Error('Expected at least 2 links from ETF section back to step-by-step guide (step 4 link + back link).');
     if (!withdrawSection) throw new Error('Expected when-to-withdraw section with panic selling warning and three pillars.');
     if (!removedDailyFaq) throw new Error('Expected "Is daily DCA always better than lump sum?" FAQ to be removed.');
     if (!removedDailyMonthlyFaq) throw new Error('Expected "Why recommend daily instead of monthly?" FAQ to be removed.');
@@ -262,7 +266,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
