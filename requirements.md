@@ -183,6 +183,21 @@ For Canadian users, the site should include a Wealthsimple referral callout.
 - The Canadian investors brokerage callout should keep the referral CTA, but should not include the recurring-investing guide link; recurring-investing setup links belong in the other promo boxes that discuss automation.
 - Link the recurring-investing setup copy to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
+## 11a. Wealthsimple step-by-step guide
+
+The site must include a standalone step-by-step section walking Canadian users through setting up Wealthsimple for automated DCA.
+
+- Section title: "Wealthsimple step-by-step" with eyebrow "Get started".
+- Include a referral promo box advertising the $25 bonus on first deposit.
+- Four numbered steps, each with a heading, explanation, and an external link that opens in a new tab:
+
+  1. **Set up your Wealthsimple profile** — link to `https://help.wealthsimple.com/hc/en-ca/articles/1500003505241-Set-up-a-Wealthsimple-profile`
+  2. **Open a Cash account and a Trading account** — recommend opening both; Cash account for e-transfers, interest, and free ATM withdrawals with the physical card; Trading account for holding ETFs. Link to `https://help.wealthsimple.com/hc/en-ca/articles/360056590534-Choose-an-account-to-open`
+  3. **Open a TFSA trading account** — explain TFSA tax benefits. Link to the same account-choosing article.
+  4. **Set up a recurring investment** — pick a recommended ETF, set daily/weekly amount, keep Cash account topped up or link a bank account. Link to `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`
+
+- All links must use `target="_blank" rel="nofollow noopener"` so they open in a new tab.
+
 ## 12. FAQs
 
 The site should include FAQ content:

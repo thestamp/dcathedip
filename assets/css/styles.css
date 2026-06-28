@@ -308,6 +308,52 @@ h3 { font-size: 1.35rem; }
   white-space: nowrap;
 }
 
+/* Wealthsimple step-by-step guide */
+.wealthsimple-guide-section {
+  background: rgba(255,255,255,0.025);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.wealthsimple-guide-section .wealthsimple-promo.referral-promo {
+  margin-bottom: 36px;
+}
+.ws-steps {
+  display: grid;
+  gap: 20px;
+}
+.ws-step {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 22px;
+  background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055));
+}
+.ws-step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: #06101e;
+  font-weight: 1000;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+.ws-step-body h3 {
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+}
+.ws-step-body p {
+  margin-bottom: 14px;
+}
+.ws-step-body .button {
+  display: inline-flex;
+}
+
 .means-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); padding-bottom: 84px; }
 .means-cards { display: grid; gap: 16px; }
 .means-card { border: 1px solid var(--border); border-radius: 24px; padding: 22px; background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055)); }
