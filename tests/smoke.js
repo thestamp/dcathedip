@@ -188,6 +188,15 @@ function createServer() {
     const timingSection = /Why not just buy the dip\?/i.test(bodyText) && /more than eight out of ten day traders lose money/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Small, regular amounts/i.test(bodyText) && /Large one-time sum/i.test(bodyText) && /Paycheque investors building a habit/i.test(bodyText);
     const lumpSumRiskFaq = /RBC GAM research/i.test(bodyText) && /emotions do/i.test(bodyText) && /behavioral choice/i.test(bodyText);
+    const compoundingSection = /Compounding over time/i.test(bodyText)
+      && /The psychological grind/i.test(bodyText)
+      && /The tipping point/i.test(bodyText)
+      && /The visible acceleration/i.test(bodyText)
+      && /Rule of 72/i.test(bodyText)
+      && /72 ÷ annual return %/i.test(bodyText)
+      && /72 ÷ 8 = about 9 years/i.test(bodyText)
+      && /not a guaranteed timeline/i.test(bodyText);
+    const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
     const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
     const meansSection = /Invest within your means/i.test(bodyText) && /Do not risk what you cannot afford/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /3–6 months of living expenses/i.test(bodyText) && /Invest only what is extra/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
@@ -251,6 +260,8 @@ function createServer() {
     if (!timingSection) throw new Error('Expected why-not-buy-the-dip timing section with day-trading loss statistic.');
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected RBC GAM research note with emotions/behavioral-choice language.');
+    if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 rule and Rule of 72 content.');
+    if (!compoundingNav) throw new Error('Expected nav menu to include a Compounding link.');
     if (!budgetSection) throw new Error('Expected sustainable DCA amount section with coffee and lottery examples.');
     if (!meansSection) throw new Error('Expected invest-within-your-means section with safety net guidance.');
     if (!broadEtfSection) throw new Error('Expected broad index ETF safety section comparing broad ETFs, industry ETFs, and individual stocks.');
@@ -266,7 +277,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

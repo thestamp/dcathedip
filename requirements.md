@@ -43,6 +43,23 @@ The site must compare these contribution schedules:
 
 The comparison should explain that each schedule can invest the same total amount; only timing changes.
 
+
+## 4a. Compounding roadmap
+
+The site must include a standalone compounding section after the schedule-frequency guide and before sustainable-budget guidance. It should explain, in plain language, that DCA contributions may feel slow at first but compounding can become more visible as the portfolio base grows.
+
+Required content:
+
+- Introduce compounding as the process where investment growth can eventually earn growth of its own.
+- Present the 8-4-3 rule as a psychological rule of thumb, not a guarantee or promise of returns:
+  - First 8 years: progress can feel slow because contributions usually do most of the work.
+  - Next 4 years: the portfolio can reach a tipping point where growth starts to rival new contributions.
+  - Final 3 years: a larger base can make percentage moves feel much bigger in dollar terms.
+- Include the Rule of 72 formula: 72 ÷ annual return ≈ years to double.
+- Include an example: at 8% annual return, money roughly doubles in 9 years.
+- Tie the section back to daily DCA: consistent contributions keep adding units while time gives those units more opportunity to compound.
+- Keep language educational, conditional, and non-guaranteed. Do not claim users will get a specific return or timeline.
+
 ## 5. Interactive DCA chart
 
 The site must include an interactive chart that compares a one-time annual investment against five recurring DCA schedules over one full year.
