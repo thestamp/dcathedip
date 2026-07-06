@@ -170,7 +170,7 @@ h3 { font-size: 1.35rem; }
 }
 .control-title { display: block; font-weight: 900; color: #d9e5f8; margin-bottom: 4px; }
 .dip-editor-head small { color: var(--muted); line-height: 1.35; }
-.button.compact { padding: 9px 12px; font-size: 0.8rem; white-space: nowrap; }
+.button.compact { padding: 9px 12px; font-size: 0.8rem; white-space: nowrap; min-height: 44px; }
 .dip-input-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .controls .dip-input-grid label { margin-bottom: 0; font-size: 0.86rem; }
 .checkbox-label {
@@ -202,6 +202,7 @@ h3 { font-size: 1.35rem; }
   border: 0;
   border-radius: 999px;
   padding: 7px 10px;
+  min-height: 44px;
   background: rgba(255,255,255,0.1);
   color: var(--text);
   cursor: pointer;
@@ -602,3 +603,300 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
 .center-note { text-align: center; max-width: 900px; margin: 18px auto 0; }
 .dip-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .etf-risk-note { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+
+/* Mobile-first hardening pass: keep late-added sections responsive. */
+img, svg, canvas { max-width: 100%; }
+button, input, select, textarea { font: inherit; }
+input, select { min-height: 44px; }
+
+@media (max-width: 920px) {
+  .foundation-layout,
+  .foundation-grid,
+  .risk-spectrum-row,
+  .crossover-layout,
+  .crossover-results,
+  .compound-form,
+  .compound-results,
+  .compounding-grid,
+  .rule-72-card {
+    grid-template-columns: 1fr;
+  }
+
+  .foundation-illustration {
+    max-width: min(280px, 78vw);
+    order: -1;
+  }
+
+  .risk-spectrum-row.header {
+    display: none;
+  }
+
+  .risk-spectrum-row {
+    align-items: start;
+  }
+
+  .risk-spectrum-row span,
+  .risk-spectrum-row strong,
+  .risk-spectrum-row p {
+    display: block;
+  }
+
+  .crossover-card,
+  .chart-card {
+    min-height: 0;
+  }
+
+  #dcaChart,
+  #crossoverChart {
+    max-height: 300px;
+  }
+}
+
+@media (max-width: 680px) {
+  .wrap {
+    width: min(100% - 28px, 1160px);
+  }
+
+  .site-header {
+    position: static;
+  }
+
+  .nav {
+    padding: 12px 0;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .hero {
+    gap: 24px;
+    padding: 42px 0 34px;
+  }
+
+  h1 {
+    font-size: clamp(2.55rem, 15vw, 4.25rem);
+  }
+
+  h2 {
+    font-size: clamp(1.85rem, 10vw, 2.65rem);
+  }
+
+  h3 {
+    font-size: 1.18rem;
+  }
+
+  .lede {
+    font-size: 1.05rem;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .hero-actions,
+  .region-picker,
+  .wealthsimple-actions,
+  .ws-step-actions {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-actions .button,
+  .region-picker .button,
+  .wealthsimple-actions .button,
+  .ws-step-actions .button,
+  .wealthsimple-promo-actions .button {
+    width: 100%;
+  }
+
+  .button {
+    min-height: 44px;
+    padding: 12px 16px;
+    text-align: center;
+  }
+
+  .trust-row span {
+    font-size: 0.88rem;
+  }
+
+  .hero-card {
+    min-height: 280px;
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .card-glow {
+    width: 210px;
+    height: 210px;
+    top: -70px;
+    right: -70px;
+  }
+
+  .hero-card h2 {
+    font-size: 2.2rem;
+  }
+
+  .benefit-card,
+  .chart-card,
+  .controls,
+  .compound-calculator,
+  .crossover-section,
+  .tfsa-card,
+  .budget-card,
+  .wealthsimple,
+  .wealthsimple-promo,
+  .risk-card,
+  details,
+  .foundation-card,
+  .pillar,
+  .means-card {
+    border-radius: 22px;
+    padding: 20px;
+  }
+
+  .calculator-layout,
+  .timing-grid,
+  .split,
+  .wealthsimple-promo,
+  .ws-step,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dip-editor-head,
+  .dip-pill,
+  .wealthsimple {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dip-actions {
+    justify-content: stretch;
+  }
+
+  .dip-actions .button {
+    flex: 1 1 140px;
+  }
+
+  .compare-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .compare-row.header {
+    display: none;
+  }
+
+  .bar {
+    min-width: 0;
+    width: 100% !important;
+  }
+
+  .daily-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .daily-table-wrap table {
+    min-width: 560px;
+  }
+
+  .daily-table-wrap th,
+  .daily-table-wrap td {
+    white-space: nowrap;
+  }
+
+  .etf-matrix {
+    display: block;
+  }
+
+  .market-label,
+  .etf-cell {
+    margin-bottom: 12px;
+  }
+
+  .market-label {
+    justify-content: flex-start;
+    background: rgba(83,230,160,0.12);
+  }
+
+  .ticker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compound-stage {
+    grid-template-columns: 56px minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .stage-number {
+    width: 56px;
+    height: 56px;
+    border-radius: 18px;
+    font-size: 1.9rem;
+  }
+
+  .compound-result-card strong,
+  .crossover-result-card strong,
+  .stat strong {
+    font-size: 1.08rem;
+    overflow-wrap: anywhere;
+  }
+
+  .crossover-card {
+    padding: 12px;
+  }
+
+  #dcaChart,
+  #crossoverChart {
+    max-height: 260px;
+  }
+
+  .footer-grid {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .wrap {
+    width: min(100% - 22px, 1160px);
+  }
+
+  h1 {
+    font-size: clamp(2.3rem, 15vw, 3.4rem);
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+  }
+
+  .mini-bars {
+    height: 86px;
+    gap: 8px;
+  }
+
+  .stats,
+  .tfsa-result,
+  .compound-results,
+  .crossover-results {
+    grid-template-columns: 1fr;
+  }
+
+  .daily-table-wrap table {
+    min-width: 520px;
+    font-size: 0.74rem;
+  }
+
+  .wealthsimple-logo-lockup {
+    font-size: 1.05rem;
+  }
+}

@@ -293,3 +293,14 @@ The test must:
 ## Advisor-safe content update
 
 The page must be revised for beginner Canadian investors seeking steady, lower-risk growth: add a pre-DCA financial foundation checklist, a risk-level-before-ticker section, local disclaimers near calculators/ETF/referral areas, CAD default currency, generic CAGR assumptions instead of ticker-specific return presets, growth-versus-contribution crossover terminology, spending-based Coast FI target math, softer daily-DCA language, neutral reset for the schedule chart, monthly = 12 contributions, and ETF examples framed as examples to research rather than recommendations.
+
+
+## Mobile friendliness requirements
+
+The site must remain comfortable on 360px–390px phones and tablets. Requirements:
+
+- No horizontal page overflow at common mobile widths.
+- All controls and CTA buttons should be at least 44px tall where practical.
+- Complex tables/charts may scroll inside their own containers, but the body itself must not sideways-scroll.
+- Late-added grids such as the foundation checklist, risk spectrum, compounding cards, calculator forms/results, ETF matrix, Wealthsimple promos, and Coast FI chart must collapse to one column on phones.
+- Desktop visual hierarchy should remain intact while mobile sections use shorter spacing, readable font sizes, full-width buttons, and compact cards.

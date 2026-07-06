@@ -4,7 +4,7 @@
   "description": "A Jekyll educational website for DCATheDip.com / DCATheDip.ca.",
   "private": true,
   "scripts": {
-    "test": "node tests/render-jekyll-lite.js && node --check assets/js/app.js && node tests/smoke.js"
+    "test": "node tests/render-jekyll-lite.js && node --check assets/js/app.js && node tests/smoke.js && node scripts/mobile-audit.js"
   },
   "devDependencies": {
     "playwright": "^1.61.1"
