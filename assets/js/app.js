@@ -56,6 +56,7 @@ const frequencies = [
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 let chart;
+let crossoverChart;
 let marketMoves = [
   { id: 1, startDay: 50,  height: -10, width: 20, recovers: false },
   { id: 2, startDay: 125, height: -10, width: 20, recovers: false },
@@ -441,6 +442,100 @@ function applyCagrPreset() {
   calculateCompounding();
 }
 
+
+function monthLabel(month) {
+  if (month === null) return "Not reached";
+  if (month === 0) return "Already there";
+  const years = Math.floor(month / 12);
+  const months = month % 12;
+  if (years === 0) return `${months} mo`;
+  return months ? `${years} yr ${months} mo` : `${years} yr`;
+}
+
+function calculateCrossover() {
+  const results = document.getElementById("crossoverResults");
+  const canvas = document.getElementById("crossoverChart");
+  if (!results || !canvas) return;
+
+  const current = Math.max(0, +document.getElementById("crossCurrent").value || 0);
+  const monthly = Math.max(0, +document.getElementById("crossMonthly").value || 0);
+  const cagr = clampNumber(document.getElementById("crossCagr").value, -20, 20);
+  const target = Math.max(0, +document.getElementById("crossTarget").value || 0);
+  const years = clampNumber(document.getElementById("crossYears").value, 1, 60);
+  const totalMonths = Math.round(years * 12);
+  const monthlyRate = Math.pow(1 + cagr / 100, 1 / 12) - 1;
+  const canGrow = monthlyRate > 0;
+  const crossoverBalance = canGrow && monthly > 0 ? monthly / monthlyRate : null;
+  const coastRequiredToday = canGrow ? target / Math.pow(1 + monthlyRate, totalMonths) : target;
+
+  const labels = [];
+  const balances = [];
+  const contributionLine = [];
+  const crossoverLine = [];
+  const coastRequired = [];
+  let balance = current;
+  let crossoverMonth = crossoverBalance !== null && current >= crossoverBalance ? 0 : null;
+  let coastMonth = current >= coastRequiredToday ? 0 : null;
+
+  for (let month = 0; month <= totalMonths; month += 1) {
+    labels.push(month);
+    balances.push(balance);
+    contributionLine.push(current + monthly * month);
+    crossoverLine.push(crossoverBalance);
+    const remainingMonths = totalMonths - month;
+    const required = canGrow ? target / Math.pow(1 + monthlyRate, remainingMonths) : target;
+    coastRequired.push(required);
+
+    if (crossoverMonth === null && crossoverBalance !== null && balance >= crossoverBalance) crossoverMonth = month;
+    if (coastMonth === null && balance >= required) coastMonth = month;
+
+    if (month < totalMonths) balance = balance * (1 + monthlyRate) + monthly;
+  }
+
+  const projectedTarget = balances.at(-1);
+
+  results.innerHTML = `
+    <div class="crossover-result-card"><small>Crossover balance</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, a typical month of growth roughly matches your monthly contribution.</p></div>
+    <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
+    <div class="crossover-result-card coast"><small>Coast FI timing</small><strong>${monthLabel(coastMonth)}</strong><p>When your balance could coast to ${money(target)} by the target date.</p></div>
+    <div class="crossover-result-card"><small>Coast-needed today</small><strong>${money(coastRequiredToday)}</strong><p>If you already had this much, you could stop adding money in this simplified model.</p></div>
+    <div class="crossover-result-card"><small>Projected target-date value</small><strong>${money(projectedTarget)}</strong><p>With the monthly investment and CAGR assumption shown.</p></div>
+  `;
+
+  const data = {
+    labels,
+    datasets: [
+      { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
+      { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
+      { label: "Crossover balance", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
+      { label: "Coast FI required balance", data: coastRequired, borderColor: "#ff8fab", tension: 0.25, pointRadius: 0, borderWidth: 2 }
+    ]
+  };
+
+  if (crossoverChart) {
+    crossoverChart.data = data;
+    crossoverChart.update();
+  } else {
+    crossoverChart = new Chart(canvas, {
+      type: "line",
+      data,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { labels: { color: "#f4f7fb", font: { weight: "700" } } },
+          tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${money(ctx.parsed.y)}` } }
+        },
+        scales: {
+          x: { title: { display: true, text: "Months", color: "#aebbd0" }, ticks: { color: "#aebbd0", maxTicksLimit: 8 }, grid: { color: "rgba(255,255,255,0.06)" } },
+          y: { ticks: { color: "#aebbd0", callback: value => money(value) }, grid: { color: "rgba(255,255,255,0.08)" } }
+        }
+      }
+    });
+  }
+}
+
 function calculateTfsaRoom() {
   const eligibilityYear = +document.getElementById("eligibilityYear").value;
   const contributed = +document.getElementById("tfsaContributed").value || 0;
@@ -466,6 +561,7 @@ function init() {
   populateCagrPresets();
   document.querySelectorAll("#compoundForm input").forEach(el => el.addEventListener("input", calculateCompounding));
   document.getElementById("compoundPreset").addEventListener("change", applyCagrPreset);
+  document.querySelectorAll("#crossoverForm input").forEach(el => el.addEventListener("input", calculateCrossover));
   document.querySelectorAll("[data-region]").forEach(btn => btn.addEventListener("click", () => renderTickers(btn.dataset.region)));
   document.getElementById("detectLocation").addEventListener("click", detectLocation);
   document.getElementById("declineLocation").addEventListener("click", () => {
@@ -477,6 +573,7 @@ function init() {
   updateChart();
   calculateTfsaRoom();
   calculateCompounding();
+  calculateCrossover();
 }
 
 document.addEventListener("DOMContentLoaded", init);

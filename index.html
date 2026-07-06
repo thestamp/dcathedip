@@ -14,6 +14,7 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
       <a href="#calculator">Calculator</a>
       <a href="#strategy">Strategy</a>
       <a href="#compounding">Compounding</a>
+      <a href="#crossover-title">Coast FI</a>
       <a href="#timing">Timing risk</a>
       <a href="#wealthsimple-guide">Step-by-step</a>
       <a href="#tickers">Tickers</a>
@@ -325,6 +326,51 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         </form>
         <div class="compound-results" id="compoundResults" aria-live="polite"></div>
         <p class="calculator-note">Preset CAGRs are editable planning assumptions for comparison only — not historical returns, forecasts, or recommendations. Real ETF returns vary year to year and can be negative.</p>
+      </div>
+
+
+      <div class="crossover-section" aria-labelledby="crossover-title">
+        <div class="crossover-copy">
+          <p class="eyebrow">Crossover point + Coast FI</p>
+          <h3 id="crossover-title">When your portfolio starts doing more of the work</h3>
+          <p>
+            The <strong>crossover point</strong> is the moment your investments can grow by more in a typical month than you add from your paycheque.
+            <strong>Coast FI</strong> is the moment your portfolio could grow to a future target number without any more contributions, if the assumed CAGR happens.
+          </p>
+          <p>Think of it this way: early on, you push the snowball. Later, the snowball can roll farther on its own.</p>
+        </div>
+
+        <div class="crossover-layout">
+          <form class="crossover-form" id="crossoverForm">
+            <label>
+              Current invested amount
+              <input type="number" id="crossCurrent" min="0" step="1000" value="10000" />
+            </label>
+            <label>
+              Monthly investment
+              <input type="number" id="crossMonthly" min="0" step="50" value="500" />
+            </label>
+            <label>
+              CAGR assumption
+              <input type="number" id="crossCagr" min="-20" max="20" step="0.1" value="7" />
+            </label>
+            <label>
+              FI target
+              <input type="number" id="crossTarget" min="0" step="10000" value="1000000" />
+            </label>
+            <label>
+              Years until target date
+              <input type="number" id="crossYears" min="1" max="60" step="1" value="25" />
+            </label>
+          </form>
+
+          <div class="crossover-card">
+            <canvas id="crossoverChart" aria-label="Crossover and Coast FI chart"></canvas>
+          </div>
+        </div>
+
+        <div class="crossover-results" id="crossoverResults" aria-live="polite"></div>
+        <p class="calculator-note">This is a simple planning model. It assumes a steady CAGR and steady monthly contributions; real markets move unevenly and can be negative for long periods.</p>
       </div>
 
 

@@ -197,6 +197,28 @@ function createServer() {
       && /72 ÷ 8 = about 9 years/i.test(bodyText)
       && /not a guaranteed timeline/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
+    const crossoverCalculator = await page.evaluate(() => {
+      const current = document.getElementById('crossCurrent');
+      const monthly = document.getElementById('crossMonthly');
+      const cagr = document.getElementById('crossCagr');
+      const target = document.getElementById('crossTarget');
+      const years = document.getElementById('crossYears');
+      current.value = 10000;
+      monthly.value = 500;
+      cagr.value = 7;
+      target.value = 1000000;
+      years.value = 25;
+      years.dispatchEvent(new Event('input', { bubbles: true }));
+      const resultText = document.getElementById('crossoverResults').textContent;
+      const chart = window.Chart.getChart(document.getElementById('crossoverChart'));
+      return {
+        visible: Boolean(document.getElementById('crossoverForm')),
+        copy: /crossover point/i.test(document.body.textContent) && /Coast FI/i.test(document.body.textContent) && /snowball/i.test(document.body.textContent),
+        outputs: /Crossover balance/i.test(resultText) && /Crossover timing/i.test(resultText) && /Coast FI timing/i.test(resultText) && /Coast-needed today/i.test(resultText),
+        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Coast FI required balance'),
+        updates: resultText.includes('$88,')
+      };
+    });
     const compoundCalculator = await page.evaluate(() => {
       const preset = document.getElementById('compoundPreset');
       const initial = document.getElementById('compoundInitial');
@@ -285,6 +307,11 @@ function createServer() {
     if (!lumpSumRiskFaq) throw new Error('Expected RBC GAM research note with emotions/behavioral-choice language.');
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 rule and Rule of 72 content.');
     if (!compoundingNav) throw new Error('Expected nav menu to include a Compounding link.');
+    if (!crossoverCalculator.visible) throw new Error('Expected crossover / Coast FI calculator form to render.');
+    if (!crossoverCalculator.copy) throw new Error('Expected crossover point and Coast FI copy in plain language.');
+    if (!crossoverCalculator.outputs) throw new Error('Expected crossover calculator to output crossover and Coast FI timing/results.');
+    if (!crossoverCalculator.chart) throw new Error('Expected crossover chart with portfolio and Coast FI required-balance lines.');
+    if (!crossoverCalculator.updates) throw new Error('Expected crossover balance to update from CAGR/monthly investment inputs.');
     if (!compoundCalculator.visible) throw new Error('Expected compounding calculator form to render.');
     if (!compoundCalculator.hasEtfPresets) throw new Error('Expected compounding calculator to include recommended ETF CAGR presets.');
     if (!compoundCalculator.selectedCage) throw new Error('Expected selecting CAGE.TO preset to populate the CAGR input.');
@@ -305,7 +332,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, crossoverCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

@@ -62,6 +62,13 @@ Required content:
 - Calculator outputs: estimated future value, total contributed, estimated growth, and Rule-of-72 approximate doubling time.
 - Calculator math should use daily trading-day contributions (260 contribution days per year) so it matches the site's daily DCA framing.
 - Preset ETF CAGR values must be clearly labelled as planning assumptions, not historical data or predictions.
+- Include a simple crossover/coast FI section written for normal readers:
+  - Crossover point: when monthly investment growth is bigger than the user's monthly contribution.
+  - Coast FI: when the user's current portfolio could grow to a target number by a chosen future year even if they stopped adding new money.
+  - Inputs: current invested amount, monthly investment, CAGR, FI target, and years until the target date.
+  - Outputs: crossover balance, approximate crossover timing, Coast FI timing, coast-required amount today, and projected balance at the target date.
+  - Include a chart showing portfolio balance over time, the crossover balance line, and the declining Coast FI required-balance curve.
+  - Explain clearly that these are planning estimates only, not guarantees.
 - Tie the section back to daily DCA: consistent contributions keep adding units while time gives those units more opportunity to compound.
 - Keep language educational, conditional, and non-guaranteed. Do not claim users will get a specific return or timeline.
 
