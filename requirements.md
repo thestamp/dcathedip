@@ -63,7 +63,7 @@ Required content:
 - Calculator math should use daily trading-day contributions (260 contribution days per year) so it matches the site's daily DCA framing.
 - Preset ETF CAGR values must be clearly labelled as planning assumptions, not historical data or predictions.
 - Include a simple crossover/coast FI section written for normal readers:
-  - Crossover point: when monthly investment growth is bigger than the user's monthly contribution.
+  - Growth-versus-contribution crossover: when average monthly investment growth implied by the CAGR assumption is bigger than the user's monthly contribution.
   - Coast FI: when the user's current portfolio could grow to a target number by a chosen future year even if they stopped adding new money.
   - Inputs: current invested amount, monthly investment, CAGR, FI target, and years until the target date.
   - Outputs: crossover balance, approximate crossover timing, Coast FI timing, coast-required amount today, and projected balance at the target date.
@@ -142,11 +142,11 @@ The site must suggest ETFs based on user-selected or detected region.
 
 For the Canadian region, show ETFs as a grid with rows for market exposure and columns for cap-based versus growth-based choices. Each ETF cell must show the ticker, name, and a quick description of what the fund covers and why it fits that column.
 
-| Market exposure | Cap-based | Growth-based |
+| Market exposure | Standard broad-market example | Tilted / more aggressive example |
 |---|---|---|
-| U.S. | ZSP.TO — BMO S&P 500 Index ETF, cap-based U.S. large-cap S&P 500 exposure | CAUS.TO — Avantis CIBC U.S. All-Cap Equity ETF, growth-oriented broad U.S. equity exposure |
-| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF, cap-based large Canadian company exposure | CACE.TO — Avantis CIBC Canadian Equity ETF, growth-oriented broad Canadian equity exposure |
-| World | XEQT.TO — iShares Core Equity ETF Portfolio, cap-based global all-equity portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF, factor-tilted global all-equity growth-oriented core |
+| U.S. | ZSP.TO — BMO S&P 500 Index ETF, standard U.S. large-cap S&P 500 exposure | CAUS.TO — Avantis CIBC U.S. All-Cap Equity ETF, growth-oriented broad U.S. equity exposure |
+| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF, standard large Canadian company exposure | CACE.TO — Avantis CIBC Canadian Equity ETF, growth-oriented broad Canadian equity exposure |
+| World | XEQT.TO — iShares Core Equity ETF Portfolio, standard global all-equity portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF, factor-tilted global all-equity growth-oriented core |
 
 ### U.S. ETF examples
 
@@ -288,3 +288,8 @@ The test must:
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
+
+
+## Advisor-safe content update
+
+The page must be revised for beginner Canadian investors seeking steady, lower-risk growth: add a pre-DCA financial foundation checklist, a risk-level-before-ticker section, local disclaimers near calculators/ETF/referral areas, CAD default currency, generic CAGR assumptions instead of ticker-specific return presets, growth-versus-contribution crossover terminology, spending-based Coast FI target math, softer daily-DCA language, neutral reset for the schedule chart, monthly = 12 contributions, and ETF examples framed as examples to research rather than recommendations.

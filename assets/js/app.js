@@ -5,17 +5,17 @@ const etfs = {
   canada: [
     {
       market: "U.S.",
-      cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Cap-based S&P 500 exposure to large U.S. companies." },
+      cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Standard broad-market S&P 500 exposure to large U.S. companies." },
       growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Growth-oriented broad U.S. equity exposure across market capitalizations." }
     },
     {
       market: "Canada",
-      cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Cap-based exposure to 60 large Canadian companies." },
+      cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Standard broad-market exposure to 60 large Canadian companies." },
       growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Growth-oriented Canadian equity exposure across market capitalizations." }
     },
     {
       market: "World",
-      cap: { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Cap-based global all-equity portfolio across Canada, U.S., international, and emerging markets." },
+      cap: { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Standard global all-equity portfolio across Canada, U.S., international, and emerging markets." },
       growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Factor-tilted global all-equity portfolio for a more aggressive growth-oriented core." }
     }
   ],
@@ -31,30 +31,23 @@ const etfs = {
 
 
 const cagrPresets = [
-  { label: "Custom CAGR", value: "custom", cagr: 8 },
-  { label: "ZSP.TO — S&P 500 assumption", value: "ZSP.TO", cagr: 8 },
-  { label: "CAUS.TO — U.S. all-cap assumption", value: "CAUS.TO", cagr: 8.5 },
-  { label: "ZIU.TO — TSX 60 assumption", value: "ZIU.TO", cagr: 6 },
-  { label: "CACE.TO — Canadian equity assumption", value: "CACE.TO", cagr: 6.5 },
-  { label: "XEQT.TO — global equity assumption", value: "XEQT.TO", cagr: 7 },
-  { label: "CAGE.TO — global factor-tilted assumption", value: "CAGE.TO", cagr: 7.5 },
-  { label: "VT — global equity assumption", value: "VT", cagr: 7 },
-  { label: "VTI — U.S. total-market assumption", value: "VTI", cagr: 8 },
-  { label: "VOO — S&P 500 assumption", value: "VOO", cagr: 8 },
-  { label: "VXUS — international equity assumption", value: "VXUS", cagr: 6 },
-  { label: "AVGE — global factor-tilted assumption", value: "AVGE", cagr: 7.5 },
-  { label: "QQQM — Nasdaq 100 assumption", value: "QQQM", cagr: 9 }
+  { label: "Custom", value: "custom", cagr: 6 },
+  { label: "Very conservative assumption", value: "very-conservative", cagr: 3 },
+  { label: "Conservative growth assumption", value: "conservative", cagr: 4 },
+  { label: "Moderate growth assumption", value: "moderate", cagr: 6 },
+  { label: "Long-term equity assumption", value: "equity", cagr: 8 },
+  { label: "Aggressive assumption", value: "aggressive", cagr: 10 }
 ];
 
 const frequencies = [
   { key: "daily", label: "Daily DCA", contributions: 260, color: "#53e6a0" },
   { key: "weekly", label: "Weekly DCA", contributions: 52, color: "#6aa8ff" },
   { key: "biweekly", label: "Biweekly DCA", contributions: 26, color: "#ffd166" },
-  { key: "monthly", label: "Monthly DCA", contributions: 13, color: "#b892ff" },
+  { key: "monthly", label: "Monthly DCA", contributions: 12, color: "#b892ff" },
   { key: "quarterly", label: "Quarterly DCA", contributions: 4, color: "#ff8fab" }
 ];
 
-const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
 let chart;
 let crossoverChart;
 let marketMoves = [
@@ -124,6 +117,13 @@ function addMarketMove() {
 
 function clearMarketMoves() {
   marketMoves = [];
+  updateChart();
+}
+
+function resetNeutralScenario() {
+  marketMoves = [];
+  document.getElementById("growth").value = 0;
+  document.getElementById("variation").value = 0;
   updateChart();
 }
 
@@ -336,8 +336,8 @@ function renderTickers(region) {
   if (region === "canada") {
     grid.innerHTML = `
       <div class="etf-matrix-header market-label">Market</div>
-      <div class="etf-matrix-header">Cap-based</div>
-      <div class="etf-matrix-header">Growth-based</div>
+      <div class="etf-matrix-header">Standard broad-market example</div>
+      <div class="etf-matrix-header">Tilted / more aggressive example</div>
       ${etfs.canada.map(row => `
         <div class="market-label">${row.market}</div>
         ${renderEtfCell(row.cap, "cap")}
@@ -460,7 +460,9 @@ function calculateCrossover() {
   const current = Math.max(0, +document.getElementById("crossCurrent").value || 0);
   const monthly = Math.max(0, +document.getElementById("crossMonthly").value || 0);
   const cagr = clampNumber(document.getElementById("crossCagr").value, -20, 20);
-  const target = Math.max(0, +document.getElementById("crossTarget").value || 0);
+  const annualSpending = Math.max(0, +document.getElementById("crossSpending").value || 0);
+  const withdrawalRate = clampNumber(document.getElementById("crossWithdrawal").value, 1, 10) / 100;
+  const target = withdrawalRate > 0 ? annualSpending / withdrawalRate : 0;
   const years = clampNumber(document.getElementById("crossYears").value, 1, 60);
   const totalMonths = Math.round(years * 12);
   const monthlyRate = Math.pow(1 + cagr / 100, 1 / 12) - 1;
@@ -495,7 +497,8 @@ function calculateCrossover() {
   const projectedTarget = balances.at(-1);
 
   results.innerHTML = `
-    <div class="crossover-result-card"><small>Crossover balance</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, a typical month of growth roughly matches your monthly contribution.</p></div>
+    <div class="crossover-result-card"><small>FI target from spending</small><strong>${money(target)}</strong><p>Based on annual spending divided by withdrawal rate.</p></div>
+    <div class="crossover-result-card"><small>Growth-vs-contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, the average monthly growth implied by your CAGR roughly matches your monthly contribution.</p></div>
     <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
     <div class="crossover-result-card coast"><small>Coast FI timing</small><strong>${monthLabel(coastMonth)}</strong><p>When your balance could coast to ${money(target)} by the target date.</p></div>
     <div class="crossover-result-card"><small>Coast-needed today</small><strong>${money(coastRequiredToday)}</strong><p>If you already had this much, you could stop adding money in this simplified model.</p></div>
@@ -507,7 +510,7 @@ function calculateCrossover() {
     datasets: [
       { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
       { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
-      { label: "Crossover balance", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
+      { label: "Growth-vs-contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
       { label: "Coast FI required balance", data: coastRequired, borderColor: "#ff8fab", tension: 0.25, pointRadius: 0, borderWidth: 2 }
     ]
   };
@@ -557,6 +560,7 @@ function calculateTfsaRoom() {
 function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));
   document.getElementById("addDip").addEventListener("click", addMarketMove);
+  document.getElementById("resetNeutral").addEventListener("click", resetNeutralScenario);
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   populateCagrPresets();
   document.querySelectorAll("#compoundForm input").forEach(el => el.addEventListener("input", calculateCompounding));
