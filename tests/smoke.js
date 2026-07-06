@@ -160,7 +160,7 @@ function createServer() {
         noExternalLogoImage: !externalLogoImage
       };
     });
-    const vtVisible = await page.locator('text=VT').first().isVisible();
+    const vtVisible = await page.locator('#tickerGrid .ticker-card .ticker', { hasText: 'VT' }).first().isVisible();
     await page.locator('[data-region="canada"]').click();
     const canadaEtfGrid = await page.evaluate(() => {
       const grid = document.querySelector('#tickerGrid');
@@ -197,6 +197,29 @@ function createServer() {
       && /72 ÷ 8 = about 9 years/i.test(bodyText)
       && /not a guaranteed timeline/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
+    const compoundCalculator = await page.evaluate(() => {
+      const preset = document.getElementById('compoundPreset');
+      const initial = document.getElementById('compoundInitial');
+      const daily = document.getElementById('compoundDaily');
+      const years = document.getElementById('compoundYears');
+      const cagr = document.getElementById('compoundCagr');
+      preset.value = 'CAGE.TO';
+      preset.dispatchEvent(new Event('change', { bubbles: true }));
+      const selectedCage = cagr.value === '7.5';
+      initial.value = 1000;
+      daily.value = 10;
+      years.value = 15;
+      cagr.value = 8;
+      cagr.dispatchEvent(new Event('input', { bubbles: true }));
+      const text = document.getElementById('compoundResults').textContent;
+      return {
+        visible: Boolean(document.getElementById('compoundForm')),
+        hasEtfPresets: [...preset.options].some(option => /ZSP\.TO/.test(option.textContent)) && [...preset.options].some(option => /CAGE\.TO/.test(option.textContent)),
+        selectedCage,
+        hasOutputs: /Estimated future value/i.test(text) && /Total contributed/i.test(text) && /Estimated growth/i.test(text) && /9\.0 years/i.test(text),
+        disclaimer: /Preset CAGRs are editable planning assumptions/i.test(document.body.textContent)
+      };
+    });
     const budgetSection = /How much should I DCA\?/i.test(bodyText) && /budget sustainably/i.test(bodyText) && /\$5 coffee each day is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
     const meansSection = /Invest within your means/i.test(bodyText) && /Do not risk what you cannot afford/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /3–6 months of living expenses/i.test(bodyText) && /Invest only what is extra/i.test(bodyText);
     const withdrawFaq = /When is the best time to withdraw\?/i.test(bodyText) && /vacation/i.test(bodyText) && /new car/i.test(bodyText) && /withdraw only when you actually need the cash/i.test(bodyText);
@@ -262,6 +285,11 @@ function createServer() {
     if (!lumpSumRiskFaq) throw new Error('Expected RBC GAM research note with emotions/behavioral-choice language.');
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 rule and Rule of 72 content.');
     if (!compoundingNav) throw new Error('Expected nav menu to include a Compounding link.');
+    if (!compoundCalculator.visible) throw new Error('Expected compounding calculator form to render.');
+    if (!compoundCalculator.hasEtfPresets) throw new Error('Expected compounding calculator to include recommended ETF CAGR presets.');
+    if (!compoundCalculator.selectedCage) throw new Error('Expected selecting CAGE.TO preset to populate the CAGR input.');
+    if (!compoundCalculator.hasOutputs) throw new Error('Expected compounding calculator to output future value, contributions, growth, and Rule-of-72 double time.');
+    if (!compoundCalculator.disclaimer) throw new Error('Expected CAGR preset disclaimer to avoid presenting assumptions as forecasts.');
     if (!budgetSection) throw new Error('Expected sustainable DCA amount section with coffee and lottery examples.');
     if (!meansSection) throw new Error('Expected invest-within-your-means section with safety net guidance.');
     if (!broadEtfSection) throw new Error('Expected broad index ETF safety section comparing broad ETFs, industry ETFs, and individual stocks.');
@@ -277,7 +305,7 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

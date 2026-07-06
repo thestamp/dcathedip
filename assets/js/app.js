@@ -29,6 +29,23 @@ const etfs = {
   ]
 };
 
+
+const cagrPresets = [
+  { label: "Custom CAGR", value: "custom", cagr: 8 },
+  { label: "ZSP.TO — S&P 500 assumption", value: "ZSP.TO", cagr: 8 },
+  { label: "CAUS.TO — U.S. all-cap assumption", value: "CAUS.TO", cagr: 8.5 },
+  { label: "ZIU.TO — TSX 60 assumption", value: "ZIU.TO", cagr: 6 },
+  { label: "CACE.TO — Canadian equity assumption", value: "CACE.TO", cagr: 6.5 },
+  { label: "XEQT.TO — global equity assumption", value: "XEQT.TO", cagr: 7 },
+  { label: "CAGE.TO — global factor-tilted assumption", value: "CAGE.TO", cagr: 7.5 },
+  { label: "VT — global equity assumption", value: "VT", cagr: 7 },
+  { label: "VTI — U.S. total-market assumption", value: "VTI", cagr: 8 },
+  { label: "VOO — S&P 500 assumption", value: "VOO", cagr: 8 },
+  { label: "VXUS — international equity assumption", value: "VXUS", cagr: 6 },
+  { label: "AVGE — global factor-tilted assumption", value: "AVGE", cagr: 7.5 },
+  { label: "QQQM — Nasdaq 100 assumption", value: "QQQM", cagr: 9 }
+];
+
 const frequencies = [
   { key: "daily", label: "Daily DCA", contributions: 260, color: "#53e6a0" },
   { key: "weekly", label: "Weekly DCA", contributions: 52, color: "#6aa8ff" },
@@ -379,6 +396,51 @@ const tfsaLimits = {
   2026: 7000
 };
 
+
+function populateCagrPresets() {
+  const select = document.getElementById("compoundPreset");
+  if (!select) return;
+  select.innerHTML = cagrPresets.map(preset => `<option value="${preset.value}" data-cagr="${preset.cagr}">${preset.label} (${preset.cagr}%)</option>`).join("");
+}
+
+function calculateCompounding() {
+  const results = document.getElementById("compoundResults");
+  if (!results) return;
+  const initial = Math.max(0, +document.getElementById("compoundInitial").value || 0);
+  const dailyContribution = Math.max(0, +document.getElementById("compoundDaily").value || 0);
+  const years = clampNumber(document.getElementById("compoundYears").value, 1, 60);
+  const cagr = clampNumber(document.getElementById("compoundCagr").value, -20, 20);
+  const periodsPerYear = 260;
+  const periods = Math.round(years * periodsPerYear);
+  const periodRate = Math.pow(1 + cagr / 100, 1 / periodsPerYear) - 1;
+  let futureContributions;
+  if (Math.abs(periodRate) < 0.0000001) {
+    futureContributions = dailyContribution * periods;
+  } else {
+    futureContributions = dailyContribution * ((Math.pow(1 + periodRate, periods) - 1) / periodRate);
+  }
+  const futureInitial = initial * Math.pow(1 + periodRate, periods);
+  const futureValue = futureInitial + futureContributions;
+  const totalContributed = initial + dailyContribution * periods;
+  const estimatedGrowth = futureValue - totalContributed;
+  const doublingYears = cagr > 0 ? (72 / cagr).toFixed(1) : "N/A";
+
+  results.innerHTML = `
+    <div class="compound-result-card"><small>Estimated future value</small><strong>${money(futureValue)}</strong></div>
+    <div class="compound-result-card"><small>Total contributed</small><strong>${money(totalContributed)}</strong></div>
+    <div class="compound-result-card growth"><small>Estimated growth</small><strong>${money(estimatedGrowth)}</strong></div>
+    <div class="compound-result-card"><small>Rule-of-72 double time</small><strong>${doublingYears}${doublingYears === "N/A" ? "" : " years"}</strong></div>
+  `;
+}
+
+function applyCagrPreset() {
+  const select = document.getElementById("compoundPreset");
+  if (!select) return;
+  const selected = select.selectedOptions[0];
+  document.getElementById("compoundCagr").value = selected.dataset.cagr;
+  calculateCompounding();
+}
+
 function calculateTfsaRoom() {
   const eligibilityYear = +document.getElementById("eligibilityYear").value;
   const contributed = +document.getElementById("tfsaContributed").value || 0;
@@ -401,6 +463,9 @@ function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));
   document.getElementById("addDip").addEventListener("click", addMarketMove);
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
+  populateCagrPresets();
+  document.querySelectorAll("#compoundForm input").forEach(el => el.addEventListener("input", calculateCompounding));
+  document.getElementById("compoundPreset").addEventListener("change", applyCagrPreset);
   document.querySelectorAll("[data-region]").forEach(btn => btn.addEventListener("click", () => renderTickers(btn.dataset.region)));
   document.getElementById("detectLocation").addEventListener("click", detectLocation);
   document.getElementById("declineLocation").addEventListener("click", () => {
@@ -411,6 +476,7 @@ function init() {
   renderTickers("canada");
   updateChart();
   calculateTfsaRoom();
+  calculateCompounding();
 }
 
 document.addEventListener("DOMContentLoaded", init);

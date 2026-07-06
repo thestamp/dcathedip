@@ -322,6 +322,32 @@ h3 { font-size: 1.35rem; }
 .rule-example { grid-column: 1 / -1; margin: 0; }
 .compounding-note { margin: 18px auto 0; max-width: 920px; text-align: center; }
 
+.compound-calculator {
+  margin-top: 22px;
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 26px;
+  background: linear-gradient(180deg, rgba(106,168,255,0.11), rgba(255,255,255,0.055));
+}
+.compound-calc-copy { max-width: 760px; margin-bottom: 18px; }
+.compound-calc-copy h3 { margin-bottom: 10px; }
+.compound-form { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.compound-form label { display: grid; gap: 8px; color: #d9e5f8; font-weight: 800; font-size: 0.9rem; }
+.compound-form input, .compound-form select {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(8,17,31,0.85);
+  color: var(--text);
+  padding: 11px;
+}
+.compound-results { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 18px; }
+.compound-result-card { border: 1px solid var(--border); border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.055); }
+.compound-result-card small { display: block; color: var(--muted); font-weight: 800; margin-bottom: 6px; }
+.compound-result-card strong { color: var(--green); font-size: 1.25rem; }
+.compound-result-card.growth strong { color: var(--gold); }
+
+
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
 .ladder { padding: 16px; box-shadow: none; }
 .ladder div { display: flex; justify-content: space-between; gap: 16px; padding: 16px; border-bottom: 1px solid var(--border); }
@@ -518,7 +544,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
   .rule-example { grid-column: auto; }

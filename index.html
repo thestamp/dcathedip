@@ -294,6 +294,40 @@ description: "DCA the Dip explains consistent daily dollar-cost averaging with i
         <p class="rule-example">Example: at an 8% annual return, <strong>72 ÷ 8 = about 9 years</strong> to double. It is only a shortcut — real markets are uneven — but it shows why staying invested for many years matters.</p>
       </div>
 
+
+      <div class="compound-calculator" aria-labelledby="compound-calc-title">
+        <div class="compound-calc-copy">
+          <p class="eyebrow">Try your numbers</p>
+          <h3 id="compound-calc-title">Simple DCA compounding calculator</h3>
+          <p>Enter your own CAGR, or pick one of the ETF planning assumptions below and edit it. The result estimates daily trading-day contributions compounding over time.</p>
+        </div>
+        <form class="compound-form" id="compoundForm">
+          <label>
+            Initial investment
+            <input type="number" id="compoundInitial" min="0" step="100" value="0" />
+          </label>
+          <label>
+            Daily trading-day contribution
+            <input type="number" id="compoundDaily" min="0" step="1" value="10" />
+          </label>
+          <label>
+            Years invested
+            <input type="number" id="compoundYears" min="1" max="60" step="1" value="15" />
+          </label>
+          <label>
+            ETF / CAGR assumption
+            <select id="compoundPreset"></select>
+          </label>
+          <label>
+            Custom CAGR
+            <input type="number" id="compoundCagr" min="-20" max="20" step="0.1" value="8" />
+          </label>
+        </form>
+        <div class="compound-results" id="compoundResults" aria-live="polite"></div>
+        <p class="calculator-note">Preset CAGRs are editable planning assumptions for comparison only — not historical returns, forecasts, or recommendations. Real ETF returns vary year to year and can be negative.</p>
+      </div>
+
+
       <p class="source-note compounding-note">
         The 8-4-3 framework is a psychology-oriented rule of thumb, not a guaranteed timeline. The Rule of 72 is a simplified approximation; investment returns are variable and can be negative. For official investor education on compounding, see <a href="https://www.investor.gov/financial-tools-calculators/calculators/compound-interest-calculator" rel="nofollow noopener">Investor.gov’s compound interest calculator</a>.
       </p>

@@ -57,6 +57,11 @@ Required content:
   - Final 3 years: a larger base can make percentage moves feel much bigger in dollar terms.
 - Include the Rule of 72 formula: 72 ÷ annual return ≈ years to double.
 - Include an example: at 8% annual return, money roughly doubles in 9 years.
+- Include a simple compounding calculator where users can enter their own CAGR or select an editable CAGR assumption tied to the recommended ETF examples.
+- Calculator inputs: initial investment, daily trading-day contribution, years invested, ETF/CAGR preset selector, and custom CAGR percentage.
+- Calculator outputs: estimated future value, total contributed, estimated growth, and Rule-of-72 approximate doubling time.
+- Calculator math should use daily trading-day contributions (260 contribution days per year) so it matches the site's daily DCA framing.
+- Preset ETF CAGR values must be clearly labelled as planning assumptions, not historical data or predictions.
 - Tie the section back to daily DCA: consistent contributions keep adding units while time gives those units more opportunity to compound.
 - Keep language educational, conditional, and non-guaranteed. Do not claim users will get a specific return or timeline.
 
