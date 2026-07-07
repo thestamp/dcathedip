@@ -566,7 +566,7 @@ Coast FI estimate
 
 Coast FI estimates whether today’s portfolio could grow toward a future financial independence target by a chosen date, even without more contributions.
 
-## FI target explanation
+## FI target and growth-funded income explanation
 
 Financial independence targets are usually based on spending:
 
@@ -576,18 +576,27 @@ Example:
 
 > $40,000 annual spending ÷ 4% = $1,000,000 FI target
 
+Growth-funded income answers a related but different question: how much must be invested so the assumed annual growth roughly equals the desired annual income?
+
+> Growth-funded income balance ≈ desired annual income ÷ CAGR
+
+Example:
+
+> $40,000 desired annual income ÷ 7% CAGR ≈ $571,429 invested
+
 ## Inputs
 
 - Current invested amount
 - Monthly investment
 - Return assumption
-- Desired annual spending
+- Desired annual income
 - Withdrawal rate
 - Years until target date
 
 ## Outputs
 
-- FI target based on spending
+- FI target based on income
+- Growth-funded income balance
 - Contribution crossover balance
 - Estimated crossover timing
 - Coast FI timing

@@ -240,10 +240,10 @@ function createServer() {
       const chart = window.Chart.getChart(document.getElementById('crossoverChart'));
       return {
         visible: Boolean(document.getElementById('crossoverForm')),
-        copy: /Contribution crossover/i.test(document.body.textContent) && /Coast FI/i.test(document.body.textContent) && /FI target ≈ annual spending ÷ withdrawal rate/i.test(document.body.textContent),
-        outputs: /FI target from spending/i.test(resultText) && /Contribution crossover/i.test(resultText) && /Coast FI timing/i.test(resultText) && /Coast-needed today/i.test(resultText),
-        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Coast FI required balance'),
-        updates: resultText.includes('$88,') && resultText.includes('$1,000,000')
+        copy: /Contribution crossover/i.test(document.body.textContent) && /Coast FI/i.test(document.body.textContent) && /desired annual income ÷ CAGR/i.test(document.body.textContent),
+        outputs: /FI target from income/i.test(resultText) && /Growth-funded income balance/i.test(resultText) && /Contribution crossover/i.test(resultText) && /Coast FI timing/i.test(resultText) && /Coast-needed today/i.test(resultText),
+        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Coast FI required balance') && chart.data.datasets.some(dataset => dataset.label === 'Growth-funded income balance'),
+        updates: resultText.includes('$88,') && resultText.includes('$1,000,000') && resultText.includes('$571,')
       };
     });
     const compoundCalculator = await page.evaluate(() => {

@@ -204,19 +204,21 @@ Required content:
 - Contribution crossover: compares monthly contribution with average monthly growth implied by the return assumption.
 - Coast FI: estimates whether today’s portfolio could grow toward a future financial independence target by a chosen date without more contributions.
 - FI target formula: annual spending ÷ withdrawal rate.
+- Growth-funded income balance formula: desired annual income ÷ CAGR. This answers how much must be invested so assumed annual growth roughly equals the target annual income.
 
 Inputs:
 
 - Current invested amount
 - Monthly investment
 - Return assumption
-- Desired annual spending
+- Desired annual income
 - Withdrawal rate
 - Years until target date
 
 Outputs:
 
-- FI target from spending
+- FI target from income
+- Growth-funded income balance
 - Contribution crossover balance
 - Crossover timing
 - Coast FI timing

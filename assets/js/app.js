@@ -469,11 +469,13 @@ function calculateCrossover() {
   const canGrow = monthlyRate > 0;
   const crossoverBalance = canGrow && monthly > 0 ? monthly / monthlyRate : null;
   const coastRequiredToday = canGrow ? target / Math.pow(1 + monthlyRate, totalMonths) : target;
+  const growthFundedIncomeBalance = cagr > 0 ? annualSpending / (cagr / 100) : null;
 
   const labels = [];
   const balances = [];
   const contributionLine = [];
   const crossoverLine = [];
+  const incomeBalanceLine = [];
   const coastRequired = [];
   let balance = current;
   let crossoverMonth = crossoverBalance !== null && current >= crossoverBalance ? 0 : null;
@@ -484,6 +486,7 @@ function calculateCrossover() {
     balances.push(balance);
     contributionLine.push(current + monthly * month);
     crossoverLine.push(crossoverBalance);
+    incomeBalanceLine.push(growthFundedIncomeBalance);
     const remainingMonths = totalMonths - month;
     const required = canGrow ? target / Math.pow(1 + monthlyRate, remainingMonths) : target;
     coastRequired.push(required);
@@ -497,7 +500,8 @@ function calculateCrossover() {
   const projectedTarget = balances.at(-1);
 
   results.innerHTML = `
-    <div class="crossover-result-card"><small>FI target from spending</small><strong>${money(target)}</strong><p>Based on annual spending divided by withdrawal rate.</p></div>
+    <div class="crossover-result-card"><small>FI target from income</small><strong>${money(target)}</strong><p>Based on desired annual income divided by withdrawal rate.</p></div>
+    <div class="crossover-result-card income"><small>Growth-funded income balance</small><strong>${growthFundedIncomeBalance === null ? "N/A" : money(growthFundedIncomeBalance)}</strong><p>At ${cagr.toFixed(1)}% CAGR, this balance would generate about ${money(annualSpending)} of assumed annual growth.</p></div>
     <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, the average monthly growth implied by your CAGR roughly matches your monthly contribution.</p></div>
     <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
     <div class="crossover-result-card coast"><small>Coast FI timing</small><strong>${monthLabel(coastMonth)}</strong><p>When your balance could coast to ${money(target)} by the target date.</p></div>
@@ -511,6 +515,7 @@ function calculateCrossover() {
       { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
       { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
       { label: "Contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
+      { label: "Growth-funded income balance", data: incomeBalanceLine, borderColor: "#7cffbd", borderDash: [9, 4], tension: 0, pointRadius: 0, borderWidth: 2 },
       { label: "Coast FI required balance", data: coastRequired, borderColor: "#ff8fab", tension: 0.25, pointRadius: 0, borderWidth: 2 }
     ]
   };
