@@ -87,6 +87,7 @@ h3 { font-size: 1.35rem; }
 .hero-card h2 { font-size: 3rem; }
 .mini-bars { display: flex; gap: 12px; height: 120px; align-items: end; margin-top: 28px; }
 .mini-bars span { flex: 1; border-radius: 12px 12px 4px 4px; background: linear-gradient(180deg, var(--green), var(--blue)); opacity: 0.88; }
+.mini-bars .opportunity-bar { background: linear-gradient(180deg, #7cffbd, var(--green)); box-shadow: 0 0 0 4px rgba(83, 230, 160, 0.14), 0 0 30px rgba(83, 230, 160, 0.52); opacity: 1; }
 
 .section { padding: 72px 0; }
 .section-heading { margin-bottom: 28px; }
