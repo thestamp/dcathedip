@@ -1,405 +1,574 @@
-# DCATheDip.com content update brief
+# DCATheDip.com — SEO-first, advisor-safe content brief
 
-Purpose: revise the site so it is more useful and trustworthy for a new, non-technical Canadian investor with a stable job who wants steady, lower-risk long-term growth and can make regular contributions.
+Purpose: rewrite the site so it feels confident, beginner-friendly, and conversion-oriented while still staying responsible for a Canadian finance education website.
 
-Tone target: plain-language, calm, educational, advisor-safe, non-promotional. Avoid hype, certainty, “hacks,” or claims that daily DCA reliably beats other approaches.
+The previous content pass became too caveat-forward. This version keeps the important disclosures, but moves heavy caveats out of headlines and first paragraphs. The public-facing experience should lead with the positive promise:
 
-Core message to preserve:
+> Automate the habit. Ignore the noise.
 
-> You do not need to be clever or predict dips. Build a sustainable investing habit, choose a diversified investment that matches your risk tolerance, use the right account, automate contributions, and stay consistent for years.
-
----
-
-## Global content rules
-
-Use these rules across the whole page.
-
-### Required wording principles
-
-- Use **consistent investing** more often than “DCA the dip.”
-- Explain that dips are something a consistent plan naturally lives through, not something the investor is trying to predict.
-- Make clear that daily, weekly, biweekly/paycheque, and monthly investing can all be reasonable.
-- Emphasize that the best schedule is the one the investor can automate and keep.
-- Refer to ETF tickers as **examples to research**, not recommendations.
-- Use **CAD** as the default currency for Canadian-focused content and calculators, or explicitly label currency.
-- Keep all calculators labelled as simplified educational models, not forecasts or advice.
-- Avoid saying “safe” without explaining what risk remains.
-- Avoid implying all-equity ETFs are low-risk.
-
-### Required disclaimer language
-
-Place this near calculators, ETF examples, and referral sections — not only in the footer:
-
-> Educational content only. This is not financial advice and does not account for your income, debts, taxes, account rules, risk tolerance, time horizon, fees, or personal situation. Investments can lose value.
-
-For calculators specifically:
-
-> This is a simplified planning model, not a forecast or backtest. It assumes steady returns for illustration only. Real markets are uneven, returns can be negative, and taxes, fees, inflation, and account rules can change results.
-
-For referral links:
-
-> Referral disclosure: this site may receive a benefit if you use a referral link. Wealthsimple is one option, not necessarily the best option for every investor. Compare fees, account types, automation, FX costs, transfer fees, support, and current terms before choosing a brokerage.
+The site should feel like a calm, practical tool for Canadian beginners who want to automate recurring ETF investing, understand dollar-cost averaging, and stay consistent through market dips.
 
 ---
 
-# 1. Hero section
+## 1. Core positioning
 
-## Replace current hero framing with:
+### Brand promise
 
-### Eyebrow
+DCA the Dip helps Canadian beginners automate recurring ETF investing, stay consistent through market dips, and understand compounding — without trying to time the market.
 
-A simple investing habit for long-term Canadians
+### Emotional promise
 
-### H1
+You do not need to be clever. You do not need to watch the market every day. You need a repeatable investing habit you can keep.
 
-Invest consistently. Stay calm through dips.
+### SEO promise
 
-### Lede
+The homepage should clearly target:
 
-DCA the Dip is an educational guide to automated, regular investing. The goal is not to predict market bottoms. The goal is to invest an amount you can afford, on a schedule you can keep, into diversified investments that match your risk tolerance.
+- dollar-cost averaging Canada
+- DCA calculator Canada
+- daily DCA calculator
+- ETF investing for beginners Canada
+- recurring ETF investing
+- TFSA dollar-cost averaging
+- DCA vs lump sum
+- Rule of 72
+- compound interest calculator
 
-### Trust row
+### Voice
 
-- Consistent contributions
-- Diversified ETFs
-- No market timing
+Use a confident, plain-language coach voice:
+
+- Start small.
+- Automate it.
+- Keep going.
+- Let the plan handle noisy markets.
+
+Avoid sounding like a compliance officer in the first impression. Do not lead with “not advice,” “not a forecast,” “not low-risk,” or “not recommendations.” Those belong in the footer, FAQ, or compact notes.
+
+---
+
+## 2. Global writing rules
+
+### Lead with benefit, then clarify
+
+Good pattern:
+
+> Automated DCA helps you invest through every market. No market timing required.
+
+Avoid leading with:
+
+> This is not market timing.
+
+### Use positive phrasing
+
+Prefer:
+
+- “Automate regular ETF buys.”
+- “Lower prices buy more units.”
+- “Choose a mix you can stick with.”
+- “Use these examples as a research starting point.”
+- “Calculator results are estimates based on your assumptions.”
+
+Avoid repeated negative framing:
+
+- “not a forecast”
+- “not advice”
+- “not recommendations”
+- “not low-risk”
+- “not guaranteed”
+- “not automatically best”
+
+The ideas can remain, but they should be consolidated and softened.
+
+### Disclosure placement
+
+Do **not** put heavy disclaimers in:
+
+- hero headline
+- hero first paragraph
+- section headlines
+- first sentence of key sections
+- CTA copy
+
+Put disclosures in:
+
+- footer disclosure box
+- FAQ answers
+- small notes below calculators
+- one small note below ETF examples
+- referral disclosure in footer and a small “Referral link” label near referral CTAs
+
+### Important distinction
+
+The site should not hide risk. It should stop making risk the brand’s first impression.
+
+---
+
+## 3. SEO metadata
+
+### Page title
+
+Use:
+
+> Dollar-Cost Averaging Calculator Canada | DCA the Dip
+
+Alternative if title length needs shortening:
+
+> DCA Calculator Canada | DCA the Dip
+
+### Meta description
+
+Use:
+
+> Compare daily, weekly, biweekly, monthly, and quarterly dollar-cost averaging strategies. Learn how automated ETF investing, compounding, TFSA accounts, and market dips work for Canadian investors.
+
+### Open graph title
+
+> DCA the Dip — Dollar-Cost Averaging Calculator for Canadians
+
+### Open graph description
+
+> Automate recurring ETF investments, compare DCA schedules, and see how consistent contributions can build over time.
+
+---
+
+## 4. Recommended page structure
+
+The page should flow like this:
+
+1. Hero: strong promise and primary CTA
+2. Simple DCA explanation
+3. Calculator: compare schedules
+4. How DCA works / automation benefits
+5. Compounding and Rule of 72
+6. Start with a simple foundation
+7. ETF examples
+8. TFSA and Wealthsimple setup
+9. DCA vs lump sum / timing risk
+10. Advanced growth milestones: contribution crossover and Coast FI
+11. FAQ
+12. Footer disclosure
+
+Reason: visitors should emotionally understand the value before being asked to process caveats, risk categories, and advanced finance concepts.
+
+---
+
+# 5. Hero section
+
+## Eyebrow
+
+Dollar-cost averaging for Canadian ETF investors
+
+## H1
+
+Automate the habit. Ignore the noise.
+
+## Lede
+
+DCA the Dip helps beginners invest a fixed amount on a regular schedule, compare daily versus weekly or monthly contributions, and understand how compounding works over time.
+
+## Supporting sentence
+
+Build a simple recurring ETF investing routine through rising, falling, and sideways markets — no market timing required.
+
+## Primary CTA
+
+Try the DCA calculator
+
+## Secondary CTA
+
+See how it works
+
+## Trust row
+
 - Built for beginners
+- ETF-focused
+- TFSA-friendly
+- No market timing required
 
-### Primary CTA
+## Notes for developer
 
-Compare schedules
-
-### Secondary CTA
-
-Choose your risk level
+Remove caveat-heavy language from the hero. Do not say “educational guide” in the first sentence. Do not lead with “The goal is not…” The hero should sell the benefit first.
 
 ---
 
-# 2. Simple rule card
+# 6. Simple rule card
 
-## Replace with:
-
-### Label
+## Label
 
 Simple rule
 
-### Heading
+## Heading
 
-Same amount. More units when prices are lower. No guessing required.
+Lower prices buy more units.
 
-### Body
+## Body
 
-When you invest the same planned amount on a regular schedule, lower prices naturally buy more ETF units and higher prices buy fewer units. You are not trying to call the bottom — you are letting consistency do the work.
+When you invest the same planned amount on a regular schedule, market dips naturally buy more ETF units. When prices are higher, the same contribution buys fewer units. The habit keeps going either way.
+
+## Microcopy
+
+Same dollars. More units on lower-price days. No guessing the bottom.
 
 ---
 
-# 3. “Why DCA daily?” section
+# 7. Calculator section
 
-This section should be softened. Daily DCA can remain the site’s preferred default, but it must not sound like the only correct schedule.
+## Eyebrow
 
-## New section title
+DCA calculator
 
-Why automate regular investing?
+## Heading
 
-## Intro heading
-
-The best schedule is the one you can keep.
+Compare daily, weekly, biweekly, monthly, and quarterly investing.
 
 ## Intro copy
 
-Daily investing can be useful if your brokerage makes automation easy. Weekly, biweekly, payday-based, or monthly investing can also be perfectly reasonable. The real win is removing the decision from your day-to-day emotions.
+Use the calculator to see how different contribution schedules work when each schedule invests the same total dollars over one year.
+
+## Small note below intro, not first sentence
+
+Educational estimate. Actual market returns vary.
+
+## Controls: beginner mode first
+
+Default controls should be simple:
+
+- regular contribution amount
+- contribution schedule comparison
+- annual return assumption
+
+Advanced controls should be collapsed by default under:
+
+> Advanced market scenario controls
+
+Advanced controls include:
+
+- add a market dip or rally
+- when it starts
+- market move %
+- how long it lasts
+- whether the market recovers afterward
+- daily variation
+- reset neutral
+
+## Rename technical labels
+
+| Current | Replace with |
+|---|---|
+| Market move editor | Add a market dip or rally |
+| Start day | When it starts |
+| Height | Market move |
+| Width each direction | How long it lasts |
+| Recovers after the move | Market recovers afterward |
+| Reset neutral | Reset to neutral |
+
+## Model explanation
+
+Move long model assumptions into a collapsed section:
+
+### How this calculator works
+
+Each schedule invests the same total amount over the year. The chart changes only the timing of contributions. You can also test simple market scenarios, such as an early dip, a late rally, or a flat year.
+
+## Neutral reset helper text
+
+Use “Reset to neutral” to remove market moves and set annual return and daily variation to 0%. In that neutral case, each schedule ends with the same value because each schedule invested the same total amount.
+
+## Bottom calculator note
+
+Calculator results are simplified estimates based on the assumptions you choose. They are meant to teach the mechanics of contribution timing, not predict future returns.
+
+---
+
+# 8. How DCA works / automation benefits
+
+## Eyebrow
+
+Why automate your DCA strategy?
+
+## Heading
+
+Make investing automatic before emotions get involved.
+
+## Intro copy
+
+Dollar-cost averaging turns investing into a routine. Pick an amount, choose a schedule, and let automation handle the buying so you are not making a fresh decision every time the market moves.
 
 ## Cards
 
 ### Card 1: Removes timing pressure
 
-Regular investing spreads your buys across many market days, so you do not need to decide whether today is the perfect day to invest.
+Regular ETF buys spread your entries across many market days. Some buys land higher, some lower, and the plan keeps moving.
 
-### Card 2: Reduces panic decisions
+### Card 2: Builds the habit
 
-A set schedule turns scary market days into ordinary contribution days. You follow the plan instead of reacting to headlines.
+Small recurring contributions are easier to keep than occasional big decisions. The habit matters more than finding the perfect day.
 
-### Card 3: Fits real life
+### Card 3: Fits paycheque investing
 
-The best contribution amount is the one your budget can handle through normal life, surprise expenses, and market downturns.
+For people investing from income, payday-based, weekly, monthly, or daily DCA can all work. Choose the schedule you can automate and keep.
 
 ---
 
-# 4. Add new section: Before you DCA
-
-Place this before the interactive chart or before the strategy section.
+# 9. Frequency guide
 
 ## Eyebrow
 
-Before you start
+Frequency guide
 
 ## Heading
 
-Make sure the foundation is in place.
+Same dollars. Different rhythm. Different experience.
+
+## Intro copy
+
+There is no magic schedule. The best DCA schedule is usually the one you can automate and keep without stress. Daily investing can feel smooth if automation is effortless. Weekly or payday-based investing may be simpler for many salaried workers.
+
+## Table
+
+| Frequency | Best fit | Simple tradeoff |
+|---|---|---|
+| Daily | People who want the smoothest automated entries | More frequent buys; difference versus weekly may be small |
+| Weekly | Simple automation and frequent investing | Easy balance between habit and simplicity |
+| Biweekly / payday | Salaried workers investing from each paycheque | Very practical for budgeting |
+| Monthly | Simple household budgeting | Larger timing chunks |
+| Quarterly | Lowest maintenance | Most timing concentration |
+
+## Bottom copy
+
+If your brokerage supports automation, daily or weekly can be easy. If you prefer matching your paycheque, biweekly can be just as practical.
+
+---
+
+# 10. Start with a simple investing foundation
+
+Move this lower than the calculator and core explanation. It is useful, but it should not slow the first impression.
+
+## Eyebrow
+
+Start smart
+
+## Heading
+
+Build a simple investing foundation.
 
 ## Body
 
-Regular investing works best when it fits your actual life. Before choosing a schedule or ETF, check the basics first.
+A good DCA plan is easier to keep when your cash flow, emergency fund, time horizon, and account choice are clear.
 
-## Checklist cards
+## Cards, preferred order
 
-### 1. High-interest debt
+### 1. Sustainable amount
 
-If you have credit card debt or other very high-interest debt, paying that down may be a better first step than investing.
+Start with an amount so small it is easy to keep. You can increase later as your budget allows.
 
 ### 2. Emergency savings
 
-Keep cash available for real emergencies. If a surprise expense would force you to sell investments during a downturn, your contribution amount may be too high.
+Keep cash available for real surprises. A cash buffer helps you avoid selling investments at the wrong time.
 
 ### 3. Time horizon
 
-Money needed in the next few years usually does not belong in volatile equity ETFs. Short-term goals may be better suited to cash, GICs, or high-interest savings products.
+Short-term money usually needs more stability. Long-term money has more time to ride through market cycles.
 
-### 4. Risk tolerance
+### 4. Account choice
 
-A diversified equity ETF can still drop sharply. Choose an investment mix you can keep holding when the market is down.
+TFSA, FHSA, RRSP, RESP, and taxable accounts all have different uses. Choose the account that fits your goal.
 
-### 5. Account choice
+### 5. Comfort level
 
-For Canadians, TFSA, FHSA, RRSP, RESP, and taxable accounts all have different uses. The right account depends on your goals and situation.
+Pick an investment mix you can keep holding when markets are noisy.
 
-### 6. Sustainable amount
+### 6. High-interest debt
 
-Start with an amount you can keep investing without stress. You can always increase later if your budget allows.
+If you have credit card debt or other very high-interest debt, paying it down may be the stronger first move.
 
 ---
 
-# 5. Add new section: Choose your risk level before choosing your ETF
-
-This is important for the “stable low-risk growth” investor persona.
+# 11. Risk-level section
 
 ## Eyebrow
 
-Risk first, ticker second
+Risk and comfort
 
 ## Heading
 
-Broad equity ETFs are diversified, but they are not low-risk.
+Choose an ETF mix you can stick with.
 
 ## Body
 
-A broad ETF can spread your money across hundreds or thousands of companies, which reduces single-company risk. But if it is an all-equity ETF, it can still fall a lot during a bear market. Choose the type of investment that matches when you need the money and how much volatility you can handle.
+The right investment is not just the one with the highest expected return. It is the one you can keep buying and holding through normal market ups and downs.
 
-## Risk table
+## Simple three-card version
 
-| Investor need | More appropriate examples to research | Plain-language explanation |
-|---|---|---|
-| Money needed soon | Savings account, GICs, cash ETFs, money market funds | Lower expected growth, but designed to protect short-term money better than stocks. |
-| Cautious long-term investor | Conservative or balanced asset-allocation ETFs | Mixes stocks and bonds to reduce volatility compared with all-equity funds. |
-| Moderate growth investor | Balanced or growth asset-allocation ETFs | More stock exposure, but still some bonds for stability. |
-| Long-term growth investor | All-equity broad-market ETFs | Higher long-term growth potential, but larger drops are normal. |
-| Aggressive investor | Factor-tilted or concentrated growth ETFs | Higher uncertainty and volatility. Not a beginner default. |
+Prefer three cards over a dense table for beginner readability.
 
-## Follow-up copy
+### Short-term money
 
-If a 30% or 40% drop would make you sell, an all-equity ETF may be too aggressive even if it is diversified. A slightly more conservative portfolio that you can actually hold is usually better than an aggressive one you abandon.
+Cash, savings accounts, GICs, cash ETFs, or money market funds may fit money you expect to need soon.
 
----
+### Smoother long-term investing
 
-# 6. Interactive chart section
+Balanced or conservative asset-allocation ETFs mix stocks and bonds for investors who want a less aggressive ride.
 
-## Replace heading with:
+### Long-term growth
 
-Same dollars, different schedules
+All-equity broad-market ETFs may fit long timelines and investors who can handle larger swings.
 
-## Replace intro copy with:
+## Bottom note
 
-This toy model compares contribution schedules over one year. It is not a forecast or backtest. It simply shows how timing can change outcomes when every schedule invests the same total dollars.
-
-## Required copy near controls
-
-Daily, weekly, biweekly, and monthly investing can all be reasonable. The best schedule is usually the one you can automate and keep without stress.
-
-## Required model disclosure
-
-This model uses simplified price paths, artificial dips/rallies, and editable assumptions. Real markets do not move in smooth lines. Use it to understand mechanics, not to predict returns.
-
-## Button to add
-
-Add a button:
-
-> Reset to neutral scenario
-
-Button behavior:
-
-- remove all custom market moves
-- set annualized gain/loss to 0%
-- set daily variation to 0%
-
-Button helper text:
-
-> In the neutral scenario, every schedule ends with the same value because every schedule invested the same total amount.
-
-## Label fix
-
-If the chart uses 13 contributions per year, label it:
-
-> Every 4 weeks
-
-If the label remains “Monthly,” use 12 contributions per year.
-
-Recommended: use **Monthly = 12** for normal-person clarity.
+Broad equity ETFs are diversified, but they can still fall during market downturns. If large drops would make you sell, consider a smoother investment mix.
 
 ---
 
-# 7. Strategy / frequency guide section
+# 12. Compounding section
 
-## Replace intro copy with:
-
-There is no magic schedule. More frequent investing spreads your buys across more market days, including some lower-price days and some higher-price days. Less frequent investing may be simpler and easier to match with your paycheque. The right answer is the schedule you can automate and stick with.
-
-## Replace table language
-
-| Frequency | Good for | Watch out for |
-|---|---|---|
-| Daily | People who can automate it easily and like very smooth entries | More transactions; difference versus weekly may be small |
-| Weekly | Simple automation and frequent investing | Can miss very short dips, but still very consistent |
-| Biweekly / paycheque | Easy for salaried workers | Contributions are less frequent than daily or weekly |
-| Monthly | Simple budgeting | Larger timing chunks |
-| Quarterly | Very low maintenance | Least frequent entries and more timing concentration |
-
----
-
-# 8. Compounding section
-
-## Replace current 8-4-3 framing with softer language
-
-### Eyebrow
+## Eyebrow
 
 Compounding over time
 
-### Heading
+## Heading
 
-The early years can feel slow. That does not mean the plan is failing.
+Compounding rewards the investors who keep going.
 
-### Body
+## Body
 
-At the beginning, most of your portfolio growth usually comes from your own contributions. Over time, if markets grow and you stay invested, investment growth can become a larger part of the story. This is why patience matters.
+At first, your contributions do most of the work. Over time, a larger balance gives investment growth more room to matter. That is why consistency and patience are so powerful.
 
 ## Stage cards
 
-### Early years: building the base
+### Years 1–8: Build the base
 
-Your contributions do most of the work. Progress may feel slow because the portfolio is still small.
+Most of the visible progress comes from your own contributions. The account may not feel exciting yet, but the habit is doing its job.
 
-### Middle years: growth becomes more noticeable
+### Years 9–12: Momentum appears
 
-As the balance grows, the same percentage return creates more dollars of growth.
+As the balance grows, the same percentage return creates more dollars of growth. Compounding becomes easier to see.
 
-### Later years: compounding can matter more
+### Years 13–15: Growth becomes visible
 
-With a larger base, investment growth may start to rival or exceed new contributions in good markets.
+With a larger base, investment growth can start to do more of the heavy lifting during strong markets.
 
 ## 8-4-3 note
 
-Some people summarize this idea as the “8-4-3 rule”: 8 years of slow-feeling progress, 4 years where growth becomes more noticeable, and 3 years where compounding can feel powerful. Treat it as a motivational rule of thumb, not a guaranteed timeline.
-
-Your actual timeline depends on your savings rate, starting balance, market returns, fees, taxes, account type, inflation, and whether you stay invested.
+Some investors call this the 8-4-3 rule. Treat it as a memorable way to understand patience, not an exact schedule. Your real timeline depends on contribution size, returns, fees, inflation, account type, and market conditions.
 
 ---
 
-# 9. Rule of 72 section
+# 13. Rule of 72 section
 
-## Keep formula but add inflation caveat
+## Eyebrow
 
-### Heading
+Quick mental math
 
-Rule of 72
+## Heading
 
-### Copy
+How long to double your money?
 
-The Rule of 72 is a quick estimate for how long it takes money to double at a steady annual return:
+## Formula card
 
-> 72 ÷ annual return % ≈ years to double
+> 72 ÷ return = years to double
 
-Example: at an 8% annual return, money roughly doubles in about 9 years before inflation.
+## Body
 
-But inflation matters. If inflation averages 3%, an 8% nominal return is closer to a 5% real return before taxes and fees. At 5% real growth, purchasing power doubles closer to 14–15 years.
+The Rule of 72 is a quick shortcut. At an 8% annual return, money roughly doubles in about 9 years.
 
-This is only mental math. Real markets are uneven.
+## Small note
+
+Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.
 
 ---
 
-# 10. CAGR calculator
+# 14. DCA compounding calculator
 
-## Replace ETF-specific CAGR presets with generic assumptions
+## Eyebrow
 
-Do not attach return assumptions directly to ETF tickers.
+Try your numbers
 
-Use these presets:
+## Heading
+
+Simple DCA compounding calculator
+
+## Intro copy
+
+Enter a starting amount, recurring contribution, time period, and return assumption to see how compounding changes the path.
+
+## Presets
+
+Use generic assumptions, not ETF-specific return assumptions:
 
 | Preset | CAGR |
 |---|---:|
-| Very conservative assumption | 3% |
-| Conservative growth assumption | 4% |
-| Moderate growth assumption | 6% |
-| Long-term equity assumption | 8% |
-| Aggressive assumption | 10% |
+| Conservative | 4% |
+| Moderate | 6% |
+| Long-term equity | 8% |
+| Aggressive | 10% |
 | Custom | user input |
 
-## Calculator intro copy
+Optional very conservative preset:
 
-Use this calculator to test different return assumptions. These are not predictions. They are planning inputs so you can see how contribution amount, time, and return assumptions interact.
+| Very conservative | 3% |
 
 ## Inputs
 
 - Initial investment
-- Regular contribution
-- Contribution frequency: daily trading day / weekly / monthly
+- Recurring contribution
+- Contribution frequency
 - Years invested
-- Return assumption / CAGR
+- Return assumption
 
 ## Outputs
 
 - Estimated future value
 - Total contributed
 - Estimated growth
-- Rule-of-72 doubling time
+- Rule-of-72 doubling estimate
 
-## Required disclaimer
+## Bottom note
 
-Return assumptions are not forecasts. A higher assumption does not mean a better or more suitable investment. Real results depend on market returns, fees, taxes, inflation, and investor behaviour.
+Results are estimates based on the return assumption you choose. Try lower and higher scenarios to understand the range of possible outcomes.
 
 ---
 
-# 11. Crossover point + Coast FI section
+# 15. Growth milestones / Coast FI section
 
-## Rename crossover point
+This is advanced content. Do not put it too high on the page.
 
-Use:
-
-> Growth-versus-contribution crossover
-
-Avoid plain “crossover point” by itself, because some readers may confuse it with financial independence.
-
-## Revised section copy
-
-### Eyebrow
+## Eyebrow
 
 Growth milestones
 
-### Heading
+## Heading
 
 When your portfolio starts doing more of the work
 
-### Body
+## Intro copy
 
-The growth-versus-contribution crossover is a motivational milestone. It is the point where the average monthly growth implied by your return assumption is larger than your monthly contribution.
+Your contributions build the snowball. Over time, growth can become a bigger part of the story.
 
-It does **not** mean you can retire. It simply means your portfolio has become large enough that the assumed growth can be bigger than what you add in a typical month.
+## Subsection: Contribution crossover
 
-Coast FI is different. Coast FI means your current portfolio could grow to a future financial independence target by a chosen date without adding more money, if the return assumption happens.
+### Heading
 
-## Add FI target explanation
+Contribution crossover
 
-Financial independence is usually based on spending, not a round number.
+### Copy
 
-Simple formula:
+Contribution crossover compares your monthly contribution with the average monthly growth implied by your return assumption. It is a motivation milestone: the point where the portfolio’s assumed monthly growth is larger than what you add.
+
+## Subsection: Coast FI
+
+### Heading
+
+Coast FI estimate
+
+### Copy
+
+Coast FI estimates whether today’s portfolio could grow toward a future financial independence target by a chosen date, even without more contributions.
+
+## FI target explanation
+
+Financial independence targets are usually based on spending:
 
 > FI target ≈ annual spending ÷ withdrawal rate
 
@@ -411,127 +580,163 @@ Example:
 
 - Current invested amount
 - Monthly investment
-- CAGR assumption
+- Return assumption
 - Desired annual spending
 - Withdrawal rate
 - Years until target date
 
-The calculator can still allow a manual FI target, but the spending-based target should be the default educational path.
-
 ## Outputs
 
 - FI target based on spending
-- Growth-versus-contribution crossover balance
+- Contribution crossover balance
 - Estimated crossover timing
 - Coast FI timing
 - Coast-needed today
 - Projected target-date value
 
-## Required disclaimer
+## Bottom note
 
-Coast FI is a simplified estimate. It does not mean you are financially independent today. It does not account for inflation, taxes, changing spending, fees, sequence of returns, CPP/OAS/pensions, account type, or future life changes.
+This is an advanced estimate based on your assumptions. It is best used to understand the relationship between contributions, growth, time, and spending.
 
----
-
-# 12. Budget / sustainable DCA section
-
-## Update coffee wording
-
-Replace:
-
-> A $5 coffee each day...
-
-With:
-
-> A $5 weekday coffee...
-
-New copy:
-
-A $5 weekday coffee is $25 a week, about $100 over four weeks, or roughly $1,200 a year. If that money is truly optional, you could automate it into diversified investments instead.
-
-## Lottery comparison copy
-
-A $5 weekly lottery ticket is $260 a year. Investing is not guaranteed either, but diversified investments have a rational long-term expected return. Lottery tickets are entertainment, not a wealth-building plan.
+Do not lead with “This does not mean you can retire.” Put that clarification in the footer disclosure or FAQ.
 
 ---
 
-# 13. Invest within your means section
+# 16. Budget section
 
-## Revised copy
+## Eyebrow
 
-DCA only works if the money can stay invested. Do not invest rent money, bill money, emergency savings, or cash you expect to need soon.
+How much should I DCA?
 
-Build a cash safety net first. If a market drop would force you to sell investments to cover normal life expenses, your investment amount is too high or your asset mix is too aggressive.
+## Heading
 
-## Add hierarchy note
+Start with an amount so small it is easy to keep.
 
-For emergencies, use your emergency fund first. Investments can be a backup only when necessary, but relying on investments for short-term emergencies can force you to sell at a bad time.
+## Body
+
+The best contribution is one you can repeat without stress. A small automatic habit that survives real life is better than an aggressive plan you abandon.
+
+## Card 1: A coffee-sized habit
+
+A $5 weekday coffee is $25 a week, about $100 over four weeks, or roughly $1,200 a year. If that money is truly optional, you could automate it into your investing routine instead.
+
+## Card 2: Better than a lottery habit
+
+A $5 weekly lottery ticket is $260 a year. Investing is not guaranteed either, but diversified investments have a rational long-term wealth-building purpose. Lottery tickets are entertainment.
+
+## Wealthsimple promo card
+
+### Heading
+
+Automate your recurring investments
+
+### Copy
+
+Wealthsimple can set up daily or weekly recurring ETF purchases from your bank account, so the habit keeps running without manual trades.
+
+### Buttons
+
+- Wealthsimple referral
+- Setup details
+
+### Small label near referral button
+
+Referral link
+
+Do not interrupt the promo card with a long referral paragraph. Put full referral disclosure in the footer.
 
 ---
 
-# 14. Broad ETF section
+# 17. Invest within your means section
 
-## Replace heading
+## Eyebrow
 
-Current:
+Sustainable investing
 
-> Broad index ETFs beat concentrated bets.
+## Heading
 
-Replace with:
+Invest money that can stay invested.
 
-> Broad ETFs reduce single-company risk, but they are not risk-free.
+## Body
 
-## Revised body
+DCA works best when the money is truly available for long-term investing. Keep bill money, rent money, and emergency savings separate from your investment habit.
 
-A diversified ETF can spread your money across many companies, sectors, and sometimes countries. That reduces the risk of one company ruining your plan. But broad equity ETFs can still drop sharply when the whole market falls.
+## Supporting copy
 
-The goal is not to find a risk-free ETF. The goal is to choose a diversified investment mix you can hold through normal market downturns.
+A cash buffer helps you stay calm when markets fall. If a normal surprise expense would force you to sell investments, lower the contribution amount or build more cash first.
+
+## Cards
+
+### Build your safety net first
+
+Keep emergency cash available so market dips do not force you to sell at the wrong time.
+
+### Keep the habit sustainable
+
+If a contribution amount creates stress, it is too high. Sustainable beats aggressive.
+
+---
+
+# 18. Broad ETF section
+
+## Eyebrow
+
+Diversified building blocks
+
+## Heading
+
+Broad ETFs make diversification simple.
+
+## Body
+
+A broad ETF can spread your money across many companies, sectors, and sometimes countries. That makes it easier to build a simple long-term investing habit without betting everything on one company or sector.
 
 ## Cards
 
 ### Broad-market ETFs
 
-Diversified across many companies. Often a good research starting point for long-term investors.
+Diversified exposure across many companies. A common research starting point for long-term investors.
 
 ### Balanced ETFs
 
-Hold both stocks and bonds. Lower expected growth than all-equity portfolios, but usually less volatile.
+A mix of stocks and bonds for investors who want a smoother ride than an all-equity portfolio.
 
 ### Individual stocks / sector ETFs
 
-More concentrated. One company or sector can struggle for years and overwhelm an otherwise good contribution habit.
+More concentrated. One company or sector can struggle for years, even while the broader market grows.
+
+## Bottom note
+
+Diversification reduces company-specific risk, but market risk still exists. Keep the full risk disclosure in the footer.
 
 ---
 
-# 15. ETF examples section
+# 19. ETF examples section
 
-## Rename section
+## Eyebrow
 
-Current:
+ETF examples
 
-> ETF ideas
+## Heading
 
-Replace with:
-
-> ETF examples to research
+Broad ETF examples for Canadian investors
 
 ## Intro copy
 
-These are examples of ETFs investors often research when building a diversified portfolio. They are not personal recommendations. Check the fund facts, fees, holdings, risk rating, tax treatment, and whether the fund fits your time horizon before investing.
+Use these as a starting point for your own research. Compare fees, holdings, risk rating, account fit, currency exposure, and tax treatment before choosing.
 
-## Rename grid columns
+Avoid saying “not personal recommendations” in the first paragraph. The footer and FAQ can handle that.
 
-Current:
+## Region controls
 
-- Cap-based
-- Growth-based
+Default to Canada. Consider removing geolocation entirely unless it clearly improves UX. Manual region buttons are enough:
 
-Replace with:
+- Canada
+- United States / elsewhere
 
-- Standard broad-market example
-- Tilted / more aggressive example
+If geolocation remains, do not make it prominent.
 
-## Canadian grid copy
+## Canadian grid columns
 
 | Market exposure | Standard broad-market example | Tilted / more aggressive example |
 |---|---|---|
@@ -539,162 +744,341 @@ Replace with:
 | Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF. Tracks 60 large Canadian companies. | CACE.TO — Avantis CIBC Canadian Equity ETF. Broad Canadian equity exposure with a factor-oriented approach. |
 | Global | XEQT.TO — iShares Core Equity ETF Portfolio. All-equity global asset-allocation ETF. | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF. Global all-equity portfolio with factor tilts. |
 
-## Add VEQT mention
+## Add after grid
 
-Below the grid:
+Other all-in-one ETFs, such as VEQT, may also be worth comparing. The best fit depends on your account, time horizon, comfort with volatility, fees, and desired exposure.
 
-> Other all-equity asset-allocation ETFs, such as VEQT, may also be worth researching. Compare holdings, fees, risk rating, and account fit before choosing.
+## U.S. / elsewhere examples
 
-## Add risk note
+- VT
+- VTI
+- VOO
+- VXUS
+- AVGE
+- QQQM
 
-All-equity ETFs are not low-risk. They may be suitable for long horizons and investors who can tolerate large drawdowns. More cautious investors may want to compare balanced or conservative asset-allocation ETFs.
+## CTA below ETF examples
+
+Ready to automate? See the Wealthsimple setup guide.
 
 ---
 
-# 16. Wealthsimple content
+# 20. Wealthsimple brokerage section
 
-## Brokerage section copy
-
-### Heading
+## Heading
 
 Need a brokerage?
 
-### Body
+## Body
 
-Wealthsimple is one low-friction option many Canadians use for ETF investing and recurring contributions. It is not the only option and not automatically the best option for everyone. Compare brokerages based on account types, fees, automation, FX costs, transfer fees, support, and current terms.
+Wealthsimple is a popular Canadian platform for automating recurring ETF purchases. Compare fees, account types, FX costs, transfer rules, automation features, and current terms before choosing a brokerage.
 
-### Referral disclosure
+## CTA
 
-Referral disclosure: this site may receive a benefit if you use the referral link. Check Wealthsimple’s current offer terms before signing up.
+Wealthsimple referral
 
-### Button labels
+## Small label
 
-- Wealthsimple referral
-- Compare brokerage features
+Referral link
 
-If there is no compare page, omit second button.
+## Footer disclosure handles
 
-## Wealthsimple Cash account copy
-
-Replace hard claims about interest and ATM withdrawals with:
-
-> A Cash account may be useful as a separate place to stage money before investing, but account features, interest rates, ATM policies, and limits can change. Check Wealthsimple’s current terms before relying on it.
+Full referral disclosure belongs in the footer, not as a large interruptive paragraph in the middle of the page.
 
 ---
 
-# 17. TFSA section
+# 21. Wealthsimple step-by-step section
 
-## Replace heading
+## Eyebrow
 
-Current:
+Get started
 
-> Use your TFSA first
+## Heading
 
-Replace with:
+Set up recurring ETF investing with Wealthsimple
 
-> For many Canadians, a TFSA can be a strong place to start
+## Intro copy
 
-## Revised copy
+A simple walkthrough for opening the right accounts and turning recurring contributions into an automated habit.
 
-If you are eligible and have contribution room, a TFSA can be a strong account for long-term investing because Canadian investment growth and withdrawals are generally tax-free. But it is not automatically the right first account for every person.
+## Step 1 heading
 
-Before deciding, consider high-interest debt, emergency savings, employer RRSP matching, FHSA eligibility, RRSP deduction value, time horizon, and your tax situation.
+Create your Wealthsimple profile
 
-TFSA contribution room is personal. Withdrawals generally restore contribution room in the next calendar year. Overcontributions can be penalized. Confirm official room with CRA My Account.
+## Step 1 copy
 
-## Add foreign withholding tax caveat
+Create your account and verify your identity. This gives you access to Cash, TFSA, RRSP, FHSA, and trading account options.
 
-Foreign withholding taxes may still apply to some foreign dividends inside a TFSA, especially U.S. dividends. This does not eliminate the TFSA benefit, but it is worth understanding when choosing ETFs.
+## Step 2 heading
+
+Choose where cash will come from
+
+## Step 2 copy
+
+You can link a bank account directly or use a Wealthsimple Cash account as a staging place before investing.
+
+## Step 3 heading
+
+Open the investing account you want to use
+
+## Step 3 copy
+
+Many Canadian long-term investors consider a TFSA first when they have contribution room, but account choice depends on your goals.
+
+## Step 4 heading
+
+Set up a recurring investment
+
+## Step 4 copy
+
+Choose an ETF, pick your contribution amount, select the schedule, and let automation handle the habit.
+
+## Important copy rule
+
+Do not say “Pick one of the recommended ETFs below.” Use “ETF examples” or “an ETF you have chosen after research.”
+
+---
+
+# 22. TFSA section
+
+## Eyebrow
+
+For Canadian investors
+
+## Heading
+
+Why many Canadians start with a TFSA
+
+## Body paragraph 1
+
+A TFSA can be a flexible place to hold long-term ETF investments because eligible growth and withdrawals are generally tax-free in Canada.
+
+## Body paragraph 2
+
+For some investors, an FHSA, RRSP, employer match, debt repayment, or another priority may come first. The right account depends on your goal and situation.
+
+## Body paragraph 3
+
+TFSA contribution room is personal. Withdrawals generally restore room in the next calendar year. Confirm your official room with CRA My Account.
+
+## Calculator heading
+
+Simple TFSA room calculator
 
 ## Calculator note
 
-Add:
+Estimate your remaining TFSA contribution room using your eligibility year, past contributions, and last year’s withdrawals. TFSA limit data last updated for 2026.
 
-> TFSA limit data last updated for 2026. Verify current limits with the CRA.
+## Move detailed caveats to FAQ/footer
+
+Foreign withholding tax, overcontribution penalties, and account-fit caveats should be included, but not in the first paragraph.
 
 ---
 
-# 18. Withdrawal section
+# 23. Timing risk / DCA vs lump sum section
 
-## Revised heading
+Move this lower than calculator, compounding, and ETF examples.
+
+## Eyebrow
+
+Timing risk
+
+## Heading
+
+Timing dips is harder than it looks.
+
+## Body
+
+The problem is not intelligence. The problem is emotion, uncertainty, and consistency. DCA removes the pressure of deciding whether today is the perfect day to invest.
+
+## Supporting copy
+
+For people investing from paycheques, DCA is a natural fit because the money arrives over time. If you receive a large lump sum, you can invest it all at once or phase it in based on your comfort level.
+
+## Source note
+
+Keep cited research, but place it in a source note or expandable detail:
+
+> Research on individual day traders shows how difficult short-term timing can be. DCA is different: it is a long-term contribution system, not a trading strategy.
+
+## Replace comparison table row
+
+Avoid saying:
+
+> DCA expected return: slightly lower
+
+Use:
+
+| Situation | Practical approach |
+|---|---|
+| Investing from income | Automate recurring ETF contributions |
+| Large lump sum | Invest at once or phase in based on comfort |
+| Nervous about timing | DCA can help reduce regret and get started |
+| Long horizon | Staying invested matters more than perfect timing |
+
+---
+
+# 24. Withdrawal section
+
+## Eyebrow
+
+When to withdraw
+
+## Heading
 
 Withdraw when the money has a real job — not because the market is noisy.
 
-## Revised copy
+## Body
 
-Selling can make sense when the money is needed for a real goal, an emergency, planned rebalancing, reducing risk before a known expense, or changing an investment that no longer fits your plan.
+Selling can make sense when the money is needed for a planned goal, emergency, rebalancing decision, or risk reduction before a known expense.
+
+## Supporting copy
 
 What usually hurts long-term investors is panic selling: selling only because the market dropped and the chart feels scary.
 
-For short-term goals, consider reducing risk before the deadline instead of waiting until the last minute.
+## Cards
+
+### A real goal
+
+Home down payment, education, a planned purchase, or another clear use.
+
+### Emergency backup
+
+Unexpected urgent expenses can happen. Ideally, use cash savings first.
+
+### Not market panic
+
+A market drop alone is not a plan. Review your goal, timeline, and investment mix before reacting.
 
 ---
 
-# 19. FAQ updates
+# 25. FAQ rewrite for SEO
 
-## FAQ: Is daily DCA always better?
+Use FAQ questions people actually search. Keep answers short, helpful, and keyword-rich.
 
-### Answer
+## FAQ 1: What is dollar-cost averaging?
 
-No. Daily DCA can be useful if automation makes it easy, but weekly, biweekly, payday-based, or monthly investing can also work well. The biggest benefit is consistency. The exact schedule usually matters less than savings rate, risk level, fees, taxes, time horizon, and staying invested.
+Dollar-cost averaging means investing a fixed amount on a regular schedule. When prices are lower, the same amount buys more units. When prices are higher, it buys fewer units.
 
-## FAQ: What if I want lower-risk growth?
+## FAQ 2: Is DCA good for beginners?
 
-### Answer
+DCA can be useful for beginners because it turns investing into a repeatable habit. It can reduce timing stress and make it easier to invest from each paycheque.
 
-Do not assume all broad ETFs are low-risk. All-equity ETFs can fall sharply. If you want a smoother ride, research balanced or conservative asset-allocation ETFs, GICs, high-interest savings products, or cash ETFs depending on when you need the money. Lower risk usually means lower expected long-term return.
+## FAQ 3: Is daily DCA better than weekly or monthly DCA?
 
-## FAQ: Are the ETF tickers recommendations?
+Daily DCA creates the smoothest contribution pattern, but weekly, biweekly, payday-based, and monthly investing can also work. The best schedule is the one you can automate and keep.
 
-### Answer
+## FAQ 4: Can I dollar-cost average in a TFSA?
 
-No. They are examples to research. The right ETF depends on your country, account type, time horizon, risk tolerance, fees, tax situation, and whether you can stay invested through downturns.
+Yes. Many Canadians use a TFSA for recurring ETF investments when they have contribution room. Confirm your official TFSA room and account fit before contributing.
 
-## FAQ: What return should I assume?
+## FAQ 5: What ETFs do Canadians use for DCA?
 
-### Answer
+Many Canadians research broad-market or all-in-one ETFs for long-term DCA. Examples include Canadian-listed ETFs that cover U.S., Canadian, or global markets. Compare fees, holdings, risk rating, and account fit before choosing.
 
-Use conservative assumptions. A higher CAGR input makes calculators look better, but it does not make the outcome more likely. Try several scenarios, including low-return or negative-return periods.
+## FAQ 6: What is the Rule of 72?
 
-## FAQ: What is Coast FI?
+The Rule of 72 estimates how long money takes to double: 72 divided by the annual return equals the approximate number of years.
 
-### Answer
+## FAQ 7: Is DCA better than lump sum investing?
 
-Coast FI means your current investments may be enough to grow to a future target by a chosen date without more contributions, if the assumed return happens. It does not mean you can retire today, and it is highly sensitive to inflation, spending, fees, taxes, and market returns.
+If you already have a large lump sum, investing sooner has often performed better historically because markets tend to rise over time. But DCA may be easier emotionally and can help investors avoid sitting in cash out of fear.
 
----
+## FAQ 8: What return should I assume in the calculator?
 
-# 20. Footer update
+Use conservative assumptions and test multiple scenarios. A higher assumption makes the output look better, but it does not make the result more likely.
 
-## Replace footer disclaimer with:
+## FAQ 9: Are ETF tickers on this site recommendations?
 
-Educational content only. Not financial advice. Investing involves risk, including possible loss of principal. Calculators are simplified models and do not include all taxes, fees, inflation, account rules, or personal circumstances. ETF tickers are examples to research, not recommendations. Referral links may provide a benefit to the site owner.
+No. ETF tickers are examples for research. The right choice depends on your account, time horizon, fees, tax situation, currency exposure, and comfort with market swings.
 
----
+## FAQ 10: What does Coast FI mean?
 
-# 21. Technical/content implementation checklist for developer
-
-- [ ] Change JavaScript currency formatter from USD to CAD or add a visible currency selector.
-- [ ] If keeping a single default, label calculator values as CAD.
-- [ ] Fix Monthly DCA: either use 12 contributions per year or rename 13-contribution schedule to “Every 4 weeks.”
-- [ ] Replace ETF-specific CAGR presets with generic return assumptions.
-- [ ] Rename ETF grid columns from “Cap-based / Growth-based” to “Standard broad-market example / Tilted or more aggressive example.”
-- [ ] Add local disclaimers near calculators, ETF examples, and referral content.
-- [ ] Add referral disclosure near Wealthsimple links.
-- [ ] Add risk-level section before ETF selection.
-- [ ] Add “Before you DCA” checklist.
-- [ ] Add neutral reset button to interactive chart.
-- [ ] Add inflation/real-return caveat to Rule of 72.
-- [ ] Rename “Crossover point” to “Growth-versus-contribution crossover.”
-- [ ] Add spending-based FI target option to Coast FI calculator.
-- [ ] Add TFSA foreign withholding tax caveat.
-- [ ] Add CRA-last-updated note for TFSA limits.
-- [ ] Update FAQ with beginner risk and ETF-example clarifications.
+Coast FI estimates whether your current investments could grow to a future target by a chosen date without additional contributions. It depends heavily on assumptions.
 
 ---
 
-# 22. Desired final reader impression
+# 26. Footer disclosure box
 
-After the update, a beginner should leave thinking:
+Create a structured footer disclosure called:
 
-> I do not need to time the market. I need to get my financial foundation in order, choose an account, pick a diversified investment that matches my risk tolerance, automate a sustainable amount, and stay consistent. Daily DCA is one option, not a magic trick. The calculators are learning tools, not promises.
+## Important information
+
+Use bullet points:
+
+- Educational content only, not financial advice.
+- Investing involves risk, including possible loss of principal.
+- Calculator results are simplified estimates based on user-selected assumptions.
+- Real returns vary and can be negative.
+- Taxes, fees, inflation, account rules, currency effects, and personal circumstances can change outcomes.
+- ETF tickers are examples for research, not personal recommendations.
+- Referral links may provide a benefit to the site owner.
+- Confirm TFSA contribution room and account rules with official sources.
+
+This footer disclosure replaces repeated heavy caveats throughout the page.
+
+---
+
+# 27. Navigation rewrite
+
+Current navigation is too crowded. Simplify to:
+
+- Calculator
+- How it works
+- Compounding
+- ETF examples
+- TFSA
+- FAQ
+
+Optional if there is room:
+
+- Start here
+- Setup guide
+
+Avoid nav labels like:
+
+- Tickers
+- Milestones
+- Timing risk
+- Withdraw
+
+These can remain sections, but they do not need top-level navigation.
+
+---
+
+# 28. Technical/content implementation checklist
+
+- [ ] Update title tag to “Dollar-Cost Averaging Calculator Canada | DCA the Dip.”
+- [ ] Update meta description with DCA, ETF, TFSA, compounding, and Canadian investor keywords.
+- [ ] Rewrite hero around “Automate the habit. Ignore the noise.”
+- [ ] Move heavy caveats out of hero and first paragraphs.
+- [ ] Replace caveat-forward headlines with positive headlines.
+- [ ] Replace “toy model” with “calculator” or “educational model.”
+- [ ] Collapse advanced chart controls by default.
+- [ ] Rename technical chart labels to beginner language.
+- [ ] Move long calculator assumptions into an expandable “How this calculator works” detail.
+- [ ] Move timing-risk / DCA-vs-lump-sum section lower on the page.
+- [ ] Simplify risk section into three beginner-friendly cards.
+- [ ] Rework compounding section to lead with reward and use the 8-4-3 hook as storytelling.
+- [ ] Keep generic CAGR assumptions instead of ETF-specific return assumptions.
+- [ ] Rewrite ETF section as “Broad ETF examples for Canadian investors.”
+- [ ] Remove or de-emphasize geolocation unless it materially improves UX.
+- [ ] Replace “recommended ETFs” language with “ETF examples.”
+- [ ] Rewrite TFSA section with a positive first paragraph and caveats later.
+- [ ] Rewrite FAQ around SEO search questions.
+- [ ] Create structured footer disclosure box and remove repetitive mid-page disclaimers.
+- [ ] Keep mobile responsiveness and mobile audit intact.
+
+---
+
+# 29. Desired final reader impression
+
+A visitor should leave thinking:
+
+> I can automate a small ETF investing habit, compare schedules, understand how DCA and compounding work, and keep going without trying to time the market.
+
+They should not leave thinking:
+
+> This site is nervous about everything it says.
+
+The ideal balance is confident up top, responsible at the bottom.

@@ -6,17 +6,17 @@ const etfs = {
     {
       market: "U.S.",
       cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Standard broad-market S&P 500 exposure to large U.S. companies." },
-      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Growth-oriented broad U.S. equity exposure across market capitalizations." }
+      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Broader U.S. equity exposure with a factor-oriented approach." }
     },
     {
       market: "Canada",
       cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Standard broad-market exposure to 60 large Canadian companies." },
-      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Growth-oriented Canadian equity exposure across market capitalizations." }
+      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Broad Canadian equity exposure with a factor-oriented approach." }
     },
     {
       market: "World",
       cap: { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Standard global all-equity portfolio across Canada, U.S., international, and emerging markets." },
-      growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Factor-tilted global all-equity portfolio for a more aggressive growth-oriented core." }
+      growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Global all-equity portfolio with factor tilts." }
     }
   ],
   us: [
@@ -32,11 +32,11 @@ const etfs = {
 
 const cagrPresets = [
   { label: "Custom", value: "custom", cagr: 6 },
-  { label: "Very conservative assumption", value: "very-conservative", cagr: 3 },
-  { label: "Conservative growth assumption", value: "conservative", cagr: 4 },
-  { label: "Moderate growth assumption", value: "moderate", cagr: 6 },
-  { label: "Long-term equity assumption", value: "equity", cagr: 8 },
-  { label: "Aggressive assumption", value: "aggressive", cagr: 10 }
+  { label: "Very conservative", value: "very-conservative", cagr: 3 },
+  { label: "Conservative", value: "conservative", cagr: 4 },
+  { label: "Moderate", value: "moderate", cagr: 6 },
+  { label: "Long-term equity", value: "equity", cagr: 8 },
+  { label: "Aggressive", value: "aggressive", cagr: 10 }
 ];
 
 const frequencies = [
@@ -75,7 +75,7 @@ function formatPct(value) {
 function renderDipList() {
   const list = document.getElementById("dipList");
   if (!marketMoves.length) {
-    list.innerHTML = `<p class="empty-dips">No custom moves yet. Add a dip or rally to test timing risk.</p>`;
+    list.innerHTML = `<p class="empty-dips">No market scenarios added yet. Add a dip or rally to test timing.</p>`;
     return;
   }
 
@@ -83,8 +83,8 @@ function renderDipList() {
     const bottomDay = Math.min(365, move.startDay + move.width);
     const recoveryDay = move.recovers ? Math.min(365, bottomDay + move.width) : null;
     const pathText = move.recovers
-      ? `starts day ${move.startDay}, reaches ${formatPct(move.height)} by day ${bottomDay}, recovers by day ${recoveryDay}`
-      : `starts day ${move.startDay}, reaches ${formatPct(move.height)} by day ${bottomDay}, does not recover`;
+      ? `starts day ${move.startDay}, moves ${formatPct(move.height)} by day ${bottomDay}, recovers by day ${recoveryDay}`
+      : `starts day ${move.startDay}, moves ${formatPct(move.height)} by day ${bottomDay}, stays there`;
     return `
       <div class="dip-pill" data-move-id="${move.id}">
         <span>${pathText}</span>
@@ -498,7 +498,7 @@ function calculateCrossover() {
 
   results.innerHTML = `
     <div class="crossover-result-card"><small>FI target from spending</small><strong>${money(target)}</strong><p>Based on annual spending divided by withdrawal rate.</p></div>
-    <div class="crossover-result-card"><small>Growth-vs-contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, the average monthly growth implied by your CAGR roughly matches your monthly contribution.</p></div>
+    <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, the average monthly growth implied by your CAGR roughly matches your monthly contribution.</p></div>
     <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
     <div class="crossover-result-card coast"><small>Coast FI timing</small><strong>${monthLabel(coastMonth)}</strong><p>When your balance could coast to ${money(target)} by the target date.</p></div>
     <div class="crossover-result-card"><small>Coast-needed today</small><strong>${money(coastRequiredToday)}</strong><p>If you already had this much, you could stop adding money in this simplified model.</p></div>
@@ -510,7 +510,7 @@ function calculateCrossover() {
     datasets: [
       { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
       { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
-      { label: "Growth-vs-contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
+      { label: "Contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
       { label: "Coast FI required balance", data: coastRequired, borderColor: "#ff8fab", tension: 0.25, pointRadius: 0, borderWidth: 2 }
     ]
   };
@@ -567,8 +567,10 @@ function init() {
   document.getElementById("compoundPreset").addEventListener("change", applyCagrPreset);
   document.querySelectorAll("#crossoverForm input").forEach(el => el.addEventListener("input", calculateCrossover));
   document.querySelectorAll("[data-region]").forEach(btn => btn.addEventListener("click", () => renderTickers(btn.dataset.region)));
-  document.getElementById("detectLocation").addEventListener("click", detectLocation);
-  document.getElementById("declineLocation").addEventListener("click", () => {
+  const detectLocationButton = document.getElementById("detectLocation");
+  if (detectLocationButton) detectLocationButton.addEventListener("click", detectLocation);
+  const declineLocationButton = document.getElementById("declineLocation");
+  if (declineLocationButton) declineLocationButton.addEventListener("click", () => {
     document.getElementById("locationNote").textContent = "Location declined. Showing Canadian-listed ETF ideas by default.";
     renderTickers("canada");
   });

@@ -4,151 +4,270 @@ This document is the source of truth for future website updates. Update this fil
 
 ## 1. Site purpose
 
-DCA the Dip explains the benefits of consistent dollar-cost averaging for long-term investors. The site should emphasize simple, repeatable investing habits instead of market timing.
+DCA the Dip helps Canadian beginners automate recurring ETF investing, compare dollar-cost averaging schedules, understand market dips and compounding, and build a repeatable investing habit without trying to time the market.
 
-## 2. Core positioning
+## 2. Core positioning and tone
 
-- Primary message: invest consistently through every market.
-- Recommended cadence: daily DCA, because it gives contributions the most chances to buy more units during short-lived dip opportunities; when prices fall, the same dollar amount buys more units.
-- Top simple rule should communicate two ideas in plain-language, investment-appropriate terms: daily DCA can buy more units at lower prices during dips, and if broad indexes grow over the long run, those extra units can help future compounding without requiring market timing.
-- Strategy must use consistent contribution amounts only.
+- Primary brand line: **Automate the habit. Ignore the noise.**
+- SEO target: **Dollar-Cost Averaging Calculator Canada | DCA the Dip**.
+- Lead with benefit and confidence; avoid opening headlines/lead paragraphs with caveats.
+- Use a plain-language coach voice: start small, automate it, keep going.
+- Explain that lower prices buy more units when the contribution amount stays fixed.
 - Do not recommend increasing contributions during drawdowns.
 - Do not discuss or recommend margin.
-- Do not present content as financial advice.
+- Consolidate heavy disclosures in the footer, FAQ, and compact calculator notes rather than repeating them in headlines.
 
-## 3. Sustainable DCA amount
+## 3. SEO metadata
 
-The site should include a section explaining how much to DCA.
+Page front matter should use:
 
-- Recommended amount: whatever the user can budget sustainably without needing to withdraw because they overextended themselves.
-- Emphasize that the habit only works if it survives real life.
-- Use a coffee example with trading-day/4-week math: $5/day equals $25/week, $100/month, or $1,200/year.
-- Compare to a $5 weekly lottery ticket, which equals $260/year.
-- Explain that DCA is not guaranteed, but it puts money into productive assets rather than a long-shot bet.
-- Remind users not to invest bill money, emergency savings, or cash they expect to need soon.
-- The two budget cards should be laid out as a balanced two-column row on desktop; do not leave a two-card row in a three-column grid.
-- The "Invest within your means" section should be a full-width band/separator with a wrapped inner content grid, not a wrapped section whose separator line stops short of the page edges.
+- Title: `Dollar-Cost Averaging Calculator Canada | DCA the Dip`
+- Description: `Compare daily, weekly, biweekly, monthly, and quarterly dollar-cost averaging strategies. Learn how automated ETF investing, compounding, TFSA accounts, and market dips work for Canadian investors.`
 
-## 4. DCA schedule comparison
+The homepage should naturally include these search themes:
 
-The site must compare these contribution schedules:
+- dollar-cost averaging Canada
+- DCA calculator Canada
+- daily DCA calculator
+- ETF investing for beginners Canada
+- recurring ETF investing
+- TFSA dollar-cost averaging
+- DCA vs lump sum
+- Rule of 72
+- compound interest calculator
 
-| Frequency | Required angle |
-|---|---|
-| Daily | Recommended default; smoothest entries; most chances to catch dip days; more transactions |
-| Weekly | Simple automation; frequent enough for many investors; can miss fast dips |
-| Biweekly / paycheque | Easy budgeting for salaried investors; fewer entries than daily |
-| Monthly | Low effort; common budgeting cadence; chunkier timing risk |
-| Quarterly | Simplest administration; least responsive to dip opportunities |
+## 4. Page structure
 
-The comparison should explain that each schedule can invest the same total amount; only timing changes.
+Recommended order:
 
+1. Hero: strong promise and primary CTA
+2. Simple DCA explanation
+3. DCA calculator comparing schedules
+4. How DCA/automation works
+5. Frequency guide
+6. Compounding and Rule of 72
+7. Simple investing foundation
+8. Risk and comfort / ETF mix
+9. Budget and sustainable investing
+10. Broad ETF building blocks
+11. Wealthsimple setup
+12. ETF examples
+13. TFSA
+14. Timing risk / DCA vs lump sum
+15. Withdrawal guidance
+16. FAQ
+17. Footer disclosure
 
-## 4a. Compounding roadmap
+## 5. Hero requirements
 
-The site must include a standalone compounding section after the schedule-frequency guide and before sustainable-budget guidance. It should explain, in plain language, that DCA contributions may feel slow at first but compounding can become more visible as the portfolio base grows.
+Hero must include:
 
-Required content:
+- Eyebrow: `Dollar-cost averaging for Canadian ETF investors`
+- H1: `Automate the habit. Ignore the noise.`
+- Lede: DCA the Dip helps beginners invest a fixed amount on a regular schedule, compare daily versus weekly or monthly contributions, and understand how compounding works over time.
+- Supporting sentence: Build a simple recurring ETF investing routine through rising, falling, and sideways markets — no market timing required.
+- Primary CTA: `Try the DCA calculator`
+- Secondary CTA: `See how it works`
+- Trust row: built for beginners, ETF-focused, TFSA-friendly, no market timing required.
 
-- Introduce compounding as the process where investment growth can eventually earn growth of its own.
-- Present the 8-4-3 rule as a psychological rule of thumb, not a guarantee or promise of returns:
-  - First 8 years: progress can feel slow because contributions usually do most of the work.
-  - Next 4 years: the portfolio can reach a tipping point where growth starts to rival new contributions.
-  - Final 3 years: a larger base can make percentage moves feel much bigger in dollar terms.
-- Include the Rule of 72 formula: 72 ÷ annual return ≈ years to double.
-- Include an example: at 8% annual return, money roughly doubles in 9 years.
-- Include a simple compounding calculator where users can enter their own CAGR or select an editable CAGR assumption tied to the recommended ETF examples.
-- Calculator inputs: initial investment, daily trading-day contribution, years invested, ETF/CAGR preset selector, and custom CAGR percentage.
-- Calculator outputs: estimated future value, total contributed, estimated growth, and Rule-of-72 approximate doubling time.
-- Calculator math should use daily trading-day contributions (260 contribution days per year) so it matches the site's daily DCA framing.
-- Preset ETF CAGR values must be clearly labelled as planning assumptions, not historical data or predictions.
-- Include a simple crossover/coast FI section written for normal readers:
-  - Growth-versus-contribution crossover: when average monthly investment growth implied by the CAGR assumption is bigger than the user's monthly contribution.
-  - Coast FI: when the user's current portfolio could grow to a target number by a chosen future year even if they stopped adding new money.
-  - Inputs: current invested amount, monthly investment, CAGR, FI target, and years until the target date.
-  - Outputs: crossover balance, approximate crossover timing, Coast FI timing, coast-required amount today, and projected balance at the target date.
-  - Include a chart showing portfolio balance over time, the crossover balance line, and the declining Coast FI required-balance curve.
-  - Explain clearly that these are planning estimates only, not guarantees.
-- Tie the section back to daily DCA: consistent contributions keep adding units while time gives those units more opportunity to compound.
-- Keep language educational, conditional, and non-guaranteed. Do not claim users will get a specific return or timeline.
+The hero must not open with “not advice,” “not a forecast,” “not recommendations,” or similar caveat-first phrasing.
 
-## 5. Interactive DCA chart
+## 6. Simple rule card
 
-The site must include an interactive chart that compares a one-time annual investment against five recurring DCA schedules over one full year.
+The top rule card should say:
+
+- Heading: `Lower prices buy more units.`
+- Body: When the user invests the same planned amount on a regular schedule, market dips naturally buy more ETF units. When prices are higher, the same contribution buys fewer units.
+- Microcopy: `Same dollars. More units on lower-price days. No guessing the bottom.`
+
+## 7. DCA calculator
+
+The site must include an interactive chart comparing a one-time annual investment against recurring DCA schedules over one year.
 
 Compared schedules:
 
-- One-time annual investment (lump sum comparator)
+- One-time annual investment / lump-sum comparator
 - Daily DCA
-- Weekly DCA (5× daily amount per contribution)
-- Biweekly DCA (10× daily)
-- Monthly DCA (20× daily)
-- Quarterly DCA (60× daily)
+- Weekly DCA
+- Biweekly DCA
+- Monthly DCA
+- Quarterly DCA
 
-User-adjustable assumptions:
+Required behavior:
 
-- Daily recurring amount (default $10)
-- Market move editor for adding any number of custom dips or rallies. Each move must include:
-  - Start day (0 to 365)
-  - Height (default example -25%, range -30% to +30%): negative values model drawdowns/dips; positive values model rallies
-  - Width in days each direction (1 to 365): days from start to the bottom/top, and the same width again for recovery when recovery is enabled
-  - Recovery checkbox: if checked, the move returns to the annualized path after the second width period; if unchecked, the move remains unrecovered through year-end
-- The editor must ship with four predefined unrecovered dips so the chart demonstrates timing risk on page load. The four initial moves are:
-  - Start day 50, reaches -10% by day 70, does not recover
-  - Start day 125, reaches -10% by day 145, does not recover
-  - Start day 150, reaches -10% by day 170, does not recover
-  - Start day 250, reaches -10% by day 270, does not recover
-- Annualized gain/loss slider (default +10%, range -10% to +10%) that compounds across the entire year, not just non-dip days
-- Daily variation slider (default 0%, range 0% to 3%) that adds a deterministic random-looking sequence of daily up/down movements around the annualized path, while keeping slider changes stable and reproducible
+- One-time annual investment is derived from daily amount × 5 trading days × 52 weeks.
+- Each schedule invests the same total annual dollars; only timing changes.
+- The first contribution for every modeled strategy happens on day 0.
+- Monthly DCA uses 12 contributions/year.
+- If all market moves are removed, annual gain/loss is 0%, and daily variation is 0%, every schedule and the lump-sum comparator must end equal.
+- The chart must include expandable day-by-day comparison table, collapsed by default.
 
-Derived value:
+Calculator copy:
 
-- One-time annual investment is not an independent slider. It must be calculated as daily recurring amount × 5 trading days × 52 weeks. This makes the lump-sum comparator equal to the total annual amount a weekly investor would contribute.
+- Eyebrow: `DCA calculator`
+- Heading: `Compare daily, weekly, biweekly, monthly, and quarterly investing.`
+- Intro: Use the calculator to see how different contribution schedules work when each schedule invests the same total dollars over one year.
+- Small note: `Educational estimate. Actual market returns vary.`
 
-Fixed model assumptions displayed on the chart:
+Advanced controls should be collapsible under `Advanced market scenario controls` and use beginner labels:
 
-- Deployment window: always 365 days (one full year)
-- Market moves can represent either drawdowns (negative values) or rallies (positive values), and they are added through the editor rather than three fixed sliders
-- Do not show an "Annual DCA" series or stat card because it is the same as the one-time annual investment
-- The six chart stat boxes must lay out as a clean 3-by-2 grid on desktop (three across, two rows).
+| Technical idea | Public label |
+|---|---|
+| Market move editor | Add a market dip or rally |
+| Start day | When it starts |
+| Height | Market move |
+| Width each direction | How long it lasts |
+| Recovers after the move | Market recovers afterward |
+| Reset neutral | Reset to neutral |
 
-The first contribution for every modeled strategy must happen on day 0 so the visual starts when the plan starts.
+Keep the long model explanation inside an expandable `How this calculator works` area.
 
-All modeled DCA schedules must invest the same total annual dollars as the one-time annual investment. If all market moves are removed or set to 0%, daily variation is 0%, and annual gain/loss is 0%, every DCA schedule and the one-time annual investment should end at the same value. The chart should show each schedule's 1-year ending value compared against the one-time annual investment, with a dollar amount and percentage difference per stat card. No deployment-window slider.
+## 8. How DCA works / automation benefits
 
-The chart must include an expandable day-by-day comparison table. The table should be collapsed by default, show roughly the first 10 rows in a scrollable container when expanded, and update whenever the assumptions change. It should compare daily values for lump sum, daily, weekly, monthly, and quarterly investing. With all market moves removed or set to 0%, daily variation at 0%, and annual gain/loss at 0%, the final-day values in the table must match across every displayed approach.
+Section must include:
 
-## 6. Timing risk section
+- Eyebrow: `Why automate your DCA strategy?`
+- Heading: `Make investing automatic before emotions get involved.`
+- Copy explaining that DCA turns investing into a routine.
 
-The site must include a "Why not just buy the dip?" section with:
+Cards:
 
-- Day-trading loss statistics from Barber, Lee, Liu & Odean.
-- A psychology benefit summary: easier to start, easier psychologically, builds a habit.
-- A DCA-vs-lump-sum comparison table (budget, emotion, expected return, best for).
-- RBC GAM research note (1990–2025) explaining that lump sum historically outperforms but emotions often drive the better behavioral choice.
+1. Removes timing pressure — regular ETF buys spread entries across market days.
+2. Builds the habit — small recurring contributions are easier to keep than occasional big decisions.
+3. Fits paycheque investing — payday-based, weekly, monthly, or daily DCA can all work.
 
-## 7. ETF suggestions by region
+## 9. Frequency guide
 
-The site must suggest ETFs based on user-selected or detected region.
+- Heading: `Same dollars. Different rhythm. Different experience.`
+- Explain that daily, weekly, biweekly/payday, monthly, and quarterly can all be reasonable.
+- Table should emphasize best fit and simple tradeoff, not imply daily is objectively superior.
 
-### Location behavior
+## 10. Compounding roadmap
 
-- Ask for browser geolocation only after user clicks a button.
-- Keep location logic client-side.
-- Allow users to decline GPS.
-- Always allow manual Canada or United States/elsewhere selection.
+The site must include a standalone compounding section.
 
-### Canada ETF examples
+Required content:
 
-For the Canadian region, show ETFs as a grid with rows for market exposure and columns for cap-based versus growth-based choices. Each ETF cell must show the ticker, name, and a quick description of what the fund covers and why it fits that column.
+- Eyebrow: `Compounding over time`
+- Heading: `Compounding rewards the investors who keep going.`
+- Explain that contributions do most of the work early, then a larger balance gives investment growth more room to matter.
+- Use the 8-4-3 framework as storytelling:
+  - Years 1–8: Build the base
+  - Years 9–12: Momentum appears
+  - Years 13–15: Growth becomes visible
+- Include a note that 8-4-3 is a memorable way to understand patience, not an exact schedule.
+
+## 11. Rule of 72
+
+- Eyebrow: `Quick mental math`
+- Heading: `How long to double your money?`
+- Formula: `72 ÷ return = years to double`
+- Example: at 8%, money roughly doubles in about 9 years.
+- Keep inflation/tax/fee/purchasing-power caveats as a short note, not the main headline.
+
+## 12. DCA compounding calculator
+
+Inputs:
+
+- Initial investment
+- Recurring contribution
+- Years invested
+- Return assumption preset
+- Custom CAGR
+
+Presets must be generic assumptions, not ETF-specific return forecasts:
+
+- Very conservative: 3%
+- Conservative: 4%
+- Moderate: 6%
+- Long-term equity: 8%
+- Aggressive: 10%
+- Custom
+
+Outputs:
+
+- Estimated future value
+- Total contributed
+- Estimated growth
+- Rule-of-72 double time
+
+Bottom note: results are estimates based on the return assumption chosen; encourage testing lower and higher scenarios.
+
+## 13. Growth milestones / Coast FI
+
+This is advanced content and should not dominate the top of the page.
+
+Required content:
+
+- Eyebrow: `Growth milestones`
+- Heading: `When your portfolio starts doing more of the work`
+- Contribution crossover: compares monthly contribution with average monthly growth implied by the return assumption.
+- Coast FI: estimates whether today’s portfolio could grow toward a future financial independence target by a chosen date without more contributions.
+- FI target formula: annual spending ÷ withdrawal rate.
+
+Inputs:
+
+- Current invested amount
+- Monthly investment
+- Return assumption
+- Desired annual spending
+- Withdrawal rate
+- Years until target date
+
+Outputs:
+
+- FI target from spending
+- Contribution crossover balance
+- Crossover timing
+- Coast FI timing
+- Coast-needed today
+- Projected target-date value
+
+## 14. Sustainable budget and means sections
+
+Budget section:
+
+- Eyebrow: `How much should I DCA?`
+- Heading: `Start with an amount so small it is easy to keep.`
+- Coffee example: $5 weekday coffee = $25/week, about $100 over four weeks, roughly $1,200/year.
+- Lottery example: $5 weekly lottery ticket = $260/year.
+- Keep two cards in a balanced two-column row on desktop.
+
+Sustainable investing section:
+
+- Eyebrow: `Sustainable investing`
+- Heading: `Invest money that can stay invested.`
+- Explain that bill money, rent money, and emergency savings should stay separate from the investing habit.
+- Keep as a full-width band with wrapped inner content.
+
+## 15. Broad ETF building blocks
+
+- Eyebrow: `Diversified building blocks`
+- Heading: `Broad ETFs make diversification simple.`
+- Explain broad ETFs spread money across many companies, sectors, and sometimes countries.
+
+Cards:
+
+- Broad-market ETFs
+- Balanced ETFs
+- Individual stocks / sector ETFs
+
+## 16. ETF examples
+
+- Eyebrow: `ETF examples`
+- Heading: `Broad ETF examples for Canadian investors`
+- Copy: use as a starting point for research; compare fees, holdings, risk rating, account fit, currency exposure, and tax treatment.
+- Default to Canada. Manual region buttons are enough: Canada and United States / elsewhere.
+
+Canadian ETF grid:
 
 | Market exposure | Standard broad-market example | Tilted / more aggressive example |
 |---|---|---|
-| U.S. | ZSP.TO — BMO S&P 500 Index ETF, standard U.S. large-cap S&P 500 exposure | CAUS.TO — Avantis CIBC U.S. All-Cap Equity ETF, growth-oriented broad U.S. equity exposure |
-| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF, standard large Canadian company exposure | CACE.TO — Avantis CIBC Canadian Equity ETF, growth-oriented broad Canadian equity exposure |
-| World | XEQT.TO — iShares Core Equity ETF Portfolio, standard global all-equity portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF, factor-tilted global all-equity growth-oriented core |
+| U.S. | ZSP.TO — BMO S&P 500 Index ETF | CAUS.TO — Avantis CIBC U.S. All-Cap Equity ETF |
+| Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF | CACE.TO — Avantis CIBC Canadian Equity ETF |
+| World | XEQT.TO — iShares Core Equity ETF Portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF |
 
-### U.S. ETF examples
+U.S./elsewhere examples:
 
 - VT
 - VTI
@@ -157,116 +276,104 @@ For the Canadian region, show ETFs as a grid with rows for market exposure and c
 - AVGE
 - QQQM
 
-## 8. Broad index ETF safety framing
+## 17. Wealthsimple setup and referral
 
-The site should include a standalone section explaining that broad index-based ETFs are usually safer building blocks for DCA than concentrated bets.
+Wealthsimple can be presented as a popular Canadian platform for automating recurring ETF purchases.
 
-- Explain that broad-market/index ETFs spread money across many companies and sectors.
-- Warn that industry-specific ETFs are more concentrated and can lag the broad market for long periods.
-- Warn that individual stocks carry the highest company-specific risk and can overwhelm a DCA habit.
-- Keep the language educational and avoid promising safety or guaranteed returns.
+Rules:
 
-## 9. Canadian account guidance
-
-If the user is in Canada or selects Canada, the site should explain that a TFSA is often the best account for this strategy when contribution room is available because profits and investment growth can be withdrawn tax-free.
-
-The TFSA copy must include caveats:
-
-- TFSA contribution room is personal.
-- Withdrawals generally restore room in the next calendar year.
-- Overcontributions can be penalized.
-- Users should verify official contribution room with CRA My Account.
-
-## 10. TFSA contribution room calculator
-
-The site must include a simple TFSA contribution room calculator.
-
-Inputs:
-
-- Eligibility year: the later of the year the user turned 18 or the year the user became a Canadian resident
-- Total TFSA contributions already made
-- Withdrawals made last year
-
-Outputs:
-
-- First eligible year
-- Total possible contribution room to the current modeled year
-- Estimated remaining contribution room
-
-Assumptions and notes:
-
-- TFSA eligibility begins in the later of 2009, the year the user turned 18, or the year the user became a Canadian resident.
-- Calculator is an estimate only.
-- TFSA annual limits must be represented in JavaScript and kept current over time.
-
-## 11. Wealthsimple referral
-
-For Canadian users, the site should include a Wealthsimple referral callout.
-
-- Referral URL should be managed in JavaScript as `WEALTHSIMPLE_REFERRAL_URL`.
+- Use a small `Referral link` label near referral CTAs.
+- Put the full referral disclosure in the footer.
+- Do not interrupt mid-page promotional copy with long referral disclaimers.
+- Use `ETF examples`, not `recommended ETFs`.
+- Keep external guide buttons opening in a new tab with `target="_blank" rel="nofollow noopener"`.
 - Current referral URL: `https://wealthsimple.com/invite/V-MKNQ`.
-- Copy should state that new signups using the referral link get $25, if that remains accurate.
-- Include a tip that Wealthsimple recurring investments can automate DCA for as little as $1 per day.
-- In the interactive chart copy, advertise Wealthsimple as the automation option and mention that recurring investing can be as little as $1 per day.
-- Include a dedicated Wealthsimple promo box with the Wealthsimple logo, referral CTA, and setup copy for daily or weekly recurring investments right from a linked bank account, and mention that recurring investing can be as little as $1 per day. Keep CTA button labels short enough to lay out cleanly.
-- The Canadian investors brokerage callout should keep the referral CTA, but should not include the recurring-investing guide link; recurring-investing setup links belong in the other promo boxes that discuss automation.
-- Link the recurring-investing setup copy to: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
+- Recurring investment guide URL: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
-## 11a. Wealthsimple step-by-step guide
+Step-by-step section:
 
-The site must include a standalone step-by-step section walking Canadian users through setting up Wealthsimple for automated DCA.
+1. Create your Wealthsimple profile
+2. Choose where cash will come from
+3. Open the investing account you want to use
+4. Set up a recurring investment
 
-- Section title: "Wealthsimple step-by-step" with eyebrow "Get started".
-- The nav menu at the top of the page must include a "Step-by-step" link pointing to `#wealthsimple-guide`.
-- Four numbered steps, each with a heading, explanation, and external links that open in new tabs:
+## 18. TFSA section
 
-  1. **Set up your Wealthsimple profile** — includes the referral sign-up button ("Sign up with referral") and a note about the $25 bonus. The help guide button uses a "Guide:" prefix so users know it links to a help article, not the actual signup. Link to `https://help.wealthsimple.com/hc/en-ca/articles/1500003505241-Set-up-a-Wealthsimple-profile`, referral to `https://wealthsimple.com/invite/V-MKNQ`.
-  2. **Open a Cash account (optional)** — explain that users can link a bank account directly to the Trading account and skip this step, but a Cash account is simpler, quicker, and keeps bank accounts completely separate for security-conscious users. Also mention competitive interest and free ATM withdrawals anywhere in Canada with the physical card. Link to `https://help.wealthsimple.com/hc/en-ca/articles/360056590534-Choose-an-account-to-open`.
-  3. **Open a TFSA trading account** — explain TFSA tax benefits. Link to the same account-choosing article.
-  4. **Set up a recurring investment** — include a link to the ETF ticker section (`#tickers`) so users can jump to recommended ETFs. Keep Cash account topped up or link a bank account. Link to `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
+- Eyebrow: `For Canadian investors`
+- Heading: `Why many Canadians start with a TFSA`
+- First paragraph should be positive: TFSA can be a flexible place to hold long-term ETF investments because eligible growth and withdrawals are generally tax-free in Canada.
+- Later copy may mention FHSA, RRSP, employer match, debt repayment, and other priorities.
+- Explain TFSA contribution room is personal and should be confirmed with CRA My Account.
+- Calculator note must state TFSA limit data last updated for 2026.
 
-- All help guide buttons must use a "Guide:" prefix (e.g., "Guide: Set up a Wealthsimple profile ↗").
-- All links must use `target="_blank" rel="nofollow noopener"` so they open in a new tab.
-- The ETF ticker section must include a link back to the step-by-step guide (`← Back to Wealthsimple step-by-step setup`).
+## 19. Timing risk / DCA vs lump sum
 
-## 12. FAQs
+Move this below calculator, compounding, ETF, and TFSA content.
 
-The site should include FAQ content:
+- Eyebrow: `Timing risk`
+- Heading: `Timing dips is harder than it looks.`
+- Explain that the problem is emotion, uncertainty, and consistency.
+- DCA removes pressure around deciding if today is perfect.
+- For paycheque investors, DCA is a natural fit because money arrives over time.
+- Keep Barber/Lee/Liu/Odean and RBC GAM sources in the source note.
+- Comparison table should be practical fit, not a caveat-forward expected-return table.
 
-### Why not just buy the dip?
+## 20. Withdrawal section
 
-- Plain-language framing: if most people were consistently good at calling bottoms, they would be professional traders rather than fitting investing around regular jobs.
-- Cite Barber, Lee, Liu, and Odean: more than eight out of ten day traders lose money after costs in a typical six-month period.
+- Eyebrow: `When to withdraw`
+- Heading: `Withdraw when the money has a real job — not because the market is noisy.`
+- Mention planned goals, emergencies, rebalancing, or risk reduction before known expenses.
+- Warn against panic selling in supporting copy.
 
-### What if I suddenly have a large amount to invest?
+## 21. FAQ
 
-- Recommends temporary higher fixed DCA rate for new lump-sum cash.
-- Example: spread $10,000 across one month at $500 per trading day, 5 days per week.
-- Mention Wealthsimple multiple cash accounts for a dedicated "lump sum" account.
-- Include the Wealthsimple referral link.
+Use SEO-shaped questions:
 
-### Why highlight the TFSA for Canadians?
+- What is dollar-cost averaging?
+- Is DCA good for beginners?
+- Is daily DCA better than weekly or monthly DCA?
+- Can I dollar-cost average in a TFSA?
+- What ETFs do Canadians use for DCA?
+- What is the Rule of 72?
+- Is DCA better than lump sum investing?
+- What return should I assume in the calculator?
+- Are ETF tickers on this site recommendations?
+- What does Coast FI mean?
 
-- TFSA lets eligible Canadian investors withdraw growth tax-free.
-- Often the cleanest account for long-term ETF DCA when contribution room is available.
+## 22. Footer disclosure
 
-### Which ETF is best?
+Create a structured footer disclosure called `Important information` with bullet points:
 
-- Broad, low-cost index ETFs are a common starting point.
-- Canadian examples: XEQT, VEQT.
-- U.S./global examples: VT, VTI, VOO, QQQM.
+- Educational content only, not financial advice.
+- Investing involves risk, including possible loss of principal.
+- Calculator results are simplified estimates based on user-selected assumptions.
+- Real returns vary and can be negative.
+- Taxes, fees, inflation, account rules, currency effects, and personal circumstances can change outcomes.
+- ETF tickers are examples for research, not personal recommendations.
+- Referral links may provide a benefit to the site owner.
+- Confirm TFSA contribution room and account rules with official sources.
 
-## 13. Technical requirements
+## 23. Mobile friendliness requirements
+
+The site must remain comfortable on 360px–390px phones and tablets:
+
+- No body-level horizontal overflow.
+- Controls and CTA buttons should be at least 44px tall where practical.
+- Complex tables/charts may scroll inside their own containers, but body must not sideways-scroll.
+- Late-added grids must collapse to one column on phones.
+- Desktop visual hierarchy should remain intact while mobile sections use shorter spacing, readable font sizes, full-width buttons, and compact cards.
+
+## 24. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
-- Main config: `_config.yml`
-- Layouts live under `_layouts/`
-- CSS lives under `assets/css/`
-- JavaScript lives under `assets/js/`
+- Main config: `_config.yml`.
+- Layouts live under `_layouts/`.
+- CSS lives under `assets/css/`.
+- JavaScript lives under `assets/js/`.
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 14. Verification requirements
+## 25. Verification requirements
 
 Before finalizing changes, run:
 
@@ -280,27 +387,13 @@ The test must:
 - Syntax-check JavaScript.
 - Load the site in Playwright.
 - Check for browser console/page errors.
-- Verify chart rendering.
+- Verify chart rendering and neutral-case invariants.
 - Verify ETF region switching.
 - Verify TFSA calculator rendering.
+- Verify SEO-first hero copy and structured footer disclosure.
+- Run mobile audit across common phone/tablet widths.
 
-## 15. Current limitations
+## 26. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
-
-
-## Advisor-safe content update
-
-The page must be revised for beginner Canadian investors seeking steady, lower-risk growth: add a pre-DCA financial foundation checklist, a risk-level-before-ticker section, local disclaimers near calculators/ETF/referral areas, CAD default currency, generic CAGR assumptions instead of ticker-specific return presets, growth-versus-contribution crossover terminology, spending-based Coast FI target math, softer daily-DCA language, neutral reset for the schedule chart, monthly = 12 contributions, and ETF examples framed as examples to research rather than recommendations.
-
-
-## Mobile friendliness requirements
-
-The site must remain comfortable on 360px–390px phones and tablets. Requirements:
-
-- No horizontal page overflow at common mobile widths.
-- All controls and CTA buttons should be at least 44px tall where practical.
-- Complex tables/charts may scroll inside their own containers, but the body itself must not sideways-scroll.
-- Late-added grids such as the foundation checklist, risk spectrum, compounding cards, calculator forms/results, ETF matrix, Wealthsimple promos, and Coast FI chart must collapse to one column on phones.
-- Desktop visual hierarchy should remain intact while mobile sections use shorter spacing, readable font sizes, full-width buttons, and compact cards.
