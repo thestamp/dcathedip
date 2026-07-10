@@ -147,7 +147,7 @@ The page should flow like this:
 9. DCA vs lump sum / timing risk
 10. Advanced growth milestones: contribution crossover and 4% rule income target
 11. FAQ
-12. Footer disclosure
+12. Section-level footnotes
 
 Reason: visitors should emotionally understand the value before being asked to process caveats, risk categories, and advanced finance concepts.
 
@@ -764,7 +764,7 @@ Wealthsimple referral
 
 Referral link
 
-## Footer disclosure handles
+## Section-level footnote handles
 
 Full referral disclosure belongs in the footer, not as a large interruptive paragraph in the middle of the page.
 
@@ -981,26 +981,21 @@ The 4% rule is a simplified retirement-planning shortcut that estimates a portfo
 
 ---
 
-# 26. Footer disclosure box
+# 26. Section-level footnotes and footer
 
-Create a structured footer disclosure called:
+Do not collect all caveats at the bottom of the page. Each major section should carry its own expandable **Footnotes** block with the relevant caveat or assumption.
 
-## Important information
+Use the summary title:
 
-Use bullet points:
+> Footnotes
 
-- Educational content only, not financial advice.
-- Investing involves risk, including possible loss of principal.
-- Calculator results are simplified estimates based on user-selected assumptions.
-- Real returns vary and can be negative.
-- Taxes, fees, inflation, account rules, currency effects, and personal circumstances can change outcomes.
-- ETF tickers are examples for research, not personal recommendations.
-- Referral links may provide a benefit to the site owner.
-- Confirm TFSA contribution room and account rules with official sources.
+Do not use:
 
-This footer disclosure replaces repeated heavy caveats throughout the page.
+> Context
 
----
+Footer copy should be minimal:
+
+> Footnotes live with each section. Open the Footnotes toggle in any section for the relevant assumptions, limitations, and disclosures.
 
 # 27. Navigation rewrite
 
@@ -1075,6 +1070,11 @@ Restructure the page around a single guided journey:
 2. **Automate** — pick an amount, use the calculator, choose a cadence, set up recurring investing, and research ETF/TFSA options.
 3. **Grow** — understand compounding, use the 4% rule income target, compare lump sum versus DCA behaviour, and plan withdrawals.
 
-Use contextual expandable footnotes throughout. Lead with benefits in the main copy; place caveats in the relevant footnote, FAQ, or footer.
+Use section-level expandable footnotes throughout. Lead with benefits in the main copy; place caveats in the relevant footnote, FAQ, or footer.
 
 Recommended term for the income tool: **4% rule income target**. Avoid “self-replenishing from CAGR” because CAGR is not guaranteed annual cash flow.
+
+
+## Footnote title standard
+
+Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain: calculators with calculator assumptions, ETFs with ETF example caveats, TFSA with contribution-room/withholding notes, brokerage links with referral disclosure, and risk sections with investment-risk notes. Keep the footer minimal.

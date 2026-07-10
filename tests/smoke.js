@@ -181,7 +181,7 @@ function createServer() {
     const seoHero = /Automate the habit/i.test(bodyText) && /Ignore the noise/i.test(bodyText) && /Dollar-cost averaging for Canadian ETF investors/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
     const journeyStructure = /Three-step journey/i.test(bodyText) && /Start simple\. Automate the habit\. Let time do the work\./i.test(bodyText) && /1 Start/i.test(navText) && /2 Automate/i.test(navText) && /3 Grow/i.test(navText);
-    const footerDisclosure = /Important information/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText);
+    const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year’s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
     const marginCopy = /\bmargin\b/i.test(bodyText);
@@ -242,7 +242,7 @@ function createServer() {
       const chart = window.Chart.getChart(document.getElementById('crossoverChart'));
       return {
         visible: Boolean(document.getElementById('crossoverForm')),
-        copy: /4% rule income target/i.test(document.body.textContent) && /desired annual income ÷ 4%/i.test(document.body.textContent) && /why this section uses the 4% rule/i.test(document.body.textContent),
+        copy: /4% rule income target/i.test(document.body.textContent) && /desired annual income ÷ 4%/i.test(document.body.textContent) && /Recommended term/i.test(document.body.textContent) && /Footnotes/i.test(document.body.textContent),
         outputs: /4% rule income target/i.test(resultText) && /Amount still needed/i.test(resultText) && /Estimated target timing/i.test(resultText) && /Contribution crossover/i.test(resultText),
         chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === '4% rule income target') && chart.data.datasets.some(dataset => dataset.label === 'Contribution crossover'),
         updates: resultText.includes('$1,000,000') && resultText.includes('$990,000')
@@ -323,7 +323,7 @@ function createServer() {
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Automate the habit / Ignore the noise.');
     if (!journeyStructure) throw new Error('Expected visible three-step journey and simplified 1 Start / 2 Automate / 3 Grow nav.');
-    if (!footerDisclosure) throw new Error('Expected structured footer disclosure box.');
+    if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
     if (!taxFreeCopy) throw new Error('Expected TFSA tax-free copy to be visible.');
@@ -368,7 +368,7 @@ function createServer() {
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, footerDisclosure, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

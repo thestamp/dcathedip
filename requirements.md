@@ -56,7 +56,7 @@ Recommended order:
 14. Timing risk / DCA vs lump sum
 15. Withdrawal guidance
 16. FAQ
-17. Footer disclosure
+17. Section-level footnotes
 
 ## 5. Hero requirements
 
@@ -353,18 +353,20 @@ Use SEO-shaped questions:
 - Are ETF tickers on this site recommendations?
 - What is the 4% rule?
 
-## 22. Footer disclosure
+## 22. Section-level footnotes and footer
 
-Create a structured footer disclosure called `Important information` with bullet points:
+Use expandable footnote blocks inside the relevant sections rather than collecting all caveats at the bottom. The summary/title for each expandable caveat block should be exactly `Footnotes`, not `Context`.
 
-- Educational content only, not financial advice.
-- Investing involves risk, including possible loss of principal.
-- Calculator results are simplified estimates based on user-selected assumptions.
-- Real returns vary and can be negative.
-- Taxes, fees, inflation, account rules, currency effects, and personal circumstances can change outcomes.
-- ETF tickers are examples for research, not personal recommendations.
-- Referral links may provide a benefit to the site owner.
-- Confirm TFSA contribution room and account rules with official sources.
+Distribute disclosures by topic:
+
+- Education/not-advice note near the journey/introduction.
+- Investment-risk notes near risk and sustainability sections.
+- Calculator-assumption notes near calculators.
+- ETF example caveats near ETF sections.
+- Referral disclosure near Wealthsimple/brokerage sections.
+- TFSA contribution-room and foreign withholding notes near TFSA sections.
+
+The footer should stay minimal and tell users that section-specific footnotes live with each section.
 
 ## 23. Mobile friendliness requirements
 
@@ -425,3 +427,8 @@ Each major section should include an expandable contextual footnote/caveat. The 
 The former Coast FI / CAGR-income line is removed. The income target tool uses the 4% rule by default: desired annual income ÷ withdrawal-rate assumption.
 
 The DCA chart should default to a neutral scenario and offer clear preset scenario buttons plus a Custom option that opens the market-move editor.
+
+
+## Footnote title standard
+
+Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain: calculators with calculator assumptions, ETFs with ETF example caveats, TFSA with contribution-room/withholding notes, brokerage links with referral disclosure, and risk sections with investment-risk notes. Keep the footer minimal.
