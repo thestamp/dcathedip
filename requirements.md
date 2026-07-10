@@ -100,7 +100,7 @@ Required behavior:
 - Monthly DCA uses 12 contributions/year.
 - If all market moves are removed, annual gain/loss is 0%, and daily variation is 0%, every recurring schedule must end equal.
 - The chart must include expandable day-by-day comparison table, collapsed by default.
-- Default percentage comparison baseline is quarterly DCA.
+- Default percentage comparison baseline is daily DCA.
 - Each schedule result card must be clickable; the selected card shows no percentage and becomes the comparison baseline for the other schedules.
 - Use green/yellow positive/negative formatting for the schedule cards relative to the selected baseline.
 
@@ -138,11 +138,13 @@ Cards:
 2. Builds the habit — small recurring contributions are easier to keep than occasional big decisions.
 3. Fits paycheque investing — payday-based, weekly, monthly, or daily DCA can all work.
 
-## 9. Frequency guide
+## 9. Frequency guide with calculator
 
-- Heading: `Same dollars. Different rhythm. Different experience.`
+- The frequency guide and DCA calculator should be one combined section anchored at `#calculator`.
+- Frequency heading: `Same dollars. Different rhythm. Different experience.`
 - Explain that daily, weekly, biweekly/payday, monthly, and quarterly can all be reasonable.
 - Table should emphasize best fit and simple tradeoff, not imply daily is objectively superior.
+- The DCA calculator should appear directly under the frequency guide content.
 
 ## 10. Compounding roadmap
 
@@ -238,22 +240,20 @@ Chart lines:
 - 4% rule income target
 - Contribution crossover
 
-## 14. Sustainable budget and means sections
+## 14. Sustainable investing section
 
-Budget section:
-
-- Eyebrow: `How much should I DCA?`
-- Heading: `Start with an amount so small it is easy to keep.`
-- Coffee example: $5 weekday coffee = $25/week, about $100 over four weeks, roughly $1,200/year.
-- Lottery example: $5 weekly lottery ticket = $260/year.
-- Keep two cards in a balanced two-column row on desktop.
-
-Sustainable investing section:
+Remove the standalone “How much should I DCA?” section. Sustainable investing should contain:
 
 - Eyebrow: `Sustainable investing`
 - Heading: `Invest money that can stay invested.`
 - Explain that bill money, rent money, and emergency savings should stay separate from the investing habit.
+- Coffee example: $5 weekday coffee = $25/week, about $100 over four weeks, roughly $1,200/year.
+- Lottery example: $5 weekly lottery ticket = $260/year.
+- Keep coffee vs lottery cards in a balanced two-column row on desktop.
+- Include the Wealthsimple recurring-investment promo here because it supports the sustainable automation message.
+- Place the `When to withdraw` content directly under sustainable investing, inside the same section, so it reads as part of the sustainability/safety guidance.
 - Keep as a full-width band with wrapped inner content.
+
 
 ## 15. Broad ETF building blocks
 
@@ -298,7 +298,7 @@ Wealthsimple can be presented as a popular Canadian platform for automating recu
 Rules:
 
 - Use a small `Referral link` label near referral CTAs.
-- Put the full referral disclosure in the footer.
+- Put the full referral disclosure in the relevant `Footnotes` block near brokerage/referral CTAs.
 - Do not interrupt mid-page promotional copy with long referral disclaimers.
 - Use `ETF examples`, not `recommended ETFs`.
 - Keep external guide buttons opening in a new tab with `target="_blank" rel="nofollow noopener"`.

@@ -585,25 +585,41 @@ Put this in an expandable contextual footnote:
 - 4% rule income target
 - Contribution crossover
 
-# 16. Budget section
+# 16. Sustainable investing section
 
 ## Eyebrow
 
-How much should I DCA?
+Sustainable investing
 
 ## Heading
 
-Start with an amount so small it is easy to keep.
+Invest money that can stay invested.
 
 ## Body
 
-The best contribution is one you can repeat without stress. A small automatic habit that survives real life is better than an aggressive plan you abandon.
+DCA works best when the money is truly available for long-term investing. Keep bill money, rent money, and emergency savings separate from your investment habit.
 
-## Card 1: A coffee-sized habit
+A cash buffer helps you stay calm when markets fall. If a normal surprise expense would force you to sell investments, lower the contribution amount or build more cash first.
+
+## Cards
+
+### Build your safety net first
+
+Keep emergency cash available so market dips do not force you to sell at the wrong time.
+
+### Keep the habit sustainable
+
+If a contribution amount creates stress, it is too high. Sustainable beats aggressive.
+
+## Coffee vs lottery comparison
+
+This comparison belongs inside Sustainable investing, not as a standalone section.
+
+### A coffee-sized habit
 
 A $5 weekday coffee is $25 a week, about $100 over four weeks, or roughly $1,200 a year. If that money is truly optional, you could automate it into your investing routine instead.
 
-## Card 2: Better than a lottery habit
+### Versus a weekly lottery ticket
 
 A $5 weekly lottery ticket is $260 a year. Investing is not guaranteed either, but diversified investments have a rational long-term wealth-building purpose. Lottery tickets are entertainment.
 
@@ -626,41 +642,16 @@ Wealthsimple can set up daily or weekly recurring ETF purchases from your bank a
 
 Referral link
 
-Do not interrupt the promo card with a long referral paragraph. Put full referral disclosure in the footer.
+Put referral disclosure in this section’s **Footnotes** block.
+
+## Withdrawal subsection
+
+Place “When to withdraw” directly under Sustainable investing so contribution size, cash buffers, and selling discipline are grouped together.
 
 ---
 
-# 17. Invest within your means section
+# 17. Broad ETF section
 
-## Eyebrow
-
-Sustainable investing
-
-## Heading
-
-Invest money that can stay invested.
-
-## Body
-
-DCA works best when the money is truly available for long-term investing. Keep bill money, rent money, and emergency savings separate from your investment habit.
-
-## Supporting copy
-
-A cash buffer helps you stay calm when markets fall. If a normal surprise expense would force you to sell investments, lower the contribution amount or build more cash first.
-
-## Cards
-
-### Build your safety net first
-
-Keep emergency cash available so market dips do not force you to sell at the wrong time.
-
-### Keep the habit sustainable
-
-If a contribution amount creates stress, it is too high. Sustainable beats aggressive.
-
----
-
-# 18. Broad ETF section
 
 ## Eyebrow
 
@@ -690,7 +681,7 @@ More concentrated. One company or sector can struggle for years, even while the 
 
 ## Bottom note
 
-Diversification reduces company-specific risk, but market risk still exists. Keep the full risk disclosure in the footer.
+Diversification reduces company-specific risk, but market risk still exists. Keep the relevant risk note in this section’s **Footnotes** block.
 
 ---
 
@@ -1082,4 +1073,13 @@ Expandable disclosure/caveat blocks inside sections should use the summary title
 
 ## DCA schedule comparison baseline
 
-Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to quarterly. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.
+Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to daily. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.
+
+
+## Latest layout direction: frequency and sustainable investing
+
+- Put the DCA calculator directly under the Frequency guide as part of the same section.
+- Make Daily DCA the default selected comparison baseline.
+- Remove the standalone “How much should I DCA?” section.
+- Move the coffee vs lottery comparison into Sustainable investing.
+- Put “When to withdraw” directly under Sustainable investing so sustainability, cash buffers, contribution size, and withdrawal discipline are grouped together.

@@ -52,7 +52,7 @@ let chart;
 let crossoverChart;
 let marketMoves = [];
 let nextMoveId = 1;
-let benchmarkKey = "quarterly";
+let benchmarkKey = "daily";
 
 const marketScenarios = {
   neutral: { growth: 0, variation: 0, moves: [] },
@@ -280,7 +280,7 @@ function updateChart() {
   renderDipList();
   const result = simulate();
   const labels = result.prices.map((_, i) => i);
-  if (!result.schedules.some(schedule => schedule.key === benchmarkKey)) benchmarkKey = "quarterly";
+  if (!result.schedules.some(schedule => schedule.key === benchmarkKey)) benchmarkKey = "daily";
 
   const data = {
     labels,

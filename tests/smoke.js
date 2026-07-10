@@ -270,8 +270,9 @@ function createServer() {
         disclaimer: /Results are estimates based on the return assumption/i.test(document.body.textContent)
       };
     });
-    const budgetSection = /How much should I DCA\?/i.test(bodyText) && /amount so small it is easy to keep/i.test(bodyText) && /\$5 weekday coffee is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
-    const meansSection = /Sustainable investing/i.test(bodyText) && /Invest money that can stay invested/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText);
+    const noStandaloneBudget = await page.locator('#budget').count().then(count => count === 0);
+    const sustainableBudget = noStandaloneBudget && /Sustainable investing/i.test(bodyText) && /\$5 weekday coffee is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
+    const meansSection = /Sustainable investing/i.test(bodyText) && /Invest money that can stay invested/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
     const withdrawSection = /Withdraw when the money has a real job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing/i.test(bodyText) && /reducing risk before a known expense/i.test(bodyText);
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
       && /Diversified building blocks/i.test(bodyText)
@@ -296,17 +297,23 @@ function createServer() {
     const dcaBaselineComparison = await page.evaluate(() => {
       const chart = window.Chart.getChart(document.getElementById('dcaChart'));
       const textBefore = document.getElementById('stats').textContent;
-      const defaultQuarterlyBaseline = /Quarterly DCA \(1 year\).*Baseline/i.test(textBefore) && !/Lump sum/i.test(textBefore);
+      const defaultDailyBaseline = /Daily DCA \(1 year\).*Baseline/i.test(textBefore) && !/Lump sum/i.test(textBefore);
       document.querySelector('#stats [data-benchmark="monthly"]').click();
       const textAfter = document.getElementById('stats').textContent;
       const monthlyBaseline = /Monthly DCA \(1 year\).*Baseline/i.test(textAfter) && /vs Monthly/i.test(textAfter);
       return {
         noLumpDataset: chart.data.datasets.every(dataset => dataset.label !== 'Lump sum'),
-        defaultQuarterlyBaseline,
+        defaultDailyBaseline,
         monthlyBaseline,
         clickableCards: document.querySelectorAll('#stats [data-benchmark]').length === 5
       };
     });
+    const layoutRestructure = await page.evaluate(() => ({
+      calculatorUnderFrequency: Boolean(document.querySelector('#calculator .frequency-guide-block')) && Boolean(document.querySelector('#calculator #dcaForm')),
+      withdrawUnderSustainable: Boolean(document.querySelector('#means #withdraw')),
+      noStandaloneStrategy: !document.getElementById('strategy'),
+      noStandaloneBudget: !document.getElementById('budget')
+    }));
     const scenarioButtons = /Rising market/i.test(bodyText) && /Early dip/i.test(bodyText) && /Custom/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!zeroCaseEqual) throw new Error('Expected 0% market moves and 0% annual gain to make all recurring schedules equal the same annual invested amount and final table row.');
@@ -365,7 +372,7 @@ function createServer() {
     if (!compoundCalculator.selectedEquity) throw new Error('Expected selecting long-term equity preset to populate the CAGR input.');
     if (!compoundCalculator.hasOutputs) throw new Error('Expected compounding calculator to output future value, contributions, growth, and Rule-of-72 double time.');
     if (!compoundCalculator.disclaimer) throw new Error('Expected CAGR assumption disclaimer to avoid presenting assumptions as forecasts.');
-    if (!budgetSection) throw new Error('Expected sustainable DCA amount section with coffee and lottery examples.');
+    if (!sustainableBudget) throw new Error('Expected coffee and lottery examples to live inside Sustainable investing with no standalone How much should I DCA section.');
     if (!meansSection) throw new Error('Expected invest-within-your-means section with safety net guidance.');
     if (!broadEtfSection) throw new Error('Expected broad ETF risk section comparing broad ETFs, balanced ETFs, and concentrated bets.');
     if (!wealthsimpleGuide) throw new Error('Expected Wealthsimple setup guide with four numbered steps.');
@@ -380,12 +387,16 @@ function createServer() {
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 8) throw new Error(`Expected at least 8 stat cards including DCA schedule and TFSA results, found ${statCards}.`);
     if (!dcaBaselineComparison.noLumpDataset) throw new Error('Expected DCA chart to remove the lump-sum comparison series.');
-    if (!dcaBaselineComparison.defaultQuarterlyBaseline) throw new Error('Expected quarterly to be the default comparison baseline.');
+    if (!dcaBaselineComparison.defaultDailyBaseline) throw new Error('Expected daily to be the default comparison baseline.');
     if (!dcaBaselineComparison.monthlyBaseline) throw new Error('Expected clicking monthly to make monthly the no-percentage baseline and compare other schedules to it.');
     if (!dcaBaselineComparison.clickableCards) throw new Error('Expected each DCA schedule stat card to be clickable as a comparison baseline.');
+    if (!layoutRestructure.calculatorUnderFrequency) throw new Error('Expected calculator to live under the frequency guide inside #calculator.');
+    if (!layoutRestructure.withdrawUnderSustainable) throw new Error('Expected When to withdraw content under Sustainable investing.');
+    if (!layoutRestructure.noStandaloneStrategy) throw new Error('Expected standalone #strategy section to be removed.');
+    if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, dcaBaselineComparison, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
