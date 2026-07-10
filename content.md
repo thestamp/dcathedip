@@ -145,7 +145,7 @@ The page should flow like this:
 7. ETF examples
 8. TFSA and Wealthsimple setup
 9. DCA vs lump sum / timing risk
-10. Advanced growth milestones: contribution crossover and Coast FI
+10. Advanced growth milestones: contribution crossover and 4% rule income target
 11. FAQ
 12. Footer disclosure
 
@@ -530,86 +530,60 @@ Results are estimates based on the return assumption you choose. Try lower and h
 
 ---
 
-# 15. Growth milestones / Coast FI section
+# 15. Growth milestones / 4% rule income target section
 
-This is advanced content. Do not put it too high on the page.
+Remove Coast FI terminology from the page. It clouds the message for beginners.
 
 ## Eyebrow
 
-Growth milestones
+Income target
 
 ## Heading
 
-When your portfolio starts doing more of the work
+How much invested could support the income you want?
 
 ## Intro copy
 
-Your contributions build the snowball. Over time, growth can become a bigger part of the story.
+The 4% rule is a simple retirement-planning shortcut: multiply the annual portfolio income you want by 25. In formula form:
 
-## Subsection: Contribution crossover
+> desired annual income ÷ 4%
 
-### Heading
+Use this as a conservative scale estimate, then compare it with your current balance, monthly investing habit, and growth assumption.
 
-Contribution crossover
+## Contribution crossover
 
-### Copy
+Contribution crossover can remain as a motivational metric. It compares your monthly contribution with the average monthly growth implied by your growth assumption.
 
-Contribution crossover compares your monthly contribution with the average monthly growth implied by your return assumption. It is a motivation milestone: the point where the portfolio’s assumed monthly growth is larger than what you add.
+## Why not use CAGR as self-replenishing income?
 
-## Subsection: Coast FI
+Put this in an expandable contextual footnote:
 
-### Heading
-
-Coast FI estimate
-
-### Copy
-
-Coast FI estimates whether today’s portfolio could grow toward a future financial independence target by a chosen date, even without more contributions.
-
-## FI target and growth-funded income explanation
-
-Financial independence targets are usually based on spending:
-
-> FI target ≈ annual spending ÷ withdrawal rate
-
-Example:
-
-> $40,000 annual spending ÷ 4% = $1,000,000 FI target
-
-Growth-funded income answers a related but different question: how much must be invested so the assumed annual growth roughly equals the desired annual income?
-
-> Growth-funded income balance ≈ desired annual income ÷ CAGR
-
-Example:
-
-> $40,000 desired annual income ÷ 7% CAGR ≈ $571,429 invested
+> Recommended term: **4% rule income target**. Using CAGR as “self-replenishing income” can be misleading because average long-term returns are not reliable yearly cash flow. The 4% rule is still simplified, but it is more conservative because it separates a spending/withdrawal assumption from the portfolio’s growth assumption.
 
 ## Inputs
 
 - Current invested amount
 - Monthly investment
-- Return assumption
+- Growth assumption
 - Desired annual income
-- Withdrawal rate
-- Years until target date
+- Withdrawal-rate assumption
+- Years to model
 
 ## Outputs
 
-- FI target based on income
-- Growth-funded income balance
-- Contribution crossover balance
-- Estimated crossover timing
-- Coast FI timing
-- Coast-needed today
-- Projected target-date value
+- 4% rule income target
+- Amount still needed
+- Estimated target timing
+- Contribution crossover
+- Crossover timing
+- Projected value
 
-## Bottom note
+## Chart lines
 
-This is an advanced estimate based on your assumptions. It is best used to understand the relationship between contributions, growth, time, and spending.
-
-Do not lead with “This does not mean you can retire.” Put that clarification in the footer disclosure or FAQ.
-
----
+- Portfolio balance
+- Total you contributed
+- 4% rule income target
+- Contribution crossover
 
 # 16. Budget section
 
@@ -975,7 +949,7 @@ DCA can be useful for beginners because it turns investing into a repeatable hab
 
 ## FAQ 3: Is daily DCA better than weekly or monthly DCA?
 
-Daily DCA creates the smoothest contribution pattern, but weekly, biweekly, payday-based, and monthly investing can also work. The best schedule is the one you can automate and keep.
+Daily DCA spreads contributions across the most market days, but weekly, biweekly, payday-based, and monthly investing can also work. The key is to keep investing at a rate you can automate and sustain.
 
 ## FAQ 4: Can I dollar-cost average in a TFSA?
 
@@ -1001,9 +975,9 @@ Use conservative assumptions and test multiple scenarios. A higher assumption ma
 
 No. ETF tickers are examples for research. The right choice depends on your account, time horizon, fees, tax situation, currency exposure, and comfort with market swings.
 
-## FAQ 10: What does Coast FI mean?
+## FAQ 10: What is the 4% rule?
 
-Coast FI estimates whether your current investments could grow to a future target by a chosen date without additional contributions. It depends heavily on assumptions.
+The 4% rule is a simplified retirement-planning shortcut that estimates a portfolio target by dividing desired annual income by 4%. It is a planning rule of thumb, not a guarantee.
 
 ---
 
@@ -1091,3 +1065,16 @@ They should not leave thinking:
 > This site is nervous about everything it says.
 
 The ideal balance is confident up top, responsible at the bottom.
+
+
+## Current implementation direction: Three-step journey
+
+Restructure the page around a single guided journey:
+
+1. **Start** — prepare the foundation and choose a risk level.
+2. **Automate** — pick an amount, use the calculator, choose a cadence, set up recurring investing, and research ETF/TFSA options.
+3. **Grow** — understand compounding, use the 4% rule income target, compare lump sum versus DCA behaviour, and plan withdrawals.
+
+Use contextual expandable footnotes throughout. Lead with benefits in the main copy; place caveats in the relevant footnote, FAQ, or footer.
+
+Recommended term for the income tool: **4% rule income target**. Avoid “self-replenishing from CAGR” because CAGR is not guaranteed annual cash flow.

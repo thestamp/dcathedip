@@ -25,7 +25,7 @@ const etfs = {
     { ticker: "VOO", name: "Vanguard S&P 500 ETF", use: "Large-cap U.S. index exposure." },
     { ticker: "VXUS", name: "Vanguard Total International Stock ETF", use: "International equity sleeve outside the U.S." },
     { ticker: "AVGE", name: "Avantis All Equity Markets ETF", use: "Avantis-style global all-equity allocation with factor tilts." },
-    { ticker: "QQQM", name: "Invesco NASDAQ 100 ETF", use: "Growth-heavy Nasdaq 100 exposure for higher risk tolerance." }
+    { ticker: "QQQM", name: "Invesco NASDAQ 100 ETF", use: "Concentrated Nasdaq-100 exposure with higher sector and valuation risk." }
   ]
 };
 
@@ -50,13 +50,17 @@ const frequencies = [
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
 let chart;
 let crossoverChart;
-let marketMoves = [
-  { id: 1, startDay: 50,  height: -10, width: 20, recovers: false },
-  { id: 2, startDay: 125, height: -10, width: 20, recovers: false },
-  { id: 3, startDay: 150, height: -10, width: 20, recovers: false },
-  { id: 4, startDay: 250, height: -10, width: 20, recovers: false }
-];
-let nextMoveId = 5;
+let marketMoves = [];
+let nextMoveId = 1;
+
+const marketScenarios = {
+  neutral: { growth: 0, variation: 0, moves: [] },
+  rising: { growth: 8, variation: 0.5, moves: [] },
+  "early-dip": { growth: 6, variation: 0.5, moves: [{ startDay: 35, height: -18, width: 35, recovers: true }] },
+  "late-dip": { growth: 6, variation: 0.5, moves: [{ startDay: 260, height: -18, width: 35, recovers: false }] },
+  sideways: { growth: 0, variation: 2, moves: [{ startDay: 80, height: -10, width: 25, recovers: true }, { startDay: 210, height: 10, width: 25, recovers: true }] },
+  bearish: { growth: -8, variation: 1, moves: [{ startDay: 70, height: -12, width: 30, recovers: false }, { startDay: 220, height: -10, width: 30, recovers: false }] }
+};
 
 function money(value) {
   return fmt.format(value);
@@ -102,6 +106,22 @@ function renderDipList() {
   });
 }
 
+function applyScenario(name) {
+  const editor = document.getElementById("dipEditor");
+  document.querySelectorAll("[data-scenario]").forEach(button => button.classList.toggle("active", button.dataset.scenario === name));
+  if (name === "custom") {
+    if (editor) editor.open = true;
+    return;
+  }
+  const scenario = marketScenarios[name] || marketScenarios.neutral;
+  marketMoves = scenario.moves.map((move, index) => ({ id: index + 1, ...move }));
+  nextMoveId = marketMoves.length + 1;
+  document.getElementById("growth").value = scenario.growth;
+  document.getElementById("variation").value = scenario.variation;
+  if (editor) editor.open = false;
+  updateChart();
+}
+
 function addMarketMove() {
   const move = {
     id: nextMoveId,
@@ -121,10 +141,7 @@ function clearMarketMoves() {
 }
 
 function resetNeutralScenario() {
-  marketMoves = [];
-  document.getElementById("growth").value = 0;
-  document.getElementById("variation").value = 0;
-  updateChart();
+  applyScenario("neutral");
 }
 
 function setOutputs() {
@@ -460,53 +477,45 @@ function calculateCrossover() {
   const current = Math.max(0, +document.getElementById("crossCurrent").value || 0);
   const monthly = Math.max(0, +document.getElementById("crossMonthly").value || 0);
   const cagr = clampNumber(document.getElementById("crossCagr").value, -20, 20);
-  const annualSpending = Math.max(0, +document.getElementById("crossSpending").value || 0);
+  const desiredIncome = Math.max(0, +document.getElementById("crossSpending").value || 0);
   const withdrawalRate = clampNumber(document.getElementById("crossWithdrawal").value, 1, 10) / 100;
-  const target = withdrawalRate > 0 ? annualSpending / withdrawalRate : 0;
   const years = clampNumber(document.getElementById("crossYears").value, 1, 60);
   const totalMonths = Math.round(years * 12);
   const monthlyRate = Math.pow(1 + cagr / 100, 1 / 12) - 1;
+  const target = withdrawalRate > 0 ? desiredIncome / withdrawalRate : 0;
+  const amountStillNeeded = Math.max(0, target - current);
   const canGrow = monthlyRate > 0;
   const crossoverBalance = canGrow && monthly > 0 ? monthly / monthlyRate : null;
-  const coastRequiredToday = canGrow ? target / Math.pow(1 + monthlyRate, totalMonths) : target;
-  const growthFundedIncomeBalance = cagr > 0 ? annualSpending / (cagr / 100) : null;
 
   const labels = [];
   const balances = [];
   const contributionLine = [];
+  const targetLine = [];
   const crossoverLine = [];
-  const incomeBalanceLine = [];
-  const coastRequired = [];
   let balance = current;
+  let targetMonth = current >= target ? 0 : null;
   let crossoverMonth = crossoverBalance !== null && current >= crossoverBalance ? 0 : null;
-  let coastMonth = current >= coastRequiredToday ? 0 : null;
 
   for (let month = 0; month <= totalMonths; month += 1) {
     labels.push(month);
     balances.push(balance);
     contributionLine.push(current + monthly * month);
+    targetLine.push(target);
     crossoverLine.push(crossoverBalance);
-    incomeBalanceLine.push(growthFundedIncomeBalance);
-    const remainingMonths = totalMonths - month;
-    const required = canGrow ? target / Math.pow(1 + monthlyRate, remainingMonths) : target;
-    coastRequired.push(required);
-
+    if (targetMonth === null && balance >= target) targetMonth = month;
     if (crossoverMonth === null && crossoverBalance !== null && balance >= crossoverBalance) crossoverMonth = month;
-    if (coastMonth === null && balance >= required) coastMonth = month;
-
     if (month < totalMonths) balance = balance * (1 + monthlyRate) + monthly;
   }
 
   const projectedTarget = balances.at(-1);
 
   results.innerHTML = `
-    <div class="crossover-result-card"><small>FI target from income</small><strong>${money(target)}</strong><p>Based on desired annual income divided by withdrawal rate.</p></div>
-    <div class="crossover-result-card income"><small>Growth-funded income balance</small><strong>${growthFundedIncomeBalance === null ? "N/A" : money(growthFundedIncomeBalance)}</strong><p>At ${cagr.toFixed(1)}% CAGR, this balance would generate about ${money(annualSpending)} of assumed annual growth.</p></div>
-    <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>At this balance, the average monthly growth implied by your CAGR roughly matches your monthly contribution.</p></div>
+    <div class="crossover-result-card income"><small>4% rule income target</small><strong>${money(target)}</strong><p>Desired annual income divided by ${(withdrawalRate * 100).toFixed(1)}%.</p></div>
+    <div class="crossover-result-card"><small>Amount still needed</small><strong>${money(amountStillNeeded)}</strong><p>How far your current invested amount is from the income target.</p></div>
+    <div class="crossover-result-card"><small>Estimated target timing</small><strong>${monthLabel(targetMonth)}</strong><p>Based on your monthly investing and growth assumption.</p></div>
+    <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>When average monthly growth implied by your assumption roughly matches your monthly investment.</p></div>
     <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
-    <div class="crossover-result-card coast"><small>Coast FI timing</small><strong>${monthLabel(coastMonth)}</strong><p>When your balance could coast to ${money(target)} by the target date.</p></div>
-    <div class="crossover-result-card"><small>Coast-needed today</small><strong>${money(coastRequiredToday)}</strong><p>If you already had this much, you could stop adding money in this simplified model.</p></div>
-    <div class="crossover-result-card"><small>Projected target-date value</small><strong>${money(projectedTarget)}</strong><p>With the monthly investment and CAGR assumption shown.</p></div>
+    <div class="crossover-result-card"><small>Projected value</small><strong>${money(projectedTarget)}</strong><p>With the monthly investment and growth assumption shown.</p></div>
   `;
 
   const data = {
@@ -514,9 +523,8 @@ function calculateCrossover() {
     datasets: [
       { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
       { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
-      { label: "Contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 },
-      { label: "Growth-funded income balance", data: incomeBalanceLine, borderColor: "#7cffbd", borderDash: [9, 4], tension: 0, pointRadius: 0, borderWidth: 2 },
-      { label: "Coast FI required balance", data: coastRequired, borderColor: "#ff8fab", tension: 0.25, pointRadius: 0, borderWidth: 2 }
+      { label: "4% rule income target", data: targetLine, borderColor: "#7cffbd", borderDash: [9, 4], tension: 0, pointRadius: 0, borderWidth: 2 },
+      { label: "Contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 }
     ]
   };
 
@@ -566,6 +574,7 @@ function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));
   document.getElementById("addDip").addEventListener("click", addMarketMove);
   document.getElementById("resetNeutral").addEventListener("click", resetNeutralScenario);
+  document.querySelectorAll("[data-scenario]").forEach(button => button.addEventListener("click", () => applyScenario(button.dataset.scenario)));
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   populateCagrPresets();
   document.querySelectorAll("#compoundForm input").forEach(el => el.addEventListener("input", calculateCompounding));

@@ -193,37 +193,48 @@ Outputs:
 
 Bottom note: results are estimates based on the return assumption chosen; encourage testing lower and higher scenarios.
 
-## 13. Growth milestones / Coast FI
+## 13. Growth milestones / 4% rule income target
 
-This is advanced content and should not dominate the top of the page.
+This section should focus on two simple ideas and avoid Coast FI terminology:
+
+1. **Contribution crossover**: the point where average monthly growth implied by the growth assumption roughly matches the user's monthly investment.
+2. **4% rule income target**: the amount invested that may be needed to support a desired annual portfolio income using a withdrawal-rate assumption.
 
 Required content:
 
-- Eyebrow: `Growth milestones`
-- Heading: `When your portfolio starts doing more of the work`
-- Contribution crossover: compares monthly contribution with average monthly growth implied by the return assumption.
-- Coast FI: estimates whether today’s portfolio could grow toward a future financial independence target by a chosen date without more contributions.
-- FI target formula: annual spending ÷ withdrawal rate.
-- Growth-funded income balance formula: desired annual income ÷ CAGR. This answers how much must be invested so assumed annual growth roughly equals the target annual income.
+- Eyebrow: `Income target`
+- Heading: `How much invested could support the income you want?`
+- Main formula: desired annual income ÷ withdrawal-rate assumption.
+- Default withdrawal-rate assumption: 4%.
+- Explain that this is a simplified retirement-planning shortcut, not a guarantee.
+- Use an expandable contextual footnote explaining why the site uses the 4% rule instead of a CAGR/self-replenishing-income line.
+- Recommended term: `4% rule income target`.
+- Avoid “self-replenishing income” and “growth-funded income” as visible primary labels.
 
 Inputs:
 
 - Current invested amount
 - Monthly investment
-- Return assumption
+- Growth assumption
 - Desired annual income
-- Withdrawal rate
-- Years until target date
+- Withdrawal-rate assumption
+- Years to model
 
 Outputs:
 
-- FI target from income
-- Growth-funded income balance
-- Contribution crossover balance
+- 4% rule income target
+- Amount still needed
+- Estimated target timing
+- Contribution crossover
 - Crossover timing
-- Coast FI timing
-- Coast-needed today
-- Projected target-date value
+- Projected value
+
+Chart lines:
+
+- Portfolio balance
+- Total you contributed
+- 4% rule income target
+- Contribution crossover
 
 ## 14. Sustainable budget and means sections
 
@@ -340,7 +351,7 @@ Use SEO-shaped questions:
 - Is DCA better than lump sum investing?
 - What return should I assume in the calculator?
 - Are ETF tickers on this site recommendations?
-- What does Coast FI mean?
+- What is the 4% rule?
 
 ## 22. Footer disclosure
 
@@ -399,3 +410,18 @@ The test must:
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
+
+
+## Current UX direction: 3-step journey
+
+The site should be organized as a guided path rather than scattered finance topics:
+
+1. **Start** — foundation, risk comfort, cash buffer, account fit.
+2. **Automate** — recurring contribution amount, DCA schedule, budget habit, brokerage setup, ETF examples, TFSA context.
+3. **Grow** — compounding, Rule of 72, 4% rule income target, timing/lump-sum context, withdrawal behaviour.
+
+Each major section should include an expandable contextual footnote/caveat. The main copy should remain confident and SEO-friendly; heavier nuance belongs in section footnotes, FAQ, and footer disclosures.
+
+The former Coast FI / CAGR-income line is removed. The income target tool uses the 4% rule by default: desired annual income ÷ withdrawal-rate assumption.
+
+The DCA chart should default to a neutral scenario and offer clear preset scenario buttons plus a Custom option that opens the market-move editor.

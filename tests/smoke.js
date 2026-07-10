@@ -179,6 +179,8 @@ function createServer() {
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
     const seoHero = /Automate the habit/i.test(bodyText) && /Ignore the noise/i.test(bodyText) && /Dollar-cost averaging for Canadian ETF investors/i.test(bodyText);
+    const navText = await page.locator('.nav-links').textContent();
+    const journeyStructure = /Three-step journey/i.test(bodyText) && /Start simple\. Automate the habit\. Let time do the work\./i.test(bodyText) && /1 Start/i.test(navText) && /2 Automate/i.test(navText) && /3 Grow/i.test(navText);
     const footerDisclosure = /Important information/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year’s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
@@ -222,7 +224,7 @@ function createServer() {
       return marketMoves.length === 0 && document.getElementById('growth').value === '0' && document.getElementById('variation').value === '0'
         && finalValues.every(value => Math.abs(value - finalValues[0]) < 0.01);
     });
-    const crossoverCalculator = await page.evaluate(() => {
+    const incomeTargetCalculator = await page.evaluate(() => {
       const current = document.getElementById('crossCurrent');
       const monthly = document.getElementById('crossMonthly');
       const cagr = document.getElementById('crossCagr');
@@ -240,10 +242,10 @@ function createServer() {
       const chart = window.Chart.getChart(document.getElementById('crossoverChart'));
       return {
         visible: Boolean(document.getElementById('crossoverForm')),
-        copy: /Contribution crossover/i.test(document.body.textContent) && /Coast FI/i.test(document.body.textContent) && /desired annual income ÷ CAGR/i.test(document.body.textContent),
-        outputs: /FI target from income/i.test(resultText) && /Growth-funded income balance/i.test(resultText) && /Contribution crossover/i.test(resultText) && /Coast FI timing/i.test(resultText) && /Coast-needed today/i.test(resultText),
-        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Coast FI required balance') && chart.data.datasets.some(dataset => dataset.label === 'Growth-funded income balance'),
-        updates: resultText.includes('$88,') && resultText.includes('$1,000,000') && resultText.includes('$571,')
+        copy: /4% rule income target/i.test(document.body.textContent) && /desired annual income ÷ 4%/i.test(document.body.textContent) && /why this section uses the 4% rule/i.test(document.body.textContent),
+        outputs: /4% rule income target/i.test(resultText) && /Amount still needed/i.test(resultText) && /Estimated target timing/i.test(resultText) && /Contribution crossover/i.test(resultText),
+        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === '4% rule income target') && chart.data.datasets.some(dataset => dataset.label === 'Contribution crossover'),
+        updates: resultText.includes('$1,000,000') && resultText.includes('$990,000')
       };
     });
     const compoundCalculator = await page.evaluate(() => {
@@ -271,7 +273,7 @@ function createServer() {
     });
     const budgetSection = /How much should I DCA\?/i.test(bodyText) && /amount so small it is easy to keep/i.test(bodyText) && /\$5 weekday coffee is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
     const meansSection = /Sustainable investing/i.test(bodyText) && /Invest money that can stay invested/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText);
-    const withdrawSection = /Withdraw when the money has a real job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing decision/i.test(bodyText) && /risk reduction before a known expense/i.test(bodyText);
+    const withdrawSection = /Withdraw when the money has a real job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing/i.test(bodyText) && /reducing risk before a known expense/i.test(bodyText);
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
       && /Diversified building blocks/i.test(bodyText)
       && /Balanced ETFs/i.test(bodyText)
@@ -292,6 +294,7 @@ function createServer() {
     const timingSources = await page.locator('#timing a[href*="barber-lee-liu-odean.pdf"], #timing a[href*="rbcgam.com"]').count();
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
+    const scenarioButtons = /Rising market/i.test(bodyText) && /Early dip/i.test(bodyText) && /Custom/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!zeroCaseEqual) throw new Error('Expected 0% dip and 0% annual gain to make all DCA schedules equal the one-time annual investment and final table row.');
     if (!dailyComparisonTable.collapsedByDefault) throw new Error('Expected day-by-day comparison table to be collapsed by default.');
@@ -319,6 +322,7 @@ function createServer() {
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Automate the habit / Ignore the noise.');
+    if (!journeyStructure) throw new Error('Expected visible three-step journey and simplified 1 Start / 2 Automate / 3 Grow nav.');
     if (!footerDisclosure) throw new Error('Expected structured footer disclosure box.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
@@ -338,11 +342,11 @@ function createServer() {
     if (!foundationSection) throw new Error('Expected before-you-DCA foundation checklist and illustration.');
     if (!riskLevelSection) throw new Error('Expected risk-level-before-ticker section for cautious investors.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
-    if (!crossoverCalculator.visible) throw new Error('Expected crossover / Coast FI calculator form to render.');
-    if (!crossoverCalculator.copy) throw new Error('Expected growth-versus-contribution crossover and Coast FI copy in plain language.');
-    if (!crossoverCalculator.outputs) throw new Error('Expected crossover calculator to output FI target, crossover and Coast FI timing/results.');
-    if (!crossoverCalculator.chart) throw new Error('Expected crossover chart with portfolio and Coast FI required-balance lines.');
-    if (!crossoverCalculator.updates) throw new Error('Expected crossover balance to update from CAGR/monthly investment inputs.');
+    if (!incomeTargetCalculator.visible) throw new Error('Expected 4% rule income target calculator form to render.');
+    if (!incomeTargetCalculator.copy) throw new Error('Expected 4% rule income target copy and contextual footnote.');
+    if (!incomeTargetCalculator.outputs) throw new Error('Expected income target calculator to output 4% target and progress results.');
+    if (!incomeTargetCalculator.chart) throw new Error('Expected income target chart with portfolio, target, and contribution-crossover lines.');
+    if (!incomeTargetCalculator.updates) throw new Error('Expected crossover balance to update from CAGR/monthly investment inputs.');
     if (!compoundCalculator.visible) throw new Error('Expected compounding calculator form to render.');
     if (!compoundCalculator.hasGenericPresets) throw new Error('Expected compounding calculator to include generic CAGR presets.');
     if (!compoundCalculator.selectedEquity) throw new Error('Expected selecting long-term equity preset to populate the CAGR input.');
@@ -362,8 +366,9 @@ function createServer() {
     if (timingSources !== 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
+    if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, footerDisclosure, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, crossoverCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, footerDisclosure, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
