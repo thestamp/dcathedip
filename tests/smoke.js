@@ -58,8 +58,7 @@ function createServer() {
       const annualTotal = +document.getElementById('recurring').value * 5 * 52;
       const rows = [...document.querySelectorAll('#dailyTable tbody tr')];
       const finalCells = [...rows.at(-1).querySelectorAll('td')].map(cell => cell.textContent.trim());
-      return Math.abs(result.lumpEnd - annualTotal) < 0.01
-        && result.schedules.every(schedule => Math.abs(schedule.end - annualTotal) < 0.01)
+      return result.schedules.every(schedule => Math.abs(schedule.end - annualTotal) < 0.01)
         && document.getElementById('capitalOut').value.includes('2,600')
         && rows.length === 366
         && finalCells.every(value => value.includes('2,600'));
@@ -80,7 +79,7 @@ function createServer() {
       const firstColumnWidth = document.querySelector('#dailyTable thead th:first-child').getBoundingClientRect().width;
       return {
         collapsedByDefault,
-        hasExpectedHeaders: ['Day', 'Lump sum', 'Daily', 'Weekly', 'Monthly', 'Quarterly'].every(header => headers.includes(header)) && !headers.includes('Annual'),
+        hasExpectedHeaders: ['Day', 'Daily', 'Weekly', 'Biweekly', 'Monthly', 'Quarterly'].every(header => headers.includes(header)) && !headers.includes('Lump sum') && !headers.includes('Annual'),
         scrollable: wrapper.scrollHeight > wrapper.clientHeight,
         fitsFrame: wrapper.scrollWidth <= wrapper.clientWidth + 1 && firstColumnWidth <= 60,
         updatesOnSlider: before !== after
@@ -144,7 +143,7 @@ function createServer() {
     await page.locator('#tfsaWithdrawals').fill('5000');
     const dayZeroInvested = await page.evaluate(() => {
       const result = simulate();
-      return result.lumpValues[0] > 0 && result.schedules.every(schedule => schedule.values[0] > 0);
+      return result.schedules.every(schedule => schedule.values[0] > 0);
     });
     const layoutChecks = await page.evaluate(() => {
       const budgetGrid = document.querySelector('.budget-grid');
@@ -220,7 +219,7 @@ function createServer() {
       document.getElementById('variation').value = 2;
       document.getElementById('resetNeutral').click();
       const result = simulate();
-      const finalValues = [result.lumpEnd, ...result.schedules.map(s => s.end)];
+      const finalValues = result.schedules.map(s => s.end);
       return marketMoves.length === 0 && document.getElementById('growth').value === '0' && document.getElementById('variation').value === '0'
         && finalValues.every(value => Math.abs(value - finalValues[0]) < 0.01);
     });
@@ -294,11 +293,25 @@ function createServer() {
     const timingSources = await page.locator('#timing a[href*="barber-lee-liu-odean.pdf"], #timing a[href*="rbcgam.com"]').count();
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
+    const dcaBaselineComparison = await page.evaluate(() => {
+      const chart = window.Chart.getChart(document.getElementById('dcaChart'));
+      const textBefore = document.getElementById('stats').textContent;
+      const defaultQuarterlyBaseline = /Quarterly DCA \(1 year\).*Baseline/i.test(textBefore) && !/Lump sum/i.test(textBefore);
+      document.querySelector('#stats [data-benchmark="monthly"]').click();
+      const textAfter = document.getElementById('stats').textContent;
+      const monthlyBaseline = /Monthly DCA \(1 year\).*Baseline/i.test(textAfter) && /vs Monthly/i.test(textAfter);
+      return {
+        noLumpDataset: chart.data.datasets.every(dataset => dataset.label !== 'Lump sum'),
+        defaultQuarterlyBaseline,
+        monthlyBaseline,
+        clickableCards: document.querySelectorAll('#stats [data-benchmark]').length === 5
+      };
+    });
     const scenarioButtons = /Rising market/i.test(bodyText) && /Early dip/i.test(bodyText) && /Custom/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
-    if (!zeroCaseEqual) throw new Error('Expected 0% dip and 0% annual gain to make all DCA schedules equal the one-time annual investment and final table row.');
+    if (!zeroCaseEqual) throw new Error('Expected 0% market moves and 0% annual gain to make all recurring schedules equal the same annual invested amount and final table row.');
     if (!dailyComparisonTable.collapsedByDefault) throw new Error('Expected day-by-day comparison table to be collapsed by default.');
-    if (!dailyComparisonTable.hasExpectedHeaders) throw new Error('Expected day-by-day comparison table headers for lump, daily, weekly, monthly, and quarterly only.');
+    if (!dailyComparisonTable.hasExpectedHeaders) throw new Error('Expected day-by-day comparison table headers for daily, weekly, biweekly, monthly, and quarterly only.');
     if (!dailyComparisonTable.scrollable) throw new Error('Expected day-by-day comparison table to be scrollable.');
     if (!dailyComparisonTable.fitsFrame) throw new Error('Expected day-by-day comparison table to fit inside its frame with a narrow Day column.');
     if (!dailyComparisonTable.updatesOnSlider) throw new Error('Expected day-by-day comparison table to update when sliders change.');
@@ -365,10 +378,14 @@ function createServer() {
     if (false) throw new Error('noop');
     if (timingSources !== 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
     if (marginCopy) throw new Error('The page should not contain margin copy.');
-    if (statCards < 9) throw new Error(`Expected at least 9 stat cards including TFSA results, found ${statCards}.`);
+    if (statCards < 8) throw new Error(`Expected at least 8 stat cards including DCA schedule and TFSA results, found ${statCards}.`);
+    if (!dcaBaselineComparison.noLumpDataset) throw new Error('Expected DCA chart to remove the lump-sum comparison series.');
+    if (!dcaBaselineComparison.defaultQuarterlyBaseline) throw new Error('Expected quarterly to be the default comparison baseline.');
+    if (!dcaBaselineComparison.monthlyBaseline) throw new Error('Expected clicking monthly to make monthly the no-percentage baseline and compare other schedules to it.');
+    if (!dcaBaselineComparison.clickableCards) throw new Error('Expected each DCA schedule stat card to be clickable as a comparison baseline.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, budgetSection, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, dcaBaselineComparison, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

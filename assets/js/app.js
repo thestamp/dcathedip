@@ -52,6 +52,7 @@ let chart;
 let crossoverChart;
 let marketMoves = [];
 let nextMoveId = 1;
+let benchmarkKey = "quarterly";
 
 const marketScenarios = {
   neutral: { growth: 0, variation: 0, moves: [] },
@@ -245,23 +246,17 @@ function simulateSchedule(prices, frequency) {
 }
 
 function simulate() {
-  const recurringAmount = +document.getElementById("recurring").value;
-  const capital = recurringAmount * 5 * 52;
   const prices = buildPrices();
-  const lumpShares = capital / prices[0];
-  const lumpValues = prices.map(p => lumpShares * p);
   const schedules = frequencies.map(freq => simulateSchedule(prices, freq));
-  return { prices, lumpShares, lumpValues, lumpEnd: lumpValues.at(-1), schedules };
+  return { prices, schedules };
 }
 
 function renderDailyTable(result) {
-  const visibleSchedules = result.schedules.filter(schedule => schedule.key !== "biweekly");
-  const headers = ["Day", "Lump sum", ...visibleSchedules.map(schedule => schedule.label.replace(" DCA", ""))];
+  const headers = ["Day", ...result.schedules.map(schedule => schedule.label.replace(" DCA", ""))];
   const rows = result.prices.map((_, day) => `
     <tr>
       <th scope="row">${day}</th>
-      <td>${money(result.lumpValues[day])}</td>
-      ${visibleSchedules.map(schedule => `<td>${money(schedule.values[day])}</td>`).join("")}
+      ${result.schedules.map(schedule => `<td>${money(schedule.values[day])}</td>`).join("")}
     </tr>
   `).join("");
 
@@ -275,29 +270,30 @@ function renderDailyTable(result) {
   `;
 }
 
+function setBenchmark(key) {
+  benchmarkKey = key;
+  updateChart();
+}
+
 function updateChart() {
   setOutputs();
   renderDipList();
   const result = simulate();
   const labels = result.prices.map((_, i) => i);
-  const best = [...result.schedules].sort((a, b) => b.end - a.end)[0];
-  const daily = result.schedules.find(s => s.key === "daily");
+  if (!result.schedules.some(schedule => schedule.key === benchmarkKey)) benchmarkKey = "quarterly";
 
   const data = {
     labels,
-    datasets: [
-      ...result.schedules.map(schedule => ({
-        label: schedule.label,
-        data: schedule.values,
-        borderColor: schedule.color,
-        backgroundColor: `${schedule.color}22`,
-        fill: schedule.key === "daily",
-        tension: 0.25,
-        pointRadius: 0,
-        borderWidth: schedule.key === "daily" ? 3 : 2
-      })),
-      { label: "Lump sum", data: result.lumpValues, borderColor: "rgba(255,255,255,0.72)", borderDash: [7, 7], tension: 0.25, pointRadius: 0, borderWidth: 2 }
-    ]
+    datasets: result.schedules.map(schedule => ({
+      label: schedule.label,
+      data: schedule.values,
+      borderColor: schedule.color,
+      backgroundColor: `${schedule.color}22`,
+      fill: schedule.key === benchmarkKey,
+      tension: 0.25,
+      pointRadius: 0,
+      borderWidth: schedule.key === benchmarkKey ? 3 : 2
+    }))
   };
 
   if (chart) {
@@ -323,14 +319,17 @@ function updateChart() {
     });
   }
 
+  const benchmark = result.schedules.find(schedule => schedule.key === benchmarkKey) || result.schedules.find(schedule => schedule.key === "quarterly");
   document.getElementById("stats").innerHTML = `
-    <div class="stat"><small>One-time annual investment</small><strong>${money(result.lumpEnd)}</strong></div>
     ${result.schedules.map(s => {
-      const diff = s.end - result.lumpEnd;
-      const pct = (diff / result.lumpEnd * 100);
-      return `<div class="stat ${diff >= 0 ? "good" : "warn"}"><small>${s.label} (1 year)</small><strong>${money(s.end)} <span>${diff >= 0 ? "+" : ""}${pct.toFixed(1)}%</span></strong></div>`;
+      const isBenchmark = s.key === benchmark.key;
+      const diff = s.end - benchmark.end;
+      const pct = benchmark.end === 0 ? 0 : (diff / benchmark.end * 100);
+      const comparison = isBenchmark ? `<span class="benchmark-label">Baseline</span>` : `<span>${diff >= 0 ? "+" : ""}${pct.toFixed(1)}% vs ${benchmark.label.replace(" DCA", "")}</span>`;
+      return `<button type="button" class="stat stat-button ${isBenchmark ? "selected" : diff >= 0 ? "good" : "warn"}" data-benchmark="${s.key}" aria-pressed="${isBenchmark}"><small>${s.label} (1 year)</small><strong>${money(s.end)} ${comparison}</strong></button>`;
     }).join("")}
   `;
+  document.querySelectorAll("#stats [data-benchmark]").forEach(button => button.addEventListener("click", () => setBenchmark(button.dataset.benchmark)));
 
   renderDailyTable(result);
 }

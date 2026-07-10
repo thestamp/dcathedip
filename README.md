@@ -6,7 +6,7 @@ A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 
 - Beautiful responsive Jekyll landing page
 - Interactive DCA-through-a-dip calculator using Chart.js
-- Lump sum vs daily, weekly, biweekly, monthly, and quarterly DCA comparison
+- Clickable daily, weekly, biweekly, monthly, and quarterly DCA schedule comparison
 - Frequency guide with benefits and drawbacks for each schedule
 - Canadian TFSA account guidance and simple contribution room calculator
 - Canadian vs U.S. ETF suggestions

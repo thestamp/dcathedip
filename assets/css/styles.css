@@ -214,8 +214,12 @@ h3 { font-size: 1.35rem; }
 #dcaChart { max-height: 390px; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
 .stat { border: 1px solid var(--border); border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.055); }
+.stat-button { appearance: none; width: 100%; text-align: left; color: var(--text); cursor: pointer; font: inherit; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+.stat-button:hover { transform: translateY(-2px); border-color: rgba(83,230,160,0.45); }
+.stat-button.selected { border-color: rgba(83,230,160,0.65); background: rgba(83,230,160,0.10); }
 .stat small { display: block; color: var(--muted); font-weight: 800; margin-bottom: 6px; }
 .stat strong { font-size: 1.25rem; }
+.stat .benchmark-label { color: var(--muted); font-size: 0.85rem; font-weight: 800; opacity: 1; }
 .stat.good strong { color: var(--green); }
 .stat.warn strong { color: var(--gold); }
 .daily-comparison {

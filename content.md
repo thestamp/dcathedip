@@ -1078,3 +1078,8 @@ Recommended term for the income tool: **4% rule income target**. Avoid “self-r
 ## Footnote title standard
 
 Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain: calculators with calculator assumptions, ETFs with ETF example caveats, TFSA with contribution-room/withholding notes, brokerage links with referral disclosure, and risk sections with investment-risk notes. Keep the footer minimal.
+
+
+## DCA schedule comparison baseline
+
+Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to quarterly. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.

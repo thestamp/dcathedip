@@ -194,7 +194,7 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
       <div class="section-heading center">
         <p class="eyebrow">DCA calculator</p>
         <h2>Compare daily, weekly, biweekly, monthly, and quarterly investing.</h2>
-        <p>Use the calculator to see how different contribution schedules work when each schedule invests the same total dollars over one year.</p>
+        <p>Use the calculator to see how different recurring schedules perform when each schedule invests the same total dollars over one year. Click any schedule card to compare the others against it.</p>
         <p class="calculator-note">Educational estimate. Actual market returns vary.</p>
       </div>
 
@@ -258,25 +258,25 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
             <output id="variationOut"></output>
           </label>
           <div class="derived-total">
-            <small>One-time annual investment</small>
+            <small>Total invested per schedule</small>
             <strong><output id="capitalOut"></output></strong>
-            <span>Calculated as daily amount × 5 trading days × 52 weeks.</span>
+            <span>Each cadence invests the same annual total, calculated as daily amount × 5 trading days × 52 weeks.</span>
           </div>
           <details class="model-details">
             <summary>How this calculator works</summary>
-            <p class="chart-assumptions">Each schedule invests the same total amount over the year. The chart changes only the timing of contributions. You can also test simple market scenarios, such as an early dip, a late rally, or a flat year.</p>
+            <p class="chart-assumptions">Each schedule invests the same total amount over the year. The chart changes only the timing of recurring contributions. You can also test simple market scenarios, such as an early dip, a late rally, or a flat year.</p>
             <p class="chart-assumptions">Use “Reset to neutral” to remove market moves and set annual return and daily variation to 0%. In that neutral case, each schedule ends with the same value because each schedule invested the same total amount.</p>
-            <p class="chart-assumptions">Weekly = 5× daily for 52 weeks. Biweekly/monthly/quarterly are scaled so every schedule invests the same annual total. <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Use Wealthsimple to automate this</a>, and <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">click here for setup details</a>. Recurring investments can run daily or weekly from your bank account, for as little as $1 a day.</p>
+            <p class="chart-assumptions">Weekly = 5× daily for 52 weeks. Biweekly/monthly/quarterly are scaled so every schedule invests the same annual total. Click a schedule result card to use it as the comparison baseline. <a href="https://wealthsimple.com/invite/V-MKNQ" rel="nofollow noopener">Use Wealthsimple to automate this</a>, and <a href="https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment" rel="nofollow noopener">click here for setup details</a>. Recurring investments can run daily or weekly from your bank account, for as little as $1 a day.</p>
           </details>
         </form>
 
         <div class="chart-card">
-          <canvas id="dcaChart" aria-label="DCA vs lump sum ending value chart"></canvas>
+          <canvas id="dcaChart" aria-label="DCA schedule ending value chart"></canvas>
           <p class="calculator-note">Calculator results are simplified estimates based on the assumptions you choose. They are meant to teach contribution timing, not predict returns.</p>
           <div class="stats" id="stats"></div>
           <details class="daily-comparison">
             <summary>Expand day-by-day comparison table</summary>
-            <p>Scroll the table to compare the daily value of lump sum, daily, weekly, monthly, and quarterly investing. The table updates whenever you move the sliders.</p>
+            <p>Scroll the table to compare the daily value of each recurring schedule. The table updates whenever you move the sliders.</p>
             <div class="daily-table-wrap" id="dailyTable" aria-live="polite"></div>
           </details>
           <details class="section-footnote"><summary>Footnotes</summary><p>The chart compares timing, not a complete financial plan. Calculator results are simplified estimates based on user-selected assumptions and do not include tax, inflation, fees, currency effects, account rules, or real-world behaviour during market stress. Real returns vary and can be negative.</p></details>

@@ -82,11 +82,10 @@ The top rule card should say:
 
 ## 7. DCA calculator
 
-The site must include an interactive chart comparing a one-time annual investment against recurring DCA schedules over one year.
+The site must include an interactive chart comparing recurring DCA schedules over one year. Do not show a lump-sum series, stat card, or day-table column in the main calculator.
 
 Compared schedules:
 
-- One-time annual investment / lump-sum comparator
 - Daily DCA
 - Weekly DCA
 - Biweekly DCA
@@ -95,18 +94,21 @@ Compared schedules:
 
 Required behavior:
 
-- One-time annual investment is derived from daily amount × 5 trading days × 52 weeks.
+- Total invested per schedule is derived from daily amount × 5 trading days × 52 weeks.
 - Each schedule invests the same total annual dollars; only timing changes.
 - The first contribution for every modeled strategy happens on day 0.
 - Monthly DCA uses 12 contributions/year.
-- If all market moves are removed, annual gain/loss is 0%, and daily variation is 0%, every schedule and the lump-sum comparator must end equal.
+- If all market moves are removed, annual gain/loss is 0%, and daily variation is 0%, every recurring schedule must end equal.
 - The chart must include expandable day-by-day comparison table, collapsed by default.
+- Default percentage comparison baseline is quarterly DCA.
+- Each schedule result card must be clickable; the selected card shows no percentage and becomes the comparison baseline for the other schedules.
+- Use green/yellow positive/negative formatting for the schedule cards relative to the selected baseline.
 
 Calculator copy:
 
 - Eyebrow: `DCA calculator`
 - Heading: `Compare daily, weekly, biweekly, monthly, and quarterly investing.`
-- Intro: Use the calculator to see how different contribution schedules work when each schedule invests the same total dollars over one year.
+- Intro: Use the calculator to see how different recurring schedules perform when each schedule invests the same total dollars over one year. Click any schedule card to compare the others against it.
 - Small note: `Educational estimate. Actual market returns vary.`
 
 Advanced controls should be collapsible under `Advanced market scenario controls` and use beginner labels:
@@ -432,3 +434,8 @@ The DCA chart should default to a neutral scenario and offer clear preset scenar
 ## Footnote title standard
 
 Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain: calculators with calculator assumptions, ETFs with ETF example caveats, TFSA with contribution-room/withholding notes, brokerage links with referral disclosure, and risk sections with investment-risk notes. Keep the footer minimal.
+
+
+## DCA schedule comparison baseline
+
+Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to quarterly. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.
