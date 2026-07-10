@@ -1,37 +1,43 @@
-# DCA the Dip Website Requirements
+# Keep Calm and DCA On Website Requirements
 
 This document is the source of truth for future website updates. Update this file first, then implement the site from these requirements.
 
 ## 1. Site purpose
 
-DCA the Dip helps Canadian beginners automate recurring ETF investing, compare dollar-cost averaging schedules, understand market dips and compounding, and build a repeatable investing habit without trying to time the market.
+**Keep Calm and DCA On** helps Canadian beginners automate recurring ETF investing, compare dollar-cost averaging schedules, and keep a steady investing habit through market dips, rallies, rough patches, and noisy headlines without trying to time the market.
+
+Core line:
+
+> You are not predicting the noise. You are building through it.
 
 ## 2. Core positioning and tone
 
-- Primary brand line: **Automate the habit. Ignore the noise.**
-- SEO target: **Dollar-Cost Averaging Calculator Canada | DCA the Dip**.
+- Primary brand line: **Keep Calm and DCA On.**
+- SEO target: **Keep Calm and DCA On | DCA Calculator Canada**.
 - Lead with benefit and confidence; avoid opening headlines/lead paragraphs with caveats.
 - Use a plain-language coach voice: start small, automate it, keep going.
 - Explain that lower prices buy more units when the contribution amount stays fixed.
 - Do not recommend increasing contributions during drawdowns.
 - Do not discuss or recommend margin.
-- Consolidate heavy disclosures in the footer, FAQ, and compact calculator notes rather than repeating them in headlines.
+- Consolidate heavy disclosures in section-level Footnotes, FAQ, and compact calculator notes rather than repeating them in headlines.
 
 ## 3. SEO metadata
 
 Page front matter should use:
 
-- Title: `Dollar-Cost Averaging Calculator Canada | DCA the Dip`
-- Description: `Compare daily, weekly, biweekly, monthly, and quarterly dollar-cost averaging strategies. Learn how automated ETF investing, compounding, TFSA accounts, and market dips work for Canadian investors.`
+- Title: `Keep Calm and DCA On | DCA Calculator Canada`
+- Description: `Compare daily, weekly, biweekly, monthly, and quarterly dollar-cost averaging schedules. Build a steady Canadian ETF investing habit through market dips, rallies, and noisy headlines.`
 
 The homepage should naturally include these search themes:
 
 - dollar-cost averaging Canada
 - DCA calculator Canada
 - daily DCA calculator
+- automated ETF investing for Canadians
 - ETF investing for beginners Canada
-- recurring ETF investing
 - TFSA dollar-cost averaging
+- dollar-cost averaging through market downturns
+- should I keep investing when the market is down
 - DCA vs lump sum
 - Rule of 72
 - compound interest calculator
@@ -40,34 +46,35 @@ The homepage should naturally include these search themes:
 
 Recommended order:
 
-1. Hero: strong promise and primary CTA
-2. Simple DCA explanation
-3. DCA calculator comparing schedules
-4. How DCA/automation works
-5. Frequency guide
-6. Compounding and Rule of 72
-7. Simple investing foundation
-8. Risk and comfort / ETF mix
-9. Budget and sustainable investing
-10. Broad ETF building blocks
-11. Wealthsimple setup
+1. Hero: strong Keep Calm and DCA On promise and primary CTA
+2. Simple rule card: lower prices buy more units
+3. Three-step journey
+4. Simple investing foundation
+5. Risk and comfort / ETF mix
+6. Why calm investors automate
+7. Market noise playbook
+8. Budget and sustainable investing, coffee vs lottery comparison, Wealthsimple promo, and withdrawal guidance
+9. Frequency guide with the DCA calculator directly underneath
+10. Wealthsimple setup
+11. Broad ETF building blocks
 12. ETF examples
 13. TFSA
-14. Timing risk / DCA vs lump sum
-15. Withdrawal guidance
-16. FAQ
-17. Section-level footnotes
+14. Compounding and Rule of 72 / daily contribution calculator
+15. Growth milestones / 4% rule income target
+16. Timing risk / DCA vs lump sum
+17. FAQ
+18. Section-level footnotes
 
 ## 5. Hero requirements
 
 Hero must include:
 
 - Eyebrow: `Dollar-cost averaging for Canadian ETF investors`
-- H1: `Automate the habit. Ignore the noise.`
-- Lede: DCA the Dip helps beginners invest a fixed amount on a regular schedule, compare daily versus weekly or monthly contributions, and understand how compounding works over time.
-- Supporting sentence: Build a simple recurring ETF investing routine through rising, falling, and sideways markets — no market timing required.
-- Primary CTA: `Try the DCA calculator`
-- Secondary CTA: `See how it works`
+- H1: `Keep Calm and DCA On.`
+- Lede: `Build a steady ETF investing habit through market dips, rallies, and noisy headlines.`
+- Supporting sentence: `Use this Canadian DCA calculator to compare daily, weekly, biweekly, monthly, and quarterly contribution schedules — then automate the one you can keep.`
+- Primary CTA: `Compare DCA schedules`
+- Secondary CTA: `Build your calm plan`
 - Trust row: built for beginners, ETF-focused, TFSA-friendly, no market timing required.
 
 The hero must not open with “not advice,” “not a forecast,” “not recommendations,” or similar caveat-first phrasing.
@@ -77,7 +84,7 @@ The hero must not open with “not advice,” “not a forecast,” “not recom
 The top rule card should say:
 
 - Heading: `Lower prices buy more units.`
-- Body: When the user invests the same planned amount on a regular schedule, market dips naturally buy more ETF units. When prices are higher, the same contribution buys fewer units.
+- Body: When the user invests the same planned amount on a regular schedule, market noise can work in their favour. Lower ETF prices naturally buy more units. Higher prices buy fewer units. The schedule keeps going.
 - Microcopy: `Same dollars. More units on lower-price days. No guessing the bottom.`
 
 ## 7. DCA calculator
@@ -106,21 +113,20 @@ Required behavior:
 
 Calculator copy:
 
-- Eyebrow: `DCA calculator`
-- Heading: `Compare daily, weekly, biweekly, monthly, and quarterly investing.`
-- Intro: Use the calculator to see how different recurring schedules perform when each schedule invests the same total dollars over one year. Click any schedule card to compare the others against it.
+- Eyebrow: `Steady DCA calculator`
+- Heading: `Compare schedules through market noise.`
+- Intro: Each schedule invests the same total amount over one year. Click any schedule to compare the others against it, then test calm, rising, choppy, or rough market scenarios.
 - Small note: `Educational estimate. Actual market returns vary.`
 
-Advanced controls should be collapsible under `Advanced market scenario controls` and use beginner labels:
+Scenario labels:
 
-| Technical idea | Public label |
-|---|---|
-| Market move editor | Add a market dip or rally |
-| Start day | When it starts |
-| Height | Market move |
-| Width each direction | How long it lasts |
-| Recovers after the move | Market recovers afterward |
-| Reset neutral | Reset to neutral |
+- Calm baseline
+- Market climbs
+- Early rough patch
+- Late rough patch
+- Choppy sideways year
+- Tough market year
+- Build your own scenario
 
 Keep the long model explanation inside an expandable `How this calculator works` area.
 
@@ -128,9 +134,9 @@ Keep the long model explanation inside an expandable `How this calculator works`
 
 Section must include:
 
-- Eyebrow: `Why automate your DCA strategy?`
+- Eyebrow: `Why calm investors automate`
 - Heading: `Make investing automatic before emotions get involved.`
-- Copy explaining that DCA turns investing into a routine.
+- Copy explaining that market headlines can make every contribution feel like a decision, while DCA turns that decision into a system.
 
 Cards:
 
@@ -138,22 +144,40 @@ Cards:
 2. Builds the habit — small recurring contributions are easier to keep than occasional big decisions.
 3. Fits paycheque investing — payday-based, weekly, monthly, or daily DCA can all work.
 
-## 9. Frequency guide with calculator
+## 9. Market noise playbook
+
+Section must include:
+
+- Eyebrow: `Market noise playbook`
+- Heading: `When markets get loud, your plan stays quiet.`
+- Copy explaining that red days, green days, and scary headlines are normal.
+
+Cards:
+
+1. Red days are not instructions.
+2. Green days are not permission to chase.
+3. Check the plan, then keep the schedule.
+
+Footnote: if income, debt, emergency fund, goal, or risk tolerance has changed, review the plan before contributing more.
+
+## 10. Frequency guide with calculator
 
 - The frequency guide and DCA calculator should be one combined section anchored at `#calculator`.
-- Frequency heading: `Same dollars. Different rhythm. Different experience.`
-- Explain that daily, weekly, biweekly/payday, monthly, and quarterly can all be reasonable.
+- Frequency eyebrow: `Choose your calm schedule`.
+- Frequency heading: `Choose the schedule you can keep in rough markets.`
+- Explain that daily is the default because it feels automatic and spreads contributions across more market days.
+- Explain that weekly, biweekly/payday, monthly, and quarterly can all be reasonable.
 - Table should emphasize best fit and simple tradeoff, not imply daily is objectively superior.
 - The DCA calculator should appear directly under the frequency guide content.
 
-## 10. Compounding roadmap
+## 11. Compounding roadmap
 
 The site must include a standalone compounding section.
 
 Required content:
 
 - Eyebrow: `Compounding over time`
-- Heading: `Compounding rewards the investors who keep going.`
+- Heading: `How patience compounds.`
 - Explain that contributions do most of the work early, then a larger balance gives investment growth more room to matter.
 - Use the 8-4-3 framework as storytelling:
   - Years 1–8: Build the base
@@ -161,7 +185,7 @@ Required content:
   - Years 13–15: Growth becomes visible
 - Include a note that 8-4-3 is a memorable way to understand patience, not an exact schedule.
 
-## 11. How long to double your money
+## 12. How long to double your money
 
 Merge the former `Quick mental math` and `Try your numbers` areas into a single section/card.
 
@@ -181,15 +205,6 @@ Inputs:
 - Return assumption preset
 - Custom CAGR
 
-Presets must be generic assumptions, not ETF-specific return forecasts:
-
-- Very conservative: 3%
-- Conservative: 4%
-- Moderate: 6%
-- Long-term equity: 8%
-- Aggressive: 10%
-- Custom
-
 Outputs:
 
 - Estimated future value
@@ -197,9 +212,7 @@ Outputs:
 - Estimated growth
 - Rule-of-72 double time
 
-Bottom note: results are estimates based on the return assumption chosen; encourage testing lower and higher scenarios.
-
-## 12. Growth milestones / 4% rule income target
+## 13. Growth milestones / 4% rule income target
 
 This section should focus on two simple ideas and avoid Coast FI terminology:
 
@@ -213,49 +226,23 @@ Required content:
 - Main formula: desired annual income ÷ withdrawal-rate assumption.
 - Default withdrawal-rate assumption: 4%.
 - Explain that this is a simplified retirement-planning shortcut, not a guarantee.
-- Use an expandable contextual footnote explaining why the site uses the 4% rule instead of a CAGR/self-replenishing-income line.
 - Recommended term: `4% rule income target`.
 - Avoid “self-replenishing income” and “growth-funded income” as visible primary labels.
-
-Inputs:
-
-- Current invested amount
-- Monthly investment
-- Growth assumption
-- Desired annual income
-- Withdrawal-rate assumption
-- Years to model
-
-Outputs:
-
-- 4% rule income target
-- Amount still needed
-- Estimated target timing
-- Contribution crossover
-- Crossover timing
-- Projected value
-
-Chart lines:
-
-- Portfolio balance
-- Total you contributed
-- 4% rule income target
-- Contribution crossover
 
 ## 14. Sustainable investing section
 
 Remove the standalone “How much should I DCA?” section. Sustainable investing should contain:
 
 - Eyebrow: `Sustainable investing`
-- Heading: `Invest money that can stay invested.`
+- Heading: `Keep the habit small enough to survive real life.`
 - Explain that bill money, rent money, and emergency savings should stay separate from the investing habit.
 - Coffee example: $5 weekday coffee = $25/week, about $100 over four weeks, roughly $1,200/year.
 - Lottery example: $5 weekly lottery ticket = $260/year.
 - Keep coffee vs lottery cards in a balanced two-column row on desktop.
 - Include the Wealthsimple recurring-investment promo here because it supports the sustainable automation message.
-- Place the `When to withdraw` content directly under sustainable investing, inside the same section, so it reads as part of the sustainability/safety guidance.
+- Place the `When to withdraw` content directly under sustainable investing, inside the same section.
+- Withdrawal heading: `Sell because the money has a job, not because the market is loud.`
 - Keep as a full-width band with wrapped inner content.
-
 
 ## 15. Broad ETF building blocks
 
@@ -284,14 +271,7 @@ Canadian ETF grid:
 | Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF | CACE.TO — Avantis CIBC Canadian Equity ETF |
 | World | XEQT.TO — iShares Core Equity ETF Portfolio | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF |
 
-U.S./elsewhere examples:
-
-- VT
-- VTI
-- VOO
-- VXUS
-- AVGE
-- QQQM
+U.S./elsewhere examples: VT, VTI, VOO, VXUS, AVGE, QQQM.
 
 ## 17. Wealthsimple setup and referral
 
@@ -303,7 +283,6 @@ Rules:
 - Put the full referral disclosure in the relevant `Footnotes` block near brokerage/referral CTAs.
 - Do not interrupt mid-page promotional copy with long referral disclaimers.
 - Use `ETF examples`, not `recommended ETFs`.
-- Keep external guide buttons opening in a new tab with `target="_blank" rel="nofollow noopener"`.
 - Current referral URL: `https://wealthsimple.com/invite/V-MKNQ`.
 - Recurring investment guide URL: `https://help.wealthsimple.com/hc/en-ca/articles/9544942923547-Set-up-a-recurring-investment`.
 
@@ -328,27 +307,22 @@ Step-by-step section:
 Move this below calculator, compounding, ETF, and TFSA content.
 
 - Eyebrow: `Timing risk`
-- Heading: `Timing dips is harder than it looks.`
+- Heading: `Trying to time the noise is harder than it looks.`
 - Explain that the problem is emotion, uncertainty, and consistency.
 - DCA removes pressure around deciding if today is perfect.
 - For paycheque investors, DCA is a natural fit because money arrives over time.
 - Keep Barber/Lee/Liu/Odean and RBC GAM sources in the source note.
 - Comparison table should be practical fit, not a caveat-forward expected-return table.
 
-## 20. Withdrawal section
+## 20. FAQ
 
-- Eyebrow: `When to withdraw`
-- Heading: `Withdraw when the money has a real job — not because the market is noisy.`
-- Mention planned goals, emergencies, rebalancing, or risk reduction before known expenses.
-- Warn against panic selling in supporting copy.
-
-## 21. FAQ
-
-Use SEO-shaped questions:
+Use SEO-shaped and brand-aligned questions:
 
 - What is dollar-cost averaging?
-- Is DCA good for beginners?
-- Is daily DCA better than weekly or monthly DCA?
+- Should I keep DCA investing when the market is down?
+- Does DCA mean buying the dip?
+- Is daily DCA better during volatile markets?
+- What if I feel nervous investing during a crash?
 - Can I dollar-cost average in a TFSA?
 - What ETFs do Canadians use for DCA?
 - What is the Rule of 72?
@@ -357,7 +331,7 @@ Use SEO-shaped questions:
 - Are ETF tickers on this site recommendations?
 - What is the 4% rule?
 
-## 22. Section-level footnotes and footer
+## 21. Section-level footnotes and footer
 
 Use expandable footnote blocks inside the relevant sections rather than collecting all caveats at the bottom. The summary/title for each expandable caveat block should be exactly `Footnotes`, not `Context`.
 
@@ -372,7 +346,7 @@ Distribute disclosures by topic:
 
 The footer should stay minimal and tell users that section-specific footnotes live with each section.
 
-## 23. Mobile friendliness requirements
+## 22. Mobile friendliness requirements
 
 The site must remain comfortable on 360px–390px phones and tablets:
 
@@ -382,7 +356,7 @@ The site must remain comfortable on 360px–390px phones and tablets:
 - Late-added grids must collapse to one column on phones.
 - Desktop visual hierarchy should remain intact while mobile sections use shorter spacing, readable font sizes, full-width buttons, and compact cards.
 
-## 24. Technical requirements
+## 23. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
 - Main config: `_config.yml`.
@@ -392,7 +366,7 @@ The site must remain comfortable on 360px–390px phones and tablets:
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 25. Verification requirements
+## 24. Verification requirements
 
 Before finalizing changes, run:
 
@@ -409,35 +383,32 @@ The test must:
 - Verify chart rendering and neutral-case invariants.
 - Verify ETF region switching.
 - Verify TFSA calculator rendering.
-- Verify SEO-first hero copy and structured footer disclosure.
+- Verify Keep Calm and DCA On hero copy, market-noise playbook, and section footnotes.
 - Run mobile audit across common phone/tablet widths.
 
-## 26. Current limitations
+## 25. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
 
-
-## Current UX direction: 3-step journey
+## 26. Current UX direction: calm 3-step journey
 
 The site should be organized as a guided path rather than scattered finance topics:
 
 1. **Start** — foundation, risk comfort, cash buffer, account fit.
-2. **Automate** — recurring contribution amount, DCA schedule, budget habit, brokerage setup, ETF examples, TFSA context.
+2. **Automate** — recurring contribution amount, DCA schedule, brokerage setup, market-noise playbook, ETF examples, TFSA context.
 3. **Grow** — compounding, Rule of 72, 4% rule income target, timing/lump-sum context, withdrawal behaviour.
 
 Each major section should include an expandable contextual footnote/caveat. The main copy should remain confident and SEO-friendly; heavier nuance belongs in section footnotes, FAQ, and footer disclosures.
 
 The former Coast FI / CAGR-income line is removed. The income target tool uses the 4% rule by default: desired annual income ÷ withdrawal-rate assumption.
 
-The DCA chart should default to a neutral scenario and offer clear preset scenario buttons plus a Custom option that opens the market-move editor.
+The DCA chart should default to a neutral scenario and offer clear market-noise scenario buttons plus a Custom option that opens the market-move editor.
 
+## 27. Footnote title standard
 
-## Footnote title standard
+Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain. Keep the footer minimal.
 
-Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain: calculators with calculator assumptions, ETFs with ETF example caveats, TFSA with contribution-room/withholding notes, brokerage links with referral disclosure, and risk sections with investment-risk notes. Keep the footer minimal.
+## 28. DCA schedule comparison baseline
 
-
-## DCA schedule comparison baseline
-
-Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to quarterly. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.
+Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to daily. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.

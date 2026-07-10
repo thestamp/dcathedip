@@ -1,13 +1,13 @@
-# DCA the Dip
+# Keep Calm and DCA On
 
-A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
+A Jekyll educational website for **KeepCalmAndDCAOn.com**.
 
 ## Features
 
 - Beautiful responsive Jekyll landing page
 - Interactive DCA-through-a-dip calculator using Chart.js
 - Clickable daily, weekly, biweekly, monthly, and quarterly DCA schedule comparison
-- Frequency guide with the DCA calculator directly underneath and Daily as the default comparison baseline
+- Frequency guide with the steady DCA calculator directly underneath, market-noise scenario labels, and Daily as the default comparison baseline
 - Canadian TFSA account guidance and simple contribution room calculator
 - Canadian vs U.S. ETF suggestions
 - Optional browser geolocation for region selection
@@ -21,7 +21,7 @@ A Jekyll educational website for **DCATheDip.com / DCATheDip.ca**.
 - `assets/css/styles.css` — site styling
 - `assets/js/app.js` — calculator, ETF picker, TFSA calculator, and referral config
 - `requirements.md` — product/content requirements for future updates
-- `CNAME` — GitHub Pages custom domain (`dcathedip.com`)
+- `CNAME` — GitHub Pages custom domain (`keepcalmanddcaon.com`)
 
 ## Configure referral link
 

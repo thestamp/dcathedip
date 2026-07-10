@@ -177,9 +177,9 @@ function createServer() {
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
-    const seoHero = /Automate the habit/i.test(bodyText) && /Ignore the noise/i.test(bodyText) && /Dollar-cost averaging for Canadian ETF investors/i.test(bodyText);
+    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /Build a steady ETF investing habit/i.test(bodyText) && /Dollar-cost averaging for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
-    const journeyStructure = /Three-step journey/i.test(bodyText) && /Start simple\. Automate the habit\. Let time do the work\./i.test(bodyText) && /1 Start/i.test(navText) && /2 Automate/i.test(navText) && /3 Grow/i.test(navText);
+    const journeyStructure = /Three-step journey/i.test(bodyText) && /Start calm\. Automate the habit\. Keep building\./i.test(bodyText) && /1 Start/i.test(navText) && /2 Automate/i.test(navText) && /3 Grow/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year’s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
@@ -189,9 +189,9 @@ function createServer() {
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
     const unitsRule = /Lower prices buy more units/i.test(bodyText) && /No guessing the bottom/i.test(bodyText);
     const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing sooner has often performed better historically/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
-    const timingSection = /Timing dips is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
+    const timingSection = /Trying to time the noise is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Investing from income/i.test(bodyText) && /Large lump sum/i.test(bodyText) && /Staying invested matters more than perfect timing/i.test(bodyText);
-    const lumpSumRiskFaq = /Timing dips is harder than it looks/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
+    const lumpSumRiskFaq = /Trying to time the noise is harder than it looks/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
     const compoundingSection = /Compounding over time/i.test(bodyText)
       && /Build the base/i.test(bodyText)
       && /Momentum appears/i.test(bodyText)
@@ -276,8 +276,9 @@ function createServer() {
     });
     const noStandaloneBudget = await page.locator('#budget').count().then(count => count === 0);
     const sustainableBudget = noStandaloneBudget && /Sustainable investing/i.test(bodyText) && /\$5 weekday coffee is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
-    const meansSection = /Sustainable investing/i.test(bodyText) && /Invest money that can stay invested/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
-    const withdrawSection = /Withdraw when the money has a real job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing/i.test(bodyText) && /reducing risk before a known expense/i.test(bodyText);
+    const meansSection = /Sustainable investing/i.test(bodyText) && /Keep the habit small enough to survive real life/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
+    const marketNoisePlaybook = /Market noise playbook/i.test(bodyText) && /When markets get loud, your plan stays quiet/i.test(bodyText) && /Red days are not instructions/i.test(bodyText) && /Green days are not permission to chase/i.test(bodyText) && /Check the plan, then keep the schedule/i.test(bodyText);
+    const withdrawSection = /Sell because the money has a job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing/i.test(bodyText) && /reducing risk before a known expense/i.test(bodyText);
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
       && /Diversified building blocks/i.test(bodyText)
       && /Balanced ETFs/i.test(bodyText)
@@ -293,6 +294,7 @@ function createServer() {
     const etfToStepsLink = await page.locator('a[href="#wealthsimple-guide"]').count().then(count => count >= 1);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
     const removedDailyMonthlyFaq = !/Why recommend daily instead of monthly\?/i.test(bodyText);
+    const calmFaqs = /Should I keep DCA investing when the market is down\?/i.test(bodyText) && /Does DCA mean buying the dip\?/i.test(bodyText) && /What if I feel nervous investing during a crash\?/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
     const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count >= 2);
     const timingSources = await page.locator('#timing a[href*="barber-lee-liu-odean.pdf"], #timing a[href*="rbcgam.com"]').count();
@@ -318,7 +320,7 @@ function createServer() {
       noStandaloneStrategy: !document.getElementById('strategy'),
       noStandaloneBudget: !document.getElementById('budget')
     }));
-    const scenarioButtons = /Rising market/i.test(bodyText) && /Early dip/i.test(bodyText) && /Custom/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
+    const scenarioButtons = /Market climbs/i.test(bodyText) && /Early rough patch/i.test(bodyText) && /Build your own scenario/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!zeroCaseEqual) throw new Error('Expected 0% market moves and 0% annual gain to make all recurring schedules equal the same annual invested amount and final table row.');
     if (!dailyComparisonTable.collapsedByDefault) throw new Error('Expected day-by-day comparison table to be collapsed by default.');
@@ -345,7 +347,7 @@ function createServer() {
     if (!layoutChecks.meansFullWidth) throw new Error('Expected invest-within-your-means section separator/background to span full viewport width.');
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
-    if (!seoHero) throw new Error('Expected SEO-first hero around Automate the habit / Ignore the noise.');
+    if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / building through market noise.');
     if (!journeyStructure) throw new Error('Expected visible three-step journey and simplified 1 Start / 2 Automate / 3 Grow nav.');
     if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
@@ -377,14 +379,15 @@ function createServer() {
     if (!compoundCalculator.hasOutputs) throw new Error('Expected compounding calculator to output future value, contributions, growth, and Rule-of-72 double time.');
     if (!compoundCalculator.disclaimer) throw new Error('Expected CAGR assumption disclaimer to avoid presenting assumptions as forecasts.');
     if (!sustainableBudget) throw new Error('Expected coffee and lottery examples to live inside Sustainable investing with no standalone How much should I DCA section.');
-    if (!meansSection) throw new Error('Expected invest-within-your-means section with safety net guidance.');
+    if (!meansSection) throw new Error('Expected sustainable investing section with safety net guidance.');
+    if (!marketNoisePlaybook) throw new Error('Expected market noise playbook section for rough-market DCA behaviour.');
     if (!broadEtfSection) throw new Error('Expected broad ETF risk section comparing broad ETFs, balanced ETFs, and concentrated bets.');
     if (!wealthsimpleGuide) throw new Error('Expected Wealthsimple setup guide with four numbered steps.');
     if (!referralPromo) throw new Error('Expected referral disclosure and referral signup link.');
     if (!stepByStepNav) throw new Error('Expected nav menu to include ETF examples link.');
     if (!etfToStepsLink) throw new Error('Expected at least 2 links from ETF section back to step-by-step guide (step 4 link + back link).');
     if (!withdrawSection) throw new Error('Expected withdrawal section with panic selling and planned-risk-management language.');
-    if (false) throw new Error('noop');
+    if (!calmFaqs) throw new Error('Expected FAQ to address down markets, buying the dip, and crash nervousness.');
     if (false) throw new Error('noop');
     if (false) throw new Error('noop');
     if (timingSources !== 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
@@ -400,7 +403,7 @@ function createServer() {
     if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

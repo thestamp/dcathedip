@@ -1,12 +1,12 @@
-# DCATheDip.com — SEO-first, advisor-safe content brief
+# KeepCalmAndDCAOn.com — SEO-first, advisor-safe content brief
 
-Purpose: rewrite the site so it feels confident, beginner-friendly, and conversion-oriented while still staying responsible for a Canadian finance education website.
+Purpose: align the site with the new **Keep Calm and DCA On** brand. The site should feel like a calm, practical tool for Canadian beginners who want to automate ETF investing and keep a steady dollar-cost averaging habit through market dips, rallies, scary headlines, and boring sideways markets.
 
-The previous content pass became too caveat-forward. This version keeps the important disclosures, but moves heavy caveats out of headlines and first paragraphs. The public-facing experience should lead with the positive promise:
+The public-facing promise:
 
-> Automate the habit. Ignore the noise.
+> You are not predicting the noise. You are building through it.
 
-The site should feel like a calm, practical tool for Canadian beginners who want to automate recurring ETF investing, understand dollar-cost averaging, and stay consistent through market dips.
+The site should lead with confident behavioural coaching, then place risk notes, assumptions, referral disclosure, and calculator limitations in compact section-level **Footnotes** blocks.
 
 ---
 
@@ -14,11 +14,11 @@ The site should feel like a calm, practical tool for Canadian beginners who want
 
 ### Brand promise
 
-DCA the Dip helps Canadian beginners automate recurring ETF investing, stay consistent through market dips, and understand compounding — without trying to time the market.
+**Keep Calm and DCA On** helps Canadian beginners build a steady ETF investing habit through market noise — without trying to guess the bottom, chase rallies, or turn every headline into a decision.
 
 ### Emotional promise
 
-You do not need to be clever. You do not need to watch the market every day. You need a repeatable investing habit you can keep.
+You do not need to be clever. You do not need to watch the market every day. You need a repeatable investing habit that still makes sense when markets are loud.
 
 ### SEO promise
 
@@ -27,46 +27,52 @@ The homepage should clearly target:
 - dollar-cost averaging Canada
 - DCA calculator Canada
 - daily DCA calculator
+- automated ETF investing for Canadians
 - ETF investing for beginners Canada
-- recurring ETF investing
 - TFSA dollar-cost averaging
+- dollar-cost averaging through market downturns
+- should I keep investing when the market is down
 - DCA vs lump sum
 - Rule of 72
 - compound interest calculator
 
 ### Voice
 
-Use a confident, plain-language coach voice:
+Use a calm, confident, plain-language coach voice:
 
 - Start small.
 - Automate it.
 - Keep going.
-- Let the plan handle noisy markets.
+- Let the schedule handle noisy markets.
+- You are not predicting the noise. You are building through it.
 
-Avoid sounding like a compliance officer in the first impression. Do not lead with “not advice,” “not a forecast,” “not low-risk,” or “not recommendations.” Those belong in the footer, FAQ, or compact notes.
+Avoid caveat-first copy in the first impression. Do not lead with “not advice,” “not a forecast,” “not low-risk,” or “not recommendations.” Those ideas belong in footnotes, FAQ, calculator notes, and disclosures.
 
 ---
 
 ## 2. Global writing rules
 
-### Lead with benefit, then clarify
+### Lead with the habit
 
 Good pattern:
 
-> Automated DCA helps you invest through every market. No market timing required.
+> Build a steady ETF investing habit through dips, rallies, and noisy headlines.
 
 Avoid leading with:
 
 > This is not market timing.
 
+The site can clarify that DCA is not market timing, but the main message should be the calm habit.
+
 ### Use positive phrasing
 
 Prefer:
 
-- “Automate regular ETF buys.”
+- “Automate recurring ETF buys.”
 - “Lower prices buy more units.”
-- “Choose a mix you can stick with.”
-- “Use these examples as a research starting point.”
+- “Choose a mix you can keep holding.”
+- “The schedule does the work.”
+- “Sell because the money has a job, not because the market is loud.”
 - “Calculator results are estimates based on your assumptions.”
 
 Avoid repeated negative framing:
@@ -78,7 +84,7 @@ Avoid repeated negative framing:
 - “not guaranteed”
 - “not automatically best”
 
-The ideas can remain, but they should be consolidated and softened.
+The ideas can remain, but should be consolidated and softened.
 
 ### Disclosure placement
 
@@ -92,15 +98,16 @@ Do **not** put heavy disclaimers in:
 
 Put disclosures in:
 
-- footer disclosure box
+- section-level **Footnotes** blocks
 - FAQ answers
 - small notes below calculators
-- one small note below ETF examples
-- referral disclosure in footer and a small “Referral link” label near referral CTAs
+- ETF footnotes
+- TFSA footnotes
+- referral footnotes near brokerage links
 
 ### Important distinction
 
-The site should not hide risk. It should stop making risk the brand’s first impression.
+The brand should not imply “buy dips harder.” It should imply “keep the fixed plan going when prices move.” Lower prices may buy more units, but the contribution amount remains fixed and sustainable.
 
 ---
 
@@ -110,25 +117,21 @@ The site should not hide risk. It should stop making risk the brand’s first im
 
 Use:
 
-> Dollar-Cost Averaging Calculator Canada | DCA the Dip
-
-Alternative if title length needs shortening:
-
-> DCA Calculator Canada | DCA the Dip
+> Keep Calm and DCA On | DCA Calculator Canada
 
 ### Meta description
 
 Use:
 
-> Compare daily, weekly, biweekly, monthly, and quarterly dollar-cost averaging strategies. Learn how automated ETF investing, compounding, TFSA accounts, and market dips work for Canadian investors.
+> Compare daily, weekly, biweekly, monthly, and quarterly dollar-cost averaging schedules. Build a steady Canadian ETF investing habit through market dips, rallies, and noisy headlines.
 
 ### Open graph title
 
-> DCA the Dip — Dollar-Cost Averaging Calculator for Canadians
+> Keep Calm and DCA On — DCA Calculator for Canadians
 
 ### Open graph description
 
-> Automate recurring ETF investments, compare DCA schedules, and see how consistent contributions can build over time.
+> Automate recurring ETF investments, compare DCA schedules, and keep building through market noise.
 
 ---
 
@@ -136,20 +139,26 @@ Use:
 
 The page should flow like this:
 
-1. Hero: strong promise and primary CTA
-2. Simple DCA explanation
-3. Calculator: compare schedules
-4. How DCA works / automation benefits
-5. Compounding and Rule of 72
-6. Start with a simple foundation
-7. ETF examples
-8. TFSA and Wealthsimple setup
-9. DCA vs lump sum / timing risk
-10. Advanced growth milestones: contribution crossover and 4% rule income target
-11. FAQ
-12. Section-level footnotes
+1. Hero: Keep Calm and DCA On promise and primary CTA
+2. Simple rule card: lower prices buy more units
+3. Three-step journey: Start → Automate → Grow
+4. Start smart foundation
+5. Risk and comfort
+6. Why calm investors automate
+7. Market noise playbook
+8. Sustainable investing, coffee vs lottery habit, Wealthsimple automation, and when to withdraw
+9. Frequency guide with the DCA calculator directly underneath
+10. Wealthsimple setup
+11. Broad ETF building blocks
+12. ETF examples
+13. TFSA
+14. Compounding and Rule of 72 / daily contribution calculator
+15. 4% rule income target
+16. Timing risk / DCA vs lump sum
+17. FAQ
+18. Section-level footnotes
 
-Reason: visitors should emotionally understand the value before being asked to process caveats, risk categories, and advanced finance concepts.
+Reason: visitors should emotionally understand the value of staying steady before processing calculator assumptions, risk categories, and advanced finance concepts.
 
 ---
 
@@ -161,23 +170,23 @@ Dollar-cost averaging for Canadian ETF investors
 
 ## H1
 
-Automate the habit. Ignore the noise.
+Keep Calm and DCA On.
 
 ## Lede
 
-DCA the Dip helps beginners invest a fixed amount on a regular schedule, compare daily versus weekly or monthly contributions, and understand how compounding works over time.
+Build a steady ETF investing habit through market dips, rallies, and noisy headlines.
 
 ## Supporting sentence
 
-Build a simple recurring ETF investing routine through rising, falling, and sideways markets — no market timing required.
+Use this Canadian DCA calculator to compare daily, weekly, biweekly, monthly, and quarterly contribution schedules — then automate the one you can keep.
 
 ## Primary CTA
 
-Try the DCA calculator
+Compare DCA schedules
 
 ## Secondary CTA
 
-See how it works
+Build your calm plan
 
 ## Trust row
 
@@ -188,7 +197,7 @@ See how it works
 
 ## Notes for developer
 
-Remove caveat-heavy language from the hero. Do not say “educational guide” in the first sentence. Do not lead with “The goal is not…” The hero should sell the benefit first.
+Remove caveat-heavy language from the hero. Do not say “educational guide” in the first sentence. The hero should sell the calm habit first.
 
 ---
 
@@ -204,146 +213,49 @@ Lower prices buy more units.
 
 ## Body
 
-When you invest the same planned amount on a regular schedule, market dips naturally buy more ETF units. When prices are higher, the same contribution buys fewer units. The habit keeps going either way.
+When you invest the same planned amount on a regular schedule, market noise can work in your favour. Lower ETF prices naturally buy more units. Higher prices buy fewer units. You do not need to guess which day is best — the schedule keeps going.
 
 ## Microcopy
 
 Same dollars. More units on lower-price days. No guessing the bottom.
 
----
+## Footnote idea
 
-# 7. Calculator section
-
-## Eyebrow
-
-DCA calculator
-
-## Heading
-
-Compare daily, weekly, biweekly, monthly, and quarterly investing.
-
-## Intro copy
-
-Use the calculator to see how different contribution schedules work when each schedule invests the same total dollars over one year.
-
-## Small note below intro, not first sentence
-
-Educational estimate. Actual market returns vary.
-
-## Controls: beginner mode first
-
-Default controls should be simple:
-
-- daily contribution amount
-- contribution schedule comparison
-- annual return assumption
-
-Advanced controls should be collapsed by default under:
-
-> Advanced market scenario controls
-
-Advanced controls include:
-
-- add a market dip or rally
-- when it starts
-- market move %
-- how long it lasts
-- whether the market recovers afterward
-- daily variation
-- reset neutral
-
-## Rename technical labels
-
-| Current | Replace with |
-|---|---|
-| Market move editor | Add a market dip or rally |
-| Start day | When it starts |
-| Height | Market move |
-| Width each direction | How long it lasts |
-| Recovers after the move | Market recovers afterward |
-| Reset neutral | Reset to neutral |
-
-## Model explanation
-
-Move long model assumptions into a collapsed section:
-
-### How this calculator works
-
-Each schedule invests the same total amount over the year. The chart changes only the timing of contributions. You can also test simple market scenarios, such as an early dip, a late rally, or a flat year.
-
-## Neutral reset helper text
-
-Use “Reset to neutral” to remove market moves and set annual return and daily variation to 0%. In that neutral case, each schedule ends with the same value because each schedule invested the same total amount.
-
-## Bottom calculator note
-
-Calculator results are simplified estimates based on the assumptions you choose. They are meant to teach the mechanics of contribution timing, not predict future returns.
+Lower prices are only helpful if the investment still fits your risk tolerance and time horizon. DCA does not remove market risk.
 
 ---
 
-# 8. How DCA works / automation benefits
+# 7. Three-step journey
 
 ## Eyebrow
 
-Why automate your DCA strategy?
+Three-step journey
 
 ## Heading
 
-Make investing automatic before emotions get involved.
+Start calm. Automate the habit. Keep building.
 
-## Intro copy
+## Body
 
-Dollar-cost averaging turns investing into a routine. Pick an amount, choose a schedule, and let automation handle the buying so you are not making a fresh decision every time the market moves.
+The page follows one path: confirm the foundation, automate recurring investing, then understand compounding and withdrawal planning.
 
 ## Cards
 
-### Card 1: Removes timing pressure
+### Start
 
-Regular ETF buys spread your entries across many market days. Some buys land higher, some lower, and the plan keeps moving.
+Check cash flow, risk comfort, account fit, and sustainability.
 
-### Card 2: Builds the habit
+### Automate
 
-Small recurring contributions are easier to keep than occasional big decisions. The habit matters more than finding the perfect day.
+Choose a recurring amount and schedule you can keep when headlines get loud.
 
-### Card 3: Fits paycheque investing
+### Grow
 
-For people investing from income, payday-based, weekly, monthly, or daily DCA can all work. Choose the schedule you can automate and keep.
-
----
-
-# 9. Frequency guide
-
-## Eyebrow
-
-Frequency guide
-
-## Heading
-
-Same dollars. Different rhythm. Different experience.
-
-## Intro copy
-
-There is no magic schedule. The best DCA schedule is usually the one you can automate and keep without stress. Daily investing can feel smooth if automation is effortless. Weekly or payday-based investing may be simpler for many salaried workers.
-
-## Table
-
-| Frequency | Best fit | Simple tradeoff |
-|---|---|---|
-| Daily | People who want the smoothest automated entries | More frequent buys; difference versus weekly may be small |
-| Weekly | Simple automation and frequent investing | Easy balance between habit and simplicity |
-| Biweekly / payday | Salaried workers investing from each paycheque | Very practical for budgeting |
-| Monthly | Simple household budgeting | Larger timing chunks |
-| Quarterly | Lowest maintenance | Most timing concentration |
-
-## Bottom copy
-
-If your brokerage supports automation, daily or weekly can be easy. If you prefer matching your paycheque, biweekly can be just as practical.
+Use compounding and 4% rule tools to understand long-term scale.
 
 ---
 
-# 10. Start with a simple investing foundation
-
-Move this lower than the calculator and core explanation. It is useful, but it should not slow the first impression.
+# 8. Start with a simple investing foundation
 
 ## Eyebrow
 
@@ -355,9 +267,9 @@ Build a simple investing foundation.
 
 ## Body
 
-A good DCA plan is easier to keep when your cash flow, emergency fund, time horizon, and account choice are clear.
+A calm DCA plan is easier to keep when your cash flow, emergency fund, time horizon, and account choice are clear.
 
-## Cards, preferred order
+## Cards
 
 ### 1. Sustainable amount
 
@@ -385,7 +297,7 @@ If you have credit card debt or other very high-interest debt, paying it down ma
 
 ---
 
-# 11. Risk-level section
+# 9. Risk-level section
 
 ## Eyebrow
 
@@ -397,11 +309,9 @@ Choose an ETF mix you can stick with.
 
 ## Body
 
-The right investment is not just the one with the highest expected return. It is the one you can keep buying and holding through normal market ups and downs.
+The right investment is not just the one with the highest expected return. It is the one you can keep buying and holding through rough markets.
 
-## Simple three-card version
-
-Prefer three cards over a dense table for beginner readability.
+## Cards
 
 ### Short-term money
 
@@ -421,152 +331,71 @@ Broad equity ETFs are diversified, but they can still fall during market downtur
 
 ---
 
-# 12. Compounding section
+# 10. How DCA works / automation benefits
 
 ## Eyebrow
 
-Compounding over time
+Why calm investors automate
 
 ## Heading
 
-Compounding rewards the investors who keep going.
-
-## Body
-
-At first, your contributions do most of the work. Over time, a larger balance gives investment growth more room to matter. That is why consistency and patience are so powerful.
-
-## Stage cards
-
-### Years 1–8: Build the base
-
-Most of the visible progress comes from your own contributions. The account may not feel exciting yet, but the habit is doing its job.
-
-### Years 9–12: Momentum appears
-
-As the balance grows, the same percentage return creates more dollars of growth. Compounding becomes easier to see.
-
-### Years 13–15: Growth becomes visible
-
-With a larger base, investment growth can start to do more of the heavy lifting during strong markets.
-
-## 8-4-3 note
-
-Some investors call this the 8-4-3 rule. Treat it as a memorable way to understand patience, not an exact schedule. Your real timeline depends on contribution size, returns, fees, inflation, account type, and market conditions.
-
----
-
-# 13. How long to double your money section
-
-Merge the former quick mental math and “try your numbers” areas into one section.
-
-## Eyebrow
-
-Rule of 72 + DCA calculator
-
-## Heading
-
-How long to double your money?
-
-## Formula card
-
-> 72 ÷ return = years to double
-
-## Body
-
-The Rule of 72 gives a quick mental shortcut: divide 72 by the return assumption to estimate how many years it takes money to double. Then use your daily contribution below to see how compounding changes the path.
-
-At an 8% annual return, money roughly doubles in about 9 years. Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.
-
-## Presets
-
-Use generic assumptions, not ETF-specific return assumptions:
-
-| Preset | CAGR |
-|---|---:|
-| Very conservative | 3% |
-| Conservative | 4% |
-| Moderate | 6% |
-| Long-term equity | 8% |
-| Aggressive | 10% |
-| Custom | user input |
-
-## Inputs
-
-- Initial investment
-- Daily contribution
-- Years invested
-- Return assumption preset
-- Custom CAGR
-
-## Outputs
-
-- Estimated future value
-- Total contributed
-- Estimated growth
-- Rule-of-72 doubling estimate
-
-## Bottom note
-
-Results are estimates based on the return assumption you choose. Try lower and higher scenarios to understand the range of possible outcomes.
-
----
-
-# 15. Growth milestones / 4% rule income target section
-
-Remove Coast FI terminology from the page. It clouds the message for beginners.
-
-## Eyebrow
-
-Income target
-
-## Heading
-
-How much invested could support the income you want?
+Make investing automatic before emotions get involved.
 
 ## Intro copy
 
-The 4% rule is a simple retirement-planning shortcut: multiply the annual portfolio income you want by 25. In formula form:
+Market headlines can make every contribution feel like a decision. Dollar-cost averaging turns that decision into a system: same amount, same rhythm, long-term plan.
 
-> desired annual income ÷ 4%
+## Cards
 
-Use this as a conservative scale estimate, then compare it with your current balance, monthly investing habit, and growth assumption.
+### Card 1: Removes timing pressure
 
-## Contribution crossover
+Regular ETF buys spread your entries across many market days. Some buys land higher, some lower, and the plan keeps moving.
 
-Contribution crossover can remain as a motivational metric. It compares your monthly contribution with the average monthly growth implied by your growth assumption.
+### Card 2: Builds the habit
 
-## Why not use CAGR as self-replenishing income?
+Small recurring contributions are easier to keep than occasional big decisions. The habit matters more than finding the perfect day.
 
-Put this in an expandable contextual footnote:
+### Card 3: Fits paycheque investing
 
-> Recommended term: **4% rule income target**. Using CAGR as “self-replenishing income” can be misleading because average long-term returns are not reliable yearly cash flow. The 4% rule is still simplified, but it is more conservative because it separates a spending/withdrawal assumption from the portfolio’s growth assumption.
+For people investing from income, payday-based, weekly, monthly, or daily DCA can all work. Choose the schedule you can automate and keep.
 
-## Inputs
+---
 
-- Current invested amount
-- Monthly investment
-- Growth assumption
-- Desired annual income
-- Withdrawal-rate assumption
-- Years to model
+# 11. Market noise playbook
 
-## Outputs
+## Eyebrow
 
-- 4% rule income target
-- Amount still needed
-- Estimated target timing
-- Contribution crossover
-- Crossover timing
-- Projected value
+Market noise playbook
 
-## Chart lines
+## Heading
 
-- Portfolio balance
-- Total you contributed
-- 4% rule income target
-- Contribution crossover
+When markets get loud, your plan stays quiet.
 
-# 16. Sustainable investing section
+## Intro copy
+
+Red days, green days, and scary headlines are normal. A fixed DCA schedule keeps the question simple: does the plan still fit your life?
+
+## Cards
+
+### Red days are not instructions
+
+A down day does not automatically mean stop, panic, or change the plan.
+
+### Green days are not permission to chase
+
+A rally does not mean you missed your chance. The habit continues either way.
+
+### Check the plan, then keep the schedule
+
+If your emergency fund, debt situation, time horizon, and risk tolerance still support long-term investing, the schedule can keep doing its job.
+
+## Footnote idea
+
+This is educational guidance, not personal advice. If your income, debt, emergency fund, goal, or risk tolerance has changed, review your plan before contributing more.
+
+---
+
+# 12. Sustainable investing section
 
 ## Eyebrow
 
@@ -574,19 +403,19 @@ Sustainable investing
 
 ## Heading
 
-Invest money that can stay invested.
+Keep the habit small enough to survive real life.
 
 ## Body
 
-DCA works best when the money is truly available for long-term investing. Keep bill money, rent money, and emergency savings separate from your investment habit.
+The calm plan is not the most aggressive plan. It is the one you can keep after bills, debt priorities, emergency savings, and normal life expenses.
 
-A cash buffer helps you stay calm when markets fall. If a normal surprise expense would force you to sell investments, lower the contribution amount or build more cash first.
+DCA works best when the money is truly available for long-term investing. Keep bill money, rent money, and emergency savings separate from your investment habit.
 
 ## Cards
 
 ### Build your safety net first
 
-Keep emergency cash available so market dips do not force you to sell at the wrong time.
+Keep emergency cash available so market drops do not force you to sell at the wrong time.
 
 ### Keep the habit sustainable
 
@@ -629,10 +458,143 @@ Put referral disclosure in this section’s **Footnotes** block.
 
 Place “When to withdraw” directly under Sustainable investing so contribution size, cash buffers, and selling discipline are grouped together.
 
+### Eyebrow
+
+When to withdraw
+
+### Heading
+
+Sell because the money has a job, not because the market is loud.
+
+### Body
+
+Selling can make sense when the money is needed for a planned goal, emergency, rebalancing decision, or risk reduction before a known expense.
+
+What usually hurts long-term investors is panic selling: selling only because the market dropped and the chart feels scary.
+
 ---
 
-# 17. Broad ETF section
+# 13. Frequency guide with DCA calculator
 
+## Eyebrow
+
+Choose your calm schedule
+
+## Heading
+
+Choose the schedule you can keep in rough markets.
+
+## Intro copy
+
+Daily DCA is the default because it makes investing feel automatic and spreads contributions across more market days. Weekly, biweekly, monthly, and quarterly investing can also work. The best schedule is the one you can keep when headlines get loud.
+
+## Table
+
+| Frequency | Best fit | Simple tradeoff |
+|---|---|---|
+| Daily | People who want the smoothest automated entries | More frequent buys; difference versus weekly may be small |
+| Weekly | Simple automation and frequent investing | Easy balance between habit and simplicity |
+| Biweekly / payday | Salaried workers investing from each paycheque | Very practical for budgeting |
+| Monthly | Simple household budgeting | Larger timing chunks |
+| Quarterly | Lowest maintenance | Most timing concentration |
+
+## DCA calculator eyebrow
+
+Steady DCA calculator
+
+## Calculator heading
+
+Compare schedules through market noise.
+
+## Calculator intro
+
+Each schedule invests the same total amount over one year. Click any schedule to compare the others against it, then test calm, rising, choppy, or rough market scenarios.
+
+## Small note below intro, not first sentence
+
+Educational estimate. Actual market returns vary.
+
+## Controls: beginner mode first
+
+Default controls should be simple:
+
+- daily recurring amount
+- contribution schedule comparison
+- annualized gain/loss assumption
+- daily variation
+
+Advanced controls should be collapsed by default under:
+
+> Custom market scenario controls
+
+Advanced controls include:
+
+- add a market dip or rally
+- when it starts
+- market move %
+- how long it lasts
+- whether the market recovers afterward
+- daily variation
+- reset neutral
+
+## Scenario button labels
+
+| Scenario key | Label |
+|---|---|
+| neutral | Calm baseline |
+| rising | Market climbs |
+| early-dip | Early rough patch |
+| late-dip | Late rough patch |
+| sideways | Choppy sideways year |
+| bearish | Tough market year |
+| custom | Build your own scenario |
+
+## Model explanation
+
+Move long model assumptions into a collapsed section:
+
+### How this calculator works
+
+Each schedule invests the same total amount over the year. The chart changes only the timing of contributions. You can also test simple market scenarios, such as an early rough patch, late rough patch, choppy year, or tough market year.
+
+## Neutral reset helper text
+
+Use “Reset to neutral” to remove market moves and set annual return and daily variation to 0%. In that neutral case, each schedule ends with the same value because each schedule invested the same total amount.
+
+## Bottom calculator note
+
+Calculator results are simplified estimates based on the assumptions you choose. They are meant to teach the mechanics of contribution timing, not predict future returns.
+
+---
+
+# 14. Wealthsimple setup section
+
+## Eyebrow
+
+Get started
+
+## Heading
+
+Set up recurring ETF investing with Wealthsimple
+
+## Intro copy
+
+A simple walkthrough for opening the right accounts and turning recurring contributions into an automated habit.
+
+## Steps
+
+1. Create your Wealthsimple profile
+2. Choose where cash will come from
+3. Open the investing account you want to use
+4. Set up a recurring investment
+
+## Important copy rule
+
+Do not say “Pick one of the recommended ETFs below.” Use “ETF examples” or “an ETF you have chosen after research.”
+
+---
+
+# 15. Broad ETF section
 
 ## Eyebrow
 
@@ -666,7 +628,7 @@ Diversification reduces company-specific risk, but market risk still exists. Kee
 
 ---
 
-# 19. ETF examples section
+# 16. ETF examples section
 
 ## Eyebrow
 
@@ -680,17 +642,6 @@ Broad ETF examples for Canadian investors
 
 Use these as a starting point for your own research. Compare fees, holdings, risk rating, account fit, currency exposure, and tax treatment before choosing.
 
-Avoid saying “not personal recommendations” in the first paragraph. The footer and FAQ can handle that.
-
-## Region controls
-
-Default to Canada. Consider removing geolocation entirely unless it clearly improves UX. Manual region buttons are enough:
-
-- Canada
-- United States / elsewhere
-
-If geolocation remains, do not make it prominent.
-
 ## Canadian grid columns
 
 | Market exposure | Standard broad-market example | Tilted / more aggressive example |
@@ -698,10 +649,6 @@ If geolocation remains, do not make it prominent.
 | U.S. | ZSP.TO — BMO S&P 500 Index ETF. Tracks large U.S. companies in the S&P 500. | CAUS.TO — Avantis CIBC U.S. All-Cap Equity ETF. Broader U.S. equity exposure with a factor-oriented approach. |
 | Canada | ZIU.TO — BMO S&P/TSX 60 Index ETF. Tracks 60 large Canadian companies. | CACE.TO — Avantis CIBC Canadian Equity ETF. Broad Canadian equity exposure with a factor-oriented approach. |
 | Global | XEQT.TO — iShares Core Equity ETF Portfolio. All-equity global asset-allocation ETF. | CAGE.TO — Avantis CIBC All-Equity Asset Allocation ETF. Global all-equity portfolio with factor tilts. |
-
-## Add after grid
-
-Other all-in-one ETFs, such as VEQT, may also be worth comparing. The best fit depends on your account, time horizon, comfort with volatility, fees, and desired exposure.
 
 ## U.S. / elsewhere examples
 
@@ -712,89 +659,9 @@ Other all-in-one ETFs, such as VEQT, may also be worth comparing. The best fit d
 - AVGE
 - QQQM
 
-## CTA below ETF examples
-
-Ready to automate? See the Wealthsimple setup guide.
-
 ---
 
-# 20. Wealthsimple brokerage section
-
-## Heading
-
-Need a brokerage?
-
-## Body
-
-Wealthsimple is a popular Canadian platform for automating recurring ETF purchases. Compare fees, account types, FX costs, transfer rules, automation features, and current terms before choosing a brokerage.
-
-## CTA
-
-Wealthsimple referral
-
-## Small label
-
-Referral link
-
-## Section-level footnote handles
-
-Full referral disclosure belongs in the footer, not as a large interruptive paragraph in the middle of the page.
-
----
-
-# 21. Wealthsimple step-by-step section
-
-## Eyebrow
-
-Get started
-
-## Heading
-
-Set up recurring ETF investing with Wealthsimple
-
-## Intro copy
-
-A simple walkthrough for opening the right accounts and turning recurring contributions into an automated habit.
-
-## Step 1 heading
-
-Create your Wealthsimple profile
-
-## Step 1 copy
-
-Create your account and verify your identity. This gives you access to Cash, TFSA, RRSP, FHSA, and trading account options.
-
-## Step 2 heading
-
-Choose where cash will come from
-
-## Step 2 copy
-
-You can link a bank account directly or use a Wealthsimple Cash account as a staging place before investing.
-
-## Step 3 heading
-
-Open the investing account you want to use
-
-## Step 3 copy
-
-Many Canadian long-term investors consider a TFSA first when they have contribution room, but account choice depends on your goals.
-
-## Step 4 heading
-
-Set up a recurring investment
-
-## Step 4 copy
-
-Choose an ETF, pick your contribution amount, select the schedule, and let automation handle the habit.
-
-## Important copy rule
-
-Do not say “Pick one of the recommended ETFs below.” Use “ETF examples” or “an ETF you have chosen after research.”
-
----
-
-# 22. TFSA section
+# 17. TFSA section
 
 ## Eyebrow
 
@@ -824,15 +691,122 @@ Simple TFSA room calculator
 
 Estimate your remaining TFSA contribution room using your eligibility year, past contributions, and last year’s withdrawals. TFSA limit data last updated for 2026.
 
-## Move detailed caveats to FAQ/footer
+---
 
-Foreign withholding tax, overcontribution penalties, and account-fit caveats should be included, but not in the first paragraph.
+# 18. Compounding section
+
+## Eyebrow
+
+Compounding over time
+
+## Heading
+
+How patience compounds.
+
+## Body
+
+At first, your contributions do most of the work. Over time, a larger balance gives investment growth more room to matter. That is why consistency and patience are so powerful.
+
+## Stage cards
+
+### Years 1–8: Build the base
+
+Most of the visible progress comes from your own contributions. The account may not feel exciting yet, but the habit is doing its job.
+
+### Years 9–12: Momentum appears
+
+As the balance grows, the same percentage return creates more dollars of growth. Compounding becomes easier to see.
+
+### Years 13–15: Growth becomes visible
+
+With a larger base, investment growth can start to do more of the heavy lifting during strong markets.
+
+## 8-4-3 note
+
+Some investors call this the 8-4-3 rule. Treat it as a memorable way to understand patience, not an exact schedule. Your real timeline depends on contribution size, returns, fees, inflation, account type, and market conditions.
 
 ---
 
-# 23. Timing risk / DCA vs lump sum section
+# 19. How long to double your money section
 
-Move this lower than calculator, compounding, and ETF examples.
+Merge the former quick mental math and “try your numbers” areas into one section.
+
+## Eyebrow
+
+Rule of 72 + DCA calculator
+
+## Heading
+
+How long to double your money?
+
+## Formula card
+
+> 72 ÷ return = years to double
+
+## Body
+
+The Rule of 72 gives a quick mental shortcut: divide 72 by the return assumption to estimate how many years it takes money to double. Then use your daily contribution below to see how compounding changes the path.
+
+At an 8% annual return, money roughly doubles in about 9 years. Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.
+
+## Inputs
+
+- Initial investment
+- Daily contribution
+- Years invested
+- Return assumption preset
+- Custom CAGR
+
+## Outputs
+
+- Estimated future value
+- Total contributed
+- Estimated growth
+- Rule-of-72 doubling estimate
+
+---
+
+# 20. Growth milestones / 4% rule income target section
+
+Remove Coast FI terminology from the page. It clouds the message for beginners.
+
+## Eyebrow
+
+Income target
+
+## Heading
+
+How much invested could support the income you want?
+
+## Intro copy
+
+The 4% rule is a simple retirement-planning shortcut: multiply the annual portfolio income you want by 25. In formula form:
+
+> desired annual income ÷ 4%
+
+Use this as a conservative scale estimate, then compare it with your current balance, monthly investing habit, and growth assumption.
+
+## Inputs
+
+- Current invested amount
+- Monthly investment
+- Growth assumption
+- Desired annual income
+- Withdrawal-rate assumption
+- Years to model
+
+## Outputs
+
+- 4% rule income target
+- Amount still needed
+- Estimated target timing
+- Contribution crossover
+- Crossover timing
+- Projected value
+
+---
+
+# 21. Timing risk / DCA vs lump sum section
 
 ## Eyebrow
 
@@ -840,7 +814,7 @@ Timing risk
 
 ## Heading
 
-Timing dips is harder than it looks.
+Trying to time the noise is harder than it looks.
 
 ## Body
 
@@ -856,13 +830,7 @@ Keep cited research, but place it in a source note or expandable detail:
 
 > Research on individual day traders shows how difficult short-term timing can be. DCA is different: it is a long-term contribution system, not a trading strategy.
 
-## Replace comparison table row
-
-Avoid saying:
-
-> DCA expected return: slightly lower
-
-Use:
+## Comparison table
 
 | Situation | Practical approach |
 |---|---|
@@ -873,41 +841,7 @@ Use:
 
 ---
 
-# 24. Withdrawal section
-
-## Eyebrow
-
-When to withdraw
-
-## Heading
-
-Withdraw when the money has a real job — not because the market is noisy.
-
-## Body
-
-Selling can make sense when the money is needed for a planned goal, emergency, rebalancing decision, or risk reduction before a known expense.
-
-## Supporting copy
-
-What usually hurts long-term investors is panic selling: selling only because the market dropped and the chart feels scary.
-
-## Cards
-
-### A real goal
-
-Home down payment, education, a planned purchase, or another clear use.
-
-### Emergency backup
-
-Unexpected urgent expenses can happen. Ideally, use cash savings first.
-
-### Not market panic
-
-A market drop alone is not a plan. Review your goal, timeline, and investment mix before reacting.
-
----
-
-# 25. FAQ rewrite for SEO
+# 22. FAQ rewrite for SEO and calm-market positioning
 
 Use FAQ questions people actually search. Keep answers short, helpful, and keyword-rich.
 
@@ -915,45 +849,53 @@ Use FAQ questions people actually search. Keep answers short, helpful, and keywo
 
 Dollar-cost averaging means investing a fixed amount on a regular schedule. When prices are lower, the same amount buys more units. When prices are higher, it buys fewer units.
 
-## FAQ 2: Is DCA good for beginners?
+## FAQ 2: Should I keep DCA investing when the market is down?
 
-DCA can be useful for beginners because it turns investing into a repeatable habit. It can reduce timing stress and make it easier to invest from each paycheque.
+If your time horizon, emergency fund, debt situation, and risk tolerance still support long-term investing, a fixed DCA schedule can help you avoid emotional timing decisions. If your personal situation has changed, review the plan before contributing more.
 
-## FAQ 3: Is daily DCA better than weekly or monthly DCA?
+## FAQ 3: Does DCA mean buying the dip?
+
+Not exactly. DCA means investing a fixed amount on a regular schedule. Lower prices naturally buy more units, but the point is not to guess the bottom. The point is to keep the habit steady.
+
+## FAQ 4: Is daily DCA better during volatile markets?
 
 Daily DCA spreads contributions across the most market days, but weekly, biweekly, payday-based, and monthly investing can also work. The key is to keep investing at a rate you can automate and sustain.
 
-## FAQ 4: Can I dollar-cost average in a TFSA?
+## FAQ 5: What if I feel nervous investing during a crash?
+
+Nervousness is a signal to review your plan, not automatically abandon it. Check your cash buffer, debt, time horizon, contribution amount, and investment mix. If the plan still fits, the schedule can keep going.
+
+## FAQ 6: Can I dollar-cost average in a TFSA?
 
 Yes. Many Canadians use a TFSA for recurring ETF investments when they have contribution room. Confirm your official TFSA room and account fit before contributing.
 
-## FAQ 5: What ETFs do Canadians use for DCA?
+## FAQ 7: What ETFs do Canadians use for DCA?
 
 Many Canadians research broad-market or all-in-one ETFs for long-term DCA. Examples include Canadian-listed ETFs that cover U.S., Canadian, or global markets. Compare fees, holdings, risk rating, and account fit before choosing.
 
-## FAQ 6: What is the Rule of 72?
+## FAQ 8: What is the Rule of 72?
 
 The Rule of 72 estimates how long money takes to double: 72 divided by the annual return equals the approximate number of years.
 
-## FAQ 7: Is DCA better than lump sum investing?
+## FAQ 9: Is DCA better than lump sum investing?
 
 If you already have a large lump sum, investing sooner has often performed better historically because markets tend to rise over time. But DCA may be easier emotionally and can help investors avoid sitting in cash out of fear.
 
-## FAQ 8: What return should I assume in the calculator?
+## FAQ 10: What return should I assume in the calculator?
 
 Use conservative assumptions and test multiple scenarios. A higher assumption makes the output look better, but it does not make the result more likely.
 
-## FAQ 9: Are ETF tickers on this site recommendations?
+## FAQ 11: Are ETF tickers on this site recommendations?
 
 No. ETF tickers are examples for research. The right choice depends on your account, time horizon, fees, tax situation, currency exposure, and comfort with market swings.
 
-## FAQ 10: What is the 4% rule?
+## FAQ 12: What is the 4% rule?
 
 The 4% rule is a simplified retirement-planning shortcut that estimates a portfolio target by dividing desired annual income by 4%. It is a planning rule of thumb, not a guarantee.
 
 ---
 
-# 26. Section-level footnotes and footer
+# 23. Section-level footnotes and footer
 
 Do not collect all caveats at the bottom of the page. Each major section should carry its own expandable **Footnotes** block with the relevant caveat or assumption.
 
@@ -969,98 +911,49 @@ Footer copy should be minimal:
 
 > Footnotes live with each section. Open the Footnotes toggle in any section for the relevant assumptions, limitations, and disclosures.
 
-# 27. Navigation rewrite
+---
 
-Current navigation is too crowded. Simplify to:
+# 24. Navigation direction
 
-- Calculator
-- How it works
-- Compounding
-- ETF examples
-- TFSA
+Keep simple navigation:
+
+- Start
+- Automate
+- Grow
+- ETF/TFSA
 - FAQ
 
-Optional if there is room:
-
-- Start here
-- Setup guide
-
-Avoid nav labels like:
-
-- Tickers
-- Milestones
-- Timing risk
-- Withdraw
-
-These can remain sections, but they do not need top-level navigation.
+Avoid overcrowding the nav with every section. The page itself can carry the full guided journey.
 
 ---
 
-# 28. Technical/content implementation checklist
+# 25. Technical/content implementation checklist
 
-- [ ] Update title tag to “Dollar-Cost Averaging Calculator Canada | DCA the Dip.”
-- [ ] Update meta description with DCA, ETF, TFSA, compounding, and Canadian investor keywords.
-- [ ] Rewrite hero around “Automate the habit. Ignore the noise.”
-- [ ] Move heavy caveats out of hero and first paragraphs.
-- [ ] Replace caveat-forward headlines with positive headlines.
-- [ ] Replace “toy model” with “calculator” or “educational model.”
-- [ ] Collapse advanced chart controls by default.
-- [ ] Rename technical chart labels to beginner language.
-- [ ] Move long calculator assumptions into an expandable “How this calculator works” detail.
-- [ ] Move timing-risk / DCA-vs-lump-sum section lower on the page.
-- [ ] Simplify risk section into three beginner-friendly cards.
-- [ ] Rework compounding section to lead with reward and use the 8-4-3 hook as storytelling.
-- [ ] Keep generic CAGR assumptions instead of ETF-specific return assumptions.
-- [ ] Rewrite ETF section as “Broad ETF examples for Canadian investors.”
-- [ ] Remove or de-emphasize geolocation unless it materially improves UX.
-- [ ] Replace “recommended ETFs” language with “ETF examples.”
-- [ ] Rewrite TFSA section with a positive first paragraph and caveats later.
-- [ ] Rewrite FAQ around SEO search questions.
-- [ ] Create structured footer disclosure box and remove repetitive mid-page disclaimers.
-- [ ] Keep mobile responsiveness and mobile audit intact.
+- [x] Update brand to **Keep Calm and DCA On**.
+- [x] Update title tag to “Keep Calm and DCA On | DCA Calculator Canada.”
+- [x] Update meta description with DCA, ETF, TFSA, market noise, and Canadian investor keywords.
+- [x] Rewrite hero around “Keep Calm and DCA On.”
+- [x] Add market-noise positioning: “You are not predicting the noise. You are building through it.”
+- [x] Keep daily as the default DCA comparison baseline.
+- [x] Put the DCA calculator directly under the frequency guide.
+- [x] Rename scenario buttons for market moods.
+- [x] Add market noise playbook.
+- [x] Keep coffee vs lottery comparison inside Sustainable investing.
+- [x] Keep When to withdraw under Sustainable investing.
+- [x] Merge Rule of 72 and compounding inputs into one “How long to double your money?” block.
+- [x] Use “Daily contribution,” not “Regular contribution.”
+- [ ] Keep mobile responsiveness and mobile audit intact after implementation.
 
 ---
 
-# 29. Desired final reader impression
+# 26. Desired final reader impression
 
 A visitor should leave thinking:
 
-> I can automate a small ETF investing habit, compare schedules, understand how DCA and compounding work, and keep going without trying to time the market.
+> I can automate a small ETF investing habit, compare schedules, understand how DCA and compounding work, and keep going through market noise without trying to time the market.
 
 They should not leave thinking:
 
-> This site is nervous about everything it says.
+> I need to predict dips, chase rallies, or make every contribution a market call.
 
-The ideal balance is confident up top, responsible at the bottom.
-
-
-## Current implementation direction: Three-step journey
-
-Restructure the page around a single guided journey:
-
-1. **Start** — prepare the foundation and choose a risk level.
-2. **Automate** — pick an amount, use the calculator, choose a cadence, set up recurring investing, and research ETF/TFSA options.
-3. **Grow** — understand compounding, use the 4% rule income target, compare lump sum versus DCA behaviour, and plan withdrawals.
-
-Use section-level expandable footnotes throughout. Lead with benefits in the main copy; place caveats in the relevant footnote, FAQ, or footer.
-
-Recommended term for the income tool: **4% rule income target**. Avoid “self-replenishing from CAGR” because CAGR is not guaranteed annual cash flow.
-
-
-## Footnote title standard
-
-Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain: calculators with calculator assumptions, ETFs with ETF example caveats, TFSA with contribution-room/withholding notes, brokerage links with referral disclosure, and risk sections with investment-risk notes. Keep the footer minimal.
-
-
-## DCA schedule comparison baseline
-
-Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to daily. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.
-
-
-## Latest layout direction: frequency and sustainable investing
-
-- Put the DCA calculator directly under the Frequency guide as part of the same section.
-- Make Daily DCA the default selected comparison baseline.
-- Remove the standalone “How much should I DCA?” section.
-- Move the coffee vs lottery comparison into Sustainable investing.
-- Put “When to withdraw” directly under Sustainable investing so sustainability, cash buffers, contribution size, and withdrawal discipline are grouped together.
+The ideal balance is confident up top, responsible in the footnotes.

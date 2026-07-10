@@ -1,4 +1,4 @@
-// DCA the Dip configuration
+// Keep Calm and DCA On configuration
 const WEALTHSIMPLE_REFERRAL_URL = "https://wealthsimple.com/invite/V-MKNQ";
 
 const etfs = {
