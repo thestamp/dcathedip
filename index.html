@@ -513,25 +513,16 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
         </article>
       </div>
 
-      <div class="rule-72-card">
-        <div>
-          <p class="eyebrow">Quick mental math</p>
-          <h3>How long to double your money?</h3>
-          <p>The Rule of 72 is a quick shortcut.</p>
-        </div>
-        <div class="rule-formula" aria-label="Rule of 72 formula">
-          <span>72 ÷ return</span>
-          <strong>= years to double</strong>
-        </div>
-        <p class="rule-example">At an 8% annual return, money roughly doubles in about 9 years. Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.</p>
-      </div>
-
-
       <div class="compound-calculator" aria-labelledby="compound-calc-title">
         <div class="compound-calc-copy">
-          <p class="eyebrow">Try your numbers</p>
-          <h3 id="compound-calc-title">Simple DCA compounding calculator</h3>
-          <p>Enter a starting amount, recurring contribution, time period, and return assumption to see how compounding changes the path.</p>
+          <p class="eyebrow">Rule of 72 + DCA calculator</p>
+          <h3 id="compound-calc-title">How long to double your money?</h3>
+          <p>The Rule of 72 gives a quick mental shortcut: divide 72 by the return assumption to estimate how many years it takes money to double. Then use your daily contribution below to see how compounding changes the path.</p>
+          <div class="rule-formula" aria-label="Rule of 72 formula">
+            <span>72 ÷ return</span>
+            <strong>= years to double</strong>
+          </div>
+          <p class="rule-example">At an 8% annual return, money roughly doubles in about 9 years. Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.</p>
         </div>
         <form class="compound-form" id="compoundForm">
           <label>
@@ -539,7 +530,7 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
             <input type="number" id="compoundInitial" min="0" step="100" value="0" />
           </label>
           <label>
-            Regular contribution
+            Daily contribution
             <input type="number" id="compoundDaily" min="0" step="1" value="10" />
           </label>
           <label>

@@ -196,9 +196,13 @@ function createServer() {
       && /Build the base/i.test(bodyText)
       && /Momentum appears/i.test(bodyText)
       && /Growth becomes visible/i.test(bodyText)
-      && /Rule of 72/i.test(bodyText)
+      && /Rule of 72 \+ DCA calculator/i.test(bodyText)
+      && /How long to double your money\?/i.test(bodyText)
       && /72 ÷ return/i.test(bodyText)
-      && /Use this as mental math/i.test(bodyText);
+      && /Use this as mental math/i.test(bodyText)
+      && /Daily contribution/i.test(bodyText)
+      && !/Try your numbers/i.test(bodyText)
+      && !/Regular contribution/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
     const foundationImage = await page.locator('.foundation-illustration').count().then(count => count === 1);
     const foundationSection = /Build a simple investing foundation/i.test(bodyText)

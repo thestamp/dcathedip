@@ -161,20 +161,22 @@ Required content:
   - Years 13–15: Growth becomes visible
 - Include a note that 8-4-3 is a memorable way to understand patience, not an exact schedule.
 
-## 11. Rule of 72
+## 11. How long to double your money
 
-- Eyebrow: `Quick mental math`
+Merge the former `Quick mental math` and `Try your numbers` areas into a single section/card.
+
+Required copy:
+
+- Eyebrow: `Rule of 72 + DCA calculator`
 - Heading: `How long to double your money?`
 - Formula: `72 ÷ return = years to double`
 - Example: at 8%, money roughly doubles in about 9 years.
 - Keep inflation/tax/fee/purchasing-power caveats as a short note, not the main headline.
 
-## 12. DCA compounding calculator
-
 Inputs:
 
 - Initial investment
-- Recurring contribution
+- Daily contribution
 - Years invested
 - Return assumption preset
 - Custom CAGR
@@ -197,7 +199,7 @@ Outputs:
 
 Bottom note: results are estimates based on the return assumption chosen; encourage testing lower and higher scenarios.
 
-## 13. Growth milestones / 4% rule income target
+## 12. Growth milestones / 4% rule income target
 
 This section should focus on two simple ideas and avoid Coast FI terminology:
 

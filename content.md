@@ -234,7 +234,7 @@ Educational estimate. Actual market returns vary.
 
 Default controls should be simple:
 
-- regular contribution amount
+- daily contribution amount
 - contribution schedule comparison
 - annual return assumption
 
@@ -455,11 +455,13 @@ Some investors call this the 8-4-3 rule. Treat it as a memorable way to understa
 
 ---
 
-# 13. Rule of 72 section
+# 13. How long to double your money section
+
+Merge the former quick mental math and “try your numbers” areas into one section.
 
 ## Eyebrow
 
-Quick mental math
+Rule of 72 + DCA calculator
 
 ## Heading
 
@@ -471,27 +473,9 @@ How long to double your money?
 
 ## Body
 
-The Rule of 72 is a quick shortcut. At an 8% annual return, money roughly doubles in about 9 years.
+The Rule of 72 gives a quick mental shortcut: divide 72 by the return assumption to estimate how many years it takes money to double. Then use your daily contribution below to see how compounding changes the path.
 
-## Small note
-
-Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.
-
----
-
-# 14. DCA compounding calculator
-
-## Eyebrow
-
-Try your numbers
-
-## Heading
-
-Simple DCA compounding calculator
-
-## Intro copy
-
-Enter a starting amount, recurring contribution, time period, and return assumption to see how compounding changes the path.
+At an 8% annual return, money roughly doubles in about 9 years. Inflation, taxes, fees, and real market returns affect purchasing power. Use this as mental math, not a promise.
 
 ## Presets
 
@@ -499,23 +483,20 @@ Use generic assumptions, not ETF-specific return assumptions:
 
 | Preset | CAGR |
 |---|---:|
+| Very conservative | 3% |
 | Conservative | 4% |
 | Moderate | 6% |
 | Long-term equity | 8% |
 | Aggressive | 10% |
 | Custom | user input |
 
-Optional very conservative preset:
-
-| Very conservative | 3% |
-
 ## Inputs
 
 - Initial investment
-- Recurring contribution
-- Contribution frequency
+- Daily contribution
 - Years invested
-- Return assumption
+- Return assumption preset
+- Custom CAGR
 
 ## Outputs
 
