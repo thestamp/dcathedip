@@ -320,6 +320,18 @@ function createServer() {
       noStandaloneStrategy: !document.getElementById('strategy'),
       noStandaloneBudget: !document.getElementById('budget')
     }));
+    const adsenseBlocks = await page.evaluate(() => {
+      const blocks = [...document.querySelectorAll('.ad-block')];
+      const placements = blocks.map(block => block.dataset.adPlacement);
+      return {
+        count: blocks.length,
+        hasIns: blocks.every(block => block.querySelector('ins.adsbygoogle')),
+        labelled: blocks.every(block => /Advertisement/i.test(block.textContent)),
+        noHeroAds: document.querySelectorAll('.hero .ad-block, .hero ins.adsbygoogle').length === 0,
+        expectedPlacements: ['after-journey', 'after-noise-playbook', 'after-calculator', 'before-faq'].every(placement => placements.includes(placement)),
+        loaderDeferredWithoutPublisher: !document.documentElement.classList.contains('adsense-configured')
+      };
+    });
     const scenarioButtons = /Market climbs/i.test(bodyText) && /Early rough patch/i.test(bodyText) && /Build your own scenario/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
     if (errors.length) throw new Error(`Browser errors: ${errors.join(' | ')}`);
     if (!zeroCaseEqual) throw new Error('Expected 0% market moves and 0% annual gain to make all recurring schedules equal the same annual invested amount and final table row.');
@@ -401,9 +413,15 @@ function createServer() {
     if (!layoutRestructure.withdrawUnderSustainable) throw new Error('Expected When to withdraw content under Sustainable investing.');
     if (!layoutRestructure.noStandaloneStrategy) throw new Error('Expected standalone #strategy section to be removed.');
     if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
+    if (adsenseBlocks.count !== 4) throw new Error(`Expected 4 non-intrusive AdSense blocks, found ${adsenseBlocks.count}.`);
+    if (!adsenseBlocks.hasIns) throw new Error('Expected every ad block to include AdSense ins markup.');
+    if (!adsenseBlocks.labelled) throw new Error('Expected every ad block to be visibly labelled Advertisement.');
+    if (!adsenseBlocks.noHeroAds) throw new Error('Expected no AdSense block inside the hero.');
+    if (!adsenseBlocks.expectedPlacements) throw new Error('Expected AdSense blocks after journey, after playbook, after calculator, and before FAQ.');
+    if (!adsenseBlocks.loaderDeferredWithoutPublisher) throw new Error('Expected AdSense loader to stay disabled while publisher ID placeholder is present.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

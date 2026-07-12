@@ -569,6 +569,31 @@ function calculateTfsaRoom() {
   `;
 }
 
+function initAdsense() {
+  const ads = [...document.querySelectorAll("ins.adsbygoogle")];
+  if (!ads.length) return;
+  const client = ads[0].dataset.adClient || "";
+  const configured = /^ca-pub-\d{10,}$/.test(client);
+  document.documentElement.classList.toggle("adsense-configured", configured);
+  if (!configured) return;
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`;
+  document.head.appendChild(script);
+
+  script.addEventListener("load", () => {
+    ads.forEach(() => {
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        // Ad blockers or unapproved domains can block AdSense; keep the page usable.
+      }
+    });
+  });
+}
+
 function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));
   document.getElementById("addDip").addEventListener("click", addMarketMove);
@@ -593,6 +618,7 @@ function init() {
   calculateTfsaRoom();
   calculateCompounding();
   calculateCrossover();
+  initAdsense();
 }
 
 document.addEventListener("DOMContentLoaded", init);

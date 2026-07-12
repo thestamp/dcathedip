@@ -8,6 +8,7 @@ A Jekyll educational website for **KeepCalmAndDCAOn.com**.
 - Interactive DCA-through-a-dip calculator using Chart.js
 - Clickable daily, weekly, biweekly, monthly, and quarterly DCA schedule comparison
 - Frequency guide with the steady DCA calculator directly underneath, market-noise scenario labels, and Daily as the default comparison baseline
+- AdSense-ready responsive ad blocks in non-intrusive section breaks
 - Canadian TFSA account guidance and simple contribution room calculator
 - Canadian vs U.S. ETF suggestions
 - Optional browser geolocation for region selection

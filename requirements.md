@@ -346,7 +346,25 @@ Distribute disclosures by topic:
 
 The footer should stay minimal and tell users that section-specific footnotes live with each section.
 
-## 22. Mobile friendliness requirements
+
+## 22. AdSense placement requirements
+
+Add non-intrusive but visible responsive Google AdSense slots in natural breaks between major sections. Ads should not appear inside the hero, calculator controls, FAQ answers, or footnote content. Use clearly labelled `Advertisement` blocks with reserved height to reduce layout shift.
+
+Current ad placements:
+
+- After the three-step journey, before Start Smart.
+- After the market noise playbook, before Sustainable investing.
+- After the DCA calculator, before the Wealthsimple setup guide.
+- Before the FAQ.
+
+Implementation notes:
+
+- Ad blocks use `ins.adsbygoogle` markup and are ready for real AdSense publisher/slot IDs.
+- Keep the placeholder `ca-pub-REPLACE_WITH_ADSENSE_PUBLISHER_ID` until the real publisher ID is provided. The JavaScript loader only loads AdSense when a valid numeric `ca-pub-...` client is present, avoiding console errors during local tests.
+- Replace placeholder slot IDs with real AdSense ad unit slots before launch monetization.
+
+## 23. Mobile friendliness requirements
 
 The site must remain comfortable on 360px–390px phones and tablets:
 
@@ -356,7 +374,7 @@ The site must remain comfortable on 360px–390px phones and tablets:
 - Late-added grids must collapse to one column on phones.
 - Desktop visual hierarchy should remain intact while mobile sections use shorter spacing, readable font sizes, full-width buttons, and compact cards.
 
-## 23. Technical requirements
+## 24. Technical requirements
 
 - Site uses Jekyll structure for GitHub Pages.
 - Main config: `_config.yml`.
@@ -366,7 +384,7 @@ The site must remain comfortable on 360px–390px phones and tablets:
 - Custom domain is configured with `CNAME`.
 - Generated files and dependencies must not be committed (`_site/`, `node_modules/`, `vendor/bundle/`, caches).
 
-## 24. Verification requirements
+## 25. Verification requirements
 
 Before finalizing changes, run:
 
@@ -386,12 +404,12 @@ The test must:
 - Verify Keep Calm and DCA On hero copy, market-noise playbook, and section footnotes.
 - Run mobile audit across common phone/tablet widths.
 
-## 25. Current limitations
+## 26. Current limitations
 
 - Local environment may not have Ruby/Jekyll installed. If unavailable, use the lightweight renderer for smoke tests and state that real `bundle exec jekyll build` was not run locally.
 - The site is educational and must not claim guaranteed investment results.
 
-## 26. Current UX direction: calm 3-step journey
+## 27. Current UX direction: calm 3-step journey
 
 The site should be organized as a guided path rather than scattered finance topics:
 
@@ -405,10 +423,10 @@ The former Coast FI / CAGR-income line is removed. The income target tool uses t
 
 The DCA chart should default to a neutral scenario and offer clear market-noise scenario buttons plus a Custom option that opens the market-move editor.
 
-## 27. Footnote title standard
+## 28. Footnote title standard
 
 Expandable disclosure/caveat blocks inside sections should use the summary title **Footnotes**, not “Context.” Relevant bottom-of-page disclosure items should live in the section they explain. Keep the footer minimal.
 
-## 28. DCA schedule comparison baseline
+## 29. DCA schedule comparison baseline
 
 Do not show a lump-sum series, stat card, or table column in the main DCA calculator. Compare only recurring schedules: daily, weekly, biweekly, monthly, and quarterly. Default the comparison baseline to daily. Each schedule result card should be clickable; when selected, it becomes the baseline and shows no percentage, while the other schedules show percentage differences versus that selected schedule using the existing green/yellow positive/negative formatting.

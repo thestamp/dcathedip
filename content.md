@@ -895,7 +895,21 @@ The 4% rule is a simplified retirement-planning shortcut that estimates a portfo
 
 ---
 
-# 23. Section-level footnotes and footer
+
+# 23. AdSense placement direction
+
+Add non-intrusive but visible responsive AdSense blocks in natural section breaks:
+
+- after the three-step journey
+- after the market noise playbook
+- after the DCA calculator
+- before the FAQ
+
+Do not place ads inside the hero, calculator controls, FAQ answers, or footnote toggles. Label each block `Advertisement`, reserve enough height to reduce layout shift, and keep the design visually quiet so ads do not overpower the educational content. Use placeholder publisher/slot IDs until the real Google AdSense values are supplied.
+
+---
+
+# 24. Section-level footnotes and footer
 
 Do not collect all caveats at the bottom of the page. Each major section should carry its own expandable **Footnotes** block with the relevant caveat or assumption.
 
@@ -913,7 +927,7 @@ Footer copy should be minimal:
 
 ---
 
-# 24. Navigation direction
+# 25. Navigation direction
 
 Keep simple navigation:
 
@@ -927,7 +941,7 @@ Avoid overcrowding the nav with every section. The page itself can carry the ful
 
 ---
 
-# 25. Technical/content implementation checklist
+# 26. Technical/content implementation checklist
 
 - [x] Update brand to **Keep Calm and DCA On**.
 - [x] Update title tag to “Keep Calm and DCA On | DCA Calculator Canada.”
@@ -942,11 +956,12 @@ Avoid overcrowding the nav with every section. The page itself can carry the ful
 - [x] Keep When to withdraw under Sustainable investing.
 - [x] Merge Rule of 72 and compounding inputs into one “How long to double your money?” block.
 - [x] Use “Daily contribution,” not “Regular contribution.”
+- [x] Add non-intrusive AdSense blocks in natural section breaks.
 - [ ] Keep mobile responsiveness and mobile audit intact after implementation.
 
 ---
 
-# 26. Desired final reader impression
+# 27. Desired final reader impression
 
 A visitor should leave thinking:
 
