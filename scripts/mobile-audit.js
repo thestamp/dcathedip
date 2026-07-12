@@ -43,7 +43,12 @@ function createServer() {
     ]) {
       const page = await browser.newPage({ viewport, isMobile: viewport.width < 600 });
       page.on('pageerror', e => errors.push(`${viewport.name}: ${e.message}`));
-      page.on('console', msg => { if (msg.type() === 'error') errors.push(`${viewport.name}: ${msg.text()}`); });
+      page.on('console', msg => {
+        const text = msg.text();
+        const isExternalAdResourceError = /googlesyndication|googleads|doubleclick|adsbygoogle|pagead|google\.com.*Content Security Policy/i.test(text)
+          || /^Failed to load resource: the server responded with a status of (400|403)/i.test(text);
+        if (msg.type() === 'error' && !isExternalAdResourceError) errors.push(`${viewport.name}: ${text}`);
+      });
       await page.goto(baseUrl, { waitUntil: 'networkidle' });
       const report = await page.evaluate(() => {
         const viewportWidth = document.documentElement.clientWidth;

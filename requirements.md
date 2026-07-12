@@ -361,7 +361,7 @@ Current ad placements:
 Implementation notes:
 
 - Ad blocks use `ins.adsbygoogle` markup and are ready for real AdSense publisher/slot IDs.
-- Keep the placeholder `ca-pub-REPLACE_WITH_ADSENSE_PUBLISHER_ID` until the real publisher ID is provided. The JavaScript loader only loads AdSense when a valid numeric `ca-pub-...` client is present, avoiding console errors during local tests.
+- The verified AdSense publisher ID is `ca-pub-3629246939430785`; replace placeholder ad slot IDs with real AdSense ad-unit slot IDs before launch monetization.
 - Replace placeholder slot IDs with real AdSense ad unit slots before launch monetization.
 
 ## 23. Mobile friendliness requirements

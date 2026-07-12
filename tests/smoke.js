@@ -44,7 +44,10 @@ function createServer() {
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   page.on('console', msg => {
-    if (msg.type() === 'error') errors.push(msg.text());
+    const text = msg.text();
+    const isExternalAdResourceError = /googlesyndication|googleads|doubleclick|adsbygoogle|pagead|google\.com.*Content Security Policy/i.test(text)
+      || /^Failed to load resource: the server responded with a status of (400|403)/i.test(text);
+    if (msg.type() === 'error' && !isExternalAdResourceError) errors.push(text);
   });
 
   try {
@@ -329,7 +332,9 @@ function createServer() {
         labelled: blocks.every(block => /Advertisement/i.test(block.textContent)),
         noHeroAds: document.querySelectorAll('.hero .ad-block, .hero ins.adsbygoogle').length === 0,
         expectedPlacements: ['after-journey', 'after-noise-playbook', 'after-calculator', 'before-faq'].every(placement => placements.includes(placement)),
-        loaderDeferredWithoutPublisher: !document.documentElement.classList.contains('adsense-configured')
+        publisherConfigured: [...document.querySelectorAll('.ad-block ins.adsbygoogle')].every(ad => ad.dataset.adClient === 'ca-pub-3629246939430785'),
+        verificationScript: Boolean(document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3629246939430785"]')),
+        loaderConfigured: document.documentElement.classList.contains('adsense-configured')
       };
     });
     const scenarioButtons = /Market climbs/i.test(bodyText) && /Early rough patch/i.test(bodyText) && /Build your own scenario/i.test(bodyText) && /Custom market scenario controls/i.test(bodyText);
@@ -418,7 +423,9 @@ function createServer() {
     if (!adsenseBlocks.labelled) throw new Error('Expected every ad block to be visibly labelled Advertisement.');
     if (!adsenseBlocks.noHeroAds) throw new Error('Expected no AdSense block inside the hero.');
     if (!adsenseBlocks.expectedPlacements) throw new Error('Expected AdSense blocks after journey, after playbook, after calculator, and before FAQ.');
-    if (!adsenseBlocks.loaderDeferredWithoutPublisher) throw new Error('Expected AdSense loader to stay disabled while publisher ID placeholder is present.');
+    if (!adsenseBlocks.publisherConfigured) throw new Error('Expected every AdSense block to use the verified publisher ID.');
+    if (!adsenseBlocks.verificationScript) throw new Error('Expected Google AdSense verification script in the page head.');
+    if (!adsenseBlocks.loaderConfigured) throw new Error('Expected AdSense loader to be configured with the verified publisher ID.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
     console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));

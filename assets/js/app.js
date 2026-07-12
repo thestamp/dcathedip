@@ -577,13 +577,7 @@ function initAdsense() {
   document.documentElement.classList.toggle("adsense-configured", configured);
   if (!configured) return;
 
-  const script = document.createElement("script");
-  script.async = true;
-  script.crossOrigin = "anonymous";
-  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`;
-  document.head.appendChild(script);
-
-  script.addEventListener("load", () => {
+  const pushAds = () => {
     ads.forEach(() => {
       try {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -591,8 +585,23 @@ function initAdsense() {
         // Ad blockers or unapproved domains can block AdSense; keep the page usable.
       }
     });
-  });
+  };
+
+  const existingScript = document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]');
+  if (existingScript) {
+    if (window.adsbygoogle) pushAds();
+    else existingScript.addEventListener("load", pushAds, { once: true });
+    return;
+  }
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`;
+  script.addEventListener("load", pushAds, { once: true });
+  document.head.appendChild(script);
 }
+
 
 function init() {
   document.querySelectorAll("#dcaForm input, #dcaForm select").forEach(el => el.addEventListener("input", updateChart));

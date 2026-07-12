@@ -905,7 +905,7 @@ Add non-intrusive but visible responsive AdSense blocks in natural section break
 - after the DCA calculator
 - before the FAQ
 
-Do not place ads inside the hero, calculator controls, FAQ answers, or footnote toggles. Label each block `Advertisement`, reserve enough height to reduce layout shift, and keep the design visually quiet so ads do not overpower the educational content. Use placeholder publisher/slot IDs until the real Google AdSense values are supplied.
+Do not place ads inside the hero, calculator controls, FAQ answers, or footnote toggles. Label each block `Advertisement`, reserve enough height to reduce layout shift, and keep the design visually quiet so ads do not overpower the educational content. Use the verified AdSense publisher ID and replace placeholder slot IDs with real Google AdSense ad-unit slots when available.
 
 ---
 
