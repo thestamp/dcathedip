@@ -284,6 +284,8 @@ Wealthsimple referral banners use the following Wealthsimple-inspired brand colo
 
 All Wealthsimple-branded elements (`.wealthsimple-promo`, `.ws-step-num`, `.ws-step-referral`, `.ws-referral-note`, `.wealthsimple`) use the gold gradient and warm accent instead of the site's default green/blue scheme.
 
+**White-card redesign (2026-07-13):** Wealthsimple referral banners now use white-background cards (`#fcfcfc`) with Dune-filled pill buttons, slate gray text, and the actual Wealthsimple wordmark SVG logo — matching Wealthsimple's own site design language. The step-by-step guide section also uses a white background. Buttons are Dune (`#32302f`) with white text, or ghost/outlined with Dune text. The referral step uses a celery green border and tinted background.
+
 ## 17a. Wealthsimple setup and referral
 
 Wealthsimple can be presented as a popular Canadian platform for automating recurring ETF purchases.

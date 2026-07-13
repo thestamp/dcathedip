@@ -401,119 +401,143 @@ h3 { font-size: 1.35rem; }
 .budget-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
 .budget-card { padding: 24px; box-shadow: none; }
 .budget-card p { margin-bottom: 0; }
+/* ── Wealthsimple white-card banners ── */
+.wealthsimple-logo { height: 22px; display: block; }
+.wealthsimple-logo-sm { height: 18px; display: block; }
+
 .wealthsimple-promo {
   margin-top: 22px;
-  padding: 24px;
+  padding: 28px 32px;
   display: grid;
-  grid-template-columns: 190px minmax(0, 1fr) 210px;
-  gap: 20px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 24px;
   align-items: center;
   box-shadow: none;
-  border-color: rgba(245, 179, 66, 0.22);
-  background: linear-gradient(135deg, rgba(245, 179, 66, 0.06), rgba(153, 179, 131, 0.04));
-}
-.wealthsimple-logo-lockup {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--ws-gold);
-  font-size: 1.3rem;
-  font-weight: 900;
-  text-transform: lowercase;
-}
-.wealthsimple-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--ws-gold), var(--ws-gold-dim));
+  border: 1px solid #e4e2e1;
+  border-radius: 20px;
+  background: #fcfcfc;
   color: var(--ws-dune);
-  font-weight: 1000;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 18px rgba(245, 179, 66, 0.25);
 }
-.wealthsimple-promo-copy h3 { margin-bottom: 8px; }
-.wealthsimple-promo-copy p { margin: 0; }
+.wealthsimple-promo .wealthsimple-logo { grid-column: 1; }
+.wealthsimple-promo-copy { min-width: 0; }
+.wealthsimple-promo-copy h3 {
+  margin: 0 0 6px;
+  font-size: 1.15rem;
+  color: var(--ws-dune);
+  letter-spacing: -0.02em;
+}
+.wealthsimple-promo-copy p {
+  margin: 0;
+  color: #686664;
+  font-size: 0.92rem;
+}
 .wealthsimple-promo-actions {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
   align-items: stretch;
+  flex-shrink: 0;
 }
-.wealthsimple-promo-actions .button {
-  white-space: nowrap;
-}
-/* Wealthsimple-themed primary button override */
+.wealthsimple-promo-actions .button { white-space: nowrap; }
+
+/* Wealthsimple white-card primary buttons (Dune-filled pill) */
 .wealthsimple-promo .button.primary,
 .ws-step-referral .button.primary,
 .wealthsimple .button.primary {
-  background: linear-gradient(135deg, var(--ws-gold), var(--ws-gold-dim));
-  color: var(--ws-dune);
+  background: var(--ws-dune);
+  color: #fff;
   border-color: transparent;
+  font-weight: 700;
+}
+.wealthsimple-promo .button.primary:hover,
+.ws-step-referral .button.primary:hover,
+.wealthsimple .button.primary:hover {
+  background: #1c1b1b;
 }
 
-/* Wealthsimple step-by-step guide */
-.wealthsimple-guide-section {
-  background: linear-gradient(180deg, rgba(245, 179, 66, 0.04), rgba(153, 179, 131, 0.03));
-  border-top: 1px solid rgba(245, 179, 66, 0.18);
-  border-bottom: 1px solid rgba(245, 179, 66, 0.18);
+/* Wealthsimple white-card ghost buttons (Dune outline) */
+.wealthsimple-promo .button.ghost,
+.ws-step-referral .button.ghost,
+.wealthsimple .button.ghost {
+  background: transparent;
+  color: var(--ws-dune);
+  border-color: #c9c6c4;
+  font-weight: 700;
 }
+
+/* ── Wealthsimple step-by-step guide (white-card section) ── */
+.wealthsimple-guide-section {
+  background: #fcfcfc;
+  border-top: 1px solid #e4e2e1;
+  border-bottom: 1px solid #e4e2e1;
+  color: var(--ws-dune);
+}
+.wealthsimple-guide-section .section-heading .eyebrow { color: #686664; }
+.wealthsimple-guide-section .section-heading h2 { color: var(--ws-dune); }
+.wealthsimple-guide-section .section-heading p { color: #686664; }
+.wealthsimple-guide-section .section-footnote { color: #686664; background: #f8f8f8; border-color: #e4e2e1; }
+.wealthsimple-guide-section .section-footnote summary { color: #686664; }
+
 .wealthsimple-guide-section .wealthsimple-promo.referral-promo {
   margin-bottom: 36px;
 }
-.ws-steps {
-  display: grid;
-  gap: 20px;
-}
+
+.ws-steps { display: grid; gap: 18px; }
 .ws-step {
   display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
+  grid-template-columns: 48px minmax(0, 1fr);
   gap: 20px;
   align-items: start;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 22px;
-  background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055));
+  border: 1px solid #e4e2e1;
+  border-radius: 18px;
+  padding: 22px 24px;
+  background: #fff;
 }
 .ws-step-num {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, var(--ws-gold), var(--ws-gold-dim));
-  color: var(--ws-dune);
-  font-weight: 1000;
-  font-size: 1.35rem;
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  background: var(--ws-dune);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.2rem;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(245, 179, 66, 0.2);
 }
-.ws-step-body h3 {
-  margin-bottom: 10px;
-  font-size: 1.15rem;
-}
-.ws-step-body p {
-  margin-bottom: 14px;
-}
-.ws-step-body .button {
-  display: inline-flex;
-}
-.ws-step-actions {
+.ws-step-body h3 { margin-bottom: 8px; font-size: 1.1rem; color: var(--ws-dune); }
+.ws-step-body p { margin-bottom: 12px; color: #686664; }
+.ws-step-body .button { display: inline-flex; }
+.ws-step-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+.ws-referral-note { margin: 8px 0 0; font-size: 0.85rem; color: #486635; font-weight: 700; }
+.ws-step-referral { border-color: #99b383; background: #fafdf9; }
+
+/* ── ETF section brokerage box (white card) ── */
+.wealthsimple {
+  margin-top: 24px;
+  padding: 24px 28px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 24px;
   align-items: center;
-  margin-bottom: 10px;
+  box-shadow: none;
+  border: 1px solid #e4e2e1;
+  border-radius: 18px;
+  background: #fcfcfc;
+  color: var(--ws-dune);
 }
-.ws-referral-note {
-  margin: 8px 0 0;
-  font-size: 0.85rem;
-  color: var(--ws-gold);
-}
-.ws-step-referral {
-  border-color: rgba(245, 179, 66, 0.35);
-  background: linear-gradient(135deg, rgba(245, 179, 66, 0.08), rgba(153, 179, 131, 0.05));
+.wealthsimple h3 { margin-bottom: 6px; color: var(--ws-dune); }
+.wealthsimple p { color: #686664; }
+.wealthsimple .eyebrow { color: #94908d; }
+.wealthsimple .tip { color: #486635; font-weight: 700; margin-top: 10px; }
+.wealthsimple-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; flex-shrink: 0; }
+
+/* referral label inside white cards */
+.wealthsimple-promo .referral-label,
+.wealthsimple .referral-label {
+  color: #94908d;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -2px;
 }
 
 .means-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); padding-bottom: 84px; }
@@ -561,10 +585,6 @@ h3 { font-size: 1.35rem; }
 .etf-cell p { margin: 0; }
 .etf-cell.cap { background: rgba(106,168,255,0.09); }
 .etf-cell.growth { background: rgba(83,230,160,0.09); }
-.wealthsimple { margin-top: 24px; padding: 24px; display: flex; justify-content: space-between; gap: 24px; align-items: center; box-shadow: none; border-color: rgba(245, 179, 66, 0.22); background: linear-gradient(135deg, rgba(245, 179, 66, 0.06), rgba(153, 179, 131, 0.04)); }
-.wealthsimple h3 { margin-bottom: 8px; }
-.wealthsimple .tip { color: var(--ws-gold); font-weight: 800; margin-top: 12px; }
-.wealthsimple-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
 
 .tfsa-section { align-items: stretch; }
 .tfsa-card { padding: 28px; box-shadow: none; }
