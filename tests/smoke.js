@@ -153,7 +153,7 @@ function createServer() {
       const budgetCols = getComputedStyle(budgetGrid).gridTemplateColumns.split(' ').length;
       const meansRect = document.querySelector('#means').getBoundingClientRect();
       const longPromoCta = [...document.querySelectorAll('.wealthsimple-promo-actions .button')]
-        .some(button => button.textContent.trim().length > 25);
+        .some(button => button.textContent.trim().length > 30);
       const externalLogoImage = Boolean(document.querySelector('.wealthsimple-logo-lockup img'));
       return {
         budgetTwoColumns: budgetCols === 2,
