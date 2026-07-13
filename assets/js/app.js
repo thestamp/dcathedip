@@ -150,7 +150,6 @@ const etfsFlat = [
 const etfsHighLeverage = [
   { ticker: "SPXU.TO", name: "Global X S&P 500 2x Bull", provider: "Global X", market: "U.S.", leverage: "2x", mer: "1.44%", return1y: "52%", return5y: "30%", lean: "2× daily S&P 500. High risk — daily reset causes decay." },
   { ticker: "CNDU.TO", name: "Global X TSX 60 2x Bull", provider: "Global X", market: "Canada", leverage: "2x", mer: "1.44%", return1y: "60%", return5y: "25%", lean: "2× daily TSX 60. High risk — daily reset causes decay." },
-  { ticker: "HQU.TO", name: "Global X NASDAQ-100 2x Bull", provider: "Global X", market: "U.S.", leverage: "2x", mer: "1.44%", return1y: "55%", return5y: "35%", lean: "2× daily NASDAQ-100. High risk — daily reset causes decay." },
   { ticker: "TSPX.TO", name: "Global X S&P 500 3x Bull", provider: "Global X", market: "U.S.", leverage: "3x", mer: "1.50%", return1y: "78%", return5y: "40%", lean: "3× daily S&P 500. Extreme risk — daily reset causes significant decay." },
   { ticker: "TCND.TO", name: "Global X TSX 60 3x Bull", provider: "Global X", market: "Canada", leverage: "3x", mer: "1.50%", return1y: "90%", return5y: "35%", lean: "3× daily TSX 60. Extreme risk — daily reset causes significant decay." }
 ];
@@ -195,22 +194,30 @@ function computeBestStandard() {
 }
 const bestStandardTicker = computeBestStandard();
 
-// Color scales: red (worst) → yellow → green (best)
-function merColor(merStr, group) {
-  const vals = group.map(e => parseFloat(e.mer)).filter(v => !isNaN(v));
+// Color scales: bottom 30% = bright red, middle 40% = yellow, top 30% = bright green
+function tierColor(val, vals, invert) {
   if (vals.length < 2) return 'var(--green)';
-  const val = parseFloat(merStr), min = Math.min(...vals), max = Math.max(...vals);
+  const min = Math.min(...vals), max = Math.max(...vals);
   if (max === min) return 'var(--green)';
   const t = (val - min) / (max - min);
-  return `rgb(${Math.round(255*t)},${Math.round(255*(1-t))},60)`;
+  const tAdj = invert ? (1 - t) : t;
+  if (tAdj <= 0.3) {
+    const s = tAdj / 0.3;
+    return `rgb(${Math.round(255*(1-s))},${Math.round(60*s)},60)`;
+  } else if (tAdj >= 0.7) {
+    const s = (tAdj - 0.7) / 0.3;
+    return `rgb(${Math.round(60*(1-s))},${Math.round(220+35*s)},${Math.round(60+60*s)})`;
+  } else {
+    return `rgb(255,210,60)`;
+  }
+}
+function merColor(merStr, group) {
+  const vals = group.map(e => parseFloat(e.mer)).filter(v => !isNaN(v));
+  return tierColor(parseFloat(merStr), vals, true);
 }
 function returnColor(retStr, group) {
   const vals = group.map(e => parseFloat(e.return1y)).filter(v => !isNaN(v));
-  if (vals.length < 2) return 'var(--green)';
-  const val = parseFloat(retStr), min = Math.min(...vals), max = Math.max(...vals);
-  if (max === min) return 'var(--green)';
-  const t = (val - min) / (max - min);
-  return `rgb(${Math.round(255*(1-t))},${Math.round(255*t)},60)`;
+  return tierColor(parseFloat(retStr), vals, false);
 }
 
 function buildPieConic(items, total, isCountries) {
