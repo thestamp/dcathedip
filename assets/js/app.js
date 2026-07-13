@@ -333,30 +333,27 @@ function renderTickers(region) {
         </div>
         <div class="etf-section">
           <div class="etf-section-header">Standard Broad-Market ETFs</div>
-          <p class="etf-section-sub">World: one-ticket global diversification. Canada: like a double-double — reliable, comfortable, very Canadian. U.S.: the world's largest market in a single ETF.</p>
           <div class="etf-matrix-headers">
             <span class="etf-matrix-h">World</span>
-            <span class="etf-matrix-h">Canada</span>
+            <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
             <span class="etf-matrix-h">U.S.</span>
           </div>
           <div class="etf-cards">${standardEtfs.map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
         </div>
         <div class="etf-section">
           <div class="etf-section-header">Tilted / Factor ETFs</div>
-          <p class="etf-section-sub">Factor-based strategies that tilt toward value, profitability, or broader exposure. World: factor tilts across the globe. Canada: Canadian stocks with a value slant — sorry about the concentration. U.S.: goes beyond the S&P 500 into mid/small caps.</p>
           <div class="etf-matrix-headers">
             <span class="etf-matrix-h">World</span>
-            <span class="etf-matrix-h">Canada</span>
+            <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
             <span class="etf-matrix-h">U.S.</span>
           </div>
           <div class="etf-cards">${tiltedEtfs.map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
         </div>
         <div class="etf-section">
           <div class="etf-section-header">1.25× Leveraged ETFs</div>
-          <p class="etf-section-sub">Moderate daily leverage — 1.25× amplification of gains and losses. No margin account, no collateral, no margin calls. World: global all-equity, amplified. Canada: TSX 60 with an extra kick, and an extra apology. U.S.: S&P 500 with a mild boost.</p>
           <div class="etf-matrix-headers">
             <span class="etf-matrix-h">World</span>
-            <span class="etf-matrix-h">Canada</span>
+            <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
             <span class="etf-matrix-h">U.S.</span>
           </div>
           <div class="etf-cards">${leveragedEtfs.map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
