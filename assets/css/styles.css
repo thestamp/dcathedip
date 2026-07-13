@@ -588,15 +588,41 @@ h3 { font-size: 1.35rem; }
 .etf-cell.growth { background: rgba(83,230,160,0.09); }
 .etf-cell.leveraged { background: rgba(255,209,102,0.09); }
 
-/* ETF card grid — 5 columns, stacked on mobile */
+/* ETF card grid */
 .etf-grid { margin-top: 0; }
+.etf-grid-controls {
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+  flex-wrap: wrap; margin-bottom: 18px;
+}
 .pie-mode-toggle {
-  display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 20px; padding: 6px;
+  display: flex; gap: 8px; padding: 6px;
   background: rgba(255,255,255,0.04); border-radius: 999px; border: 1px solid var(--border);
 }
-.pie-mode-btn { border-radius: 999px !important; font-size: 0.82rem; }
-.pie-mode-btn.active { background: rgba(83,230,160,0.15) !important; color: var(--green) !important; }
+.pie-mode-btn { border-radius: 999px !important; font-size: 0.82rem; padding: 5px 14px !important; }
+.pie-mode-btn.active { background: rgba(83,230,160,0.15) !important; color: var(--green) !important; border-color: rgba(83,230,160,0.3) !important; }
+
+.etf-leverage-toggle {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  font-size: 0.82rem; color: var(--muted); user-select: none;
+}
+.etf-leverage-toggle input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; }
+
+/* Section grouping */
+.etf-section { margin-bottom: 28px; }
+.etf-section-header {
+  font-size: 1.08rem; font-weight: 900; color: var(--green);
+  padding: 8px 0 12px; border-bottom: 1px solid var(--border);
+  margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.etf-matrix-headers {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+  margin-bottom: 10px;
+}
+.etf-matrix-h {
+  text-align: center; font-size: 0.78rem; font-weight: 800;
+  color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 6px 0;
+}
 
 .etf-cards {
   display: grid;
@@ -640,6 +666,13 @@ h3 { font-size: 1.35rem; }
   border: 1px solid var(--border); border-radius: 999px; padding: 1px 7px;
   margin-left: auto;
 }
+.etf-lev-tag {
+  font-size: 0.7rem; font-weight: 900; color: #111;
+  background: var(--gold); border-radius: 999px; padding: 2px 8px;
+  margin-left: auto;
+}
+.etf-card.high-lev { border-color: rgba(255,209,102,0.3); }
+.etf-card.high-lev.x3 { border-color: rgba(255,100,80,0.3); }
 .etf-card h3 { font-size: 0.9rem; margin-bottom: 8px; line-height: 1.3; }
 .etf-card-metrics { display: flex; gap: 14px; margin-bottom: 10px; }
 .etf-card .etf-metric { font-size: 0.8rem; color: var(--muted); }

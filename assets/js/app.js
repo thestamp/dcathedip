@@ -2,49 +2,50 @@
 const WEALTHSIMPLE_REFERRAL_URL = "https://wealthsimple.com/invite/V-MKNQ";
 
 // ETF data with country, sector, and top-10 holdings for pie charts
+// ETF data with country, sector, and top-10 holdings for pie charts
 const etfsFlat = [
   // === WORLD / INTERNATIONAL ===
   {
     ticker: "XEQT.TO", name: "iShares Core Equity ETF", provider: "iShares", market: "World", type: "standard",
-    mer: "0.20%", return1y: "23.8%",
+    mer: "0.20%", return1y: "23.8%", return5y: "14.2%",
     lean: "~25% Canada / 45% U.S. / 30% International. Lower Canada tilt.",
-    countries: [{ name: "U.S.", pct: 45 }, { name: "Canada", pct: 25 }, { name: "Intl Dev", pct: 22 }, { name: "Emerging", pct: 8 }],
+    countries: [{ name: "Canada", pct: 25 }, { name: "U.S.", pct: 45 }, { name: "Japan", pct: 5 }, { name: "U.K.", pct: 4 }, { name: "China", pct: 3 }, { name: "France", pct: 2.5 }, { name: "Germany", pct: 2 }, { name: "Switzerland", pct: 2 }, { name: "Australia", pct: 1.5 }, { name: "Netherlands", pct: 1 }, { name: "Other", pct: 9 }],
     sectors: [{ name: "Technology", pct: 23 }, { name: "Financials", pct: 21 }, { name: "Industrials", pct: 12 }, { name: "Consumer Cyclical", pct: 9 }, { name: "Energy", pct: 7 }, { name: "Healthcare", pct: 7 }, { name: "Communication", pct: 6 }, { name: "Other", pct: 15 }],
     top10: [{ name: "Apple", pct: 2.0 }, { name: "Microsoft", pct: 1.5 }, { name: "NVIDIA", pct: 1.5 }, { name: "Amazon", pct: 1.0 }, { name: "RBC", pct: 1.0 }, { name: "TD Bank", pct: 0.8 }, { name: "Meta", pct: 0.7 }, { name: "Alphabet", pct: 0.7 }, { name: "Shopify", pct: 0.6 }, { name: "Brookfield", pct: 0.5 }],
     top10Pct: 10.3
   },
   {
     ticker: "VEQT.TO", name: "Vanguard All-Equity ETF", provider: "Vanguard", market: "World", type: "standard",
-    mer: "0.24%", return1y: "23.9%",
+    mer: "0.24%", return1y: "23.9%", return5y: "14.0%",
     lean: "~30% Canada / 42% U.S. / 28% International. Leans more Canada.",
-    countries: [{ name: "U.S.", pct: 42 }, { name: "Canada", pct: 30 }, { name: "Intl Dev", pct: 20 }, { name: "Emerging", pct: 8 }],
+    countries: [{ name: "Canada", pct: 30 }, { name: "U.S.", pct: 42 }, { name: "Japan", pct: 4 }, { name: "U.K.", pct: 3.5 }, { name: "China", pct: 2.5 }, { name: "France", pct: 2 }, { name: "Germany", pct: 2 }, { name: "Switzerland", pct: 1.5 }, { name: "Australia", pct: 1.5 }, { name: "Netherlands", pct: 1 }, { name: "Other", pct: 10 }],
     sectors: [{ name: "Technology", pct: 21 }, { name: "Financials", pct: 20 }, { name: "Industrials", pct: 12 }, { name: "Consumer Cyclical", pct: 9 }, { name: "Energy", pct: 7 }, { name: "Healthcare", pct: 7 }, { name: "Communication", pct: 6 }, { name: "Other", pct: 18 }],
     top10: [{ name: "Apple", pct: 2.8 }, { name: "RBC", pct: 2.2 }, { name: "Microsoft", pct: 2.1 }, { name: "Amazon", pct: 1.6 }, { name: "TD Bank", pct: 1.4 }, { name: "NVIDIA", pct: 1.3 }, { name: "Shopify", pct: 1.2 }, { name: "Enbridge", pct: 1.1 }, { name: "BMO", pct: 1.0 }, { name: "Brookfield", pct: 0.9 }],
     top10Pct: 15.6
   },
   {
     ticker: "ZEQT.TO", name: "BMO All-Equity ETF", provider: "BMO", market: "World", type: "standard",
-    mer: "0.20%", return1y: "23.7%",
+    mer: "0.20%", return1y: "23.7%", return5y: "13.5%",
     lean: "~25% Canada / 45% U.S. / 30% International. Similar to XEQT.",
-    countries: [{ name: "U.S.", pct: 45 }, { name: "Canada", pct: 25 }, { name: "Intl Dev", pct: 22 }, { name: "Emerging", pct: 8 }],
+    countries: [{ name: "Canada", pct: 25 }, { name: "U.S.", pct: 45 }, { name: "Japan", pct: 5 }, { name: "U.K.", pct: 4 }, { name: "China", pct: 3 }, { name: "France", pct: 2.5 }, { name: "Germany", pct: 2 }, { name: "Switzerland", pct: 2 }, { name: "Australia", pct: 1.5 }, { name: "Netherlands", pct: 1 }, { name: "Other", pct: 9 }],
     sectors: [{ name: "Technology", pct: 23 }, { name: "Financials", pct: 21 }, { name: "Industrials", pct: 12 }, { name: "Consumer Cyclical", pct: 9 }, { name: "Energy", pct: 7 }, { name: "Healthcare", pct: 7 }, { name: "Communication", pct: 6 }, { name: "Other", pct: 15 }],
     top10: [{ name: "Apple", pct: 2.0 }, { name: "Microsoft", pct: 1.5 }, { name: "NVIDIA", pct: 1.5 }, { name: "Amazon", pct: 1.0 }, { name: "RBC", pct: 1.0 }, { name: "TD Bank", pct: 0.8 }, { name: "Meta", pct: 0.7 }, { name: "Alphabet", pct: 0.7 }, { name: "Shopify", pct: 0.6 }, { name: "Brookfield", pct: 0.5 }],
     top10Pct: 10.3
   },
   {
     ticker: "CAGE.TO", name: "Avantis CIBC All-Equity", provider: "Avantis", market: "World", type: "tilted",
-    mer: "0.37%", return1y: "24.1%",
+    mer: "0.37%", return1y: "24.1%", return5y: "14.8%",
     lean: "Global all-equity with factor tilts toward value and profitability.",
-    countries: [{ name: "U.S.", pct: 48 }, { name: "Canada", pct: 22 }, { name: "Intl Dev", pct: 20 }, { name: "Emerging", pct: 10 }],
+    countries: [{ name: "Canada", pct: 22 }, { name: "U.S.", pct: 48 }, { name: "Japan", pct: 5 }, { name: "U.K.", pct: 3 }, { name: "China", pct: 3 }, { name: "France", pct: 2 }, { name: "Germany", pct: 2 }, { name: "Switzerland", pct: 1.5 }, { name: "Australia", pct: 1.5 }, { name: "Netherlands", pct: 1 }, { name: "Other", pct: 11 }],
     sectors: [{ name: "Technology", pct: 20 }, { name: "Financials", pct: 22 }, { name: "Industrials", pct: 14 }, { name: "Consumer Cyclical", pct: 8 }, { name: "Energy", pct: 8 }, { name: "Healthcare", pct: 7 }, { name: "Other", pct: 21 }],
     top10: [{ name: "Apple", pct: 1.8 }, { name: "Microsoft", pct: 1.4 }, { name: "RBC", pct: 1.2 }, { name: "NVIDIA", pct: 1.2 }, { name: "Amazon", pct: 0.9 }, { name: "TD Bank", pct: 0.8 }, { name: "Meta", pct: 0.7 }, { name: "Alphabet", pct: 0.6 }, { name: "Shopify", pct: 0.6 }, { name: "Enbridge", pct: 0.5 }],
     top10Pct: 9.7
   },
   {
     ticker: "HEQL.TO", name: "Global X Enhanced All-Equity", provider: "Global X", market: "World", type: "leveraged",
-    mer: "0.44%", return1y: "30.2%",
+    mer: "0.44%", return1y: "30.2%", return5y: "20.5%",
     lean: "1.25× daily leveraged global all-equity. Amplifies gains and losses.",
-    countries: [{ name: "U.S.", pct: 45 }, { name: "Canada", pct: 25 }, { name: "Intl Dev", pct: 22 }, { name: "Emerging", pct: 8 }],
+    countries: [{ name: "Canada", pct: 25 }, { name: "U.S.", pct: 45 }, { name: "Japan", pct: 5 }, { name: "U.K.", pct: 4 }, { name: "France", pct: 2.5 }, { name: "Germany", pct: 2 }, { name: "Switzerland", pct: 2 }, { name: "Australia", pct: 1.5 }, { name: "Netherlands", pct: 1 }, { name: "Other", pct: 12 }],
     sectors: [{ name: "Technology", pct: 23 }, { name: "Financials", pct: 21 }, { name: "Industrials", pct: 12 }, { name: "Consumer Cyclical", pct: 9 }, { name: "Energy", pct: 7 }, { name: "Other", pct: 28 }],
     top10: [{ name: "Apple", pct: 2.0 }, { name: "Microsoft", pct: 1.5 }, { name: "NVIDIA", pct: 1.5 }, { name: "Amazon", pct: 1.0 }, { name: "RBC", pct: 1.0 }, { name: "TD Bank", pct: 0.8 }, { name: "Meta", pct: 0.7 }, { name: "Alphabet", pct: 0.7 }, { name: "Shopify", pct: 0.6 }, { name: "Brookfield", pct: 0.5 }],
     top10Pct: 10.3
@@ -53,7 +54,7 @@ const etfsFlat = [
   // === CANADA ===
   {
     ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", provider: "BMO", market: "Canada", type: "standard",
-    mer: "0.14%", return1y: "30.1%",
+    mer: "0.14%", return1y: "30.1%", return5y: "12.0%",
     lean: "60 largest Canadian companies. Concentrated large-cap.",
     countries: [{ name: "Canada", pct: 100 }],
     sectors: [{ name: "Financials", pct: 43 }, { name: "Energy", pct: 17 }, { name: "Materials", pct: 12 }, { name: "Technology", pct: 8 }, { name: "Industrials", pct: 8 }, { name: "Other", pct: 12 }],
@@ -62,7 +63,7 @@ const etfsFlat = [
   },
   {
     ticker: "XIU.TO", name: "iShares S&P/TSX 60 ETF", provider: "iShares", market: "Canada", type: "standard",
-    mer: "0.18%", return1y: "30.0%",
+    mer: "0.18%", return1y: "30.0%", return5y: "11.8%",
     lean: "Same 60-company index as ZIU. Higher MER for identical exposure.",
     countries: [{ name: "Canada", pct: 100 }],
     sectors: [{ name: "Financials", pct: 43 }, { name: "Energy", pct: 17 }, { name: "Materials", pct: 12 }, { name: "Technology", pct: 8 }, { name: "Industrials", pct: 8 }, { name: "Other", pct: 12 }],
@@ -71,7 +72,7 @@ const etfsFlat = [
   },
   {
     ticker: "VCN.TO", name: "Vanguard FTSE Canada All Cap", provider: "Vanguard", market: "Canada", type: "standard",
-    mer: "0.06%", return1y: "33.5%",
+    mer: "0.06%", return1y: "33.5%", return5y: "15.0%",
     lean: "Broader — includes mid/small caps. Lowest MER of Canadian ETFs.",
     countries: [{ name: "Canada", pct: 100 }],
     sectors: [{ name: "Financials", pct: 38 }, { name: "Energy", pct: 18 }, { name: "Materials", pct: 13 }, { name: "Technology", pct: 10 }, { name: "Industrials", pct: 9 }, { name: "Other", pct: 12 }],
@@ -80,7 +81,7 @@ const etfsFlat = [
   },
   {
     ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity", provider: "Avantis", market: "Canada", type: "tilted",
-    mer: "0.38%", return1y: "31.2%",
+    mer: "0.38%", return1y: "31.2%", return5y: "13.0%",
     lean: "Broad Canadian equity with factor-oriented selection.",
     countries: [{ name: "Canada", pct: 100 }],
     sectors: [{ name: "Financials", pct: 40 }, { name: "Energy", pct: 18 }, { name: "Materials", pct: 13 }, { name: "Technology", pct: 9 }, { name: "Industrials", pct: 9 }, { name: "Other", pct: 11 }],
@@ -89,7 +90,7 @@ const etfsFlat = [
   },
   {
     ticker: "CANL.TO", name: "Global X Enhanced TSX 60", provider: "Global X", market: "Canada", type: "leveraged",
-    mer: "0.45%", return1y: "38.5%",
+    mer: "0.45%", return1y: "38.5%", return5y: "18.0%",
     lean: "1.25× daily leveraged Canadian large-caps. Amplifies gains and losses.",
     countries: [{ name: "Canada", pct: 100 }],
     sectors: [{ name: "Financials", pct: 43 }, { name: "Energy", pct: 17 }, { name: "Materials", pct: 12 }, { name: "Technology", pct: 8 }, { name: "Other", pct: 20 }],
@@ -100,7 +101,7 @@ const etfsFlat = [
   // === U.S. ===
   {
     ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", provider: "BMO", market: "U.S.", type: "standard",
-    mer: "0.09%", return1y: "25.9%",
+    mer: "0.09%", return1y: "25.9%", return5y: "16.9%",
     lean: "Pure S&P 500 — holds U.S. stocks directly. Lowest MER in class.",
     countries: [{ name: "U.S.", pct: 100 }],
     sectors: [{ name: "Technology", pct: 37 }, { name: "Financials", pct: 13 }, { name: "Consumer Cyclical", pct: 10 }, { name: "Healthcare", pct: 9 }, { name: "Industrials", pct: 7 }, { name: "Communication", pct: 6 }, { name: "Consumer Defensive", pct: 5 }, { name: "Energy", pct: 3 }, { name: "Other", pct: 10 }],
@@ -109,7 +110,7 @@ const etfsFlat = [
   },
   {
     ticker: "VFV.TO", name: "Vanguard S&P 500 ETF", provider: "Vanguard", market: "U.S.", type: "standard",
-    mer: "0.09%", return1y: "25.9%",
+    mer: "0.09%", return1y: "25.9%", return5y: "16.9%",
     lean: "Same S&P 500 exposure. Tied with ZSP on MER.",
     countries: [{ name: "U.S.", pct: 100 }],
     sectors: [{ name: "Technology", pct: 37 }, { name: "Financials", pct: 13 }, { name: "Consumer Cyclical", pct: 10 }, { name: "Healthcare", pct: 9 }, { name: "Industrials", pct: 7 }, { name: "Communication", pct: 6 }, { name: "Other", pct: 18 }],
@@ -118,7 +119,7 @@ const etfsFlat = [
   },
   {
     ticker: "XUS.TO", name: "iShares Core S&P 500 ETF", provider: "iShares", market: "U.S.", type: "standard",
-    mer: "0.10%", return1y: "25.8%",
+    mer: "0.10%", return1y: "25.8%", return5y: "16.8%",
     lean: "Same S&P 500 index. Slightly higher MER than ZSP/VFV.",
     countries: [{ name: "U.S.", pct: 100 }],
     sectors: [{ name: "Technology", pct: 37 }, { name: "Financials", pct: 13 }, { name: "Consumer Cyclical", pct: 10 }, { name: "Healthcare", pct: 9 }, { name: "Industrials", pct: 7 }, { name: "Other", pct: 24 }],
@@ -127,7 +128,7 @@ const etfsFlat = [
   },
   {
     ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap", provider: "Avantis", market: "U.S.", type: "tilted",
-    mer: "0.38%", return1y: "26.5%",
+    mer: "0.38%", return1y: "26.5%", return5y: "17.5%",
     lean: "Broader U.S. equity with factor tilts — includes mid/small caps.",
     countries: [{ name: "U.S.", pct: 100 }],
     sectors: [{ name: "Technology", pct: 32 }, { name: "Financials", pct: 15 }, { name: "Consumer Cyclical", pct: 11 }, { name: "Healthcare", pct: 10 }, { name: "Industrials", pct: 9 }, { name: "Other", pct: 23 }],
@@ -136,7 +137,7 @@ const etfsFlat = [
   },
   {
     ticker: "USSL.TO", name: "Global X Enhanced S&P 500", provider: "Global X", market: "U.S.", type: "leveraged",
-    mer: "0.45%", return1y: "32.5%",
+    mer: "0.45%", return1y: "32.5%", return5y: "19.5%",
     lean: "1.25× daily leveraged S&P 500. Amplifies gains and losses.",
     countries: [{ name: "U.S.", pct: 100 }],
     sectors: [{ name: "Technology", pct: 37 }, { name: "Financials", pct: 13 }, { name: "Consumer Cyclical", pct: 10 }, { name: "Other", pct: 40 }],
@@ -145,7 +146,16 @@ const etfsFlat = [
   }
 ];
 
-// Preserve US ETFs for region toggle
+// 2x and 3x high-leverage ETFs (Canada and US only, no pie charts)
+const etfsHighLeverage = [
+  { ticker: "SPXU.TO", name: "Global X S&P 500 2x Bull", provider: "Global X", market: "U.S.", leverage: "2x", mer: "1.44%", return1y: "52%", return5y: "30%", lean: "2× daily S&P 500. High risk — daily reset causes decay." },
+  { ticker: "CNDU.TO", name: "Global X TSX 60 2x Bull", provider: "Global X", market: "Canada", leverage: "2x", mer: "1.44%", return1y: "60%", return5y: "25%", lean: "2× daily TSX 60. High risk — daily reset causes decay." },
+  { ticker: "HQU.TO", name: "Global X NASDAQ-100 2x Bull", provider: "Global X", market: "U.S.", leverage: "2x", mer: "1.44%", return1y: "55%", return5y: "35%", lean: "2× daily NASDAQ-100. High risk — daily reset causes decay." },
+  { ticker: "TSPX.TO", name: "Global X S&P 500 3x Bull", provider: "Global X", market: "U.S.", leverage: "3x", mer: "1.50%", return1y: "78%", return5y: "40%", lean: "3× daily S&P 500. Extreme risk — daily reset causes significant decay." },
+  { ticker: "TCND.TO", name: "Global X TSX 60 3x Bull", provider: "Global X", market: "Canada", leverage: "3x", mer: "1.50%", return1y: "90%", return5y: "35%", lean: "3× daily TSX 60. Extreme risk — daily reset causes significant decay." }
+];
+
+// Legacy US ETFs
 const etfs = {
   us: [
     { ticker: "VT", name: "Vanguard Total World Stock ETF", use: "One-ticket global equity market exposure." },
@@ -156,83 +166,115 @@ const etfs = {
     { ticker: "QQQM", name: "Invesco NASDAQ 100 ETF", use: "Concentrated Nasdaq-100 exposure with higher sector and valuation risk." }
   ]
 };
+let showHighLeverage = false;
 
-// Pie chart view mode: 'countries', 'sectors', 'top10'
+// Pie chart view mode
 let pieMode = 'countries';
 
-// Compute best standard ETF: highest (1Y return / MER ratio)
+// Consistent country colors: Canada=red, US=blue
+const countryColors = {
+  "Canada": "#ff4444", "U.S.": "#4488ff", "Japan": "#ffaa00",
+  "U.K.": "#aa44ff", "China": "#ff6644", "France": "#44aaff",
+  "Germany": "#ffcc00", "Switzerland": "#ff4488", "Australia": "#44ff88",
+  "Netherlands": "#ff8844", "Other": "#888888"
+};
+
+const pieColors = ['#53e6a0','#6aa8ff','#ffd166','#ff8fab','#b892ff','#ff9f43','#54a0ff','#5f27cd','#01a3a4','#f368e0','#ff6348','#7bed9f','#70a1ff','#ffa502','#eccc68'];
+
+function getColor(items, i, isCountries) {
+  if (isCountries && items[i].name in countryColors) return countryColors[items[i].name];
+  return pieColors[i % pieColors.length];
+}
+
+// Best standard ETF among International only
 function computeBestStandard() {
-  const standards = etfsFlat.filter(e => e.type === 'standard');
-  const scored = standards.map(e => {
-    const merNum = parseFloat(e.mer);
-    const retNum = parseFloat(e.return1y);
-    return { ...e, score: retNum / merNum };
-  });
+  const standards = etfsFlat.filter(e => e.type === 'standard' && e.market === 'World');
+  const scored = standards.map(e => ({ ...e, score: parseFloat(e.return1y) / parseFloat(e.mer) }));
   scored.sort((a, b) => b.score - a.score);
   return scored[0].ticker;
 }
 const bestStandardTicker = computeBestStandard();
 
-// Colors for pie chart segments
-const pieColors = [
-  '#53e6a0', '#6aa8ff', '#ffd166', '#ff8fab', '#b892ff',
-  '#ff9f43', '#54a0ff', '#5f27cd', '#01a3a4', '#f368e0',
-  '#ff6348', '#7bed9f', '#70a1ff', '#ffa502', '#eccc68'
-];
+// Color scales: red (worst) → yellow → green (best)
+function merColor(merStr, group) {
+  const vals = group.map(e => parseFloat(e.mer)).filter(v => !isNaN(v));
+  if (vals.length < 2) return 'var(--green)';
+  const val = parseFloat(merStr), min = Math.min(...vals), max = Math.max(...vals);
+  if (max === min) return 'var(--green)';
+  const t = (val - min) / (max - min);
+  return `rgb(${Math.round(255*t)},${Math.round(255*(1-t))},60)`;
+}
+function returnColor(retStr, group) {
+  const vals = group.map(e => parseFloat(e.return1y)).filter(v => !isNaN(v));
+  if (vals.length < 2) return 'var(--green)';
+  const val = parseFloat(retStr), min = Math.min(...vals), max = Math.max(...vals);
+  if (max === min) return 'var(--green)';
+  const t = (val - min) / (max - min);
+  return `rgb(${Math.round(255*(1-t))},${Math.round(255*t)},60)`;
+}
 
-function buildPieConic(items, total) {
+function buildPieConic(items, total, isCountries) {
   let cumulative = 0;
   return items.map((item, i) => {
     const start = cumulative;
     const pct = total ? (item.pct / total * 100) : item.pct;
     cumulative += pct;
-    return `${pieColors[i % pieColors.length]} ${start.toFixed(1)}% ${cumulative.toFixed(1)}%`;
+    return `${getColor(items, i, isCountries)} ${start.toFixed(1)}% ${cumulative.toFixed(1)}%`;
   }).join(', ');
 }
 
-function buildPieTooltip(items, total) {
+function buildPieTooltip(items, total, isCountries) {
   return items.map((item, i) => {
     const pct = total ? (item.pct / total * 100).toFixed(1) : item.pct.toFixed(1);
-    return `<span style="color:${pieColors[i % pieColors.length]}">●</span> ${item.name}: ${pct}%`;
+    return `<span style="color:${getColor(items,i,isCountries)}">●</span> ${item.name}: ${pct}%`;
   }).join('<br>');
 }
 
 function renderPieChart(etf) {
   let items, total;
-  if (pieMode === 'countries') {
-    items = etf.countries;
-    total = null;
-  } else if (pieMode === 'sectors') {
-    items = etf.sectors;
-    total = null;
-  } else {
-    items = etf.top10;
-    total = 100;
-  }
-  const conic = buildPieConic(items, total);
-  const tooltip = buildPieTooltip(items, total);
-  return `<div class="etf-pie" style="background: conic-gradient(${conic});" title="${tooltip.replace(/<br>/g, '\n').replace(/<[^>]*>/g, '')}" data-tooltip="${tooltip.replace(/"/g, '&quot;')}"></div>`;
+  const isCountries = pieMode === 'countries';
+  if (isCountries) { items = etf.countries; total = null; }
+  else if (pieMode === 'sectors') { items = etf.sectors; total = null; }
+  else { items = etf.top10; total = 100; }
+  return `<div class="etf-pie" style="background: conic-gradient(${buildPieConic(items, total, isCountries)});" data-tooltip="${buildPieTooltip(items, total, isCountries).replace(/"/g, '&quot;')}"></div>`;
 }
 
-function renderEtfCard(etf) {
-  const isBest = etf.ticker === bestStandardTicker && etf.type === 'standard';
-  const typeLabel = etf.type === 'standard' ? 'Standard' : etf.type === 'tilted' ? 'Tilted' : '1.25× Leveraged';
-  const typeClass = etf.type === 'standard' ? 'standard' : etf.type === 'tilted' ? 'tilted' : 'leveraged';
+function renderEtfCard(etf, group) {
+  const isBest = etf.ticker === bestStandardTicker && etf.type === 'standard' && etf.market === 'World';
   return `
-    <article class="etf-card ${typeClass}${isBest ? ' etf-best' : ''}">
-      ${isBest ? `<span class="etf-best-star" title="Best standard ETF: lowest MER (${etf.mer}) with highest 1Y return (${etf.return1y}) — picked by score: return ÷ MER">★ Recommended</span>` : ''}
+    <article class="etf-card ${etf.type}${isBest ? ' etf-best' : ''}">
+      ${isBest ? `<span class="etf-best-star" title="Best international standard ETF: scored by 1Y return ÷ MER">★ Recommended</span>` : ''}
       <div class="etf-card-head">
         <span class="ticker">${etf.ticker}</span>
         <span class="etf-provider-tag">${etf.provider}</span>
-        <span class="etf-type-tag">${typeLabel}</span>
       </div>
       <h3>${etf.name}</h3>
+      <p class="etf-lean">${etf.lean}</p>
       <div class="etf-card-metrics">
-        <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
-        <span class="etf-metric">1Y <strong>${etf.return1y}</strong></span>
+        <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
+        <span class="etf-metric">1Y <strong style="color:${returnColor(etf.return1y, group)}">${etf.return1y}</strong></span>
+        <span class="etf-metric">5Y <strong style="color:${returnColor(etf.return5y, group)}">${etf.return5y}</strong></span>
       </div>
       ${renderPieChart(etf)}
+    </article>
+  `;
+}
+
+function renderHighLevCard(etf, group) {
+  return `
+    <article class="etf-card high-lev ${etf.leverage.replace('x','')}">
+      <div class="etf-card-head">
+        <span class="ticker">${etf.ticker}</span>
+        <span class="etf-provider-tag">${etf.provider}</span>
+        <span class="etf-lev-tag">${etf.leverage}</span>
+      </div>
+      <h3>${etf.name}</h3>
       <p class="etf-lean">${etf.lean}</p>
+      <div class="etf-card-metrics">
+        <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
+        <span class="etf-metric">1Y <strong style="color:${returnColor(etf.return1y, group)}">${etf.return1y}</strong></span>
+        <span class="etf-metric">5Y <strong style="color:${returnColor(etf.return5y, group)}">${etf.return5y}</strong></span>
+      </div>
     </article>
   `;
 }
@@ -242,19 +284,74 @@ function renderTickers(region) {
   grid.classList.remove("etf-matrix", "ticker-grid");
 
   if (region === "canada") {
-    grid.classList.add("etf-grid");
-    grid.innerHTML = `
-      <div class="pie-mode-toggle" role="group" aria-label="Pie chart view">
-        <button class="button ghost compact pie-mode-btn active" data-mode="countries">Countries</button>
-        <button class="button ghost compact pie-mode-btn" data-mode="sectors">Industries</button>
-        <button class="button ghost compact pie-mode-btn" data-mode="top10">Top 10 Stocks</button>
-      </div>
-      <div class="etf-cards">
-        ${etfsFlat.map(etf => renderEtfCard(etf)).join("")}
-      </div>
-    `;
+    if (showHighLeverage) {
+      const usLev = etfsHighLeverage.filter(e => e.market === 'U.S.');
+      const caLev = etfsHighLeverage.filter(e => e.market === 'Canada');
+      grid.classList.add("etf-grid");
+      grid.innerHTML = `
+        <div class="etf-grid-controls">
+          <label class="etf-leverage-toggle">
+            <input type="checkbox" id="highLevCheck" checked onchange="toggleHighLeverage()" />
+            <span>Show 2× / 3× high leverage</span>
+          </label>
+        </div>
+        <div class="etf-section">
+          <div class="etf-section-header">U.S. — High Leverage</div>
+          <div class="etf-cards">${usLev.map(e => renderHighLevCard(e, usLev)).join("")}</div>
+        </div>
+        <div class="etf-section">
+          <div class="etf-section-header">Canada — High Leverage</div>
+          <div class="etf-cards">${caLev.map(e => renderHighLevCard(e, caLev)).join("")}</div>
+        </div>
+      `;
+    } else {
+      const standardEtfs = etfsFlat.filter(e => e.type === 'standard');
+      const tiltedEtfs = etfsFlat.filter(e => e.type === 'tilted');
+      const leveragedEtfs = etfsFlat.filter(e => e.type === 'leveraged');
 
-    // Add pie mode toggle listeners
+      grid.classList.add("etf-grid");
+      grid.innerHTML = `
+        <div class="etf-grid-controls">
+          <div class="pie-mode-toggle" role="group" aria-label="Pie chart view">
+            <button class="button ghost compact pie-mode-btn active" data-mode="countries">Countries</button>
+            <button class="button ghost compact pie-mode-btn" data-mode="sectors">Industries</button>
+            <button class="button ghost compact pie-mode-btn" data-mode="top10">Top 10 Stocks</button>
+          </div>
+          <label class="etf-leverage-toggle">
+            <input type="checkbox" id="highLevCheck" onchange="toggleHighLeverage()" />
+            <span>Show 2× / 3× high leverage</span>
+          </label>
+        </div>
+        <div class="etf-section">
+          <div class="etf-section-header">Standard Broad-Market ETFs</div>
+          <div class="etf-matrix-headers">
+            <span class="etf-matrix-h">World</span>
+            <span class="etf-matrix-h">Canada</span>
+            <span class="etf-matrix-h">U.S.</span>
+          </div>
+          <div class="etf-cards">${standardEtfs.map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
+        </div>
+        <div class="etf-section">
+          <div class="etf-section-header">Tilted / Factor ETFs</div>
+          <div class="etf-matrix-headers">
+            <span class="etf-matrix-h">World</span>
+            <span class="etf-matrix-h">Canada</span>
+            <span class="etf-matrix-h">U.S.</span>
+          </div>
+          <div class="etf-cards">${tiltedEtfs.map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
+        </div>
+        <div class="etf-section">
+          <div class="etf-section-header">1.25× Leveraged ETFs</div>
+          <div class="etf-matrix-headers">
+            <span class="etf-matrix-h">World</span>
+            <span class="etf-matrix-h">Canada</span>
+            <span class="etf-matrix-h">U.S.</span>
+          </div>
+          <div class="etf-cards">${leveragedEtfs.map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
+        </div>
+      `;
+    }
+
     grid.querySelectorAll('.pie-mode-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         grid.querySelectorAll('.pie-mode-btn').forEach(b => b.classList.remove('active'));
@@ -264,12 +361,11 @@ function renderTickers(region) {
       });
     });
 
-    // Add hover tooltip listeners for pie charts
     grid.querySelectorAll('.etf-pie').forEach(pie => {
       const tooltip = pie.dataset.tooltip;
       if (!tooltip) return;
       let tipEl = null;
-      pie.addEventListener('mouseenter', (e) => {
+      pie.addEventListener('mouseenter', () => {
         tipEl = document.createElement('div');
         tipEl.className = 'etf-pie-tooltip';
         tipEl.innerHTML = tooltip;
@@ -278,9 +374,7 @@ function renderTickers(region) {
         tipEl.style.left = rect.left + rect.width / 2 + 'px';
         tipEl.style.top = rect.top - 8 + 'px';
       });
-      pie.addEventListener('mouseleave', () => {
-        if (tipEl) { tipEl.remove(); tipEl = null; }
-      });
+      pie.addEventListener('mouseleave', () => { if (tipEl) { tipEl.remove(); tipEl = null; } });
     });
   } else {
     grid.classList.add("ticker-grid");
@@ -298,6 +392,10 @@ function renderTickers(region) {
   document.getElementById("locationNote").textContent = region === "canada" ? "Showing Canadian-listed ETF ideas." : "Showing U.S.-listed ETF ideas.";
 }
 
+function toggleHighLeverage() {
+  showHighLeverage = !showHighLeverage;
+  renderTickers('canada');
+}
 
 const cagrPresets = [
   { label: "Custom", value: "custom", cagr: 6 },
