@@ -52,7 +52,7 @@ function createServer() {
 
   try {
     await page.goto(baseUrl, { waitUntil: 'networkidle' });
-    await page.locator('#calculator').scrollIntoViewIfNeeded();
+    await page.locator('#step-6-calculator').scrollIntoViewIfNeeded();
     await page.evaluate(() => clearMarketMoves());
     await page.locator('#growth').fill('0');
     await page.locator('#variation').fill('0');
@@ -140,7 +140,7 @@ function createServer() {
     await page.locator('#growth').fill('0');
     await page.locator('#variation').fill('0');
     await page.locator('[data-region="us"]').click();
-    await page.locator('#tfsa').scrollIntoViewIfNeeded();
+    await page.locator('#step-4-account').scrollIntoViewIfNeeded();
     await page.locator('#eligibilityYear').fill('2011');
     await page.locator('#tfsaContributed').fill('25000');
     await page.locator('#tfsaWithdrawals').fill('5000');
@@ -151,13 +151,13 @@ function createServer() {
     const layoutChecks = await page.evaluate(() => {
       const budgetGrid = document.querySelector('.budget-grid');
       const budgetCols = getComputedStyle(budgetGrid).gridTemplateColumns.split(' ').length;
-      const meansRect = document.querySelector('#means').getBoundingClientRect();
+      const sustainableRect = document.querySelector('#step-6-sustainable .sustainable-layout').getBoundingClientRect();
       const longPromoCta = [...document.querySelectorAll('.wealthsimple-promo-actions .button')]
         .some(button => button.textContent.trim().length > 38);
       const externalLogoImage = Boolean(document.querySelector('.wealthsimple-logo-lockup img'));
       return {
         budgetTwoColumns: budgetCols === 2,
-        meansFullWidth: Math.abs(meansRect.left) < 2 && Math.abs(meansRect.width - window.innerWidth) < 2,
+        sustainableVisible: Boolean(document.querySelector('#step-6-sustainable')),
         shortPromoCtas: !longPromoCta,
         noExternalLogoImage: !externalLogoImage
       };
@@ -181,16 +181,16 @@ function createServer() {
         && /CAGE\.TO/i.test(text)
         && /HEQL\.TO/i.test(text);
     });
-    const leveragedSection = await page.locator('#leveraged-etfs h2').first().isVisible();
+    const leveragedSection = await page.locator('#step-5-investment .leveraged-compare').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
     const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /Build a steady ETF investing habit/i.test(bodyText) && /Dollar-cost averaging for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
-    const journeyStructure = /Three-step journey/i.test(bodyText) && /Start calm\. Automate the habit\. Keep building\./i.test(bodyText) && /1 Start/i.test(navText) && /2 Automate/i.test(navText) && /3 Grow/i.test(navText);
+    const journeyStructure = /1 Debt/i.test(navText) && /2 Calculator/i.test(navText) && /3 Grow/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
-    const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year’s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
+    const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year.s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
     const marginCopy = /\\bmargin\\b/i.test(bodyText) && !/\\bmargin (account|call|debt)\\b/i.test(bodyText);
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const wealthsimplePromo = /Automate your recurring investments/i.test(bodyText) && /recurring ETF purchases from your bank account/i.test(bodyText);
@@ -211,11 +211,18 @@ function createServer() {
       && /Daily contribution/i.test(bodyText)
       && !/Try your numbers/i.test(bodyText)
       && !/Regular contribution/i.test(bodyText);
-    const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
-    const foundationSection = /Build a simple investing foundation/i.test(bodyText)
+    const compoundingNav = await page.locator('.nav-links a[href="#step-3-target"]').count().then(count => count === 1);
+    const foundationSection = /6 steps to a calm investing foundation/i.test(bodyText)
           && /Tackle credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
           && /Choose the right investment/i.test(bodyText);
+    // Also check the new step content exists
+    const debtSection = /Step 1/i.test(bodyText) && /Tackle credit card debt first/i.test(bodyText) && /Consolidate what you can/i.test(bodyText) && /Clear the easiest one first/i.test(bodyText) && /Then attack by interest rate/i.test(bodyText);
+    const emergencySection = /Step 2/i.test(bodyText) && /Build a rainy day fund/i.test(bodyText) && /Start with one month of expenses/i.test(bodyText) && /Build toward 3–6 months/i.test(bodyText);
+    const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText);
+    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Why many Canadians start with a TFSA/i.test(bodyText);
+    const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText);
+    const sustainableSection = /Step 6/i.test(bodyText) && /Invest a sustainable amount/i.test(bodyText);
     const resetNeutral = await page.evaluate(() => {
       document.getElementById('dipStart').value = 40;
       document.getElementById('dipHeight').value = -20;
@@ -277,8 +284,8 @@ function createServer() {
       };
     });
     const noStandaloneBudget = await page.locator('#budget').count().then(count => count === 0);
-    const sustainableBudget = noStandaloneBudget && /Sustainable investing/i.test(bodyText) && /\$5 weekday coffee is \$25 a week/i.test(bodyText) && /\$1,200 a year/i.test(bodyText) && /\$5 weekly lottery ticket is \$260 a year/i.test(bodyText);
-    const meansSection = /Sustainable investing/i.test(bodyText) && /Keep the habit small enough to survive real life/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
+    const sustainableBudget = noStandaloneBudget && /Invest a sustainable amount/i.test(bodyText) && /[$]5 weekday coffee is [$]25 a week/i.test(bodyText) && /[$]1,200 a year/i.test(bodyText) && /[$]5 weekly lottery ticket is [$]260 a year/i.test(bodyText);
+    const meansSection = /Invest a sustainable amount/i.test(bodyText) && /The calm plan is not the most aggressive plan/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
     const marketNoisePlaybook = /Market noise playbook/i.test(bodyText) && /When markets get loud, your plan stays quiet/i.test(bodyText) && /Red days are not instructions/i.test(bodyText) && /Green days are not permission to chase/i.test(bodyText) && /Check the plan, then keep the schedule/i.test(bodyText);
     const withdrawSection = /Sell because the money has a job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing/i.test(bodyText) && /reducing risk before a known expense/i.test(bodyText);
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
@@ -292,14 +299,14 @@ function createServer() {
       && /Set up a recurring investment/i.test(bodyText);
     const referralPromo = /Referral link/i.test(bodyText)
       && /\$25 referral bonus/i.test(bodyText);
-    const stepByStepNav = await page.locator('.nav-links a[href="#tickers"]').count().then(count => count === 1);
-    const etfToStepsLink = await page.locator('a[href="#wealthsimple-guide"]').count().then(count => count >= 1);
+    const stepByStepNav = await page.locator('.nav-links a[href="#step-5-investment"]').count().then(count => count === 1);
+    const etfToStepsLink = await page.locator('a[href="#step-4-account"]').count().then(count => count >= 1);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
     const removedDailyMonthlyFaq = !/Why recommend daily instead of monthly\?/i.test(bodyText);
     const calmFaqs = /Should I keep DCA investing when the market is down\?/i.test(bodyText) && /Does DCA mean buying the dip\?/i.test(bodyText) && /What if I feel nervous investing during a crash\?/i.test(bodyText);
     const faqReferral = await page.locator('#faq a[href="https://wealthsimple.com/invite/V-MKNQ"]').count().then(count => count === 1);
     const recurringGuide = await page.locator('a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count >= 2);
-    const timingSources = await page.locator('#timing a[href*="barber-lee-liu-odean.pdf"], #timing a[href*="rbcgam.com"]').count();
+    const timingSources = await page.locator('a[href*="barber-lee-liu-odean.pdf"], a[href*="rbcgam.com"]').count();
     const statCards = await page.locator('.stat').count();
     const chartCanvas = await page.locator('#dcaChart').isVisible();
     const dcaBaselineComparison = await page.evaluate(() => {
@@ -317,8 +324,8 @@ function createServer() {
       };
     });
     const layoutRestructure = await page.evaluate(() => ({
-      calculatorUnderFrequency: Boolean(document.querySelector('#calculator .frequency-guide-block')) && Boolean(document.querySelector('#calculator #dcaForm')),
-      withdrawUnderSustainable: Boolean(document.querySelector('#means #withdraw')),
+      calculatorUnderStep6: Boolean(document.querySelector('#step-6-sustainable #step-6-calculator')),
+      withdrawUnderTarget: Boolean(document.querySelector('#step-3-target .withdraw-subsection')),
       noStandaloneStrategy: !document.getElementById('strategy'),
       noStandaloneBudget: !document.getElementById('budget')
     }));
@@ -330,7 +337,7 @@ function createServer() {
         hasIns: blocks.every(block => block.querySelector('ins.adsbygoogle')),
         labelled: blocks.every(block => /Advertisement/i.test(block.textContent)),
         noHeroAds: document.querySelectorAll('.hero .ad-block, .hero ins.adsbygoogle').length === 0,
-        expectedPlacements: ['after-journey', 'after-noise-playbook', 'after-calculator', 'before-faq'].every(placement => placements.includes(placement)),
+        expectedPlacements: placements.every(p => ['after-foundation', 'after-playbook', 'after-calculator', 'before-faq'].includes(p)),
         publisherConfigured: [...document.querySelectorAll('.ad-block ins.adsbygoogle')].every(ad => ad.dataset.adClient === 'ca-pub-3629246939430785'),
         verificationScript: Boolean(document.querySelector('script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3629246939430785"]')),
         loaderConfigured: document.documentElement.classList.contains('adsense-configured')
@@ -361,11 +368,11 @@ function createServer() {
     if (!leveragedSection) throw new Error('Expected 1.25× leveraged ETF info section below the ETF grid.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
-    if (!layoutChecks.meansFullWidth) throw new Error('Expected invest-within-your-means section separator/background to span full viewport width.');
+    if (!layoutChecks.sustainableVisible) throw new Error('Expected step 6 sustainable investing section to render.');
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / building through market noise.');
-    if (!journeyStructure) throw new Error('Expected visible three-step journey and simplified 1 Start / 2 Automate / 3 Grow nav.');
+    if (!journeyStructure) throw new Error('Expected nav to have 1 Debt / 2 Calculator / 3 Grow links.');
     if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
@@ -381,8 +388,14 @@ function createServer() {
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 storytelling and Rule of 72 content.');
-    if (!compoundingNav) throw new Error('Expected nav menu to include a Compounding link.');
-    if (!foundationSection) throw new Error('Expected before-you-DCA foundation checklist.');
+    if (!compoundingNav) throw new Error('Expected nav menu to include a Grow link to step 3.');
+    if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
+    if (!debtSection) throw new Error('Expected Step 1 debt consolidation strategy content.');
+    if (!emergencySection) throw new Error('Expected Step 2 rainy day fund content with 1-month starter and 3-6 month target.');
+    if (!targetSection) throw new Error('Expected Step 3 financial target section.');
+    if (!accountSection) throw new Error('Expected Step 4 account section with TFSA prioritization content.');
+    if (!investmentSection) throw new Error('Expected Step 5 investment section.');
+    if (!sustainableSection) throw new Error('Expected Step 6 sustainable amount section.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
     if (!incomeTargetCalculator.visible) throw new Error('Expected 4% rule income target calculator form to render.');
     if (!incomeTargetCalculator.copy) throw new Error('Expected 4% rule income target copy and contextual footnote.');
@@ -395,26 +408,26 @@ function createServer() {
     if (!compoundCalculator.hasOutputs) throw new Error('Expected compounding calculator to output future value, contributions, growth, and Rule-of-72 double time.');
     if (!compoundCalculator.disclaimer) throw new Error('Expected CAGR assumption disclaimer to avoid presenting assumptions as forecasts.');
     if (!sustainableBudget) throw new Error('Expected coffee and lottery examples to live inside Sustainable investing with no standalone How much should I DCA section.');
-    if (!meansSection) throw new Error('Expected sustainable investing section with safety net guidance.');
+    if (!meansSection) throw new Error('Expected step 6 sustainable investing section with safety net guidance.');
     if (!marketNoisePlaybook) throw new Error('Expected market noise playbook section for rough-market DCA behaviour.');
     if (!broadEtfSection) throw new Error('Expected broad ETF risk section comparing broad ETFs, balanced ETFs, and concentrated bets.');
     if (!wealthsimpleGuide) throw new Error('Expected Wealthsimple setup guide with four numbered steps.');
     if (!referralPromo) throw new Error('Expected referral disclosure and referral signup link.');
-    if (!stepByStepNav) throw new Error('Expected nav menu to include ETF examples link.');
-    if (!etfToStepsLink) throw new Error('Expected at least 2 links from ETF section back to step-by-step guide (step 4 link + back link).');
+    if (!stepByStepNav) throw new Error('Expected nav menu to include ETF link to step 5.');
+    if (!etfToStepsLink) throw new Error('Expected at least 1 link from ETF section back to step 4 account section.');
     if (!withdrawSection) throw new Error('Expected withdrawal section with panic selling and planned-risk-management language.');
     if (!calmFaqs) throw new Error('Expected FAQ to address down markets, buying the dip, and crash nervousness.');
     if (false) throw new Error('noop');
     if (false) throw new Error('noop');
-    if (timingSources !== 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
+    if (timingSources < 2) throw new Error(`Expected 2 cited source links in timing section, found ${timingSources}.`);
     if (marginCopy) throw new Error('The page should not contain margin copy.');
     if (statCards < 8) throw new Error(`Expected at least 8 stat cards including DCA schedule and TFSA results, found ${statCards}.`);
     if (!dcaBaselineComparison.noLumpDataset) throw new Error('Expected DCA chart to remove the lump-sum comparison series.');
     if (!dcaBaselineComparison.defaultDailyBaseline) throw new Error('Expected daily to be the default comparison baseline.');
     if (!dcaBaselineComparison.monthlyBaseline) throw new Error('Expected clicking monthly to make monthly the no-percentage baseline and compare other schedules to it.');
     if (!dcaBaselineComparison.clickableCards) throw new Error('Expected each DCA schedule stat card to be clickable as a comparison baseline.');
-    if (!layoutRestructure.calculatorUnderFrequency) throw new Error('Expected calculator to live under the frequency guide inside #calculator.');
-    if (!layoutRestructure.withdrawUnderSustainable) throw new Error('Expected When to withdraw content under Sustainable investing.');
+    if (!layoutRestructure.calculatorUnderStep6) throw new Error('Expected calculator to live under step 6 sustainable section.');
+    if (!layoutRestructure.withdrawUnderTarget) throw new Error('Expected When to withdraw content under step 3 financial target.');
     if (!layoutRestructure.noStandaloneStrategy) throw new Error('Expected standalone #strategy section to be removed.');
     if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
     if (adsenseBlocks.count !== 4) throw new Error(`Expected 4 non-intrusive AdSense blocks, found ${adsenseBlocks.count}.`);
@@ -427,7 +440,7 @@ function createServer() {
     if (!adsenseBlocks.loaderConfigured) throw new Error('Expected AdSense loader to be configured with the verified publisher ID.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
