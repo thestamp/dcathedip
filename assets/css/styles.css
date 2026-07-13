@@ -684,7 +684,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results, .foundation-layout, .foundation-grid, .risk-spectrum-row { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results, .foundation-grid, .risk-spectrum-row { grid-template-columns: 1fr; }
   .leveraged-compare { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
@@ -696,9 +696,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
 }
 
 .foundation-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.foundation-layout { display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: 24px; align-items: center; }
-.foundation-illustration { width: 100%; max-width: 320px; justify-self: center; filter: drop-shadow(0 24px 50px rgba(0,0,0,0.3)); }
-.foundation-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.foundation-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .foundation-card { border: 1px solid var(--border); border-radius: 22px; padding: 20px; background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055)); }
 .foundation-card .icon { font-size: 1.7rem; margin-bottom: 10px; }
 .foundation-card h3 { font-size: 1.05rem; margin-bottom: 8px; }

@@ -212,12 +212,10 @@ function createServer() {
       && !/Try your numbers/i.test(bodyText)
       && !/Regular contribution/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
-    const foundationImage = await page.locator('.foundation-illustration').count().then(count => count === 1);
     const foundationSection = /Build a simple investing foundation/i.test(bodyText)
-      && /High-interest debt/i.test(bodyText)
-      && /Emergency savings/i.test(bodyText)
-      && /Comfort level/i.test(bodyText)
-      && foundationImage;
+          && /High-interest debt/i.test(bodyText)
+          && /Emergency savings/i.test(bodyText)
+          && /Comfort level/i.test(bodyText);
     const riskLevelSection = /Risk and comfort/i.test(bodyText)
       && /Choose an ETF mix you can stick with/i.test(bodyText)
       && /Balanced or conservative asset-allocation ETFs/i.test(bodyText)
@@ -388,7 +386,7 @@ function createServer() {
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 storytelling and Rule of 72 content.');
     if (!compoundingNav) throw new Error('Expected nav menu to include a Compounding link.');
-    if (!foundationSection) throw new Error('Expected before-you-DCA foundation checklist and illustration.');
+    if (!foundationSection) throw new Error('Expected before-you-DCA foundation checklist.');
     if (!riskLevelSection) throw new Error('Expected risk-level-before-ticker section for cautious investors.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
     if (!incomeTargetCalculator.visible) throw new Error('Expected 4% rule income target calculator form to render.');
