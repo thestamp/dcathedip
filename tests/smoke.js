@@ -213,9 +213,9 @@ function createServer() {
       && !/Regular contribution/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-links a[href="#compounding"]').count().then(count => count === 1);
     const foundationSection = /Build a simple investing foundation/i.test(bodyText)
-          && /High-interest debt/i.test(bodyText)
-          && /Emergency savings/i.test(bodyText)
-          && /Comfort level/i.test(bodyText);
+          && /Tackle credit card debt/i.test(bodyText)
+          && /Build up rainy day fund/i.test(bodyText)
+          && /Choose the right investment/i.test(bodyText);
     const riskLevelSection = /Risk and comfort/i.test(bodyText)
       && /Choose an ETF mix you can stick with/i.test(bodyText)
       && /Balanced or conservative asset-allocation ETFs/i.test(bodyText)
