@@ -684,7 +684,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results, .foundation-grid, .risk-spectrum-row { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results, .risk-spectrum-row { grid-template-columns: 1fr; }
   .leveraged-compare { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
@@ -696,20 +696,40 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
 }
 
 .foundation-section { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.foundation-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.foundation-card { border: 1px solid var(--border); border-radius: 22px; padding: 20px; background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055)); }
-.foundation-card .icon { font-size: 1.7rem; margin-bottom: 10px; }
-.foundation-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.foundation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.foundation-item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px 22px;
+  background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055));
+}
 .foundation-num {
-  width: 36px; height: 36px;
-  border-radius: 10px;
+  width: 48px; height: 48px;
+  border-radius: 14px;
   display: grid; place-items: center;
   background: linear-gradient(135deg, var(--green), var(--blue));
   color: #06101e;
   font-weight: 1000;
-  font-size: 1rem;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  flex-shrink: 0;
 }
+.foundation-item h3 { margin: 0 0 6px; font-size: 1.1rem; }
+.foundation-item p { margin: 0; }
+.foundation-card { border: 1px solid var(--border); border-radius: 22px; padding: 20px; background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055)); }
+.foundation-card .icon { font-size: 1.7rem; margin-bottom: 10px; }
+.foundation-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
 .foundation-card p { margin: 0; }
 .risk-spectrum { border: 1px solid var(--border); border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.055); }
 .risk-spectrum-row { display: grid; grid-template-columns: 210px minmax(0, 0.9fr) minmax(0, 1.2fr); gap: 14px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); }
