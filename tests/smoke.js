@@ -167,29 +167,22 @@ function createServer() {
     const canadaEtfGrid = await page.evaluate(() => {
       const grid = document.querySelector('#tickerGrid');
       const text = grid.textContent;
-      return grid.classList.contains('etf-matrix')
-        && /Standard broad-market/i.test(text)
-        && /Tilted|more aggressive/i.test(text)
-        && /1\.25× leveraged/i.test(text)
-        // Standard S&P 500 providers
-        && /ZSP\.TO/i.test(text) && /BMO/i.test(text)
-        && /VFV\.TO/i.test(text) && /Vanguard/i.test(text)
-        && /XUS\.TO/i.test(text) && /iShares/i.test(text)
-        // Standard Canada providers
-        && /ZIU\.TO/i.test(text)
-        && /XIU\.TO/i.test(text)
-        && /VCN\.TO/i.test(text)
-        // Standard World providers
-        && /XEQT\.TO/i.test(text)
-        && /VEQT\.TO/i.test(text)
-        && /ZEQT\.TO/i.test(text)
-        // Tilted
+      const hasPieToggle = /Countries/i.test(text) && /Industries/i.test(text) && /Top 10 Stocks/i.test(text);
+      const cardCount = document.querySelectorAll('.etf-card').length;
+      const hasBest = /Recommended/i.test(text);
+      const hasPies = document.querySelectorAll('.etf-pie').length === cardCount;
+      // All 15 ETFs present
+      return grid.classList.contains('etf-grid')
+        && hasPieToggle
+        && cardCount === 15
+        && hasBest
+        && hasPies
+        && /ZSP\.TO/i.test(text) && /VFV\.TO/i.test(text) && /XUS\.TO/i.test(text)
+        && /ZIU\.TO/i.test(text) && /XIU\.TO/i.test(text) && /VCN\.TO/i.test(text)
+        && /XEQT\.TO/i.test(text) && /VEQT\.TO/i.test(text) && /ZEQT\.TO/i.test(text)
         && /CAUS\.TO/i.test(text) && /CACE\.TO/i.test(text) && /CAGE\.TO/i.test(text)
-        // Leveraged
         && /USSL\.TO/i.test(text) && /CANL\.TO/i.test(text) && /HEQL\.TO/i.test(text)
-        // Metrics
         && /MER/i.test(text) && /1Y/i.test(text)
-        // Lean descriptions
         && /leans more Canada/i.test(text);
     });
     const leveragedSection = await page.locator('#step-5-investment .leveraged-compare').first().isVisible();
