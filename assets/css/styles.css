@@ -700,6 +700,16 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
 .foundation-card { border: 1px solid var(--border); border-radius: 22px; padding: 20px; background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055)); }
 .foundation-card .icon { font-size: 1.7rem; margin-bottom: 10px; }
 .foundation-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.foundation-num {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: #06101e;
+  font-weight: 1000;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
 .foundation-card p { margin: 0; }
 .risk-spectrum { border: 1px solid var(--border); border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.055); }
 .risk-spectrum-row { display: grid; grid-template-columns: 210px minmax(0, 0.9fr) minmax(0, 1.2fr); gap: 14px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); }
