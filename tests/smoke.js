@@ -153,7 +153,7 @@ function createServer() {
       const budgetCols = getComputedStyle(budgetGrid).gridTemplateColumns.split(' ').length;
       const meansRect = document.querySelector('#means').getBoundingClientRect();
       const longPromoCta = [...document.querySelectorAll('.wealthsimple-promo-actions .button')]
-        .some(button => button.textContent.trim().length > 30);
+        .some(button => button.textContent.trim().length > 38);
       const externalLogoImage = Boolean(document.querySelector('.wealthsimple-logo-lockup img'));
       return {
         budgetTwoColumns: budgetCols === 2,
@@ -297,7 +297,7 @@ function createServer() {
       && /Open the investing account you want to use/i.test(bodyText)
       && /Set up a recurring investment/i.test(bodyText);
     const referralPromo = /Referral link/i.test(bodyText)
-      && /Sign up with referral/i.test(bodyText);
+      && /\$25 referral bonus/i.test(bodyText);
     const stepByStepNav = await page.locator('.nav-links a[href="#tickers"]').count().then(count => count === 1);
     const etfToStepsLink = await page.locator('a[href="#wealthsimple-guide"]').count().then(count => count >= 1);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);

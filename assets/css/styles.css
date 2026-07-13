@@ -30,6 +30,7 @@ body {
     radial-gradient(circle at 85% 10%, rgba(106, 168, 255, 0.18), transparent 28rem),
     linear-gradient(180deg, var(--bg), #0d1324 44%, #070b13);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -828,6 +829,7 @@ input, select { min-height: 44px; }
   .ws-step-actions .button,
   .wealthsimple-promo-actions .button {
     width: 100%;
+    white-space: normal;
   }
 
   .button {
