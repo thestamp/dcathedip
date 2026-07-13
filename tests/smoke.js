@@ -216,10 +216,6 @@ function createServer() {
           && /Tackle credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
           && /Choose the right investment/i.test(bodyText);
-    const riskLevelSection = /Risk and comfort/i.test(bodyText)
-      && /Choose an ETF mix you can stick with/i.test(bodyText)
-      && /Balanced or conservative asset-allocation ETFs/i.test(bodyText)
-      && /larger swings/i.test(bodyText);
     const resetNeutral = await page.evaluate(() => {
       document.getElementById('dipStart').value = 40;
       document.getElementById('dipHeight').value = -20;
@@ -387,7 +383,6 @@ function createServer() {
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 storytelling and Rule of 72 content.');
     if (!compoundingNav) throw new Error('Expected nav menu to include a Compounding link.');
     if (!foundationSection) throw new Error('Expected before-you-DCA foundation checklist.');
-    if (!riskLevelSection) throw new Error('Expected risk-level-before-ticker section for cautious investors.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
     if (!incomeTargetCalculator.visible) throw new Error('Expected 4% rule income target calculator form to render.');
     if (!incomeTargetCalculator.copy) throw new Error('Expected 4% rule income target copy and contextual footnote.');
@@ -432,7 +427,7 @@ function createServer() {
     if (!adsenseBlocks.loaderConfigured) throw new Error('Expected AdSense loader to be configured with the verified publisher ID.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

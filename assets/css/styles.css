@@ -684,7 +684,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results, .risk-spectrum-row { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .etf-matrix, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results { grid-template-columns: 1fr; }
   .leveraged-compare { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
@@ -731,13 +731,6 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
 .foundation-card .icon { font-size: 1.7rem; margin-bottom: 10px; }
 .foundation-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
 .foundation-card p { margin: 0; }
-.risk-spectrum { border: 1px solid var(--border); border-radius: 24px; overflow: hidden; background: rgba(255,255,255,0.055); }
-.risk-spectrum-row { display: grid; grid-template-columns: 210px minmax(0, 0.9fr) minmax(0, 1.2fr); gap: 14px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--border); }
-.risk-spectrum-row:last-child { border-bottom: 0; }
-.risk-spectrum-row.header { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 900; font-size: 0.78rem; background: rgba(255,255,255,0.08); }
-.risk-spectrum-row span { color: var(--muted); font-weight: 800; }
-.risk-spectrum-row strong { color: var(--green); }
-.risk-spectrum-row p { margin: 0; }
 .center-note { text-align: center; max-width: 900px; margin: 18px auto 0; }
 .dip-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
 .etf-risk-note { max-width: 900px; margin-left: auto; margin-right: auto; }
@@ -766,23 +759,6 @@ input, select { min-height: 44px; }
     order: -1;
   }
 
-  .risk-spectrum-row.header {
-    display: none;
-  }
-
-  .risk-spectrum-row {
-    align-items: start;
-  }
-
-  .risk-card-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .risk-spectrum-row span,
-  .risk-spectrum-row strong,
-  .risk-spectrum-row p {
-    display: block;
-  }
 
   .crossover-card,
   .chart-card {
