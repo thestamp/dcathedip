@@ -6,17 +6,20 @@ const etfs = {
     {
       market: "U.S.",
       cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Standard broad-market S&P 500 exposure to large U.S. companies." },
-      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Broader U.S. equity exposure with a factor-oriented approach." }
+      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Broader U.S. equity exposure with a factor-oriented approach." },
+      leveraged: { ticker: "USSL.TO", name: "Global X Enhanced S&P 500 ETF", use: "1.25× daily leveraged S&P 500 exposure — moderate boost without margin debt." }
     },
     {
       market: "Canada",
       cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Standard broad-market exposure to 60 large Canadian companies." },
-      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Broad Canadian equity exposure with a factor-oriented approach." }
+      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Broad Canadian equity exposure with a factor-oriented approach." },
+      leveraged: { ticker: "CANL.TO", name: "Global X Enhanced S&P/TSX 60 ETF", use: "1.25× daily leveraged Canadian large-cap exposure — moderate boost without margin debt." }
     },
     {
       market: "World",
       cap: { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Standard global all-equity portfolio across Canada, U.S., international, and emerging markets." },
-      growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Global all-equity portfolio with factor tilts." }
+      growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Global all-equity portfolio with factor tilts." },
+      leveraged: { ticker: "HEQL.TO", name: "Global X Enhanced All-Equity ETF", use: "1.25× daily leveraged global all-equity portfolio — moderate boost without margin debt." }
     }
   ],
   us: [
@@ -352,12 +355,14 @@ function renderTickers(region) {
   if (region === "canada") {
     grid.innerHTML = `
       <div class="etf-matrix-header market-label">Market</div>
-      <div class="etf-matrix-header">Standard broad-market example</div>
-      <div class="etf-matrix-header">Tilted / more aggressive example</div>
+      <div class="etf-matrix-header">Standard broad-market</div>
+      <div class="etf-matrix-header">Tilted / more aggressive</div>
+      <div class="etf-matrix-header">1.25× leveraged</div>
       ${etfs.canada.map(row => `
         <div class="market-label">${row.market}</div>
         ${renderEtfCell(row.cap, "cap")}
         ${renderEtfCell(row.growth, "growth")}
+        ${renderEtfCell(row.leveraged, "leveraged")}
       `).join("")}
     `;
   } else {

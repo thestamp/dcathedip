@@ -170,13 +170,18 @@ function createServer() {
       return grid.classList.contains('etf-matrix')
         && /Standard broad-market/i.test(text)
         && /Tilted|more aggressive/i.test(text)
+        && /1\.25× leveraged/i.test(text)
         && /ZSP\.TO/i.test(text)
         && /CAUS\.TO/i.test(text)
+        && /USSL\.TO/i.test(text)
         && /ZIU\.TO/i.test(text)
         && /CACE\.TO/i.test(text)
+        && /CANL\.TO/i.test(text)
         && /XEQT\.TO/i.test(text)
-        && /CAGE\.TO/i.test(text);
+        && /CAGE\.TO/i.test(text)
+        && /HEQL\.TO/i.test(text);
     });
+    const leveragedSection = await page.locator('#leveraged-etfs h2').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
@@ -186,7 +191,7 @@ function createServer() {
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year’s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
-    const marginCopy = /\bmargin\b/i.test(bodyText);
+    const marginCopy = /\\bmargin\\b/i.test(bodyText) && !/\\bmargin (account|call|debt)\\b/i.test(bodyText);
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const wealthsimplePromo = /Automate your recurring investments/i.test(bodyText) && /recurring ETF purchases from your bank account/i.test(bodyText);
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
@@ -358,7 +363,8 @@ function createServer() {
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
     if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
     if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
-    if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard and tilted ETF examples for U.S., Canada, and World.');
+    if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and 1.25× leveraged ETF examples for U.S., Canada, and World.');
+    if (!leveragedSection) throw new Error('Expected 1.25× leveraged ETF info section below the ETF grid.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
     if (!layoutChecks.meansFullWidth) throw new Error('Expected invest-within-your-means section separator/background to span full viewport width.');
@@ -428,7 +434,7 @@ function createServer() {
     if (!adsenseBlocks.loaderConfigured) throw new Error('Expected AdSense loader to be configured with the verified publisher ID.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, riskLevelSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
