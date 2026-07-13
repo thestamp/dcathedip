@@ -273,7 +273,18 @@ Canadian ETF grid:
 
 U.S./elsewhere examples: VT, VTI, VOO, VXUS, AVGE, QQQM.
 
-## 17. Wealthsimple setup and referral
+## 17. Wealthsimple setup and referral (brand styling)
+
+Wealthsimple referral banners use the following Wealthsimple-inspired brand colors on the site's dark background:
+
+- **Warm gold** (`#f5b342` / `#d4992e`): Primary accent — badges, step numbers, referral notes, borders, and primary buttons in Wealthsimple sections.
+- **Dune** (`#32302f`): Wealthsimple's signature dark brown-black, used for text on gold backgrounds.
+- **Celery green** (`#99b383`): Supporting accent for subtle backgrounds.
+- **Linen** (`#faf8f5`): Reserved for light-mode contexts; not used on the dark site.
+
+All Wealthsimple-branded elements (`.wealthsimple-promo`, `.ws-step-num`, `.ws-step-referral`, `.ws-referral-note`, `.wealthsimple`) use the gold gradient and warm accent instead of the site's default green/blue scheme.
+
+## 17a. Wealthsimple setup and referral
 
 Wealthsimple can be presented as a popular Canadian platform for automating recurring ETF purchases.
 
