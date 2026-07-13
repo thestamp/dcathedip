@@ -338,7 +338,11 @@ function renderTickers(region) {
             <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
             <span class="etf-matrix-h">U.S.</span>
           </div>
-          <div class="etf-cards">${standardEtfs.map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
+          <div class="etf-columns">
+            <div class="etf-col">${standardEtfs.filter(e => e.market === 'World').map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
+            <div class="etf-col">${standardEtfs.filter(e => e.market === 'Canada').map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
+            <div class="etf-col">${standardEtfs.filter(e => e.market === 'U.S.').map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
+          </div>
         </div>
         <div class="etf-section">
           <div class="etf-section-header">Tilted / Factor ETFs</div>
@@ -347,7 +351,11 @@ function renderTickers(region) {
             <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
             <span class="etf-matrix-h">U.S.</span>
           </div>
-          <div class="etf-cards">${tiltedEtfs.map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
+          <div class="etf-columns">
+            <div class="etf-col">${tiltedEtfs.filter(e => e.market === 'World').map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
+            <div class="etf-col">${tiltedEtfs.filter(e => e.market === 'Canada').map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
+            <div class="etf-col">${tiltedEtfs.filter(e => e.market === 'U.S.').map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
+          </div>
         </div>
         <div class="etf-section">
           <div class="etf-section-header">1.25× Leveraged ETFs</div>
@@ -356,7 +364,11 @@ function renderTickers(region) {
             <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
             <span class="etf-matrix-h">U.S.</span>
           </div>
-          <div class="etf-cards">${leveragedEtfs.map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
+          <div class="etf-columns">
+            <div class="etf-col">${leveragedEtfs.filter(e => e.market === 'World').map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
+            <div class="etf-col">${leveragedEtfs.filter(e => e.market === 'Canada').map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
+            <div class="etf-col">${leveragedEtfs.filter(e => e.market === 'U.S.').map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
+          </div>
         </div>
       `;
     }
