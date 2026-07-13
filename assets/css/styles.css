@@ -611,8 +611,11 @@ h3 { font-size: 1.35rem; }
 .etf-section { margin-bottom: 28px; }
 .etf-section-header {
   font-size: 1.08rem; font-weight: 900; color: var(--green);
-  padding: 8px 0 12px; border-bottom: 1px solid var(--border);
-  margin-bottom: 14px; text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 8px 0 8px; border-bottom: 1px solid var(--border);
+  margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.etf-section-sub {
+  font-size: 0.84rem; color: var(--muted); margin: 0 0 14px; line-height: 1.5;
 }
 .etf-matrix-headers {
   display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;

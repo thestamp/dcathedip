@@ -304,10 +304,12 @@ function renderTickers(region) {
         </div>
         <div class="etf-section">
           <div class="etf-section-header">U.S. — High Leverage</div>
+          <p class="etf-section-sub">2× and 3× daily S&P 500. Extreme risk with daily reset decay — not for buy-and-hold.</p>
           <div class="etf-cards">${usLev.map(e => renderHighLevCard(e, usLev)).join("")}</div>
         </div>
         <div class="etf-section">
           <div class="etf-section-header">Canada — High Leverage</div>
+          <p class="etf-section-sub">2× and 3× daily TSX 60. For traders who can handle the volatility, and the apology for it.</p>
           <div class="etf-cards">${caLev.map(e => renderHighLevCard(e, caLev)).join("")}</div>
         </div>
       `;
@@ -331,6 +333,7 @@ function renderTickers(region) {
         </div>
         <div class="etf-section">
           <div class="etf-section-header">Standard Broad-Market ETFs</div>
+          <p class="etf-section-sub">World: one-ticket global diversification. Canada: like a double-double — reliable, comfortable, very Canadian. U.S.: the world's largest market in a single ETF.</p>
           <div class="etf-matrix-headers">
             <span class="etf-matrix-h">World</span>
             <span class="etf-matrix-h">Canada</span>
@@ -340,6 +343,7 @@ function renderTickers(region) {
         </div>
         <div class="etf-section">
           <div class="etf-section-header">Tilted / Factor ETFs</div>
+          <p class="etf-section-sub">Factor-based strategies that tilt toward value, profitability, or broader exposure. World: factor tilts across the globe. Canada: Canadian stocks with a value slant — sorry about the concentration. U.S.: goes beyond the S&P 500 into mid/small caps.</p>
           <div class="etf-matrix-headers">
             <span class="etf-matrix-h">World</span>
             <span class="etf-matrix-h">Canada</span>
@@ -349,6 +353,7 @@ function renderTickers(region) {
         </div>
         <div class="etf-section">
           <div class="etf-section-header">1.25× Leveraged ETFs</div>
+          <p class="etf-section-sub">Moderate daily leverage — 1.25× amplification of gains and losses. No margin account, no collateral, no margin calls. World: global all-equity, amplified. Canada: TSX 60 with an extra kick, and an extra apology. U.S.: S&P 500 with a mild boost.</p>
           <div class="etf-matrix-headers">
             <span class="etf-matrix-h">World</span>
             <span class="etf-matrix-h">Canada</span>
