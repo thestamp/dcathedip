@@ -5,21 +5,33 @@ const etfs = {
   canada: [
     {
       market: "U.S.",
-      cap: { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", use: "Standard broad-market S&P 500 exposure to large U.S. companies." },
-      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Broader U.S. equity exposure with a factor-oriented approach." },
-      leveraged: { ticker: "USSL.TO", name: "Global X Enhanced S&P 500 ETF", use: "1.25× daily leveraged S&P 500 exposure — moderate boost without margin debt." }
+      standard: [
+        { ticker: "ZSP.TO", name: "BMO S&P 500 Index ETF", provider: "BMO", mer: "0.09%", return1y: "25.9%", lean: "Pure S&P 500 — holds U.S. stocks directly, lowest MER in class." },
+        { ticker: "VFV.TO", name: "Vanguard S&P 500 Index ETF", provider: "Vanguard", mer: "0.09%", return1y: "25.9%", lean: "Same S&P 500 exposure. Tied with ZSP on MER." },
+        { ticker: "XUS.TO", name: "iShares Core S&P 500 Index ETF", provider: "iShares", mer: "0.10%", return1y: "25.8%", lean: "Same S&P 500 index. Slightly higher MER than ZSP/VFV." }
+      ],
+      growth: { ticker: "CAUS.TO", name: "Avantis CIBC U.S. All-Cap Equity ETF", use: "Broader U.S. equity with factor tilts — includes mid/small caps the S&P 500 misses." },
+      leveraged: { ticker: "USSL.TO", name: "Global X Enhanced S&P 500 ETF", use: "1.25× daily leveraged S&P 500 — moderate boost, no margin debt." }
     },
     {
       market: "Canada",
-      cap: { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", use: "Standard broad-market exposure to 60 large Canadian companies." },
-      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Broad Canadian equity exposure with a factor-oriented approach." },
-      leveraged: { ticker: "CANL.TO", name: "Global X Enhanced S&P/TSX 60 ETF", use: "1.25× daily leveraged Canadian large-cap exposure — moderate boost without margin debt." }
+      standard: [
+        { ticker: "ZIU.TO", name: "BMO S&P/TSX 60 Index ETF", provider: "BMO", mer: "0.14%", return1y: "30.1%", lean: "60 largest Canadian companies — concentrated large-cap." },
+        { ticker: "XIU.TO", name: "iShares S&P/TSX 60 Index ETF", provider: "iShares", mer: "0.18%", return1y: "30.0%", lean: "Same 60-company index as ZIU — higher MER for identical exposure." },
+        { ticker: "VCN.TO", name: "Vanguard FTSE Canada All Cap ETF", provider: "Vanguard", mer: "0.06%", return1y: "33.5%", lean: "Broader — includes mid/small caps. Lowest MER of the three." }
+      ],
+      growth: { ticker: "CACE.TO", name: "Avantis CIBC Canadian Equity ETF", use: "Broad Canadian equity with factor-oriented selection." },
+      leveraged: { ticker: "CANL.TO", name: "Global X Enhanced S&P/TSX 60 ETF", use: "1.25× daily leveraged Canadian large-caps — moderate boost, no margin debt." }
     },
     {
       market: "World",
-      cap: { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", use: "Standard global all-equity portfolio across Canada, U.S., international, and emerging markets." },
+      standard: [
+        { ticker: "XEQT.TO", name: "iShares Core Equity ETF Portfolio", provider: "iShares", mer: "0.20%", return1y: "23.8%", lean: "~25% Canada / 45% U.S. / 30% International. Lower Canada tilt, lower MER." },
+        { ticker: "VEQT.TO", name: "Vanguard All-Equity ETF Portfolio", provider: "Vanguard", mer: "0.24%", return1y: "23.9%", lean: "~30% Canada / 42% U.S. / 28% International. Leans more Canada, holds more stocks (13,800+)." },
+        { ticker: "ZEQT.TO", name: "BMO All-Equity ETF", provider: "BMO", mer: "0.20%", return1y: "23.7%", lean: "~25% Canada / 45% U.S. / 30% International. Similar to XEQT in allocation." }
+      ],
       growth: { ticker: "CAGE.TO", name: "Avantis CIBC All-Equity Asset Allocation ETF", use: "Global all-equity portfolio with factor tilts." },
-      leveraged: { ticker: "HEQL.TO", name: "Global X Enhanced All-Equity ETF", use: "1.25× daily leveraged global all-equity portfolio — moderate boost without margin debt." }
+      leveraged: { ticker: "HEQL.TO", name: "Global X Enhanced All-Equity ETF", use: "1.25× daily leveraged global all-equity — moderate boost, no margin debt." }
     }
   ],
   us: [
@@ -347,6 +359,27 @@ function renderEtfCell(item, type) {
   `;
 }
 
+function renderStandardCell(items) {
+  return `
+    <div class="etf-cell etf-standard-group">
+      ${items.map(item => `
+        <div class="etf-provider-row">
+          <div class="etf-provider-head">
+            <span class="ticker">${item.ticker}</span>
+            <span class="etf-provider-tag">${item.provider}</span>
+          </div>
+          <h3>${item.name}</h3>
+          <div class="etf-metrics">
+            <span class="etf-metric" title="Management Expense Ratio">MER <strong>${item.mer}</strong></span>
+            <span class="etf-metric" title="1-year return as of recent data">1Y <strong>${item.return1y}</strong></span>
+          </div>
+          <p class="etf-lean">${item.lean}</p>
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderTickers(region) {
   const grid = document.getElementById("tickerGrid");
   grid.classList.toggle("etf-matrix", region === "canada");
@@ -360,7 +393,7 @@ function renderTickers(region) {
       <div class="etf-matrix-header">1.25× leveraged</div>
       ${etfs.canada.map(row => `
         <div class="market-label">${row.market}</div>
-        ${renderEtfCell(row.cap, "cap")}
+        ${renderStandardCell(row.standard)}
         ${renderEtfCell(row.growth, "growth")}
         ${renderEtfCell(row.leveraged, "leveraged")}
       `).join("")}

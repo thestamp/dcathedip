@@ -171,15 +171,26 @@ function createServer() {
         && /Standard broad-market/i.test(text)
         && /Tilted|more aggressive/i.test(text)
         && /1\.25× leveraged/i.test(text)
-        && /ZSP\.TO/i.test(text)
-        && /CAUS\.TO/i.test(text)
-        && /USSL\.TO/i.test(text)
+        // Standard S&P 500 providers
+        && /ZSP\.TO/i.test(text) && /BMO/i.test(text)
+        && /VFV\.TO/i.test(text) && /Vanguard/i.test(text)
+        && /XUS\.TO/i.test(text) && /iShares/i.test(text)
+        // Standard Canada providers
         && /ZIU\.TO/i.test(text)
-        && /CACE\.TO/i.test(text)
-        && /CANL\.TO/i.test(text)
+        && /XIU\.TO/i.test(text)
+        && /VCN\.TO/i.test(text)
+        // Standard World providers
         && /XEQT\.TO/i.test(text)
-        && /CAGE\.TO/i.test(text)
-        && /HEQL\.TO/i.test(text);
+        && /VEQT\.TO/i.test(text)
+        && /ZEQT\.TO/i.test(text)
+        // Tilted
+        && /CAUS\.TO/i.test(text) && /CACE\.TO/i.test(text) && /CAGE\.TO/i.test(text)
+        // Leveraged
+        && /USSL\.TO/i.test(text) && /CANL\.TO/i.test(text) && /HEQL\.TO/i.test(text)
+        // Metrics
+        && /MER/i.test(text) && /1Y/i.test(text)
+        // Lean descriptions
+        && /leans more Canada/i.test(text);
     });
     const leveragedSection = await page.locator('#step-5-investment .leveraged-compare').first().isVisible();
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
