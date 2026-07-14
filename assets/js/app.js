@@ -339,15 +339,18 @@ function renderTickers(region) {
 
       function cell(etfs, market) {
         const e = etfs.find(x => x.market === market);
-        return e ? renderEtfCell(e, allStandard) : '<div class="etf-cell-card empty"></div>';
+        const colGroup = etfsFlat.filter(x => x.market === market);
+        return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
       }
       function tiltedCell(market) {
         const e = tilted.find(x => x.market === market);
-        return e ? renderEtfCell(e, tilted) : '<div class="etf-cell-card empty"></div>';
+        const colGroup = etfsFlat.filter(x => x.market === market);
+        return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
       }
       function levCell(market) {
         const e = leveraged.find(x => x.market === market);
-        return e ? renderEtfCell(e, leveraged) : '<div class="etf-cell-card empty"></div>';
+        const colGroup = etfsFlat.filter(x => x.market === market);
+        return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
       }
 
       grid.classList.add("etf-grid");
