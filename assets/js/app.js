@@ -146,28 +146,6 @@ const etfsFlat = [
   }
 ];
 
-// 2x and 3x high-leverage ETFs (Canada and US only, no pie charts)
-const etfsHighLeverage = [
-  { ticker: "SPXU.TO", name: "Global X S&P 500 2x Bull", provider: "Global X", market: "U.S.", leverage: "2x", mer: "1.44%", return1y: "52%", return5y: "30%", lean: "2× daily S&P 500. High risk — daily reset causes decay." },
-  { ticker: "CNDU.TO", name: "Global X TSX 60 2x Bull", provider: "Global X", market: "Canada", leverage: "2x", mer: "1.44%", return1y: "60%", return5y: "25%", lean: "2× daily TSX 60. High risk — daily reset causes decay." },
-  { ticker: "TSPX.TO", name: "Global X S&P 500 3x Bull", provider: "Global X", market: "U.S.", leverage: "3x", mer: "1.50%", return1y: "78%", return5y: "40%", lean: "3× daily S&P 500. Extreme risk — daily reset causes significant decay." },
-  { ticker: "TCND.TO", name: "Global X TSX 60 3x Bull", provider: "Global X", market: "Canada", leverage: "3x", mer: "1.50%", return1y: "90%", return5y: "35%", lean: "3× daily TSX 60. Extreme risk — daily reset causes significant decay." }
-];
-
-// Legacy US ETFs
-const etfs = {
-  us: [
-    { ticker: "VT", name: "Vanguard Total World Stock ETF", use: "One-ticket global equity market exposure." },
-    { ticker: "VTI", name: "Vanguard Total Stock Market ETF", use: "Broad U.S. total-market exposure." },
-    { ticker: "VOO", name: "Vanguard S&P 500 ETF", use: "Large-cap U.S. index exposure." },
-    { ticker: "VXUS", name: "Vanguard Total International Stock ETF", use: "International equity sleeve outside the U.S." },
-    { ticker: "AVGE", name: "Avantis All Equity Markets ETF", use: "Avantis-style global all-equity allocation with factor tilts." },
-    { ticker: "QQQM", name: "Invesco NASDAQ 100 ETF", use: "Concentrated Nasdaq-100 exposure with higher sector and valuation risk." }
-  ]
-};
-let showHighLeverage = false;
-
-// Pie chart view mode
 let pieMode = 'countries';
 
 // Consistent country colors: Canada=red, US=blue
@@ -282,161 +260,89 @@ function renderEtfCell(etf, group) {
   `;
 }
 
-function renderHighLevCard(etf, group) {
-  const score = totalScore(etf);
-  const scores = group.map(e => parseFloat(totalScore(e)));
-  const scoreColor = tierColor(parseFloat(score), scores, false);
-  return `
-    <article class="etf-card high-lev ${etf.leverage.replace('x','')}">
-      <div class="etf-card-head">
-        <span class="ticker">${etf.ticker.replace('.TO', '')}</span>
-        <span class="etf-lev-tag">${etf.leverage}</span>
-      </div>
-      <h3>${etf.name}</h3>
-      <div class="etf-card-metrics">
-        <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
-        <span class="etf-metric">5Y <strong>${etf.return5y}</strong></span>
-        <span class="etf-metric">Net <strong style="color:${scoreColor}">${score}%</strong></span>
-      </div>
-      <p class="etf-lean">${etf.lean}</p>
-    </article>
-  `;
-}
-
-function renderTickers(region) {
+function renderTickers() {
   const grid = document.getElementById("tickerGrid");
-  grid.classList.remove("etf-matrix", "ticker-grid");
+  grid.classList.add("etf-grid");
 
-  if (region === "canada") {
-    if (showHighLeverage) {
-      const usLev = etfsHighLeverage.filter(e => e.market === 'U.S.');
-      const caLev = etfsHighLeverage.filter(e => e.market === 'Canada');
-      grid.classList.add("etf-grid");
-      grid.innerHTML = `
-        <div class="etf-grid-controls">
-          <label class="etf-leverage-toggle">
-            <input type="checkbox" id="highLevCheck" checked onchange="toggleHighLeverage()" />
-            <span>Show 2× / 3× high leverage</span>
-          </label>
-        </div>
-        <div class="etf-section">
-          <div class="etf-section-header">U.S. — High Leverage</div>
-          <p class="etf-section-sub">2× and 3× daily S&P 500. Extreme risk with daily reset decay — not for buy-and-hold.</p>
-          <div class="etf-cards">${usLev.map(e => renderHighLevCard(e, usLev)).join("")}</div>
-        </div>
-        <div class="etf-section">
-          <div class="etf-section-header">Canada — High Leverage</div>
-          <p class="etf-section-sub">2× and 3× daily TSX 60. For traders who can handle the volatility, and the apology for it.</p>
-          <div class="etf-cards">${caLev.map(e => renderHighLevCard(e, caLev)).join("")}</div>
-        </div>
-      `;
-    } else {
-      // Build row-per-company layout
-      const byProvider = (provider) => etfsFlat.filter(e => e.provider === provider && e.type === 'standard');
-      const bmo = byProvider('BMO');
-      const ishares = byProvider('iShares');
-      const vanguard = byProvider('Vanguard');
-      const tilted = etfsFlat.filter(e => e.type === 'tilted');
-      const leveraged = etfsFlat.filter(e => e.type === 'leveraged');
-      const allStandard = etfsFlat.filter(e => e.type === 'standard');
+  const byProvider = (provider) => etfsFlat.filter(e => e.provider === provider && e.type === 'standard');
+  const bmo = byProvider('BMO');
+  const ishares = byProvider('iShares');
+  const vanguard = byProvider('Vanguard');
+  const tilted = etfsFlat.filter(e => e.type === 'tilted');
+  const leveraged = etfsFlat.filter(e => e.type === 'leveraged');
 
-      function cell(etfs, market) {
-        const e = etfs.find(x => x.market === market);
-        const colGroup = etfsFlat.filter(x => x.market === market && x.type !== 'leveraged');
-        return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
-      }
-      function tiltedCell(market) {
-        const e = tilted.find(x => x.market === market);
-        const colGroup = etfsFlat.filter(x => x.market === market && x.type !== 'leveraged');
-        return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
-      }
-      function levCell(market) {
-        const e = leveraged.find(x => x.market === market);
-        return e ? renderEtfCell(e, []) : '<div class="etf-cell-card empty"></div>';
-      }
-
-      grid.classList.add("etf-grid");
-      grid.innerHTML = `
-        <div class="etf-grid-controls">
-          <div class="pie-mode-toggle" role="group" aria-label="Pie chart view">
-            <button class="button ghost compact pie-mode-btn active" data-mode="countries">Countries</button>
-            <button class="button ghost compact pie-mode-btn" data-mode="sectors">Industries</button>
-            <button class="button ghost compact pie-mode-btn" data-mode="top10">Top 10 Stocks</button>
-          </div>
-          <label class="etf-leverage-toggle">
-            <input type="checkbox" id="highLevCheck" onchange="toggleHighLeverage()" />
-            <span>Show 2× / 3× high leverage</span>
-          </label>
-        </div>
-        <div class="etf-table">
-          <div class="etf-table-hdr"><span></span><span>World</span><span>Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span><span>U.S.</span></div>
-          <div class="etf-table-row">
-            <div class="etf-row-label"><span>Standard — BMO</span></div>
-            ${cell(bmo, 'World')}${cell(bmo, 'Canada')}${cell(bmo, 'U.S.')}
-          </div>
-          <div class="etf-table-row">
-            <div class="etf-row-label"><span>Standard — iShares</span></div>
-            ${cell(ishares, 'World')}${cell(ishares, 'Canada')}${cell(ishares, 'U.S.')}
-          </div>
-          <div class="etf-table-row">
-            <div class="etf-row-label"><span>Standard — Vanguard</span></div>
-            ${cell(vanguard, 'World')}${cell(vanguard, 'Canada')}${cell(vanguard, 'U.S.')}
-          </div>
-          <div class="etf-table-row">
-            <div class="etf-row-label"><span>Factor ETFs</span></div>
-            ${tiltedCell('World')}${tiltedCell('Canada')}${tiltedCell('U.S.')}
-          </div>
-          <div class="etf-table-row">
-            <div class="etf-row-label"><span>1.25× Leveraged</span></div>
-            ${levCell('World')}${levCell('Canada')}${levCell('U.S.')}
-          </div>
-        </div>
-      `;
-    }
-
-    grid.querySelectorAll('.pie-mode-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        grid.querySelectorAll('.pie-mode-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        pieMode = btn.dataset.mode;
-        renderTickers('canada');
-      });
-    });
-
-    grid.querySelectorAll('.etf-pie').forEach(pie => {
-      const tooltip = pie.dataset.tooltip;
-      if (!tooltip) return;
-      let tipEl = null;
-      pie.addEventListener('mouseenter', () => {
-        tipEl = document.createElement('div');
-        tipEl.className = 'etf-pie-tooltip';
-        tipEl.innerHTML = tooltip;
-        document.body.appendChild(tipEl);
-        const rect = pie.getBoundingClientRect();
-        tipEl.style.left = rect.left + rect.width / 2 + 'px';
-        tipEl.style.top = rect.top - 8 + 'px';
-      });
-      pie.addEventListener('mouseleave', () => { if (tipEl) { tipEl.remove(); tipEl = null; } });
-    });
-  } else {
-    grid.classList.add("ticker-grid");
-    grid.innerHTML = etfs.us.map(item => `
-      <article class="ticker-card">
-        <span class="ticker">${item.ticker}</span>
-        <h3>${item.name}</h3>
-        <p>${item.use}</p>
-      </article>
-    `).join("");
+  function cell(etfs, market) {
+    const e = etfs.find(x => x.market === market);
+    const colGroup = etfsFlat.filter(x => x.market === market && x.type !== 'leveraged');
+    return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
+  }
+  function tiltedCell(market) {
+    const e = tilted.find(x => x.market === market);
+    const colGroup = etfsFlat.filter(x => x.market === market && x.type !== 'leveraged');
+    return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
+  }
+  function levCell(market) {
+    const e = leveraged.find(x => x.market === market);
+    return e ? renderEtfCell(e, []) : '<div class="etf-cell-card empty"></div>';
   }
 
-  document.querySelectorAll("[data-region]").forEach(btn => btn.classList.toggle("active", btn.dataset.region === region));
-  document.getElementById("wealthsimpleBox").style.display = region === "canada" ? "flex" : "none";
-  document.getElementById("locationNote").textContent = region === "canada" ? "Showing Canadian-listed ETF ideas." : "Showing U.S.-listed ETF ideas.";
-}
+  grid.innerHTML = `
+    <div class="etf-grid-controls">
+      <div class="pie-mode-toggle" role="group" aria-label="Pie chart view">
+        <button class="button ghost compact pie-mode-btn active" data-mode="countries">Countries</button>
+        <button class="button ghost compact pie-mode-btn" data-mode="sectors">Industries</button>
+        <button class="button ghost compact pie-mode-btn" data-mode="top10">Top 10 Stocks</button>
+      </div>
+    </div>
+    <div class="etf-table">
+      <div class="etf-table-hdr"><span></span><span>World</span><span>Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span><span>U.S.</span></div>
+      <div class="etf-table-row">
+        <div class="etf-row-label"><span>Standard — BMO</span></div>
+        ${cell(bmo, 'World')}${cell(bmo, 'Canada')}${cell(bmo, 'U.S.')}
+      </div>
+      <div class="etf-table-row">
+        <div class="etf-row-label"><span>Standard — iShares</span></div>
+        ${cell(ishares, 'World')}${cell(ishares, 'Canada')}${cell(ishares, 'U.S.')}
+      </div>
+      <div class="etf-table-row">
+        <div class="etf-row-label"><span>Standard — Vanguard</span></div>
+        ${cell(vanguard, 'World')}${cell(vanguard, 'Canada')}${cell(vanguard, 'U.S.')}
+      </div>
+      <div class="etf-table-row">
+        <div class="etf-row-label"><span>Factor ETFs</span></div>
+        ${tiltedCell('World')}${tiltedCell('Canada')}${tiltedCell('U.S.')}
+      </div>
+      <div class="etf-table-row">
+        <div class="etf-row-label"><span>1.25× Leveraged</span></div>
+        ${levCell('World')}${levCell('Canada')}${levCell('U.S.')}
+      </div>
+    </div>
+  `;
 
-function toggleHighLeverage() {
-  showHighLeverage = !showHighLeverage;
-  renderTickers('canada');
+  grid.querySelectorAll('.pie-mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      grid.querySelectorAll('.pie-mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      pieMode = btn.dataset.mode;
+      renderTickers();
+    });
+  });
+
+  grid.querySelectorAll('.etf-pie').forEach(pie => {
+    const tooltip = pie.dataset.tooltip;
+    if (!tooltip) return;
+    let tipEl = null;
+    pie.addEventListener('mouseenter', () => {
+      tipEl = document.createElement('div');
+      tipEl.className = 'etf-pie-tooltip';
+      tipEl.innerHTML = tooltip;
+      document.body.appendChild(tipEl);
+      const rect = pie.getBoundingClientRect();
+      tipEl.style.left = rect.left + rect.width / 2 + 'px';
+      tipEl.style.top = rect.top - 8 + 'px';
+    });
+    pie.addEventListener('mouseleave', () => { if (tipEl) { tipEl.remove(); tipEl = null; } });
+  });
 }
 
 const cagrPresets = [
@@ -774,23 +680,6 @@ function renderDipList() {
   });
 }
 
-function detectLocation() {
-  const note = document.getElementById("locationNote");
-  if (!navigator.geolocation) {
-    note.textContent = "Geolocation is not available in this browser. Pick a market manually.";
-    return;
-  }
-  note.textContent = "Requesting location permission…";
-  navigator.geolocation.getCurrentPosition(async pos => {
-    const { latitude, longitude } = pos.coords;
-    const isCanada = latitude >= 41 && latitude <= 84 && longitude >= -141 && longitude <= -52;
-    renderTickers(isCanada ? "canada" : "us");
-    note.textContent = isCanada ? "Location suggests Canada. Showing Canadian-listed ETF ideas." : "Location suggests outside Canada. Showing U.S.-listed ETF ideas.";
-  }, () => {
-    note.textContent = "Location declined. Pick Canada or U.S. manually.";
-  }, { timeout: 8000, maximumAge: 60 * 60 * 1000 });
-}
-
 const tfsaLimits = {
   2009: 5000,
   2010: 5000,
@@ -1012,17 +901,9 @@ function init() {
   document.querySelectorAll("#compoundForm input").forEach(el => el.addEventListener("input", calculateCompounding));
   document.getElementById("compoundPreset").addEventListener("change", applyCagrPreset);
   document.querySelectorAll("#crossoverForm input").forEach(el => el.addEventListener("input", calculateCrossover));
-  document.querySelectorAll("[data-region]").forEach(btn => btn.addEventListener("click", () => renderTickers(btn.dataset.region)));
-  const detectLocationButton = document.getElementById("detectLocation");
-  if (detectLocationButton) detectLocationButton.addEventListener("click", detectLocation);
-  const declineLocationButton = document.getElementById("declineLocation");
-  if (declineLocationButton) declineLocationButton.addEventListener("click", () => {
-    document.getElementById("locationNote").textContent = "Location declined. Showing Canadian-listed ETF ideas by default.";
-    renderTickers("canada");
-  });
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
-  renderTickers("canada");
-  updateChart();
+    renderTickers();
+    updateChart();
   calculateTfsaRoom();
   calculateCompounding();
   calculateCrossover();

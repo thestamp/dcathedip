@@ -720,6 +720,7 @@ h3 { font-size: 1.35rem; }
   .etf-row-label { padding: 4px 8px; justify-content: flex-start; }
   .etf-row-label span { writing-mode: horizontal-tb; transform: none; font-size: 0.74rem; }
   .etf-cell-card .etf-pie { width: 48px; height: 48px; }
+  .pie-mode-btn { font-size: 0.75rem !important; padding: 4px 8px !important; }
 }
 /* 1.25× leveraged ETF info section */
 .leveraged-info-section {

@@ -139,7 +139,6 @@ function createServer() {
     await page.evaluate(() => clearMarketMoves());
     await page.locator('#growth').fill('0');
     await page.locator('#variation').fill('0');
-    await page.locator('[data-region="us"]').click();
     await page.locator('#step-4-account').scrollIntoViewIfNeeded();
     await page.locator('#eligibilityYear').fill('2011');
     await page.locator('#tfsaContributed').fill('25000');
@@ -162,8 +161,6 @@ function createServer() {
         noExternalLogoImage: !externalLogoImage
       };
     });
-    const vtVisible = await page.locator('#tickerGrid .ticker-card .ticker', { hasText: 'VT' }).first().isVisible();
-    await page.locator('[data-region="canada"]').click();
     const canadaEtfGrid = await page.evaluate(() => {
       const grid = document.querySelector('#tickerGrid');
       const text = grid.textContent;
@@ -369,7 +366,6 @@ function createServer() {
     if (!dailyVariationControl.changesPath) throw new Error('Expected daily variation to add daily up/down movement to the price path.');
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
     if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
-    if (!vtVisible) throw new Error('Expected U.S. ETF ticker VT to be visible after selecting U.S. region.');
     if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and 1.25× leveraged ETF examples for U.S., Canada, and World.');
     if (!leveragedSection) throw new Error('Expected 1.25× leveraged ETF info section below the ETF grid.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
@@ -446,7 +442,7 @@ function createServer() {
     if (!adsenseBlocks.loaderConfigured) throw new Error('Expected AdSense loader to be configured with the verified publisher ID.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, vtVisible, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, adsenseBlocks, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
