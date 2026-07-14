@@ -589,7 +589,7 @@ h3 { font-size: 1.35rem; }
 .etf-cell.leveraged { background: rgba(255,209,102,0.09); }
 
 /* ETF table layout — row-per-company */
-.etf-grid { margin-top: 0; }
+.etf-grid { display: block; margin-top: 0; }
 .etf-grid-controls {
   display: flex; align-items: center; justify-content: center; gap: 16px;
   flex-wrap: wrap; margin-bottom: 18px;
