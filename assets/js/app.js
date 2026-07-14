@@ -258,14 +258,17 @@ function totalScore(etf) {
 
 function renderEtfCell(etf, group) {
   const isBest = etf.ticker === bestStandardTicker && etf.type === 'standard' && etf.market === 'World';
+  const isBestLev = etf.type === 'leveraged' && etf.market === 'World';
   const score = totalScore(etf);
-  const scores = group.map(e => parseFloat(totalScore(e)));
+  const scores = group.length ? group.map(e => parseFloat(totalScore(e))) : [parseFloat(score)];
   const scoreColor = tierColor(parseFloat(score), scores, false);
+  const displayTicker = etf.ticker.replace('.TO', '');
   return `
-    <article class="etf-cell-card ${etf.type}${isBest ? ' etf-best' : ''}">
-      ${isBest ? `<span class="etf-best-star" title="Best international standard ETF: scored by 5Y return ÷ MER">★</span>` : ''}
+    <article class="etf-cell-card ${etf.type}${isBest ? ' etf-best' : ''}${isBestLev ? ' etf-best-lev' : ''}">
+      ${isBest ? `<span class="etf-best-star" title="Best international standard ETF">★</span>` : ''}
+      ${isBestLev ? `<span class="etf-best-star etf-best-lev-star" title="Recommended: 1.25× global all-equity with moderate leverage">★</span>` : ''}
       <div class="etf-cell-head">
-        <span class="ticker">${etf.ticker}</span>
+        <span class="ticker">${displayTicker}</span>
       </div>
       <h3>${etf.name}</h3>
       <div class="etf-cell-metrics">
@@ -286,7 +289,7 @@ function renderHighLevCard(etf, group) {
   return `
     <article class="etf-card high-lev ${etf.leverage.replace('x','')}">
       <div class="etf-card-head">
-        <span class="ticker">${etf.ticker}</span>
+        <span class="ticker">${etf.ticker.replace('.TO', '')}</span>
         <span class="etf-lev-tag">${etf.leverage}</span>
       </div>
       <h3>${etf.name}</h3>
@@ -339,18 +342,17 @@ function renderTickers(region) {
 
       function cell(etfs, market) {
         const e = etfs.find(x => x.market === market);
-        const colGroup = etfsFlat.filter(x => x.market === market);
+        const colGroup = etfsFlat.filter(x => x.market === market && x.type !== 'leveraged');
         return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
       }
       function tiltedCell(market) {
         const e = tilted.find(x => x.market === market);
-        const colGroup = etfsFlat.filter(x => x.market === market);
+        const colGroup = etfsFlat.filter(x => x.market === market && x.type !== 'leveraged');
         return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
       }
       function levCell(market) {
         const e = leveraged.find(x => x.market === market);
-        const colGroup = etfsFlat.filter(x => x.market === market);
-        return e ? renderEtfCell(e, colGroup) : '<div class="etf-cell-card empty"></div>';
+        return e ? renderEtfCell(e, []) : '<div class="etf-cell-card empty"></div>';
       }
 
       grid.classList.add("etf-grid");

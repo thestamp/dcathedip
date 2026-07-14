@@ -652,6 +652,8 @@ h3 { font-size: 1.35rem; }
 .etf-cell-card.leveraged { border-color: rgba(255,209,102,0.2); }
 .etf-cell-card.etf-best { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
 .etf-cell-card.empty { background: transparent; border-style: dashed; border-color: rgba(255,255,255,0.05); }
+.etf-cell-card.etf-best-lev { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+.etf-best-lev-star { background: var(--gold); }
 .etf-best-star {
   position: absolute; top: -8px; right: 8px;
   background: var(--green); color: #111; font-weight: 900; font-size: 0.68rem;

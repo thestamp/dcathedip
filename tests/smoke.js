@@ -179,11 +179,11 @@ function createServer() {
         && rowCount === 5
         && hasBest
         && hasPies
-        && /ZSP\.TO/i.test(text) && /VFV\.TO/i.test(text) && /XUS\.TO/i.test(text)
-        && /ZIU\.TO/i.test(text) && /XIU\.TO/i.test(text) && /VCN\.TO/i.test(text)
-        && /XEQT\.TO/i.test(text) && /VEQT\.TO/i.test(text) && /ZEQT\.TO/i.test(text)
-        && /CAUS\.TO/i.test(text) && /CACE\.TO/i.test(text) && /CAGE\.TO/i.test(text)
-        && /USSL\.TO/i.test(text) && /CANL\.TO/i.test(text) && /HEQL\.TO/i.test(text)
+        && /ZSP\b/i.test(text) && /VFV\b/i.test(text) && /XUS\b/i.test(text)
+        && /ZIU\b/i.test(text) && /XIU\b/i.test(text) && /VCN\b/i.test(text)
+        && /XEQT\b/i.test(text) && /VEQT\b/i.test(text) && /ZEQT\b/i.test(text)
+        && /CAUS\b/i.test(text) && /CACE\b/i.test(text) && /CAGE\b/i.test(text)
+        && /USSL\b/i.test(text) && /CANL\b/i.test(text) && /HEQL\b/i.test(text)
         && /MER/i.test(text) && /5Y/i.test(text)
         && /leans more Canada/i.test(text);
     });
