@@ -709,8 +709,16 @@ h3 { font-size: 1.35rem; }
   .etf-table-hdr, .etf-table-row { grid-template-columns: 60px 1fr 1fr 1fr; }
   .etf-cell-card { padding: 10px; }
   .etf-cell-card h3 { font-size: 0.72rem; }
+  .etf-cards { grid-template-columns: 1fr; }
 }
-
+@media (max-width: 400px) {
+  .etf-table-hdr, .etf-table-row { display: flex; flex-direction: column; gap: 6px; }
+  .etf-table-hdr span:first-child { display: none; }
+  .etf-table-hdr { display: none; }
+  .etf-row-label { padding: 4px 8px; justify-content: flex-start; }
+  .etf-row-label span { writing-mode: horizontal-tb; transform: none; font-size: 0.74rem; }
+  .etf-cell-card .etf-pie { width: 48px; height: 48px; }
+}
 /* 1.25× leveraged ETF info section */
 .leveraged-info-section {
   background: rgba(255,255,255,0.025);
