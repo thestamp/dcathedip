@@ -244,23 +244,21 @@ function createServer() {
       const monthly = document.getElementById('crossMonthly');
       const cagr = document.getElementById('crossCagr');
       const spending = document.getElementById('crossSpending');
-      const withdrawal = document.getElementById('crossWithdrawal');
       const years = document.getElementById('crossYears');
       current.value = 10000;
       monthly.value = 500;
       cagr.value = 7;
       spending.value = 40000;
-      withdrawal.value = 4;
       years.value = 25;
       years.dispatchEvent(new Event('input', { bubbles: true }));
       const resultText = document.getElementById('crossoverResults').textContent;
       const chart = window.Chart.getChart(document.getElementById('crossoverChart'));
       return {
         visible: Boolean(document.getElementById('crossoverForm')),
-        copy: /4% rule income target/i.test(document.body.textContent) && /desired annual income ÷ 4%/i.test(document.body.textContent) && /Recommended term/i.test(document.body.textContent) && /Footnotes/i.test(document.body.textContent),
-        outputs: /4% rule income target/i.test(resultText) && /Amount still needed/i.test(resultText) && /Estimated target timing/i.test(resultText) && /Contribution crossover/i.test(resultText),
-        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === '4% rule income target') && chart.data.datasets.some(dataset => dataset.label === 'Contribution crossover'),
-        updates: resultText.includes('$1,000,000') && resultText.includes('$990,000')
+        copy: /Investment target/i.test(document.body.textContent) && /4% withdrawal rate/i.test(document.body.textContent) && /Footnotes/i.test(document.body.textContent),
+        outputs: /Investment target/i.test(resultText) && /Projected value/i.test(resultText) && /Contribution crossover/i.test(resultText) && /Crossover timing/i.test(resultText),
+        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Investment target') && chart.data.datasets.some(dataset => dataset.label === 'Contribution crossover'),
+        updates: resultText.includes('$1,000,000') && resultText.includes('Shortfall')
       };
     });
     const compoundCalculator = await page.evaluate(() => {

@@ -289,7 +289,7 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
           <div class="crossover-copy">
             <p class="eyebrow">Income target</p>
             <h3 id="income-target-title">How much invested could support the income you want?</h3>
-            <p>The 4% rule is a simple retirement-planning shortcut: multiply the annual portfolio income you want by 25. In formula form: <strong>desired annual income ÷ 4%</strong>.</p>
+            <p>The 4% rule is a simple retirement-planning shortcut: multiply the annual portfolio income you want by 25. That gives you an investment target — the portfolio size you'd need to draw that income at a 4% withdrawal rate.</p>
             <p>Use this as a conservative scale estimate, then compare it with your current balance, monthly investing habit, and return assumption.</p>
           </div>
 
@@ -312,10 +312,6 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
                 <input type="number" id="crossSpending" min="0" step="1000" value="40000" />
               </label>
               <label>
-                Withdrawal-rate assumption
-                <input type="number" id="crossWithdrawal" min="1" max="10" step="0.1" value="4" />
-              </label>
-              <label>
                 Years to model
                 <input type="number" id="crossYears" min="1" max="60" step="1" value="25" />
               </label>
@@ -327,7 +323,7 @@ description: "Compare daily, weekly, biweekly, monthly, and quarterly dollar-cos
           </div>
 
           <div class="crossover-results" id="crossoverResults" aria-live="polite"></div>
-          <details class="section-footnote"><summary>Footnotes</summary><p>Recommended term: <strong>4% rule income target</strong>. Using CAGR as "self-replenishing income" can be misleading because average long-term returns are not reliable yearly cash flow. The 4% rule is still simplified, but it is more conservative because it separates a spending/withdrawal assumption from the portfolio's growth assumption. Taxes, fees, inflation, account rules, and personal circumstances can change outcomes.</p></details>
+          <details class="section-footnote"><summary>Footnotes</summary><p>The 4% rule is a simplified retirement-planning heuristic based on a fixed withdrawal rate. Taxes, fees, inflation, account rules, and personal circumstances can change outcomes. This is educational content, not personal financial advice.</p></details>
         </div>
 
         <p class="source-note compounding-note">

@@ -765,7 +765,7 @@ function calculateCrossover() {
   const monthly = Math.max(0, +document.getElementById("crossMonthly").value || 0);
   const cagr = clampNumber(document.getElementById("crossCagr").value, -20, 20);
   const desiredIncome = Math.max(0, +document.getElementById("crossSpending").value || 0);
-  const withdrawalRate = clampNumber(document.getElementById("crossWithdrawal").value, 1, 10) / 100;
+  const withdrawalRate = 0.04; // always 4%
   const years = clampNumber(document.getElementById("crossYears").value, 1, 60);
   const totalMonths = Math.round(years * 12);
   const monthlyRate = Math.pow(1 + cagr / 100, 1 / 12) - 1;
@@ -795,14 +795,17 @@ function calculateCrossover() {
   }
 
   const projectedTarget = balances.at(-1);
+  const shortfall = projectedTarget < target ? target - projectedTarget : 0;
 
   results.innerHTML = `
-    <div class="crossover-result-card income"><small>4% rule income target</small><strong>${money(target)}</strong><p>Desired annual income divided by ${(withdrawalRate * 100).toFixed(1)}%.</p></div>
-    <div class="crossover-result-card"><small>Amount still needed</small><strong>${money(amountStillNeeded)}</strong><p>How far your current invested amount is from the income target.</p></div>
-    <div class="crossover-result-card"><small>Estimated target timing</small><strong>${monthLabel(targetMonth)}</strong><p>Based on your monthly investing and growth assumption.</p></div>
-    <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>When average monthly growth implied by your assumption roughly matches your monthly investment.</p></div>
-    <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
-    <div class="crossover-result-card"><small>Projected value</small><strong>${money(projectedTarget)}</strong><p>With the monthly investment and growth assumption shown.</p></div>
+    <div class="crossover-results-row crossover-results-targets">
+      <div class="crossover-result-card income"><small>Investment target</small><strong>${money(target)}</strong><p>Desired annual income divided by 4%.</p></div>
+      <div class="crossover-result-card${shortfall > 0 ? ' shortfall' : ''}"><small>Projected value</small><strong>${money(projectedTarget)}</strong><p>${shortfall > 0 ? `Shortfall of ${money(shortfall)} — below the investment target.` : `With the monthly investment and growth assumption shown.`}</p></div>
+    </div>
+    <div class="crossover-results-row crossover-results-crossover">
+      <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>When average monthly growth implied by your assumption roughly matches your monthly investment.</p></div>
+      <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
+    </div>
   `;
 
   const data = {
@@ -810,7 +813,7 @@ function calculateCrossover() {
     datasets: [
       { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
       { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
-      { label: "4% rule income target", data: targetLine, borderColor: "#7cffbd", borderDash: [9, 4], tension: 0, pointRadius: 0, borderWidth: 2 },
+      { label: "Investment target", data: targetLine, borderColor: "#7cffbd", borderDash: [9, 4], tension: 0, pointRadius: 0, borderWidth: 2 },
       { label: "Contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 }
     ]
   };

@@ -382,10 +382,12 @@ h3 { font-size: 1.35rem; }
 }
 .crossover-card { border: 1px solid var(--border); border-radius: 22px; padding: 16px; background: rgba(8,17,31,0.42); min-height: 360px; }
 #crossoverChart { max-height: 330px; }
-.crossover-results { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 18px; }
+.crossover-results { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
+.crossover-results-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .crossover-result-card { border: 1px solid var(--border); border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.055); }
 .crossover-result-card small { display: block; color: var(--muted); font-weight: 800; margin-bottom: 6px; }
 .crossover-result-card strong { display: block; color: var(--green); font-size: 1.14rem; }
+.crossover-result-card.shortfall strong { color: var(--gold); }
 .crossover-result-card.coast strong { color: var(--gold); }
 .crossover-result-card p { margin: 8px 0 0; font-size: 0.82rem; line-height: 1.4; }
 
@@ -819,7 +821,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results-row { grid-template-columns: 1fr; }
   .leveraged-compare { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
@@ -881,7 +883,7 @@ input, select { min-height: 44px; }
   .foundation-grid,
   .risk-spectrum-row,
   .crossover-layout,
-  .crossover-results,
+  .crossover-results-row,
   .compound-form,
   .compound-results,
   .compounding-grid,
