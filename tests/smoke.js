@@ -188,7 +188,7 @@ function createServer() {
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
-    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /Build a steady ETF investing habit/i.test(bodyText) && /Dollar-cost averaging for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
+    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /From debt to deposits/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
     const journeyStructure = /1 Debt/i.test(navText) && /2 Calculator/i.test(navText) && /3 Grow/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
@@ -198,7 +198,7 @@ function createServer() {
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const wealthsimplePromo = /Automate your recurring investments/i.test(bodyText) && /recurring ETF purchases from your bank account/i.test(bodyText);
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
-    const unitsRule = /Lower prices buy more units/i.test(bodyText) && /No guessing the bottom/i.test(bodyText);
+    const unitsRule = /Lower prices buy more units/i.test(bodyText) && /No guessing/i.test(bodyText);
     const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing sooner has often performed better historically/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
     const timingSection = /Trying to time the noise is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Investing from income/i.test(bodyText) && /Large lump sum/i.test(bodyText) && /Staying invested matters more than perfect timing/i.test(bodyText);
@@ -215,7 +215,7 @@ function createServer() {
       && !/Try your numbers/i.test(bodyText)
       && !/Regular contribution/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-links a[href="#step-3-target"]').count().then(count => count === 1);
-    const foundationSection = /6 steps to a calm investing foundation/i.test(bodyText)
+    const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
           && /Choose the right investment/i.test(bodyText);
