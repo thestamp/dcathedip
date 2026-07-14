@@ -588,7 +588,7 @@ h3 { font-size: 1.35rem; }
 .etf-cell.growth { background: rgba(83,230,160,0.09); }
 .etf-cell.leveraged { background: rgba(255,209,102,0.09); }
 
-/* ETF card grid */
+/* ETF table layout — row-per-company */
 .etf-grid { margin-top: 0; }
 .etf-grid-controls {
   display: flex; align-items: center; justify-content: center; gap: 16px;
@@ -600,104 +600,94 @@ h3 { font-size: 1.35rem; }
 }
 .pie-mode-btn { border-radius: 999px !important; font-size: 0.82rem; padding: 5px 14px !important; }
 .pie-mode-btn.active { background: rgba(83,230,160,0.15) !important; color: var(--green) !important; border-color: rgba(83,230,160,0.3) !important; }
-
 .etf-leverage-toggle {
   display: flex; align-items: center; gap: 8px; cursor: pointer;
   font-size: 0.82rem; color: var(--muted); user-select: none;
 }
 .etf-leverage-toggle input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; }
-
-/* Section grouping */
 .etf-section { margin-bottom: 28px; }
 .etf-section-header {
   font-size: 1.08rem; font-weight: 900; color: var(--green);
   padding: 8px 0 8px; border-bottom: 1px solid var(--border);
   margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em;
 }
-.etf-matrix-h small {
-  display: block; font-weight: 400; text-transform: none; letter-spacing: 0;
-  font-size: 0.75rem; color: var(--muted); margin-top: 3px; line-height: 1.35;
+.etf-section-sub { font-size: 0.84rem; color: var(--muted); margin: 0 0 14px; line-height: 1.5; }
+
+.etf-table {
+  display: flex; flex-direction: column; gap: 10px;
 }
-.etf-matrix-headers {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
-  margin-bottom: 10px;
+.etf-table-hdr {
+  display: grid; grid-template-columns: 130px 1fr 1fr 1fr; gap: 10px;
+  margin-bottom: 2px;
 }
-.etf-matrix-h {
-  text-align: center; font-size: 0.78rem; font-weight: 800;
+.etf-table-hdr span {
+  text-align: center; font-size: 0.84rem; font-weight: 900;
   color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em;
-  padding: 6px 0;
+  padding: 8px 4px;
 }
-
-.etf-columns {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
+.etf-table-hdr span:first-child { color: transparent; }
+.etf-table-hdr small { display: block; font-weight: 400; text-transform: none; letter-spacing: 0; font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+.etf-table-row {
+  display: grid; grid-template-columns: 130px 1fr 1fr 1fr; gap: 10px;
+  align-items: stretch;
 }
-.etf-col {
-  display: flex; flex-direction: column; gap: 14px;
+.etf-row-label {
+  display: flex; align-items: center; justify-content: center;
+  padding: 8px;
 }
-
-.etf-cards {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
-}
-.etf-card {
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 18px;
-  background: rgba(255,255,255,0.06);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-.etf-card.standard { border-color: rgba(106,168,255,0.2); }
-.etf-card.tilted { border-color: rgba(83,230,160,0.2); }
-.etf-card.leveraged { border-color: rgba(255,209,102,0.2); }
-.etf-card.etf-best {
-  border-color: var(--green);
-  box-shadow: 0 0 0 1px var(--green), 0 0 20px rgba(83,230,160,0.15);
-}
-.etf-best-star {
-  position: absolute; top: -10px; right: 12px;
-  background: var(--green); color: #111; font-weight: 900; font-size: 0.72rem;
-  padding: 3px 10px; border-radius: 999px; cursor: help;
+.etf-row-label span {
+  writing-mode: vertical-lr; transform: rotate(180deg);
+  font-size: 0.78rem; font-weight: 800; color: var(--muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
   white-space: nowrap;
 }
-.etf-card-head {
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;
+
+/* Cell cards inside the table */
+.etf-cell-card {
+  border: 1px solid var(--border); border-radius: 18px; padding: 14px;
+  background: rgba(255,255,255,0.06); display: flex; flex-direction: column;
 }
-.etf-card-head .ticker { margin-bottom: 0; }
-.etf-provider-tag {
-  font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
-  letter-spacing: 0.06em; color: var(--muted);
-  background: rgba(255,255,255,0.08); border-radius: 999px; padding: 2px 8px;
+.etf-cell-card.standard { border-color: rgba(106,168,255,0.2); }
+.etf-cell-card.tilted { border-color: rgba(83,230,160,0.2); }
+.etf-cell-card.leveraged { border-color: rgba(255,209,102,0.2); }
+.etf-cell-card.etf-best { border-color: var(--green); box-shadow: 0 0 0 1px var(--green); }
+.etf-cell-card.empty { background: transparent; border-style: dashed; border-color: rgba(255,255,255,0.05); }
+.etf-best-star {
+  position: absolute; top: -8px; right: 8px;
+  background: var(--green); color: #111; font-weight: 900; font-size: 0.68rem;
+  width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  cursor: help;
 }
-.etf-type-tag {
-  font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.05em; color: var(--muted);
-  border: 1px solid var(--border); border-radius: 999px; padding: 1px 7px;
-  margin-left: auto;
-}
-.etf-lev-tag {
-  font-size: 0.7rem; font-weight: 900; color: #111;
-  background: var(--gold); border-radius: 999px; padding: 2px 8px;
-  margin-left: auto;
+.etf-cell-card { position: relative; }
+.etf-cell-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.etf-cell-head .ticker { margin-bottom: 0; font-size: 0.82rem; padding: 4px 8px; }
+.etf-cell-card h3 { font-size: 0.82rem; margin-bottom: 8px; line-height: 1.25; }
+.etf-cell-metrics { display: flex; flex-direction: column; gap: 3px; margin-bottom: 8px; }
+.etf-cell-metrics .etf-metric { font-size: 0.76rem; color: var(--muted); display: flex; justify-content: space-between; }
+.etf-cell-metrics .etf-metric strong { color: #ddd; }
+
+.etf-cell-card .etf-pie { width: 64px; height: 64px; margin: 0 auto 8px; }
+.etf-cell-card .etf-lean { font-size: 0.78rem; margin: 0; color: var(--muted); line-height: 1.4; flex-grow: 1; }
+
+/* High-leverage cards (standalone, not in table) */
+.etf-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.etf-card {
+  border: 1px solid var(--border); border-radius: 22px; padding: 18px;
+  background: rgba(255,255,255,0.06); display: flex; flex-direction: column;
 }
 .etf-card.high-lev { border-color: rgba(255,209,102,0.3); }
 .etf-card.high-lev.x3 { border-color: rgba(255,100,80,0.3); }
+.etf-card-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.etf-card-head .ticker { margin-bottom: 0; }
 .etf-card h3 { font-size: 0.9rem; margin-bottom: 8px; line-height: 1.3; }
 .etf-card-metrics { display: flex; gap: 14px; margin-bottom: 10px; }
 .etf-card .etf-metric { font-size: 0.8rem; color: var(--muted); }
-.etf-card .etf-metric strong { color: var(--green); margin-left: 3px; }
+.etf-card .etf-metric strong { color: #ddd; }
+.etf-lev-tag { font-size: 0.7rem; font-weight: 900; color: #111; background: var(--gold); border-radius: 999px; padding: 2px 8px; margin-left: auto; }
+.etf-card .etf-lean { font-size: 0.82rem; margin: 0; color: var(--muted); line-height: 1.45; flex-grow: 1; }
 
-/* ETF pie chart */
-.etf-pie {
-  width: 80px; height: 80px; border-radius: 50%;
-  margin: 0 auto 10px; cursor: help;
-  border: 2px solid rgba(255,255,255,0.1);
-  flex-shrink: 0;
-}
+/* Pie chart */
+.etf-pie { border-radius: 50%; margin: 0 auto; cursor: help; border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0; }
 .etf-pie-tooltip {
   position: fixed; transform: translate(-50%, -100%);
   background: #1a1a2e; border: 1px solid var(--border);
@@ -705,16 +695,20 @@ h3 { font-size: 1.35rem; }
   line-height: 1.55; color: #ddd; pointer-events: none; z-index: 9999;
   max-width: 240px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
-.etf-lean { font-size: 0.82rem; margin: 0; color: var(--muted); line-height: 1.45; flex-grow: 1; }
 
-@media (max-width: 1200px) {
-  .etf-cards, .etf-columns { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 500px) {
+  .etf-cards { grid-template-columns: 1fr; }
 }
+
 @media (max-width: 768px) {
-  .etf-cards, .etf-columns { grid-template-columns: repeat(2, 1fr); }
+  .etf-table-hdr, .etf-table-row { grid-template-columns: 80px 1fr 1fr 1fr; }
+  .etf-table-hdr span { font-size: 0.72rem; }
+  .etf-row-label span { font-size: 0.68rem; }
 }
 @media (max-width: 500px) {
-  .etf-cards, .etf-columns { grid-template-columns: 1fr; }
+  .etf-table-hdr, .etf-table-row { grid-template-columns: 60px 1fr 1fr 1fr; }
+  .etf-cell-card { padding: 10px; }
+  .etf-cell-card h3 { font-size: 0.72rem; }
 }
 
 /* 1.25× leveraged ETF info section */

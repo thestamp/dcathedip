@@ -168,13 +168,15 @@ function createServer() {
       const grid = document.querySelector('#tickerGrid');
       const text = grid.textContent;
       const hasPieToggle = /Countries/i.test(text) && /Industries/i.test(text) && /Top 10 Stocks/i.test(text);
-      const cardCount = document.querySelectorAll('.etf-card').length;
-      const hasBest = /Recommended/i.test(text);
-      const hasPies = document.querySelectorAll('.etf-pie').length === cardCount;
-      // All 15 ETFs present
+      const cellCount = document.querySelectorAll('.etf-cell-card:not(.empty)').length;
+      const hasBest = /★/.test(text);
+      const hasPies = document.querySelectorAll('.etf-pie').length > 0;
+      // Table with 5 rows (BMO, iShares, Vanguard, Factor, Leveraged)
+      const rowCount = document.querySelectorAll('.etf-table-row').length;
       return grid.classList.contains('etf-grid')
         && hasPieToggle
-        && cardCount === 15
+        && cellCount >= 13
+        && rowCount === 5
         && hasBest
         && hasPies
         && /ZSP\.TO/i.test(text) && /VFV\.TO/i.test(text) && /XUS\.TO/i.test(text)

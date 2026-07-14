@@ -252,40 +252,50 @@ function renderPieChart(etf) {
   return `<div class="etf-pie" style="background: conic-gradient(${buildPieConic(items, total, isCountries)});" data-tooltip="${buildPieTooltip(items, total, isCountries).replace(/"/g, '&quot;')}"></div>`;
 }
 
-function renderEtfCard(etf, group) {
+function totalScore(etf) {
+  return (parseFloat(etf.return5y) - 5 * parseFloat(etf.mer)).toFixed(1);
+}
+
+function renderEtfCell(etf, group) {
   const isBest = etf.ticker === bestStandardTicker && etf.type === 'standard' && etf.market === 'World';
+  const score = totalScore(etf);
+  const scores = group.map(e => parseFloat(totalScore(e)));
+  const scoreColor = tierColor(parseFloat(score), scores, false);
   return `
-    <article class="etf-card ${etf.type}${isBest ? ' etf-best' : ''}">
-      ${isBest ? `<span class="etf-best-star" title="Best international standard ETF: scored by 1Y return ÷ MER">★ Recommended</span>` : ''}
-      <div class="etf-card-head">
+    <article class="etf-cell-card ${etf.type}${isBest ? ' etf-best' : ''}">
+      ${isBest ? `<span class="etf-best-star" title="Best international standard ETF: scored by 5Y return ÷ MER">★</span>` : ''}
+      <div class="etf-cell-head">
         <span class="ticker">${etf.ticker}</span>
-        <span class="etf-provider-tag">${etf.provider}</span>
       </div>
       <h3>${etf.name}</h3>
-      <p class="etf-lean">${etf.lean}</p>
-      <div class="etf-card-metrics">
-        <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
-        <span class="etf-metric">5Y <strong style="color:${return5yColor(etf.return5y, group)}">${etf.return5y}</strong></span>
+      <div class="etf-cell-metrics">
+        <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
+        <span class="etf-metric">5Y <strong>${etf.return5y}</strong></span>
+        <span class="etf-metric">Net <strong style="color:${scoreColor}">${score}%</strong></span>
       </div>
       ${renderPieChart(etf)}
+      <p class="etf-lean">${etf.lean}</p>
     </article>
   `;
 }
 
 function renderHighLevCard(etf, group) {
+  const score = totalScore(etf);
+  const scores = group.map(e => parseFloat(totalScore(e)));
+  const scoreColor = tierColor(parseFloat(score), scores, false);
   return `
     <article class="etf-card high-lev ${etf.leverage.replace('x','')}">
       <div class="etf-card-head">
         <span class="ticker">${etf.ticker}</span>
-        <span class="etf-provider-tag">${etf.provider}</span>
         <span class="etf-lev-tag">${etf.leverage}</span>
       </div>
       <h3>${etf.name}</h3>
-      <p class="etf-lean">${etf.lean}</p>
       <div class="etf-card-metrics">
-        <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
-        <span class="etf-metric">5Y <strong style="color:${return5yColor(etf.return5y, group)}">${etf.return5y}</strong></span>
+        <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
+        <span class="etf-metric">5Y <strong>${etf.return5y}</strong></span>
+        <span class="etf-metric">Net <strong style="color:${scoreColor}">${score}%</strong></span>
       </div>
+      <p class="etf-lean">${etf.lean}</p>
     </article>
   `;
 }
@@ -318,9 +328,27 @@ function renderTickers(region) {
         </div>
       `;
     } else {
-      const standardEtfs = etfsFlat.filter(e => e.type === 'standard');
-      const tiltedEtfs = etfsFlat.filter(e => e.type === 'tilted');
-      const leveragedEtfs = etfsFlat.filter(e => e.type === 'leveraged');
+      // Build row-per-company layout
+      const byProvider = (provider) => etfsFlat.filter(e => e.provider === provider && e.type === 'standard');
+      const bmo = byProvider('BMO');
+      const ishares = byProvider('iShares');
+      const vanguard = byProvider('Vanguard');
+      const tilted = etfsFlat.filter(e => e.type === 'tilted');
+      const leveraged = etfsFlat.filter(e => e.type === 'leveraged');
+      const allStandard = etfsFlat.filter(e => e.type === 'standard');
+
+      function cell(etfs, market) {
+        const e = etfs.find(x => x.market === market);
+        return e ? renderEtfCell(e, allStandard) : '<div class="etf-cell-card empty"></div>';
+      }
+      function tiltedCell(market) {
+        const e = tilted.find(x => x.market === market);
+        return e ? renderEtfCell(e, tilted) : '<div class="etf-cell-card empty"></div>';
+      }
+      function levCell(market) {
+        const e = leveraged.find(x => x.market === market);
+        return e ? renderEtfCell(e, leveraged) : '<div class="etf-cell-card empty"></div>';
+      }
 
       grid.classList.add("etf-grid");
       grid.innerHTML = `
@@ -335,43 +363,27 @@ function renderTickers(region) {
             <span>Show 2× / 3× high leverage</span>
           </label>
         </div>
-        <div class="etf-section">
-          <div class="etf-section-header">Standard Broad-Market ETFs</div>
-          <div class="etf-matrix-headers">
-            <span class="etf-matrix-h">World</span>
-            <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
-            <span class="etf-matrix-h">U.S.</span>
+        <div class="etf-table">
+          <div class="etf-table-hdr"><span></span><span>World</span><span>Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span><span>U.S.</span></div>
+          <div class="etf-table-row">
+            <div class="etf-row-label"><span>Standard — BMO</span></div>
+            ${cell(bmo, 'World')}${cell(bmo, 'Canada')}${cell(bmo, 'U.S.')}
           </div>
-          <div class="etf-columns">
-            <div class="etf-col">${standardEtfs.filter(e => e.market === 'World').map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
-            <div class="etf-col">${standardEtfs.filter(e => e.market === 'Canada').map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
-            <div class="etf-col">${standardEtfs.filter(e => e.market === 'U.S.').map(e => renderEtfCard(e, standardEtfs)).join("")}</div>
+          <div class="etf-table-row">
+            <div class="etf-row-label"><span>Standard — iShares</span></div>
+            ${cell(ishares, 'World')}${cell(ishares, 'Canada')}${cell(ishares, 'U.S.')}
           </div>
-        </div>
-        <div class="etf-section">
-          <div class="etf-section-header">Tilted / Factor ETFs</div>
-          <div class="etf-matrix-headers">
-            <span class="etf-matrix-h">World</span>
-            <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
-            <span class="etf-matrix-h">U.S.</span>
+          <div class="etf-table-row">
+            <div class="etf-row-label"><span>Standard — Vanguard</span></div>
+            ${cell(vanguard, 'World')}${cell(vanguard, 'Canada')}${cell(vanguard, 'U.S.')}
           </div>
-          <div class="etf-columns">
-            <div class="etf-col">${tiltedEtfs.filter(e => e.market === 'World').map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
-            <div class="etf-col">${tiltedEtfs.filter(e => e.market === 'Canada').map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
-            <div class="etf-col">${tiltedEtfs.filter(e => e.market === 'U.S.').map(e => renderEtfCard(e, tiltedEtfs)).join("")}</div>
+          <div class="etf-table-row">
+            <div class="etf-row-label"><span>Factor ETFs</span></div>
+            ${tiltedCell('World')}${tiltedCell('Canada')}${tiltedCell('U.S.')}
           </div>
-        </div>
-        <div class="etf-section">
-          <div class="etf-section-header">1.25× Leveraged ETFs</div>
-          <div class="etf-matrix-headers">
-            <span class="etf-matrix-h">World</span>
-            <span class="etf-matrix-h">Canada <small>Like a double-double — reliable, comfortable, and very Canadian.</small></span>
-            <span class="etf-matrix-h">U.S.</span>
-          </div>
-          <div class="etf-columns">
-            <div class="etf-col">${leveragedEtfs.filter(e => e.market === 'World').map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
-            <div class="etf-col">${leveragedEtfs.filter(e => e.market === 'Canada').map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
-            <div class="etf-col">${leveragedEtfs.filter(e => e.market === 'U.S.').map(e => renderEtfCard(e, leveragedEtfs)).join("")}</div>
+          <div class="etf-table-row">
+            <div class="etf-row-label"><span>1.25× Leveraged</span></div>
+            ${levCell('World')}${levCell('Canada')}${levCell('U.S.')}
           </div>
         </div>
       `;
