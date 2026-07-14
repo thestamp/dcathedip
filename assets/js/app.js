@@ -265,7 +265,6 @@ function renderEtfCard(etf, group) {
       <p class="etf-lean">${etf.lean}</p>
       <div class="etf-card-metrics">
         <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
-        <span class="etf-metric">1Y <strong style="color:${returnColor(etf.return1y, group)}">${etf.return1y}</strong></span>
         <span class="etf-metric">5Y <strong style="color:${return5yColor(etf.return5y, group)}">${etf.return5y}</strong></span>
       </div>
       ${renderPieChart(etf)}
@@ -285,7 +284,6 @@ function renderHighLevCard(etf, group) {
       <p class="etf-lean">${etf.lean}</p>
       <div class="etf-card-metrics">
         <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
-        <span class="etf-metric">1Y <strong style="color:${returnColor(etf.return1y, group)}">${etf.return1y}</strong></span>
         <span class="etf-metric">5Y <strong style="color:${return5yColor(etf.return5y, group)}">${etf.return5y}</strong></span>
       </div>
     </article>
