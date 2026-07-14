@@ -182,7 +182,7 @@ function createServer() {
         && /XEQT\.TO/i.test(text) && /VEQT\.TO/i.test(text) && /ZEQT\.TO/i.test(text)
         && /CAUS\.TO/i.test(text) && /CACE\.TO/i.test(text) && /CAGE\.TO/i.test(text)
         && /USSL\.TO/i.test(text) && /CANL\.TO/i.test(text) && /HEQL\.TO/i.test(text)
-        && /MER/i.test(text) && /1Y/i.test(text)
+        && /MER/i.test(text) && /5Y/i.test(text)
         && /leans more Canada/i.test(text);
     });
     const leveragedSection = await page.locator('#step-5-investment .leveraged-compare').first().isVisible();
