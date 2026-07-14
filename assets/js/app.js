@@ -202,11 +202,13 @@ function tierColor(val, vals, invert) {
   const t = (val - min) / (max - min);
   const tAdj = invert ? (1 - t) : t;
   if (tAdj <= 0.3) {
+    // Red to yellow: red channel stays 255, green goes 0→210
     const s = tAdj / 0.3;
-    return `rgb(${Math.round(255*(1-s))},${Math.round(60*s)},60)`;
+    return `rgb(255,${Math.round(210*s)},60)`;
   } else if (tAdj >= 0.7) {
+    // Yellow to green: red channel goes 255→0, green stays 210→255
     const s = (tAdj - 0.7) / 0.3;
-    return `rgb(${Math.round(60*(1-s))},${Math.round(220+35*s)},${Math.round(60+60*s)})`;
+    return `rgb(${Math.round(255*(1-s))},${Math.round(210+45*s)},60)`;
   } else {
     return `rgb(255,210,60)`;
   }
@@ -217,6 +219,10 @@ function merColor(merStr, group) {
 }
 function returnColor(retStr, group) {
   const vals = group.map(e => parseFloat(e.return1y)).filter(v => !isNaN(v));
+  return tierColor(parseFloat(retStr), vals, false);
+}
+function return5yColor(retStr, group) {
+  const vals = group.map(e => parseFloat(e.return5y)).filter(v => !isNaN(v));
   return tierColor(parseFloat(retStr), vals, false);
 }
 
@@ -260,7 +266,7 @@ function renderEtfCard(etf, group) {
       <div class="etf-card-metrics">
         <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
         <span class="etf-metric">1Y <strong style="color:${returnColor(etf.return1y, group)}">${etf.return1y}</strong></span>
-        <span class="etf-metric">5Y <strong style="color:${returnColor(etf.return5y, group)}">${etf.return5y}</strong></span>
+        <span class="etf-metric">5Y <strong style="color:${return5yColor(etf.return5y, group)}">${etf.return5y}</strong></span>
       </div>
       ${renderPieChart(etf)}
     </article>
@@ -280,7 +286,7 @@ function renderHighLevCard(etf, group) {
       <div class="etf-card-metrics">
         <span class="etf-metric">MER <strong style="color:${merColor(etf.mer, group)}">${etf.mer}</strong></span>
         <span class="etf-metric">1Y <strong style="color:${returnColor(etf.return1y, group)}">${etf.return1y}</strong></span>
-        <span class="etf-metric">5Y <strong style="color:${returnColor(etf.return5y, group)}">${etf.return5y}</strong></span>
+        <span class="etf-metric">5Y <strong style="color:${return5yColor(etf.return5y, group)}">${etf.return5y}</strong></span>
       </div>
     </article>
   `;
