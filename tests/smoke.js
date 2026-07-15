@@ -198,7 +198,7 @@ function createServer() {
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const wealthsimplePromo = /Automate your recurring investments/i.test(bodyText) && /recurring ETF purchases from your bank account/i.test(bodyText);
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
-    const unitsRule = /Lower prices buy more units/i.test(bodyText) && /No guessing/i.test(bodyText);
+    const unitsRule = /Same dollars, more units when prices dip/i.test(bodyText) && /No guessing/i.test(bodyText);
     const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing sooner has often performed better historically/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
     const timingSection = /Trying to time the noise is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Investing from income/i.test(bodyText) && /Large lump sum/i.test(bodyText) && /Staying invested matters more than perfect timing/i.test(bodyText);
