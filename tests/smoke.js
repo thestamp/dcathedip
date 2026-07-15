@@ -190,7 +190,7 @@ function createServer() {
     const bodyText = await page.locator('body').textContent();
     const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /From debt to deposits/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
-    const journeyStructure = /1 Debt/i.test(navText) && /2 Calculator/i.test(navText) && /3 Grow/i.test(navText);
+    const journeyStructure = /The Plan/i.test(navText) && /Tackle credit card debt/i.test(navText) && /Invest a sustainable amount/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year.s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
@@ -214,7 +214,7 @@ function createServer() {
       && /Daily contribution/i.test(bodyText)
       && !/Try your numbers/i.test(bodyText)
       && !/Regular contribution/i.test(bodyText);
-    const compoundingNav = await page.locator('.nav-links a[href="#step-3-target"]').count().then(count => count === 1);
+    const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
@@ -372,7 +372,7 @@ function createServer() {
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / building through market noise.');
-    if (!journeyStructure) throw new Error('Expected nav to have 1 Debt / 2 Calculator / 3 Grow links.');
+    if (!journeyStructure) throw new Error('Expected nav to have The Plan dropdown and referral button.');
     if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');
@@ -388,7 +388,7 @@ function createServer() {
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 storytelling and Rule of 72 content.');
-    if (!compoundingNav) throw new Error('Expected nav menu to include a Grow link to step 3.');
+    if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
     if (!debtSection) throw new Error('Expected Step 1 debt consolidation strategy content.');
     if (!emergencySection) throw new Error('Expected Step 2 rainy day fund content with 1-month starter and 3-6 month target.');

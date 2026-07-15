@@ -54,8 +54,37 @@ p { color: var(--muted); line-height: 1.65; }
   color: #06101e; font-weight: 1000;
   box-shadow: 0 10px 30px rgba(83, 230, 160, 0.25);
 }
-.nav-links { display: flex; gap: 24px; color: var(--muted); font-weight: 700; font-size: 0.95rem; }
+.nav-links { display: flex; gap: 24px; color: var(--muted); font-weight: 700; font-size: 0.95rem; align-items: center; }
 .nav-links a:hover { color: var(--text); }
+
+/* Nav dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown-toggle {
+  background: none; border: none; color: var(--muted); font-weight: 700;
+  font-size: 0.95rem; cursor: pointer; padding: 8px 4px; font-family: inherit;
+  min-height: 44px;
+}
+.nav-dropdown-toggle:hover { color: var(--text); }
+.nav-dropdown-menu {
+  display: none; position: absolute; top: calc(100% + 12px); left: -14px;
+  background: #0d1a2d; border: 1px solid var(--border); border-radius: 14px;
+  padding: 8px; min-width: 280px; box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  flex-direction: column; gap: 2px; z-index: 20;
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown-toggle:focus + .nav-dropdown-menu,
+.nav-dropdown-menu:focus-within { display: flex; }
+.nav-dropdown-menu a {
+  display: block; padding: 10px 14px; border-radius: 10px;
+  color: var(--muted); font-size: 0.9rem; font-weight: 600; white-space: nowrap;
+}
+.nav-dropdown-menu a:hover { background: rgba(255,255,255,0.06); color: var(--text); }
+
+/* Nav CTA button */
+.nav-cta {
+  font-size: 0.85rem !important; padding: 10px 20px !important;
+  border-radius: 999px !important; white-space: nowrap; min-height: 44px;
+}
 
 .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) 420px; gap: 48px; align-items: center; padding: 86px 0 56px; }
 .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.78rem; font-weight: 900; margin: 0 0 12px; }
@@ -826,7 +855,10 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
   .rule-example { grid-column: auto; }
-  .nav-links { display: none; }
+  .nav-links { gap: 12px; font-size: 0.82rem; }
+  .nav-dropdown-toggle { font-size: 0.82rem; }
+  .nav-dropdown-menu { left: -60px; min-width: 240px; }
+  .nav-cta { font-size: 0.78rem !important; padding: 8px 14px !important; }
   .wealthsimple { align-items: stretch; flex-direction: column; }
   .wealthsimple-actions { justify-content: flex-start; }
   .wealthsimple-promo-actions { align-items: stretch; }
@@ -929,6 +961,11 @@ input, select { min-height: 44px; }
     width: 30px;
     height: 30px;
     border-radius: 10px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .hero {
