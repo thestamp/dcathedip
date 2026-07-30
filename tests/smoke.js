@@ -288,7 +288,7 @@ function createServer() {
     const sustainableBudget = noStandaloneBudget && /Invest a sustainable amount/i.test(bodyText) && /[$]5 weekday coffee is [$]25 a week/i.test(bodyText) && /[$]1,200 a year/i.test(bodyText) && /[$]5 weekly lottery ticket is [$]260 a year/i.test(bodyText);
     const meansSection = /Invest a sustainable amount/i.test(bodyText) && /The calm plan is not the most aggressive plan/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
     const marketNoisePlaybook = /Market noise playbook/i.test(bodyText) && /When markets get loud, your plan stays quiet/i.test(bodyText) && /Red days are not instructions/i.test(bodyText) && /Green days are not permission to chase/i.test(bodyText) && /Check the plan, then keep the schedule/i.test(bodyText);
-    const withdrawSection = /Sell because the money has a job/i.test(bodyText) && /panic selling/i.test(bodyText) && /rebalancing/i.test(bodyText) && /reducing risk before a known expense/i.test(bodyText);
+    const withdrawSection = /The only rule that matters/i.test(bodyText) && /Withdraw for real life/i.test(bodyText) && /real-life event/i.test(bodyText) && /rebalancing/i.test(bodyText) && /you only sell when life actually needs it/i.test(bodyText);
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
       && /Diversified building blocks/i.test(bodyText)
       && /Balanced ETFs/i.test(bodyText)
