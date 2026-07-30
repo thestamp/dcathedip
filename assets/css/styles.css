@@ -824,7 +824,6 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
 .pillar .icon { font-size: 1.8rem; margin-bottom: 10px; }
 .pillar h3 { margin-bottom: 8px; font-size: 1.1rem; }
 .pillar p { margin: 0; }
-@media (max-width: 680px) {
 
 .footer { border-top: 1px solid var(--border); padding: 40px 0; background: rgba(0,0,0,0.2); }
 .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
