@@ -1197,3 +1197,7 @@ input, select { min-height: 44px; }
 .scenario-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
 .scenario-buttons .button.active { background: rgba(83, 230, 160, 0.18); border-color: rgba(83, 230, 160, 0.55); color: var(--green); }
 @media (max-width: 820px) { .journey-grid { grid-template-columns: 1fr; } .journey-card { padding: 20px; } }
+.advanced-section { border: 1px solid var(--border); border-radius: 24px; padding: 20px 24px; background: rgba(255,107,107,0.06); margin-top: 60px; }
+.advanced-section summary { cursor: pointer; font-weight: 900; font-size: 1.05rem; color: var(--text); list-style: none; }
+.advanced-section summary::-webkit-details-marker { display: none; }
+.advanced-badge { display: inline-block; background: rgba(255,107,107,0.18); color: var(--red); padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 10px; }
