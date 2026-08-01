@@ -223,7 +223,7 @@ function createServer() {
     const debtSection = /Step 1/i.test(bodyText) && /Tackle high-interest credit card debt first/i.test(bodyText) && /Consolidate what you can/i.test(bodyText) && /Clear the easiest one first/i.test(bodyText) && /Then attack by interest rate/i.test(bodyText);
     const emergencySection = /Step 2/i.test(bodyText) && /Build a rainy day fund/i.test(bodyText) && /Start with one month of expenses/i.test(bodyText) && /Build toward 3–6 months/i.test(bodyText);
     const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText);
-    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /FHSA first, then TFSA for flexibility/i.test(bodyText);
+    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Start with an FHSA and a TFSA/i.test(bodyText);
     const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText);
     const sustainableSection = /Step 6/i.test(bodyText) && /Invest a sustainable amount/i.test(bodyText);
     const resetNeutral = await page.evaluate(() => {
@@ -379,7 +379,7 @@ function createServer() {
     if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');
     if (!emergencySection) throw new Error('Expected Step 2 rainy day fund content with 1-month starter and 3-6 month target.');
     if (!targetSection) throw new Error('Expected Step 3 financial target section.');
-    if (!accountSection) throw new Error('Expected Step 4 account section with FHSA-first prioritization content.');
+    if (!accountSection) throw new Error('Expected Step 4 account section with FHSA + TFSA prioritization content.');
     if (!investmentSection) throw new Error('Expected Step 5 investment section.');
     if (!sustainableSection) throw new Error('Expected Step 6 sustainable amount section.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
