@@ -190,7 +190,7 @@ function createServer() {
     const bodyText = await page.locator('body').textContent();
     const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /From debt to deposits/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
-    const journeyStructure = /The Plan/i.test(navText) && /Tackle credit card debt/i.test(navText) && /Invest a sustainable amount/i.test(navText);
+    const journeyStructure = /The Plan/i.test(navText) && /Tackle high-interest credit card debt/i.test(navText) && /Invest a sustainable amount/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year.s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
@@ -216,14 +216,14 @@ function createServer() {
       && !/Regular contribution/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
-          && /Tackle credit card debt/i.test(bodyText)
+          && /Tackle high-interest credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
           && /Choose the right investment/i.test(bodyText);
     // Also check the new step content exists
-    const debtSection = /Step 1/i.test(bodyText) && /Tackle credit card debt first/i.test(bodyText) && /Consolidate what you can/i.test(bodyText) && /Clear the easiest one first/i.test(bodyText) && /Then attack by interest rate/i.test(bodyText);
+    const debtSection = /Step 1/i.test(bodyText) && /Tackle high-interest credit card debt first/i.test(bodyText) && /Consolidate what you can/i.test(bodyText) && /Clear the easiest one first/i.test(bodyText) && /Then attack by interest rate/i.test(bodyText);
     const emergencySection = /Step 2/i.test(bodyText) && /Build a rainy day fund/i.test(bodyText) && /Start with one month of expenses/i.test(bodyText) && /Build toward 3–6 months/i.test(bodyText);
     const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText);
-    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Why many Canadians start with a TFSA/i.test(bodyText);
+    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /FHSA first, then TFSA for flexibility/i.test(bodyText);
     const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText);
     const sustainableSection = /Step 6/i.test(bodyText) && /Invest a sustainable amount/i.test(bodyText);
     const resetNeutral = await page.evaluate(() => {
@@ -376,10 +376,10 @@ function createServer() {
     if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 storytelling and Rule of 72 content.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
-    if (!debtSection) throw new Error('Expected Step 1 debt consolidation strategy content.');
+    if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');
     if (!emergencySection) throw new Error('Expected Step 2 rainy day fund content with 1-month starter and 3-6 month target.');
     if (!targetSection) throw new Error('Expected Step 3 financial target section.');
-    if (!accountSection) throw new Error('Expected Step 4 account section with TFSA prioritization content.');
+    if (!accountSection) throw new Error('Expected Step 4 account section with FHSA-first prioritization content.');
     if (!investmentSection) throw new Error('Expected Step 5 investment section.');
     if (!sustainableSection) throw new Error('Expected Step 6 sustainable amount section.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
@@ -401,7 +401,7 @@ function createServer() {
     if (!referralPromo) throw new Error('Expected referral disclosure and referral signup link.');
     if (!stepByStepNav) throw new Error('Expected nav menu to include ETF link to step 5.');
     if (!etfToStepsLink) throw new Error('Expected at least 1 link from ETF section back to step 4 account section.');
-    if (!withdrawSection) throw new Error('Expected withdrawal section with panic selling and planned-risk-management language.');
+    if (!withdrawSection) throw new Error('Expected withdrawal section with "only rule that matters" and real-life event language.');
     if (!calmFaqs) throw new Error('Expected FAQ to address down markets, buying the dip, and crash nervousness.');
     if (false) throw new Error('noop');
     if (false) throw new Error('noop');

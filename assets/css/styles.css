@@ -663,8 +663,8 @@ h3 { font-size: 1.35rem; }
 }
 .account-table tbody tr:last-child td { border-bottom: none; }
 .account-table tbody tr:hover { background: rgba(255,255,255,0.025); }
-.account-row-tfsa { background: rgba(83,230,160,0.06); }
-.account-row-tfsa td:first-child strong { color: var(--green); }
+.account-row-fhsa { background: rgba(83,230,160,0.06); }
+.account-row-fhsa td:first-child strong { color: var(--green); }
 .account-table td:first-child { font-weight: 700; color: var(--text); }
 .account-table td:last-child { color: var(--text); font-weight: 600; }
 
