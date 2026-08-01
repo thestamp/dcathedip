@@ -479,18 +479,73 @@ description: "A complete plan for Canadian ETF investors: tackle high-interest d
         <p class="location-note" style="margin-top:20px"><a href="#step-4-account">← Back to step 4: Create the right account</a></p>
       </div>
 
-      <!-- Leveraged ETFs — ADVANCED, skip if new -->
-            <details class="advanced-section" style="margin-top:60px">
-              <summary><span class="advanced-badge">⚠ Advanced — safe to skip if you are new</span> 1.25× leveraged ETFs</summary>
-              <div style="margin-top:18px">
-                <p>A 1.25× leveraged ETF targets 125% of its index's daily return — if the index rises 1%, the ETF aims for ~1.25%. Unlike 2×/3× products, this is a modest boost that <strong>does not require a margin account or collateral.</strong> You buy shares like any other ETF and your maximum loss is what you invested.</p>
-                <p><strong>What to know:</strong> Leveraged ETFs amplify both gains and losses. A 1.25× ETF falls ~1.25× as much on down days. Over time, daily reset effects (volatility decay) can cause returns to drift from a simple multiple. <strong>Not appropriate for most beginners — these are tools for investors who understand the mechanics and can tolerate extra volatility.</strong></p>
-                <p class="calculator-note" style="margin-top:12px; text-align:center;">
-                  Source: <a href="https://www.globalx.ca/enhanced-growth-etfs" target="_blank" rel="nofollow noopener" style="color:var(--gold);">Global X Enhanced Growth ETFs ↗</a>. Review the prospectus, MER, and daily reset mechanics before investing.
-                </p>
-                <details class="section-footnote"><summary>Footnotes</summary><p>Leveraged ETFs are not suitable for all investors. Returns can deviate significantly from the stated multiple over periods longer than one day due to compounding and volatility. These are examples for research, not recommendations.</p></details>
+      <!-- Leveraged ETFs — ADVANCED: for risk-tolerant investors only -->
+      <div class="advanced-leverage-section" style="margin-top:60px; border:2px solid var(--red); border-radius:24px; padding:28px; background:rgba(255,107,107,0.06);">
+        <div class="advanced-leverage-header" style="display:flex; align-items:flex-start; gap:16px; margin-bottom:24px;">
+          <span style="font-size:2.2rem; flex-shrink:0; line-height:1;">⚠️</span>
+          <div>
+            <p class="eyebrow" style="color:var(--red); margin-bottom:4px;">Advanced — for risk-tolerant investors only</p>
+            <h2 style="font-size:1.6rem; margin:0 0 12px;">Leveraged ETFs amplify gains <em>and</em> losses.</h2>
+            <p style="margin:0;">A 1.25× leveraged ETF falls ~1.25× as much on down days. Over time, daily reset effects (volatility decay) can cause returns to drift from the simple multiple. <strong>If you are new to investing, skip this section entirely.</strong> These are tools for investors who understand the mechanics and can tolerate extra volatility.</p>
+          </div>
+        </div>
+
+        <details style="margin:0; padding:0; border:none; background:transparent;">
+          <summary style="cursor:pointer; font-weight:900; font-size:1.1rem; padding:12px 16px; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,0.06); display:flex; align-items:center; gap:6px;">▶ Show leveraged ETF details</summary>
+          <div style="margin-top:24px;">
+
+            <!-- 1.25× ETF cards rendered by JS -->
+            <div id="levGrid"></div>
+
+            <!-- 2× leveraged ETF reference table -->
+            <div style="margin-top:40px;">
+              <h3 style="margin:0 0 4px;">Higher-leverage 2× funds — reference only</h3>
+              <p style="margin:0 0 18px; color:var(--muted);">These target 200% of their index's daily return. Daily reset is magnified — losses can be severe in volatile or declining markets. <strong>Most investors should not use these</strong> without a deep understanding of daily compounding mechanics.</p>
+              <div class="lev-table-wrap" style="overflow-x:auto;">
+                <table class="lev-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+                  <thead>
+                    <tr style="border-bottom:1px solid var(--border);">
+                      <th style="text-align:left; padding:10px 14px;">Ticker</th>
+                      <th style="text-align:left; padding:10px 14px;">Name</th>
+                      <th style="text-align:left; padding:10px 14px;">Underlying</th>
+                      <th style="text-align:right; padding:10px 14px;">Leverage</th>
+                      <th style="text-align:right; padding:10px 14px;">MER</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                      <td style="padding:12px 14px;"><span class="ticker" style="margin:0;">HSU</span></td>
+                      <td style="padding:12px 14px; color:var(--muted);">Horizons BetaPro S&P 500 2× Daily Bull</td>
+                      <td style="padding:12px 14px; color:var(--muted);">S&P 500</td>
+                      <td style="padding:12px 14px; text-align:right;"><span class="etf-lev-tag" style="background:var(--red);">2×</span></td>
+                      <td style="padding:12px 14px; text-align:right; color:var(--muted);">1.15%</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+                      <td style="padding:12px 14px;"><span class="ticker" style="margin:0;">HQU</span></td>
+                      <td style="padding:12px 14px; color:var(--muted);">Horizons BetaPro NASDAQ-100 2× Daily Bull</td>
+                      <td style="padding:12px 14px; color:var(--muted);">NASDAQ-100</td>
+                      <td style="padding:12px 14px; text-align:right;"><span class="etf-lev-tag" style="background:var(--red);">2×</span></td>
+                      <td style="padding:12px 14px; text-align:right; color:var(--muted);">1.15%</td>
+                    </tr>
+                    <tr>
+                      <td style="padding:12px 14px;"><span class="ticker" style="margin:0;">HXU</span></td>
+                      <td style="padding:12px 14px; color:var(--muted);">Horizons BetaPro TSX 60 2× Daily Bull</td>
+                      <td style="padding:12px 14px; color:var(--muted);">S&P/TSX 60</td>
+                      <td style="padding:12px 14px; text-align:right;"><span class="etf-lev-tag" style="background:var(--red);">2×</span></td>
+                      <td style="padding:12px 14px; text-align:right; color:var(--muted);">1.15%</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-            </details>
+            </div>
+
+            <p class="calculator-note" style="margin-top:24px; text-align:center;">
+              Source: <a href="https://www.globalx.ca/enhanced-growth-etfs" target="_blank" rel="nofollow noopener" style="color:var(--gold);">Global X Enhanced Growth ETFs ↗</a> for 1.25× products. Review the prospectus, MER, and daily reset mechanics before investing.
+            </p>
+            <details class="section-footnote"><summary>Footnotes</summary><p>Leveraged ETFs are not suitable for all investors. Returns can deviate significantly from the stated multiple over periods longer than one day due to compounding and volatility. These are examples for research, not recommendations. Higher-leverage 2× funds carry substantially more risk than 1.25× products.</p></details>
+          </div>
+        </details>
+      </div>
 
       <!-- Timing risk -->
       <div class="timing-subsection" style="margin-top:60px">

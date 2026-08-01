@@ -168,23 +168,22 @@ function createServer() {
       const cellCount = document.querySelectorAll('.etf-cell-card:not(.empty)').length;
       const hasBest = /★/.test(text);
       const hasPies = document.querySelectorAll('.etf-pie').length > 0;
-      // Table with 5 rows (BMO, iShares, Vanguard, Factor, Leveraged)
+      // Table with 4 rows (BMO, iShares, Vanguard, Factor)
       const rowCount = document.querySelectorAll('.etf-table-row').length;
       return grid.classList.contains('etf-grid')
         && hasPieToggle
-        && cellCount >= 13
-        && rowCount === 5
+        && cellCount >= 10
+        && rowCount === 4
         && hasBest
         && hasPies
         && /ZSP\b/i.test(text) && /VFV\b/i.test(text) && /XUS\b/i.test(text)
         && /ZIU\b/i.test(text) && /XIU\b/i.test(text) && /VCN\b/i.test(text)
         && /XEQT\b/i.test(text) && /VEQT\b/i.test(text) && /ZEQT\b/i.test(text)
         && /CAUS\b/i.test(text) && /CACE\b/i.test(text) && /CAGE\b/i.test(text)
-        && /USSL\b/i.test(text) && /CANL\b/i.test(text) && /HEQL\b/i.test(text)
         && /MER/i.test(text) && /5Y/i.test(text)
         && /leans more Canada/i.test(text);
     });
-    const leveragedSection = await page.locator('#step-5-investment .advanced-section').count().then(count => count === 1);
+    const leveragedSection = await page.locator('#step-5-investment .advanced-leverage-section').count().then(count => count === 1);
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
@@ -350,7 +349,7 @@ function createServer() {
     if (!dailyVariationControl.changesPath) throw new Error('Expected daily variation to add daily up/down movement to the price path.');
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
     if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
-    if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and 1.25× leveraged ETF examples for U.S., Canada, and World.');
+    if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and factor ETF examples for U.S., Canada, and World.');
     if (!leveragedSection) throw new Error('Expected 1.25× advanced leveraged ETF section (collapsible).');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
