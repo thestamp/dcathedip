@@ -187,7 +187,7 @@ function createServer() {
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
-    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /From debt to deposits/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You are not predicting the noise/i.test(bodyText);
+    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /From debt to deposits/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You are not guessing the market/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
     const journeyStructure = /The Plan/i.test(navText) && /Tackle high-interest credit card debt/i.test(navText) && /Invest a sustainable amount/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
@@ -198,10 +198,10 @@ function createServer() {
     const wealthsimplePromo = /Automate your recurring investments/i.test(bodyText) && /recurring ETF purchases from your bank account/i.test(bodyText);
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
     const unitsRule = /Same dollars, more units when prices dip/i.test(bodyText) && /No guessing/i.test(bodyText);
-    const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing sooner has often performed better historically/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
-    const timingSection = /Trying to time the noise is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
+    const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing the full amount right away has often done better/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
+    const timingSection = /Trying to time the market is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Investing from income/i.test(bodyText) && /Large lump sum/i.test(bodyText) && /Staying invested matters more than perfect timing/i.test(bodyText);
-    const lumpSumRiskFaq = /Trying to time the noise is harder than it looks/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
+    const lumpSumRiskFaq = /Trying to time the market is harder than it looks/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
     const compoundingSection = /Compounding over time/i.test(bodyText)
       && /Build the base/i.test(bodyText)
       && /Momentum appears/i.test(bodyText)
@@ -286,7 +286,7 @@ function createServer() {
     const noStandaloneBudget = await page.locator('#budget').count().then(count => count === 0);
     const sustainableBudget = noStandaloneBudget && /Invest a sustainable amount/i.test(bodyText) && /[$]5 weekday coffee is [$]25 a week/i.test(bodyText) && /[$]1,200 a year/i.test(bodyText) && /[$]5 weekly lottery ticket is [$]260 a year/i.test(bodyText);
     const meansSection = /Invest a sustainable amount/i.test(bodyText) && /The calm plan is not the most aggressive plan/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
-    const marketNoisePlaybook = /Market noise playbook/i.test(bodyText) && /When markets get loud, your plan stays quiet/i.test(bodyText) && /Red days are not instructions/i.test(bodyText) && /Green days are not permission to chase/i.test(bodyText) && /Check the plan, then keep the schedule/i.test(bodyText);
+    const marketNoisePlaybook = /Market noise playbook/i.test(bodyText) && /When markets get rough, your plan keeps steady/i.test(bodyText) && /Red days are not instructions/i.test(bodyText) && /Green days are not permission to chase/i.test(bodyText) && /Check the plan, then keep the schedule/i.test(bodyText);
     const withdrawSection = /The only rule that matters/i.test(bodyText) && /Withdraw for real life/i.test(bodyText) && /real-life event/i.test(bodyText) && /rebalancing/i.test(bodyText) && /you only sell when life actually needs it/i.test(bodyText);
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
       && /Diversified building blocks/i.test(bodyText)
@@ -356,7 +356,7 @@ function createServer() {
     if (!layoutChecks.sustainableVisible) throw new Error('Expected step 6 sustainable investing section to render.');
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
-    if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / building through market noise.');
+    if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / investing through the market.');
     if (!journeyStructure) throw new Error('Expected nav to have The Plan dropdown and referral button.');
     if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
