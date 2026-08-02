@@ -207,6 +207,15 @@ function createServer() {
           && /Growth overtakes your contributions/i.test(bodyText)
           && /Growth overtakes your employment income/i.test(bodyText)
           && /Investment income covers your living expenses/i.test(bodyText);
+    const incomeEtfSection = /Income ETF examples/i.test(bodyText)
+          && /Income-oriented ETFs for the long game/i.test(bodyText)
+          && /Growth Heavy/i.test(bodyText)
+          && /Balanced Growth & Income/i.test(bodyText)
+          && /Dividend Heavy/i.test(bodyText)
+          && /ZDV\b/i.test(bodyText) && /DGRC\b/i.test(bodyText)
+                    && /XDIV\b/i.test(bodyText) && /XEI\b/i.test(bodyText)
+                    && /VDY\b/i.test(bodyText) && /CDZ\b/i.test(bodyText) && /ZWC\b/i.test(bodyText)
+          && /Yield/i.test(bodyText) && /Covered call/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
@@ -344,6 +353,7 @@ function createServer() {
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
     if (!compoundingSection) throw new Error('Expected 3 crossovers section with growth milestones and compound calculator.');
+    if (!incomeEtfSection) throw new Error('Expected income ETF section with Growth Heavy, Balanced, and Dividend Heavy categories and all 7 tickers.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
     if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');
@@ -383,7 +393,7 @@ function createServer() {
     if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, incomeEtfSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));

@@ -146,6 +146,56 @@ const etfsFlat = [
   }
 ];
 
+// Income-oriented ETFs for the crossover section in Step 6
+// Categorized by strategy: growth-heavy, balanced, dividend-heavy
+const incomeEtfs = [
+  // === GROWTH HEAVY — dividend growth focus ===
+  {
+    ticker: "ZDV.TO", name: "BMO Canadian Dividend ETF",
+    category: "growth-heavy",
+    mer: "0.39%", yieldPct: "3.8%", return5y: "10.2%",
+    lean: "Screens for dividend growth and sustainability. Lower current yield but focuses on companies likely to grow payouts over time."
+  },
+  {
+    ticker: "DGRC.TO", name: "WisdomTree Canada Quality Dividend Growth",
+    category: "growth-heavy",
+    mer: "0.27%", yieldPct: "2.3%", return5y: "11.0%",
+    lean: "Targets companies with strong dividend growth history. Prioritizes payout increases over current yield."
+  },
+  // === BALANCED — growth + income ===
+  {
+    ticker: "XDIV.TO", name: "iShares Canadian Quality Dividend",
+    category: "balanced",
+    mer: "0.11%", yieldPct: "3.5%", return5y: "12.0%",
+    lean: "Quality screen — screens for profitability, earnings quality, and payout sustainability. Lower MER than most dividend ETFs."
+  },
+  {
+    ticker: "XEI.TO", name: "iShares S&P/TSX Composite High Dividend",
+    category: "balanced",
+    mer: "0.22%", yieldPct: "4.5%", return5y: "11.5%",
+    lean: "Diversified across Canadian high-dividend payers. Good middle ground between yield and growth."
+  },
+  // === DIVIDEND HEAVY — maximize current income ===
+  {
+    ticker: "VDY.TO", name: "Vanguard FTSE Canadian High Dividend Yield",
+    category: "dividend-heavy",
+    mer: "0.22%", yieldPct: "4.5%", return5y: "13.0%",
+    lean: "Highest yield among vanilla Canadian dividend ETFs. Heavily weighted toward financials and energy."
+  },
+  {
+    ticker: "CDZ.TO", name: "iShares S&P/TSX Canadian Dividend Aristocrats",
+    category: "dividend-heavy",
+    mer: "0.66%", yieldPct: "3.2%", return5y: "9.5%",
+    lean: "Holds companies with 5+ years of consecutive dividend growth. More reliable payers but higher MER."
+  },
+  {
+    ticker: "ZWC.TO", name: "BMO Canadian High Dividend Covered Call",
+    category: "dividend-heavy",
+    mer: "0.72%", yieldPct: "7.0%", return5y: "8.0%",
+    lean: "Covered call strategy for enhanced monthly income. Trades some upside potential for higher distributions."
+  }
+];
+
 let pieMode = 'countries';
 
 // Consistent country colors: Canada=red, US=blue
@@ -375,6 +425,48 @@ function renderLevGrid() {
       }).join('')}
     </div>
   `;
+}
+
+function renderIncomeEtfs() {
+  const grid = document.getElementById("incomeEtfGrid");
+  if (!grid) return;
+
+  const categories = [
+    { key: "growth-heavy", label: "Growth Heavy", desc: "Dividend growth — companies that reliably increase payouts over time. Lower current yield, stronger total return potential." },
+    { key: "balanced", label: "Balanced Growth & Income", desc: "A middle ground — moderate current yield with room for growth." },
+    { key: "dividend-heavy", label: "Dividend Heavy", desc: "Maximum current income. Higher yields can mean slower growth or concentrated sector exposure." }
+  ];
+
+  grid.innerHTML = categories.map(cat => {
+    const etfs = incomeEtfs.filter(e => e.category === cat.key);
+    return `
+      <div class="income-category">
+        <div class="income-category-header">
+          <h3>${cat.label}</h3>
+          <p>${cat.desc}</p>
+        </div>
+        <div class="etf-cards">
+          ${etfs.map(etf => {
+            const displayTicker = etf.ticker.replace('.TO', '');
+            return `
+              <article class="etf-card income">
+                <div class="etf-card-head">
+                  <span class="ticker">${displayTicker}</span>
+                </div>
+                <h3>${etf.name}</h3>
+                <div class="etf-card-metrics">
+                  <span class="etf-metric">Yield <strong>${etf.yieldPct}</strong></span>
+                  <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
+                  <span class="etf-metric">5Y <strong>${etf.return5y}</strong></span>
+                </div>
+                <p class="etf-lean">${etf.lean}</p>
+              </article>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 const frequencies = [
@@ -848,6 +940,7 @@ function init() {
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
     renderTickers();
     renderLevGrid();
+    renderIncomeEtfs();
     updateChart();
   calculateTfsaRoom();
   calculateCrossover();
