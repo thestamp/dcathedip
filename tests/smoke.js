@@ -202,17 +202,12 @@ function createServer() {
     const timingSection = /Why don't I just buy at the bottom and sell at the top\?/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Investing from income/i.test(bodyText) && /Large lump sum/i.test(bodyText) && /Staying invested matters more than perfect timing/i.test(bodyText);
     const lumpSumRiskFaq = /Why don't I just buy at the bottom and sell at the top\?/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
-    const compoundingSection = /Compounding over time/i.test(bodyText)
-      && /Build the base/i.test(bodyText)
-      && /Momentum appears/i.test(bodyText)
-      && /Growth becomes visible/i.test(bodyText)
-      && /Rule of 72 \+ DCA calculator/i.test(bodyText)
-      && /How long to double your money\?/i.test(bodyText)
-      && /72 ÷ return/i.test(bodyText)
-      && /Use this as mental math/i.test(bodyText)
-      && /Daily contribution/i.test(bodyText)
-      && !/Try your numbers/i.test(bodyText)
-      && !/Regular contribution/i.test(bodyText);
+    const compoundingSection = /The long game/i.test(bodyText)
+          && /3 crossovers to financial freedom/i.test(bodyText)
+          && /Growth overtakes your contributions/i.test(bodyText)
+          && /Growth overtakes your employment income/i.test(bodyText)
+          && /Growth covers your living expenses/i.test(bodyText)
+          && /Growth calculator/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
@@ -279,7 +274,7 @@ function createServer() {
         visible: Boolean(document.getElementById('compoundForm')),
         hasGenericPresets: [...preset.options].some(option => /Conservative/.test(option.textContent)) && [...preset.options].some(option => /Aggressive/.test(option.textContent)),
         selectedEquity,
-        hasOutputs: /Estimated future value/i.test(text) && /Total contributed/i.test(text) && /Estimated growth/i.test(text) && /9.0 years/i.test(text),
+        hasOutputs: /Estimated future value/i.test(text) && /Total contributed/i.test(text) && /Estimated growth/i.test(text) && /Years to double/i.test(text),
         disclaimer: /Results are estimates based on the return assumption/i.test(document.body.textContent)
       };
     });
@@ -372,7 +367,7 @@ function createServer() {
     if (!timingSection) throw new Error('Expected why-not-buy-the-dip timing section with day-trading loss statistic.');
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
-    if (!compoundingSection) throw new Error('Expected compounding section with 8-4-3 storytelling and Rule of 72 content.');
+    if (!compoundingSection) throw new Error('Expected 3 crossovers section with growth milestones and compound calculator.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
     if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');

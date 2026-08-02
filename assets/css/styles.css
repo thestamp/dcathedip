@@ -305,8 +305,8 @@ h3 { font-size: 1.35rem; }
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
-.compounding-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.compound-stage {
+.crossover-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.crossover-card {
   border: 1px solid var(--border);
   border-radius: 28px;
   padding: 24px;
@@ -316,7 +316,7 @@ h3 { font-size: 1.35rem; }
   align-items: start;
   background: linear-gradient(180deg, var(--panel-2), rgba(255,255,255,0.055));
 }
-.stage-number {
+.crossover-num {
   width: 72px;
   height: 72px;
   border-radius: 22px;
@@ -325,44 +325,12 @@ h3 { font-size: 1.35rem; }
   font-size: 2.4rem;
   font-weight: 1000;
   color: #06101e;
-  background: linear-gradient(135deg, var(--gold), var(--green));
+  background: linear-gradient(135deg, var(--green), var(--blue));
 }
-.stage-label {
-  color: var(--green);
-  font-weight: 900;
-  margin: 0 0 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.78rem;
-}
-.compound-stage h3 { font-size: 1.15rem; margin-bottom: 10px; }
-.compound-stage p:last-child { margin-bottom: 0; }
-.stage-four .stage-number { background: linear-gradient(135deg, var(--green), var(--blue)); }
-.stage-three .stage-number { background: linear-gradient(135deg, var(--blue), var(--gold)); }
-.rule-72-card {
-  margin-top: 20px;
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 26px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
-  gap: 22px;
-  align-items: center;
-  background: rgba(255,255,255,0.07);
-}
-.rule-72-card h3 { margin-bottom: 10px; }
-.rule-formula {
-  border: 1px solid rgba(83, 230, 160, 0.35);
-  border-radius: 22px;
-  padding: 18px;
-  text-align: center;
-  background: rgba(83,230,160,0.1);
-}
-.rule-formula span, .rule-formula strong { display: block; }
-.rule-formula span { color: var(--gold); font-size: 1.2rem; font-weight: 1000; }
-.rule-formula strong { margin-top: 8px; color: var(--green); font-size: 1.05rem; }
-.rule-example { grid-column: 1 / -1; margin: 0; }
-.compounding-note { margin: 18px auto 0; max-width: 920px; text-align: center; }
+.crossover-card:nth-child(2) .crossover-num { background: linear-gradient(135deg, var(--gold), var(--green)); }
+.crossover-card:nth-child(3) .crossover-num { background: linear-gradient(135deg, var(--gold), var(--red)); }
+.crossover-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+.crossover-card p:last-child { margin-bottom: 0; }
 
 .compound-calculator {
   margin-top: 22px;
@@ -832,7 +800,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .dip-input-grid, .compounding-grid, .rule-72-card, .compound-form, .compound-results, .crossover-layout, .crossover-results-row { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .dip-input-grid, .crossover-grid, .compound-form, .compound-results, .crossover-layout, .crossover-results-row { grid-template-columns: 1fr; }
   .leveraged-compare { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
@@ -900,8 +868,7 @@ input, select { min-height: 44px; }
   .crossover-results-row,
   .compound-form,
   .compound-results,
-  .compounding-grid,
-  .rule-72-card {
+  .crossover-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1093,12 +1060,12 @@ input, select { min-height: 44px; }
     grid-template-columns: 1fr;
   }
 
-  .compound-stage {
+  .crossover-card {
     grid-template-columns: 56px minmax(0, 1fr);
     gap: 14px;
   }
 
-  .stage-number {
+  .crossover-num {
     width: 56px;
     height: 56px;
     border-radius: 18px;

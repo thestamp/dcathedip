@@ -766,7 +766,7 @@ function calculateCompounding() {
     <div class="compound-result-card"><small>Estimated future value</small><strong>${money(futureValue)}</strong></div>
     <div class="compound-result-card"><small>Total contributed</small><strong>${money(totalContributed)}</strong></div>
     <div class="compound-result-card growth"><small>Estimated growth</small><strong>${money(estimatedGrowth)}</strong></div>
-    <div class="compound-result-card"><small>Rule-of-72 double time</small><strong>${doublingYears}${doublingYears === "N/A" ? "" : " years"}</strong></div>
+    <div class="compound-result-card"><small>Years to double</small><strong>${doublingYears}${doublingYears === "N/A" ? "" : " years"}</strong></div>
   `;
 }
 
