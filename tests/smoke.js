@@ -199,9 +199,9 @@ function createServer() {
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
     const unitsRule = /Same dollars, more units when prices dip/i.test(bodyText) && /No guessing/i.test(bodyText);
     const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing the full amount right away has often done better/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
-    const timingSection = /Trying to time the market is harder than it looks/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
+    const timingSection = /Why don't I just buy at the bottom and sell at the top\?/i.test(bodyText) && /Research on individual day traders/i.test(bodyText);
     const riskChart = /Easier psychologically/i.test(bodyText) && /Builds a habit/i.test(bodyText) && /Investing from income/i.test(bodyText) && /Large lump sum/i.test(bodyText) && /Staying invested matters more than perfect timing/i.test(bodyText);
-    const lumpSumRiskFaq = /Trying to time the market is harder than it looks/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
+    const lumpSumRiskFaq = /Why don't I just buy at the bottom and sell at the top\?/i.test(bodyText) && /DCA removes the pressure/i.test(bodyText) && /Barber, Lee, Liu/i.test(bodyText);
     const compoundingSection = /Compounding over time/i.test(bodyText)
       && /Build the base/i.test(bodyText)
       && /Momentum appears/i.test(bodyText)
