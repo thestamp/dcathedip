@@ -357,39 +357,6 @@ h3 { font-size: 1.35rem; }
 .compound-result-card strong { color: var(--green); font-size: 1.25rem; }
 .compound-result-card.growth strong { color: var(--gold); }
 
-.crossover-section {
-  margin-top: 22px;
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 26px;
-  background: linear-gradient(180deg, rgba(83,230,160,0.1), rgba(255,255,255,0.055));
-}
-.crossover-copy { max-width: 900px; margin-bottom: 18px; }
-.crossover-copy h3 { margin-bottom: 10px; }
-.crossover-layout { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 18px; align-items: stretch; }
-.crossover-form { display: grid; gap: 12px; align-content: start; }
-.crossover-form label { display: grid; gap: 8px; color: #d9e5f8; font-weight: 800; font-size: 0.9rem; }
-.crossover-form input {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(8,17,31,0.85);
-  color: var(--text);
-  padding: 11px;
-}
-.crossover-card { border: 1px solid var(--border); border-radius: 22px; padding: 16px; background: rgba(8,17,31,0.42); min-height: 360px; }
-#crossoverChart { max-height: 330px; }
-.crossover-results { display: flex; flex-direction: column; gap: 12px; margin-top: 18px; }
-.crossover-results-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.crossover-result-card { border: 1px solid var(--border); border-radius: 18px; padding: 16px; background: rgba(255,255,255,0.055); }
-.crossover-result-card small { display: block; color: var(--muted); font-weight: 800; margin-bottom: 6px; }
-.crossover-result-card strong { display: block; color: var(--green); font-size: 1.14rem; }
-.crossover-result-card.shortfall strong { color: var(--gold); }
-.crossover-result-card.coast strong { color: var(--gold); }
-.crossover-result-card p { margin: 8px 0 0; font-size: 0.82rem; line-height: 1.4; }
-
-
-
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
 .ladder { padding: 16px; box-shadow: none; }
 .ladder div { display: flex; justify-content: space-between; gap: 16px; padding: 16px; border-bottom: 1px solid var(--border); }
@@ -822,7 +789,7 @@ summary { cursor: pointer; font-weight: 900; font-size: 1.1rem; }
   .hero, .calculator-layout, .split, .footer-grid, .timing-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 56px; }
   .hero-card { min-height: 320px; }
-  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .dip-input-grid, .crossover-grid, .compound-form, .compound-results, .crossover-layout, .crossover-results-row { grid-template-columns: 1fr; }
+  .grid-3, .ticker-grid, .stats, .budget-grid, .wealthsimple-promo, .dip-input-grid, .crossover-grid, .compound-form, .compound-results { grid-template-columns: 1fr; }
   .leveraged-compare { grid-template-columns: 1fr; }
   .etf-matrix-header { display: none; }
   .market-label { justify-content: center; }
@@ -886,10 +853,6 @@ input, select { min-height: 44px; }
   .foundation-layout,
   .foundation-grid,
   .risk-spectrum-row,
-  .crossover-layout,
-  .crossover-results-row,
-  .compound-form,
-  .compound-results,
   .crossover-grid {
     grid-template-columns: 1fr;
   }
@@ -905,8 +868,7 @@ input, select { min-height: 44px; }
     min-height: 0;
   }
 
-  #dcaChart,
-  #crossoverChart {
+  #dcaChart {
     max-height: 300px;
   }
 }
@@ -1095,7 +1057,6 @@ input, select { min-height: 44px; }
   }
 
   .compound-result-card strong,
-  .crossover-result-card strong,
   .stat strong {
     font-size: 1.08rem;
     overflow-wrap: anywhere;
@@ -1105,8 +1066,7 @@ input, select { min-height: 44px; }
     padding: 12px;
   }
 
-  #dcaChart,
-  #crossoverChart {
+  #dcaChart {
     max-height: 260px;
   }
 
@@ -1135,8 +1095,6 @@ input, select { min-height: 44px; }
   }
 
   .stats,
-  .tfsa-result,
-  .compound-results,
   .crossover-results {
     grid-template-columns: 1fr;
   }
@@ -1163,8 +1121,6 @@ input, select { min-height: 44px; }
 .footer-disclosure li + li { margin-top: 6px; }
 
 .crossover-result-card.income strong { color: var(--green); }
-
-.scenario-picker { border: 1px solid var(--border); border-radius: 18px; padding: 14px; background: rgba(255,255,255,0.055); margin-bottom: 16px; }
 .scenario-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .section-footnote { margin-top: 18px; border: 1px solid var(--border); border-radius: 18px; padding: 14px 16px; background: rgba(255,255,255,0.045); }
 .section-footnote summary { cursor: pointer; color: var(--green); font-weight: 900; }

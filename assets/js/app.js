@@ -479,7 +479,6 @@ const frequencies = [
 
 const fmt = new Intl.NumberFormat(undefined, { style: "currency", currency: "CAD", maximumFractionDigits: 0 });
 let chart;
-let crossoverChart;
 let marketMoves = [];
 let nextMoveId = 1;
 let benchmarkKey = "daily";
@@ -817,101 +816,6 @@ const tfsaLimits = {
 };
 
 
-function monthLabel(month) {
-  if (month === null) return "Not reached";
-  if (month === 0) return "Already there";
-  const years = Math.floor(month / 12);
-  const months = month % 12;
-  if (years === 0) return `${months} mo`;
-  return months ? `${years} yr ${months} mo` : `${years} yr`;
-}
-
-function calculateCrossover() {
-  const results = document.getElementById("crossoverResults");
-  const canvas = document.getElementById("crossoverChart");
-  if (!results || !canvas) return;
-
-  const current = Math.max(0, +document.getElementById("crossCurrent").value || 0);
-  const monthly = Math.max(0, +document.getElementById("crossMonthly").value || 0);
-  const cagr = clampNumber(document.getElementById("crossCagr").value, -20, 20);
-  const desiredIncome = Math.max(0, +document.getElementById("crossSpending").value || 0);
-  const withdrawalRate = 0.04; // always 4%
-  const years = clampNumber(document.getElementById("crossYears").value, 1, 60);
-  const totalMonths = Math.round(years * 12);
-  const monthlyRate = Math.pow(1 + cagr / 100, 1 / 12) - 1;
-  const target = withdrawalRate > 0 ? desiredIncome / withdrawalRate : 0;
-  const amountStillNeeded = Math.max(0, target - current);
-  const canGrow = monthlyRate > 0;
-  const crossoverBalance = canGrow && monthly > 0 ? monthly / monthlyRate : null;
-
-  const labels = [];
-  const balances = [];
-  const contributionLine = [];
-  const targetLine = [];
-  const crossoverLine = [];
-  let balance = current;
-  let targetMonth = current >= target ? 0 : null;
-  let crossoverMonth = crossoverBalance !== null && current >= crossoverBalance ? 0 : null;
-
-  for (let month = 0; month <= totalMonths; month += 1) {
-    labels.push(month);
-    balances.push(balance);
-    contributionLine.push(current + monthly * month);
-    targetLine.push(target);
-    crossoverLine.push(crossoverBalance);
-    if (targetMonth === null && balance >= target) targetMonth = month;
-    if (crossoverMonth === null && crossoverBalance !== null && balance >= crossoverBalance) crossoverMonth = month;
-    if (month < totalMonths) balance = balance * (1 + monthlyRate) + monthly;
-  }
-
-  const projectedTarget = balances.at(-1);
-  const shortfall = projectedTarget < target ? target - projectedTarget : 0;
-
-  results.innerHTML = `
-    <div class="crossover-results-row crossover-results-targets">
-      <div class="crossover-result-card income"><small>Investment target</small><strong>${money(target)}</strong><p>Desired annual income divided by 4%.</p></div>
-      <div class="crossover-result-card${shortfall > 0 ? ' shortfall' : ''}"><small>Projected value</small><strong>${money(projectedTarget)}</strong><p>${shortfall > 0 ? `Shortfall of ${money(shortfall)} — below the investment target.` : `With the monthly investment and growth assumption shown.`}</p></div>
-    </div>
-    <div class="crossover-results-row crossover-results-crossover">
-      <div class="crossover-result-card"><small>Contribution crossover</small><strong>${crossoverBalance === null ? "N/A" : money(crossoverBalance)}</strong><p>When average monthly growth implied by your assumption roughly matches your monthly investment.</p></div>
-      <div class="crossover-result-card"><small>Crossover timing</small><strong>${monthLabel(crossoverMonth)}</strong><p>When monthly growth is estimated to exceed ${money(monthly)}.</p></div>
-    </div>
-  `;
-
-  const data = {
-    labels,
-    datasets: [
-      { label: "Portfolio balance", data: balances, borderColor: "#53e6a0", backgroundColor: "rgba(83,230,160,0.12)", fill: true, tension: 0.25, pointRadius: 0, borderWidth: 3 },
-      { label: "Total you contributed", data: contributionLine, borderColor: "#6aa8ff", borderDash: [6, 6], tension: 0.2, pointRadius: 0, borderWidth: 2 },
-      { label: "Investment target", data: targetLine, borderColor: "#7cffbd", borderDash: [9, 4], tension: 0, pointRadius: 0, borderWidth: 2 },
-      { label: "Contribution crossover", data: crossoverLine, borderColor: "#ffd166", borderDash: [3, 5], tension: 0, pointRadius: 0, borderWidth: 2 }
-    ]
-  };
-
-  if (crossoverChart) {
-    crossoverChart.data = data;
-    crossoverChart.update();
-  } else {
-    crossoverChart = new Chart(canvas, {
-      type: "line",
-      data,
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: { mode: "index", intersect: false },
-        plugins: {
-          legend: { labels: { color: "#f4f7fb", font: { weight: "700" } } },
-          tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${money(ctx.parsed.y)}` } }
-        },
-        scales: {
-          x: { title: { display: true, text: "Months", color: "#aebbd0" }, ticks: { color: "#aebbd0", maxTicksLimit: 8 }, grid: { color: "rgba(255,255,255,0.06)" } },
-          y: { ticks: { color: "#aebbd0", callback: value => money(value) }, grid: { color: "rgba(255,255,255,0.08)" } }
-        }
-      }
-    });
-  }
-}
-
 function calculateTfsaRoom() {
   const eligibilityYear = +document.getElementById("eligibilityYear").value;
   const contributed = +document.getElementById("tfsaContributed").value || 0;
@@ -936,14 +840,12 @@ function init() {
   document.getElementById("resetNeutral").addEventListener("click", resetNeutralScenario);
   document.querySelectorAll("[data-scenario]").forEach(button => button.addEventListener("click", () => applyScenario(button.dataset.scenario)));
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
-  document.querySelectorAll("#crossoverForm input").forEach(el => el.addEventListener("input", calculateCrossover));
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
     renderTickers();
     renderLevGrid();
     renderIncomeEtfs();
     updateChart();
   calculateTfsaRoom();
-  calculateCrossover();
 }
 
 document.addEventListener("DOMContentLoaded", init);

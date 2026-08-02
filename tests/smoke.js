@@ -241,28 +241,6 @@ function createServer() {
       return marketMoves.length === 0 && document.getElementById('growth').value === '0' && document.getElementById('variation').value === '0'
         && finalValues.every(value => Math.abs(value - finalValues[0]) < 0.01);
     });
-    const incomeTargetCalculator = await page.evaluate(() => {
-      const current = document.getElementById('crossCurrent');
-      const monthly = document.getElementById('crossMonthly');
-      const cagr = document.getElementById('crossCagr');
-      const spending = document.getElementById('crossSpending');
-      const years = document.getElementById('crossYears');
-      current.value = 10000;
-      monthly.value = 500;
-      cagr.value = 7;
-      spending.value = 40000;
-      years.value = 25;
-      years.dispatchEvent(new Event('input', { bubbles: true }));
-      const resultText = document.getElementById('crossoverResults').textContent;
-      const chart = window.Chart.getChart(document.getElementById('crossoverChart'));
-      return {
-        visible: Boolean(document.getElementById('crossoverForm')),
-        copy: /Investment target/i.test(document.body.textContent) && /4% withdrawal rate/i.test(document.body.textContent) && /Footnotes/i.test(document.body.textContent),
-        outputs: /Investment target/i.test(resultText) && /Projected value/i.test(resultText) && /Contribution crossover/i.test(resultText) && /Crossover timing/i.test(resultText),
-        chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Investment target') && chart.data.datasets.some(dataset => dataset.label === 'Contribution crossover'),
-        updates: resultText.includes('$1,000,000') && resultText.includes('Shortfall')
-      };
-    });
     const noStandaloneBudget = await page.locator('#budget').count().then(count => count === 0);
     const sustainableBudget = noStandaloneBudget && /Invest a sustainable amount/i.test(bodyText) && /[$]5 weekday coffee is [$]25 a week/i.test(bodyText) && /[$]1,200 a year/i.test(bodyText) && /[$]5 weekly lottery ticket is [$]260 a year/i.test(bodyText);
     const meansSection = /Invest a sustainable amount/i.test(bodyText) && /The calm plan is not the most aggressive plan/i.test(bodyText) && /Build your safety net first/i.test(bodyText) && /Keep emergency cash available/i.test(bodyText) && /Keep the habit sustainable/i.test(bodyText) && sustainableBudget;
@@ -363,11 +341,6 @@ function createServer() {
     if (!investmentSection) throw new Error('Expected Step 5 investment section.');
     if (!sustainableSection) throw new Error('Expected Step 6 sustainable amount section.');
     if (!resetNeutral) throw new Error('Expected reset-neutral button to clear moves and make all schedule outcomes equal.');
-    if (!incomeTargetCalculator.visible) throw new Error('Expected 4% rule income target calculator form to render.');
-    if (!incomeTargetCalculator.copy) throw new Error('Expected 4% rule income target copy and contextual footnote.');
-    if (!incomeTargetCalculator.outputs) throw new Error('Expected income target calculator to output 4% target and progress results.');
-    if (!incomeTargetCalculator.chart) throw new Error('Expected income target chart with portfolio, target, and contribution-crossover lines.');
-    if (!incomeTargetCalculator.updates) throw new Error('Expected crossover balance to update from CAGR/monthly investment inputs.');
     if (!sustainableBudget) throw new Error('Expected coffee and lottery examples to live inside Sustainable investing with no standalone How much should I DCA section.');
     if (!meansSection) throw new Error('Expected step 6 sustainable investing section with safety net guidance.');
     if (!marketNoisePlaybook) throw new Error('Expected market noise playbook section for rough-market DCA behaviour.');
@@ -393,7 +366,7 @@ function createServer() {
     if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, incomeEtfSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, incomeEtfSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
