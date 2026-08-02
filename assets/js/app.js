@@ -377,15 +377,6 @@ function renderLevGrid() {
   `;
 }
 
-const cagrPresets = [
-  { label: "Custom", value: "custom", cagr: 6 },
-  { label: "Very conservative", value: "very-conservative", cagr: 3 },
-  { label: "Conservative", value: "conservative", cagr: 4 },
-  { label: "Moderate", value: "moderate", cagr: 6 },
-  { label: "Long-term equity", value: "equity", cagr: 8 },
-  { label: "Aggressive", value: "aggressive", cagr: 10 }
-];
-
 const frequencies = [
   { key: "daily", label: "Daily DCA", contributions: 260, color: "#53e6a0" },
   { key: "weekly", label: "Weekly DCA", contributions: 52, color: "#6aa8ff" },
@@ -734,51 +725,6 @@ const tfsaLimits = {
 };
 
 
-function populateCagrPresets() {
-  const select = document.getElementById("compoundPreset");
-  if (!select) return;
-  select.innerHTML = cagrPresets.map(preset => `<option value="${preset.value}" data-cagr="${preset.cagr}">${preset.label} (${preset.cagr}%)</option>`).join("");
-}
-
-function calculateCompounding() {
-  const results = document.getElementById("compoundResults");
-  if (!results) return;
-  const initial = Math.max(0, +document.getElementById("compoundInitial").value || 0);
-  const dailyContribution = Math.max(0, +document.getElementById("compoundDaily").value || 0);
-  const years = clampNumber(document.getElementById("compoundYears").value, 1, 60);
-  const cagr = clampNumber(document.getElementById("compoundCagr").value, -20, 20);
-  const periodsPerYear = 260;
-  const periods = Math.round(years * periodsPerYear);
-  const periodRate = Math.pow(1 + cagr / 100, 1 / periodsPerYear) - 1;
-  let futureContributions;
-  if (Math.abs(periodRate) < 0.0000001) {
-    futureContributions = dailyContribution * periods;
-  } else {
-    futureContributions = dailyContribution * ((Math.pow(1 + periodRate, periods) - 1) / periodRate);
-  }
-  const futureInitial = initial * Math.pow(1 + periodRate, periods);
-  const futureValue = futureInitial + futureContributions;
-  const totalContributed = initial + dailyContribution * periods;
-  const estimatedGrowth = futureValue - totalContributed;
-  const doublingYears = cagr > 0 ? (72 / cagr).toFixed(1) : "N/A";
-
-  results.innerHTML = `
-    <div class="compound-result-card"><small>Estimated future value</small><strong>${money(futureValue)}</strong></div>
-    <div class="compound-result-card"><small>Total contributed</small><strong>${money(totalContributed)}</strong></div>
-    <div class="compound-result-card growth"><small>Estimated growth</small><strong>${money(estimatedGrowth)}</strong></div>
-    <div class="compound-result-card"><small>Years to double</small><strong>${doublingYears}${doublingYears === "N/A" ? "" : " years"}</strong></div>
-  `;
-}
-
-function applyCagrPreset() {
-  const select = document.getElementById("compoundPreset");
-  if (!select) return;
-  const selected = select.selectedOptions[0];
-  document.getElementById("compoundCagr").value = selected.dataset.cagr;
-  calculateCompounding();
-}
-
-
 function monthLabel(month) {
   if (month === null) return "Not reached";
   if (month === 0) return "Already there";
@@ -898,16 +844,12 @@ function init() {
   document.getElementById("resetNeutral").addEventListener("click", resetNeutralScenario);
   document.querySelectorAll("[data-scenario]").forEach(button => button.addEventListener("click", () => applyScenario(button.dataset.scenario)));
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
-  populateCagrPresets();
-  document.querySelectorAll("#compoundForm input").forEach(el => el.addEventListener("input", calculateCompounding));
-  document.getElementById("compoundPreset").addEventListener("change", applyCagrPreset);
   document.querySelectorAll("#crossoverForm input").forEach(el => el.addEventListener("input", calculateCrossover));
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
     renderTickers();
     renderLevGrid();
     updateChart();
   calculateTfsaRoom();
-  calculateCompounding();
   calculateCrossover();
 }
 

@@ -206,8 +206,7 @@ function createServer() {
           && /3 crossovers to financial freedom/i.test(bodyText)
           && /Growth overtakes your contributions/i.test(bodyText)
           && /Growth overtakes your employment income/i.test(bodyText)
-          && /Growth covers your living expenses/i.test(bodyText)
-          && /Growth calculator/i.test(bodyText);
+          && /Investment income covers your living expenses/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
@@ -253,29 +252,6 @@ function createServer() {
         outputs: /Investment target/i.test(resultText) && /Projected value/i.test(resultText) && /Contribution crossover/i.test(resultText) && /Crossover timing/i.test(resultText),
         chart: Boolean(chart) && chart.data.datasets.some(dataset => dataset.label === 'Portfolio balance') && chart.data.datasets.some(dataset => dataset.label === 'Investment target') && chart.data.datasets.some(dataset => dataset.label === 'Contribution crossover'),
         updates: resultText.includes('$1,000,000') && resultText.includes('Shortfall')
-      };
-    });
-    const compoundCalculator = await page.evaluate(() => {
-      const preset = document.getElementById('compoundPreset');
-      const initial = document.getElementById('compoundInitial');
-      const daily = document.getElementById('compoundDaily');
-      const years = document.getElementById('compoundYears');
-      const cagr = document.getElementById('compoundCagr');
-      preset.value = 'equity';
-      preset.dispatchEvent(new Event('change', { bubbles: true }));
-      const selectedEquity = cagr.value === '8';
-      initial.value = 1000;
-      daily.value = 10;
-      years.value = 15;
-      cagr.value = 8;
-      cagr.dispatchEvent(new Event('input', { bubbles: true }));
-      const text = document.getElementById('compoundResults').textContent;
-      return {
-        visible: Boolean(document.getElementById('compoundForm')),
-        hasGenericPresets: [...preset.options].some(option => /Conservative/.test(option.textContent)) && [...preset.options].some(option => /Aggressive/.test(option.textContent)),
-        selectedEquity,
-        hasOutputs: /Estimated future value/i.test(text) && /Total contributed/i.test(text) && /Estimated growth/i.test(text) && /Years to double/i.test(text),
-        disclaimer: /Results are estimates based on the return assumption/i.test(document.body.textContent)
       };
     });
     const noStandaloneBudget = await page.locator('#budget').count().then(count => count === 0);
@@ -382,11 +358,6 @@ function createServer() {
     if (!incomeTargetCalculator.outputs) throw new Error('Expected income target calculator to output 4% target and progress results.');
     if (!incomeTargetCalculator.chart) throw new Error('Expected income target chart with portfolio, target, and contribution-crossover lines.');
     if (!incomeTargetCalculator.updates) throw new Error('Expected crossover balance to update from CAGR/monthly investment inputs.');
-    if (!compoundCalculator.visible) throw new Error('Expected compounding calculator form to render.');
-    if (!compoundCalculator.hasGenericPresets) throw new Error('Expected compounding calculator to include generic CAGR presets.');
-    if (!compoundCalculator.selectedEquity) throw new Error('Expected selecting long-term equity preset to populate the CAGR input.');
-    if (!compoundCalculator.hasOutputs) throw new Error('Expected compounding calculator to output future value, contributions, growth, and Rule-of-72 double time.');
-    if (!compoundCalculator.disclaimer) throw new Error('Expected CAGR assumption disclaimer to avoid presenting assumptions as forecasts.');
     if (!sustainableBudget) throw new Error('Expected coffee and lottery examples to live inside Sustainable investing with no standalone How much should I DCA section.');
     if (!meansSection) throw new Error('Expected step 6 sustainable investing section with safety net guidance.');
     if (!marketNoisePlaybook) throw new Error('Expected market noise playbook section for rough-market DCA behaviour.');
@@ -412,7 +383,7 @@ function createServer() {
     if (!layoutRestructure.noStandaloneBudget) throw new Error('Expected standalone #budget section to be removed.');
     if (!scenarioButtons) throw new Error('Expected pre-built scenario buttons and custom scenario editor.');
     if (!chartCanvas) throw new Error('Expected DCA chart canvas to be visible.');
-    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, compoundCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
+    console.log(JSON.stringify({ ok: true, zeroCaseEqual, seoHero, journeyStructure, sectionFootnotes, noCaveatHero, dailyComparisonTable, chartMoveEditor, dailyVariationControl, dayZeroInvested, layoutChecks, canadaEtfGrid, leveragedSection, tfsaVisible, taxFreeCopy, eligibilityCopy, recurringTip, wealthsimplePromo, canadaBoxNoGuide, recurringGuide, unitsRule, lumpSumFaq, timingSection, riskChart, lumpSumRiskFaq, compoundingSection, compoundingNav, foundationSection, debtSection, emergencySection, targetSection, accountSection, investmentSection, sustainableSection, resetNeutral, incomeTargetCalculator, sustainableBudget, meansSection, marketNoisePlaybook, broadEtfSection, wealthsimpleGuide, referralPromo, stepByStepNav, etfToStepsLink, withdrawSection, removedDailyFaq, removedDailyMonthlyFaq, calmFaqs, faqReferral, statCards, dcaBaselineComparison, layoutRestructure, scenarioButtons, chartCanvas }, null, 2));
   } finally {
     await browser.close();
     await new Promise(resolve => server.close(resolve));
