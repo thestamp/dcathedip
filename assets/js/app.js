@@ -841,11 +841,117 @@ function init() {
   document.querySelectorAll("[data-scenario]").forEach(button => button.addEventListener("click", () => applyScenario(button.dataset.scenario)));
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
+  document.getElementById("crossGrowth").addEventListener("change", renderCrossoverCalc);
+  document.getElementById("crossWeekly").addEventListener("input", renderCrossoverCalc);
     renderTickers();
     renderLevGrid();
     renderIncomeEtfs();
     updateChart();
   calculateTfsaRoom();
+  renderCrossoverCalc();
+}
+
+function renderCrossoverCalc() {
+  const grid = document.getElementById("crossoverGrid");
+  if (!grid) return;
+
+  const r = parseFloat((document.getElementById("crossGrowth") || {}).value) || 0;
+  const weekly = parseFloat((document.getElementById("crossWeekly") || {}).value) || 0;
+  const employmentIncome = parseFloat((document.getElementById("crossIncome") || {}).value) || 0;
+  const monthlyExpenses = parseFloat((document.getElementById("crossExpenses") || {}).value) || 0;
+
+  const M = weekly * 52 / 12; // monthly contribution
+  const i = r > 0 ? Math.pow(1 + r / 100, 1 / 12) - 1 : 0;
+  const hasBase = r > 0 && weekly > 0;
+  const hasIncome = employmentIncome > 0;
+  const hasExpenses = monthlyExpenses > 0;
+
+  function yearsToTarget(targetBalance) {
+    if (i <= 0 || M <= 0) return null;
+    if (targetBalance <= 0) return 0;
+    const ratio = 1 + targetBalance * i / M;
+    if (ratio <= 1) return null;
+    return Math.log(ratio) / Math.log(1 + i) / 12;
+  }
+
+  // Crossover 1: monthly growth > monthly contribution → target balance = M / i
+  const t1Years = hasBase ? yearsToTarget(M / i) : null;
+
+  // Crossover 2: annual growth > employment income → target balance = E / (r/100)
+  const t2Years = (hasBase && hasIncome) ? yearsToTarget(employmentIncome / (r / 100)) : null;
+
+  // Crossover 3: 4% rule → target balance = monthly expenses × 300
+  const t3Years = (hasBase && hasExpenses) ? yearsToTarget(monthlyExpenses * 300) : null;
+
+  function fmtYears(y) {
+    if (y === null || y === undefined) return "";
+    if (y < 0.1) return "< 0.1 yr";
+    if (y >= 99) return "99+ yr";
+    return y.toFixed(1) + " yr";
+  }
+
+  function needsBase(phase) {
+    if (phase === 1) return "";
+    if (phase === 2) return hasBase ? "" : "needs-base";
+    if (phase === 3) return (hasBase && hasIncome) ? "" : (hasBase ? "needs-income" : "needs-base");
+    return "";
+  }
+
+  function renderPhase(num, title, years, phaseHasInput, extraInputHtml) {
+    const nb = needsBase(num);
+    const error = nb !== "" && phaseHasInput;
+    const cls = error ? " crossover-error" : "";
+    const label = nb === "needs-base" ? "enter growth & contribution above" :
+                  nb === "needs-income" ? "enter employment income in phase 2" : "";
+    const yrDisplay = (nb === "" && years !== null) ? fmtYears(years) : "";
+    const yrLabel = yrDisplay ? `<span class="crossover-yr">${yrDisplay}</span>` :
+                    (error ? `<span class="crossover-yr error-label">${label}</span>` : "");
+
+    return `
+      <div class="crossover-num">${num}</div>
+      <div>
+        <h3>${title}</h3>
+        ${extraInputHtml}
+        ${yrLabel}
+      </div>
+    `;
+  }
+
+  // Build the three cards with JS-rendered content
+  const cards = grid.querySelectorAll(".crossover-card");
+  if (cards.length !== 3) return;
+
+  cards[0].className = "crossover-card";
+  cards[0].innerHTML = renderPhase(1, "Growth overtakes your contributions", t1Years, hasBase, "");
+  if (!hasBase) {
+    cards[0].innerHTML += `<p>Your monthly investment growth exceeds what you put in each month. Every dollar of growth is a dollar you did not have to earn and save yourself — your money is now doing the work.</p>`;
+  }
+
+  cards[1].className = "crossover-card" + (needsBase(2) !== "" && hasIncome ? " crossover-error" : "");
+  cards[1].innerHTML = renderPhase(2, "Growth overtakes your employment income", t2Years, hasIncome,
+    `<label class="cross-input-label">Annual employment income
+      <input type="number" id="crossIncome" class="cross-input" placeholder="e.g. 60000" min="0" step="1000" value="${employmentIncome || ''}" />
+    </label>`
+  );
+  if (!hasIncome) {
+    cards[1].innerHTML += `<p>Your annual investment growth exceeds your yearly paycheque. At this point your portfolio earns more than your job — a true second income stream working alongside you.</p>`;
+  }
+
+  cards[2].className = "crossover-card" + (needsBase(3) !== "" && hasExpenses ? " crossover-error" : "");
+  cards[2].innerHTML = renderPhase(3, "Investment income covers your living expenses", t3Years, hasExpenses,
+    `<label class="cross-input-label">Monthly living expenses
+      <input type="number" id="crossExpenses" class="cross-input" placeholder="e.g. 3500" min="0" step="100" value="${monthlyExpenses || ''}" />
+    </label>`
+  );
+  if (!hasExpenses) {
+    cards[2].innerHTML += `<p>Your monthly investment income exceeds your monthly costs — even after stress-testing with a 30% market drop. This is the crossover where work becomes optional.</p>`;
+  }
+
+  // Re-attach event listeners to the inputs in cards 2 and 3
+  const incomeEl = document.getElementById("crossIncome");
+  const expensesEl = document.getElementById("crossExpenses");
+  if (incomeEl) incomeEl.addEventListener("input", renderCrossoverCalc);
+  if (expensesEl) expensesEl.addEventListener("input", renderCrossoverCalc);
 }
 
 document.addEventListener("DOMContentLoaded", init);

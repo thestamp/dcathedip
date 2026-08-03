@@ -553,22 +553,39 @@ description: "A complete plan for Canadian ETF investors: tackle high-interest d
           <p>Popularized by <em>Your Money or Your Life</em>, the crossover concept maps your path from saving to financial independence. Each milestone marks the moment your investments start working harder than you do.</p>
         </div>
 
-        <div class="crossover-grid">
-          <article class="crossover-card">
+        <div class="crossover-controls">
+          <label>Growth assumption
+            <select id="crossGrowth">
+              <option value="">—</option>
+              <option value="5">5%</option>
+              <option value="6">6%</option>
+              <option value="7" selected>7%</option>
+              <option value="8">8%</option>
+              <option value="9">9%</option>
+              <option value="10">10%</option>
+            </select>
+          </label>
+          <label>Weekly contribution
+            <input type="number" id="crossWeekly" placeholder="e.g. 100" min="0" step="10" value="100" />
+          </label>
+        </div>
+
+        <div class="crossover-grid" id="crossoverGrid">
+          <article class="crossover-card" id="crossCard1">
             <div class="crossover-num">1</div>
             <div>
               <h3>Growth overtakes your contributions</h3>
               <p>Your monthly investment growth exceeds what you put in each month. Every dollar of growth is a dollar you did not have to earn and save yourself — your money is now doing the work.</p>
             </div>
           </article>
-          <article class="crossover-card">
+          <article class="crossover-card" id="crossCard2">
             <div class="crossover-num">2</div>
             <div>
               <h3>Growth overtakes your employment income</h3>
               <p>Your annual investment growth exceeds your yearly paycheque. At this point your portfolio earns more than your job — a true second income stream working alongside you.</p>
             </div>
           </article>
-          <article class="crossover-card">
+          <article class="crossover-card" id="crossCard3">
             <div class="crossover-num">3</div>
             <div>
               <h3>Investment income covers your living expenses</h3>
