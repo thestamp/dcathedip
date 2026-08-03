@@ -897,10 +897,9 @@ function renderCrossoverCalc() {
     return "";
   }
 
-  function renderPhase(num, title, years, phaseHasInput, extraInputHtml) {
+  function renderPhase(num, title, years, phaseHasInput, extraInputHtml, description) {
     const nb = needsBase(num);
     const error = nb !== "" && phaseHasInput;
-    const cls = error ? " crossover-error" : "";
     const label = nb === "needs-base" ? "enter growth & contribution above" :
                   nb === "needs-income" ? "enter employment income in phase 2" : "";
     const yrDisplay = (nb === "" && years !== null) ? fmtYears(years) : "";
@@ -911,8 +910,9 @@ function renderCrossoverCalc() {
       <div class="crossover-num">${num}</div>
       <div>
         <h3>${title}</h3>
-        ${extraInputHtml}
         ${yrLabel}
+        ${extraInputHtml}
+        <p>${description}</p>
       </div>
     `;
   }
@@ -922,30 +922,22 @@ function renderCrossoverCalc() {
   if (cards.length !== 3) return;
 
   cards[0].className = "crossover-card";
-  cards[0].innerHTML = renderPhase(1, "Growth overtakes your contributions", t1Years, hasBase, "");
-  if (!hasBase) {
-    cards[0].innerHTML += `<p>Your monthly investment growth exceeds what you put in each month. Every dollar of growth is a dollar you did not have to earn and save yourself — your money is now doing the work.</p>`;
-  }
+  cards[0].innerHTML = renderPhase(1, "Growth overtakes your contributions", t1Years, hasBase, "",
+    "Your monthly investment growth exceeds what you put in each month. Every dollar of growth is a dollar you did not have to earn and save yourself — your money is now doing the work.");
 
   cards[1].className = "crossover-card" + (needsBase(2) !== "" && hasIncome ? " crossover-error" : "");
   cards[1].innerHTML = renderPhase(2, "Growth overtakes your employment income", t2Years, hasIncome,
     `<label class="cross-input-label">Annual employment income
       <input type="number" id="crossIncome" class="cross-input" placeholder="e.g. 60000" min="0" step="1000" value="${employmentIncome || ''}" />
-    </label>`
-  );
-  if (!hasIncome) {
-    cards[1].innerHTML += `<p>Your annual investment growth exceeds your yearly paycheque. At this point your portfolio earns more than your job — a true second income stream working alongside you.</p>`;
-  }
+    </label>`,
+    "Your annual investment growth exceeds your yearly paycheque. At this point your portfolio earns more than your job — a true second income stream working alongside you.");
 
   cards[2].className = "crossover-card" + (needsBase(3) !== "" && hasExpenses ? " crossover-error" : "");
   cards[2].innerHTML = renderPhase(3, "Investment income covers your living expenses", t3Years, hasExpenses,
     `<label class="cross-input-label">Monthly living expenses
       <input type="number" id="crossExpenses" class="cross-input" placeholder="e.g. 3500" min="0" step="100" value="${monthlyExpenses || ''}" />
-    </label>`
-  );
-  if (!hasExpenses) {
-    cards[2].innerHTML += `<p>Your monthly investment income exceeds your monthly costs — even after stress-testing with a 30% market drop. This is the crossover where work becomes optional.</p>`;
-  }
+    </label>`,
+    "Your monthly investment income exceeds your monthly costs — even after stress-testing with a 30% market drop. This is the crossover where work becomes optional. Your portfolio can support your life through good markets and bad.");
 
   // Re-attach event listeners to the inputs in cards 2 and 3
   const incomeEl = document.getElementById("crossIncome");
