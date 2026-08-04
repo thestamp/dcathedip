@@ -847,6 +847,7 @@ function init() {
     updateChart();
   calculateTfsaRoom();
   renderCrossoverCalc();
+  renderTargetCalc();
 }
 
 function renderCrossoverCalc() {
@@ -929,7 +930,7 @@ function renderCrossoverCalc() {
 
   const props = [
     renderCard(1, "Growth overtakes your contributions",
-      yearsToTarget(M / i), hasBase,
+      hasGrowth ? (i > 0 ? Math.log(2) / Math.log(1 + i) / 12 : null) : null, hasGrowth,
       `<label class="cross-input-label">Growth assumption
         <select id="crossGrowth" class="cross-input" style="max-width:120px">
           <option value="">—</option>
@@ -968,4 +969,52 @@ function renderCrossoverCalc() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", init);
+function renderTargetCalc() {
+  const container = document.getElementById("targetCalcContent");
+  if (!container) return;
+
+  const tR = parseFloat((document.getElementById("targetGrowth") || {}).value) || 0;
+  const tWeekly = parseFloat((document.getElementById("targetWeekly") || {}).value) || 0;
+  const tTarget = parseFloat((document.getElementById("targetAmount") || {}).value) || 0;
+
+  const tM = tWeekly * 52 / 12;
+  const ti = tR > 0 ? Math.pow(1 + tR / 100, 1 / 12) - 1 : 0;
+  const canCalc = tR > 0 && tWeekly > 0 && tTarget > 0;
+
+  let years = null;
+  if (canCalc && ti > 0) {
+    const ratio = 1 + tTarget * ti / tM;
+    if (ratio > 1) years = Math.log(ratio) / Math.log(1 + ti) / 12;
+  }
+
+  const yrText = years !== null ? (years < 0.1 ? "< 0.1 yr" : years >= 99 ? "99+ yr" : years.toFixed(1) + " yr") : "";
+
+  const growthOpts = [5, 6, 7, 8, 9, 10].map(v =>
+    `<option value="${v}"${tR === v ? " selected" : ""}>${v}%</option>`
+  ).join("");
+
+  container.innerHTML = `
+    <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; margin-bottom:12px;">
+      <label class="cross-input-label" style="margin-bottom:0;">Growth
+        <select id="targetGrowth" class="cross-input" style="max-width:100px">
+          <option value="">—</option>
+          ${growthOpts}
+        </select>
+      </label>
+      <label class="cross-input-label" style="margin-bottom:0;">Weekly
+        <input type="number" id="targetWeekly" class="cross-input" placeholder="100" min="0" step="10" value="${tWeekly || ''}" style="max-width:110px" />
+      </label>
+      <label class="cross-input-label" style="margin-bottom:0;">Target
+        <input type="number" id="targetAmount" class="cross-input" placeholder="e.g. 100000" min="0" step="1000" value="${tTarget || ''}" style="max-width:130px" />
+      </label>
+    </div>
+    ${yrText ? `<span class="crossover-yr">${yrText}</span>` : ""}
+  `;
+
+  ["targetGrowth", "targetWeekly", "targetAmount"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", renderTargetCalc);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", init)
