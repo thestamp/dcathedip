@@ -207,15 +207,14 @@ function createServer() {
           && /Growth overtakes your contributions/i.test(bodyText)
           && /Growth overtakes your employment income/i.test(bodyText)
           && /Investment income covers your living expenses/i.test(bodyText);
-    const incomeEtfSection = /Income ETF examples/i.test(bodyText)
-          && /Income-oriented ETFs for the long game/i.test(bodyText)
-          && /Growth Heavy/i.test(bodyText)
-          && /Balanced Growth & Income/i.test(bodyText)
-          && /Dividend Heavy/i.test(bodyText)
-          && /ZDV\b/i.test(bodyText) && /DGRC\b/i.test(bodyText)
-                    && /XDIV\b/i.test(bodyText) && /XEI\b/i.test(bodyText)
-                    && /VDY\b/i.test(bodyText) && /CDZ\b/i.test(bodyText) && /ZWC\b/i.test(bodyText)
-          && /Yield/i.test(bodyText) && /Covered call/i.test(bodyText);
+    const incomeEtfSection = /Income ETF comparison/i.test(bodyText)
+                  && /Canadian dividend ETFs at a glance/i.test(bodyText)
+                  && /Trailing yield/i.test(bodyText) && /Proj. yield/i.test(bodyText)
+                  && /Total ROI/i.test(bodyText)
+                  && /\bVDY\b/i.test(bodyText) && /\bXDIV\b/i.test(bodyText) && /\bXEI\b/i.test(bodyText)
+                  && /Vanguard FTSE Canadian High Dividend Yield/i.test(bodyText)
+                  && /iShares Core MSCI Canadian Quality Dividend/i.test(bodyText)
+                  && /iShares S&P\/TSX Composite High Dividend/i.test(bodyText);
     const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
@@ -331,7 +330,7 @@ function createServer() {
     if (!riskChart) throw new Error('Expected lump sum versus DCA timing risk chart.');
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
     if (!compoundingSection) throw new Error('Expected 3 crossovers section with growth milestones and compound calculator.');
-    if (!incomeEtfSection) throw new Error('Expected income ETF section with Growth Heavy, Balanced, and Dividend Heavy categories and all 7 tickers.');
+    if (!incomeEtfSection) throw new Error('Expected dividend ETF comparison table with VDY, XDIV, XEI and sortable columns.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
     if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');

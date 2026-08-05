@@ -146,53 +146,51 @@ const etfsFlat = [
   }
 ];
 
-// Income-oriented ETFs for the crossover section in Step 6
-// Categorized by strategy: growth-heavy, balanced, dividend-heavy
-const incomeEtfs = [
-  // === GROWTH HEAVY — dividend growth focus ===
+// Dividend ETF comparison data — sourced from fund facts as of Jul/Aug 2026
+// trailing: 12-month trailing yield | projYield: distribution yield (forward-looking proxy)
+// return5y: annualized 5-year total return | roiTotal: 5Y return + trailing yield − MER
+const dividendEtfs = [
   {
-    ticker: "ZDV.TO", name: "BMO Canadian Dividend ETF",
-    category: "growth-heavy",
-    mer: "0.39%", yieldPct: "3.8%", return5y: "10.2%",
-    lean: "Screens for dividend growth and sustainability. Lower current yield but focuses on companies likely to grow payouts over time."
+    ticker: "VDY",
+    name: "Vanguard FTSE Canadian High Dividend Yield",
+    mer: 0.22,
+    trailingYield: 3.04,
+    projYield: 3.04,
+    return5y: 19.59,
+    top10Pct: 69.4,
+    numStocks: 60,
+    canada: 100,
+    usa: 0,
+    intl: 0,
+    source: "Vanguard Canada | Jun 30, 2026"
   },
   {
-    ticker: "DGRC.TO", name: "WisdomTree Canada Quality Dividend Growth",
-    category: "growth-heavy",
-    mer: "0.27%", yieldPct: "2.3%", return5y: "11.0%",
-    lean: "Targets companies with strong dividend growth history. Prioritizes payout increases over current yield."
-  },
-  // === BALANCED — growth + income ===
-  {
-    ticker: "XDIV.TO", name: "iShares Canadian Quality Dividend",
-    category: "balanced",
-    mer: "0.11%", yieldPct: "3.5%", return5y: "12.0%",
-    lean: "Quality screen — screens for profitability, earnings quality, and payout sustainability. Lower MER than most dividend ETFs."
-  },
-  {
-    ticker: "XEI.TO", name: "iShares S&P/TSX Composite High Dividend",
-    category: "balanced",
-    mer: "0.22%", yieldPct: "4.5%", return5y: "11.5%",
-    lean: "Diversified across Canadian high-dividend payers. Good middle ground between yield and growth."
-  },
-  // === DIVIDEND HEAVY — maximize current income ===
-  {
-    ticker: "VDY.TO", name: "Vanguard FTSE Canadian High Dividend Yield",
-    category: "dividend-heavy",
-    mer: "0.22%", yieldPct: "4.5%", return5y: "13.0%",
-    lean: "Highest yield among vanilla Canadian dividend ETFs. Heavily weighted toward financials and energy."
+    ticker: "XDIV",
+    name: "iShares Core MSCI Canadian Quality Dividend",
+    mer: 0.11,
+    trailingYield: 3.07,
+    projYield: 3.10,
+    return5y: 19.97,
+    top10Pct: 75.2,
+    numStocks: 21,
+    canada: 99.8,
+    usa: 0,
+    intl: 0,
+    source: "BlackRock Canada | Aug 4, 2026"
   },
   {
-    ticker: "CDZ.TO", name: "iShares S&P/TSX Canadian Dividend Aristocrats",
-    category: "dividend-heavy",
-    mer: "0.66%", yieldPct: "3.2%", return5y: "9.5%",
-    lean: "Holds companies with 5+ years of consecutive dividend growth. More reliable payers but higher MER."
-  },
-  {
-    ticker: "ZWC.TO", name: "BMO Canadian High Dividend Covered Call",
-    category: "dividend-heavy",
-    mer: "0.72%", yieldPct: "7.0%", return5y: "8.0%",
-    lean: "Covered call strategy for enhanced monthly income. Trades some upside potential for higher distributions."
+    ticker: "XEI",
+    name: "iShares S&P/TSX Composite High Dividend",
+    mer: 0.22,
+    trailingYield: 3.39,
+    projYield: 3.40,
+    return5y: 16.85,
+    top10Pct: 45.3,
+    numStocks: 75,
+    canada: 100,
+    usa: 0,
+    intl: 0,
+    source: "BlackRock Canada | Aug 4, 2026"
   }
 ];
 
@@ -427,46 +425,62 @@ function renderLevGrid() {
   `;
 }
 
-function renderIncomeEtfs() {
-  const grid = document.getElementById("incomeEtfGrid");
+function renderDividendTable() {
+  const grid = document.getElementById("dividendTableBody");
   if (!grid) return;
 
-  const categories = [
-    { key: "growth-heavy", label: "Growth Heavy", desc: "Dividend growth — companies that reliably increase payouts over time. Lower current yield, stronger total return potential." },
-    { key: "balanced", label: "Balanced Growth & Income", desc: "A middle ground — moderate current yield with room for growth." },
-    { key: "dividend-heavy", label: "Dividend Heavy", desc: "Maximum current income. Higher yields can mean slower growth or concentrated sector exposure." }
-  ];
+  let sortCol = null;
+  let sortDir = 1;
 
-  grid.innerHTML = categories.map(cat => {
-    const etfs = incomeEtfs.filter(e => e.category === cat.key);
-    return `
-      <div class="income-category">
-        <div class="income-category-header">
-          <h3>${cat.label}</h3>
-          <p>${cat.desc}</p>
-        </div>
-        <div class="etf-cards">
-          ${etfs.map(etf => {
-            const displayTicker = etf.ticker.replace('.TO', '');
-            return `
-              <article class="etf-card income">
-                <div class="etf-card-head">
-                  <span class="ticker">${displayTicker}</span>
-                </div>
-                <h3>${etf.name}</h3>
-                <div class="etf-card-metrics">
-                  <span class="etf-metric">Yield <strong>${etf.yieldPct}</strong></span>
-                  <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
-                  <span class="etf-metric">5Y <strong>${etf.return5y}</strong></span>
-                </div>
-                <p class="etf-lean">${etf.lean}</p>
-              </article>
-            `;
-          }).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
+  function render(data) {
+    grid.innerHTML = data.map(etf => {
+      const roiTotal = etf.return5y + etf.trailingYield - etf.mer;
+      const pct = (v) => `${v.toFixed(1)}%`;
+      return `
+        <tr>
+          <td class="div-ticker"><span class="ticker-pill">${etf.ticker}</span></td>
+          <td class="div-name">${etf.name}</td>
+          <td class="div-num">${pct(etf.trailingYield)}</td>
+          <td class="div-num">${pct(etf.projYield)}</td>
+          <td class="div-num">${pct(etf.return5y)}</td>
+          <td class="div-num div-mer">${etf.mer.toFixed(2)}%</td>
+          <td class="div-num div-roi" data-value="${roiTotal.toFixed(2)}"><strong>${roiTotal.toFixed(1)}%</strong></td>
+          <td class="div-num">${pct(etf.top10Pct)}</td>
+          <td class="div-num">${etf.numStocks}</td>
+          <td class="div-num">${pct(etf.canada)}</td>
+          <td class="div-num">${pct(etf.usa)}</td>
+          <td class="div-num">${pct(etf.intl)}</td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function sort(key) {
+    if (sortCol === key) { sortDir *= -1; } else { sortCol = key; sortDir = 1; }
+    const sorted = [...dividendEtfs].sort((a, b) => {
+      let va, vb;
+      if (key === 'name' || key === 'ticker') {
+        va = a[key]; vb = b[key];
+        return sortDir * va.localeCompare(vb);
+      }
+      if (key === 'roi') { va = a.return5y + a.trailingYield - a.mer; vb = b.return5y + b.trailingYield - b.mer; }
+      else { va = a[key]; vb = b[key]; }
+      return sortDir * (va - vb);
+    });
+    document.querySelectorAll('#dividendTable thead th').forEach(th => th.classList.remove('sorted-asc', 'sorted-desc'));
+    const th = document.querySelector(`#dividendTable thead th[data-sort="${key}"]`);
+    if (th) th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+    render(sorted);
+  }
+
+  const thead = document.getElementById("dividendTable").querySelector("thead");
+  if (thead) {
+    thead.querySelectorAll("th[data-sort]").forEach(th => {
+      th.addEventListener("click", () => sort(th.dataset.sort));
+    });
+  }
+
+  render(dividendEtfs);
 }
 
 const frequencies = [
@@ -843,7 +857,7 @@ function init() {
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
     renderTickers();
     renderLevGrid();
-    renderIncomeEtfs();
+    renderDividendTable();
     updateChart();
   calculateTfsaRoom();
   renderCrossoverCalc();
