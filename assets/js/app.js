@@ -868,7 +868,62 @@ function renderCrossoverCalc() {
   const grid = document.getElementById("crossoverGrid");
   if (!grid) return;
 
-  // Read current values from the dynamically-created elements
+  const growthOpts = [5, 6, 7, 8, 9, 10].map(v =>
+    `<option value="${v}">${v}%</option>`
+  ).join("");
+
+  grid.innerHTML = `
+    <article class="crossover-card" id="crossCard1">
+      <div class="crossover-num">1</div>
+      <div>
+        <h3>Growth overtakes your contributions</h3>
+        <span id="crossYr1" class="crossover-yr" style="display:none"></span>
+        <label class="cross-input-label">Growth assumption
+          <select id="crossGrowth" class="cross-input" style="max-width:120px">
+            <option value="">—</option>
+            ${growthOpts}
+          </select>
+        </label>
+        <p>Your monthly investment growth exceeds what you put in each month. Every dollar of growth is a dollar you did not have to earn and save yourself — your money is now doing the work.</p>
+      </div>
+    </article>
+    <article class="crossover-card" id="crossCard2">
+      <div class="crossover-num">2</div>
+      <div>
+        <h3>Growth overtakes your employment income</h3>
+        <span id="crossYr2" class="crossover-yr" style="display:none"></span>
+        <span id="crossErr2" class="crossover-yr error-label" style="display:none"></span>
+        <label class="cross-input-label">Weekly contribution
+          <input type="number" id="crossWeekly" class="cross-input" placeholder="e.g. 100" min="0" step="10" style="max-width:140px" />
+        </label>
+        <label class="cross-input-label">Annual employment income
+          <input type="number" id="crossIncome" class="cross-input" placeholder="e.g. 60000" min="0" step="1000" />
+        </label>
+        <p>Your annual investment growth exceeds your yearly paycheque. At this point your portfolio earns more than your job — a true second income stream working alongside you.</p>
+      </div>
+    </article>
+    <article class="crossover-card" id="crossCard3">
+      <div class="crossover-num">3</div>
+      <div>
+        <h3>Investment income covers your living expenses</h3>
+        <span id="crossYr3" class="crossover-yr" style="display:none"></span>
+        <span id="crossErr3" class="crossover-yr error-label" style="display:none"></span>
+        <label class="cross-input-label">Monthly living expenses
+          <input type="number" id="crossExpenses" class="cross-input" placeholder="e.g. 3500" min="0" step="100" />
+        </label>
+        <p>Your monthly investment income exceeds your monthly costs — even after stress-testing with a 30% market drop. This is the crossover where work becomes optional. Your portfolio can support your life through good markets and bad.</p>
+      </div>
+    </article>
+  `;
+
+  // Attach listeners once — they only update results, never destroy inputs
+  ["crossGrowth", "crossWeekly", "crossIncome", "crossExpenses"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", updateCrossoverResults);
+  });
+}
+
+function updateCrossoverResults() {
   const r = parseFloat((document.getElementById("crossGrowth") || {}).value) || 0;
   const weekly = parseFloat((document.getElementById("crossWeekly") || {}).value) || 0;
   const employmentIncome = parseFloat((document.getElementById("crossIncome") || {}).value) || 0;
@@ -897,9 +952,8 @@ function renderCrossoverCalc() {
     return y.toFixed(1) + " yr";
   }
 
-  // Error label for a phase: returns "" if ok, or an error message
   function phaseError(phase) {
-    if (phase === 1) return ""; // self-contained — growth rate is in card 1
+    if (phase === 1) return "";
     if (phase === 2) {
       if (hasIncome && !hasGrowth) return "enter growth rate in phase 1";
       if (hasIncome && hasGrowth && !hasWeekly) return "enter weekly contribution above";
@@ -914,88 +968,41 @@ function renderCrossoverCalc() {
     return "";
   }
 
-  function renderCard(num, title, years, showYears, extraHtml, description) {
-    const err = phaseError(num);
-    const yr = showYears && err === "" && years !== null ? fmtYears(years) : "";
-    const yrBadge = yr ? `<span class="crossover-yr">${yr}</span>` : "";
-    const errBadge = err ? `<span class="crossover-yr error-label">${err}</span>` : "";
-    const badge = yrBadge || errBadge;
-    const classes = err ? " crossover-error" : "";
+  // Card 1
+  const yr1 = hasGrowth && i > 0 ? Math.log(2) / Math.log(1 + i) / 12 : null;
+  updateBadge("crossYr1", null, yr1, hasGrowth);
 
-    return {
-      html: `
-        <div class="crossover-num">${num}</div>
-        <div>
-          <h3>${title}</h3>
-          ${badge}
-          ${extraHtml}
-          <p>${description}</p>
-        </div>`,
-      className: "crossover-card" + classes
-    };
-  }
+  // Card 2
+  const yr2 = yearsToTarget(employmentIncome / (r / 100));
+  updateBadge("crossYr2", "crossErr2", yr2, hasBase && hasIncome ? phaseError(2) : null, hasBase && hasIncome);
 
-  const growthOpts = [5, 6, 7, 8, 9, 10].map(v =>
-    `<option value="${v}"${r === v ? " selected" : ""}>${v}%</option>`
-  ).join("");
-
-  const cards = grid.querySelectorAll(".crossover-card");
-  if (cards.length !== 3) return;
-
-  const props = [
-    renderCard(1, "Growth overtakes your contributions",
-      hasGrowth ? (i > 0 ? Math.log(2) / Math.log(1 + i) / 12 : null) : null, hasGrowth,
-      `<label class="cross-input-label">Growth assumption
-        <select id="crossGrowth" class="cross-input" style="max-width:120px">
-          <option value="">—</option>
-          ${growthOpts}
-        </select>
-      </label>`,
-      "Your monthly investment growth exceeds what you put in each month. Every dollar of growth is a dollar you did not have to earn and save yourself — your money is now doing the work."),
-
-    renderCard(2, "Growth overtakes your employment income",
-      yearsToTarget(employmentIncome / (r / 100)), hasBase && hasIncome,
-      `<label class="cross-input-label">Weekly contribution
-        <input type="number" id="crossWeekly" class="cross-input" placeholder="e.g. 100" min="0" step="10" value="${weekly || ''}" style="max-width:140px" />
-      </label>
-      <label class="cross-input-label">Annual employment income
-        <input type="number" id="crossIncome" class="cross-input" placeholder="e.g. 60000" min="0" step="1000" value="${employmentIncome || ''}" />
-      </label>`,
-      "Your annual investment growth exceeds your yearly paycheque. At this point your portfolio earns more than your job — a true second income stream working alongside you."),
-
-    renderCard(3, "Investment income covers your living expenses",
-      yearsToTarget(monthlyExpenses * 300), hasBase && hasExpenses,
-      `<label class="cross-input-label">Monthly living expenses
-        <input type="number" id="crossExpenses" class="cross-input" placeholder="e.g. 3500" min="0" step="100" value="${monthlyExpenses || ''}" />
-      </label>`,
-      "Your monthly investment income exceeds your monthly costs — even after stress-testing with a 30% market drop. This is the crossover where work becomes optional. Your portfolio can support your life through good markets and bad.")
-  ];
-
-  props.forEach((p, i) => {
-    cards[i].className = p.className;
-    cards[i].innerHTML = p.html;
-  });
-
-  // Re-attach listeners
-  ["crossGrowth", "crossWeekly", "crossIncome", "crossExpenses"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => preserveFocus(renderCrossoverCalc));
-  });
+  // Card 3
+  const yr3 = yearsToTarget(monthlyExpenses * 300);
+  updateBadge("crossYr3", "crossErr3", yr3, hasBase && hasExpenses ? phaseError(3) : null, hasBase && hasExpenses);
 }
 
-// Save and restore input focus across re-renders
-function preserveFocus(fn) {
-  const active = document.activeElement;
-  const id = active && active.id ? active.id : null;
-  const isSelect = active && active.tagName === "SELECT";
-  const pos = (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) ? active.selectionStart : null;
-  fn();
-  if (id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.focus();
-      if (pos !== null && !isSelect) { el.selectionStart = el.selectionEnd = pos; }
-    }
+function updateBadge(yrId, errId, years, hasErr, show) {
+  const yrEl = document.getElementById(yrId);
+  const errEl = errId ? document.getElementById(errId) : null;
+  if (!yrEl) return;
+  const err = typeof hasErr === "string" ? hasErr : "";
+
+  if (err) {
+    yrEl.style.display = "none";
+    if (errEl) { errEl.textContent = err; errEl.style.display = ""; }
+    const card = yrEl.closest(".crossover-card");
+    if (card) card.classList.add("crossover-error");
+  } else if (show && years !== null) {
+    const y = years < 0.1 ? "< 0.1 yr" : years >= 99 ? "99+ yr" : years.toFixed(1) + " yr";
+    yrEl.textContent = y; yrEl.style.display = "";
+    if (errEl) errEl.style.display = "none";
+    const card = yrEl.closest(".crossover-card");
+    if (card) card.classList.remove("crossover-error");
+  } else {
+    yrEl.style.display = "none";
+    if (errEl) errEl.style.display = "none";
+    const card = yrEl.closest(".crossover-card");
+    if (card) card.classList.remove("crossover-error");
   }
 }
 
@@ -1003,24 +1010,8 @@ function renderTargetCalc() {
   const container = document.getElementById("targetCalcContent");
   if (!container) return;
 
-  const tR = parseFloat((document.getElementById("targetGrowth") || {}).value) || 0;
-  const tWeekly = parseFloat((document.getElementById("targetWeekly") || {}).value) || 0;
-  const tTarget = parseFloat((document.getElementById("targetAmount") || {}).value) || 0;
-
-  const tM = tWeekly * 52 / 12;
-  const ti = tR > 0 ? Math.pow(1 + tR / 100, 1 / 12) - 1 : 0;
-  const canCalc = tR > 0 && tWeekly > 0 && tTarget > 0;
-
-  let years = null;
-  if (canCalc && ti > 0) {
-    const ratio = 1 + tTarget * ti / tM;
-    if (ratio > 1) years = Math.log(ratio) / Math.log(1 + ti) / 12;
-  }
-
-  const yrText = years !== null ? (years < 0.1 ? "< 0.1 yr" : years >= 99 ? "99+ yr" : years.toFixed(1) + " yr") : "";
-
   const growthOpts = [5, 6, 7, 8, 9, 10].map(v =>
-    `<option value="${v}"${tR === v ? " selected" : ""}>${v}%</option>`
+    `<option value="${v}">${v}%</option>`
   ).join("");
 
   container.innerHTML = `
@@ -1032,19 +1023,45 @@ function renderTargetCalc() {
         </select>
       </label>
       <label class="cross-input-label" style="margin-bottom:0;">Weekly
-        <input type="number" id="targetWeekly" class="cross-input" placeholder="100" min="0" step="10" value="${tWeekly || ''}" style="max-width:110px" />
+        <input type="number" id="targetWeekly" class="cross-input" placeholder="100" min="0" step="10" style="max-width:110px" />
       </label>
       <label class="cross-input-label" style="margin-bottom:0;">Target
-        <input type="number" id="targetAmount" class="cross-input" placeholder="e.g. 100000" min="0" step="1000" value="${tTarget || ''}" style="max-width:130px" />
+        <input type="number" id="targetAmount" class="cross-input" placeholder="e.g. 100000" min="0" step="1000" style="max-width:130px" />
       </label>
     </div>
-    ${yrText ? `<span class="crossover-yr">${yrText}</span>` : ""}
+    <span id="targetCalcResult" class="crossover-yr" style="display:none"></span>
   `;
 
   ["targetGrowth", "targetWeekly", "targetAmount"].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => preserveFocus(renderTargetCalc));
+    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", updateTargetResult);
   });
+}
+
+function updateTargetResult() {
+  const tR = parseFloat((document.getElementById("targetGrowth") || {}).value) || 0;
+  const tWeekly = parseFloat((document.getElementById("targetWeekly") || {}).value) || 0;
+  const tTarget = parseFloat((document.getElementById("targetAmount") || {}).value) || 0;
+  const resultEl = document.getElementById("targetCalcResult");
+  if (!resultEl) return;
+
+  const tM = tWeekly * 52 / 12;
+  const ti = tR > 0 ? Math.pow(1 + tR / 100, 1 / 12) - 1 : 0;
+  const canCalc = tR > 0 && tWeekly > 0 && tTarget > 0;
+
+  let years = null;
+  if (canCalc && ti > 0) {
+    const ratio = 1 + tTarget * ti / tM;
+    if (ratio > 1) years = Math.log(ratio) / Math.log(1 + ti) / 12;
+  }
+
+  if (years !== null) {
+    const yrText = years < 0.1 ? "< 0.1 yr" : years >= 99 ? "99+ yr" : years.toFixed(1) + " yr";
+    resultEl.textContent = yrText;
+    resultEl.style.display = "";
+  } else {
+    resultEl.style.display = "none";
+  }
 }
 
 document.addEventListener("DOMContentLoaded", init)
