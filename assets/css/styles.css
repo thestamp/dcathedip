@@ -787,7 +787,7 @@ h3 { font-size: 1.35rem; }
 .dividend-table .div-roi { color: var(--green); }
 .section-footnote-text {
   margin-top: 10px;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--muted);
   line-height: 1.5;
 }
