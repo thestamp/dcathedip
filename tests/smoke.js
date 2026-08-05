@@ -187,7 +187,7 @@ function createServer() {
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
-    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /From debt to deposits/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You are not guessing the market/i.test(bodyText);
+    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /DCA — dollar-cost averaging/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You never have to guess the right moment/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
     const journeyStructure = /The Plan/i.test(navText) && /Tackle high-interest credit card debt/i.test(navText) && /Invest a sustainable amount/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
