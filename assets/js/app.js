@@ -965,8 +965,24 @@ function renderCrossoverCalc() {
   // Re-attach listeners
   ["crossGrowth", "crossWeekly", "crossIncome", "crossExpenses"].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", renderCrossoverCalc);
+    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => preserveFocus(renderCrossoverCalc));
   });
+}
+
+// Save and restore input focus across re-renders
+function preserveFocus(fn) {
+  const active = document.activeElement;
+  const id = active && active.id ? active.id : null;
+  const isSelect = active && active.tagName === "SELECT";
+  const pos = (active && (active.tagName === "INPUT" || active.tagName === "TEXTAREA")) ? active.selectionStart : null;
+  fn();
+  if (id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.focus();
+      if (pos !== null && !isSelect) { el.selectionStart = el.selectionEnd = pos; }
+    }
+  }
 }
 
 function renderTargetCalc() {
@@ -1013,7 +1029,7 @@ function renderTargetCalc() {
 
   ["targetGrowth", "targetWeekly", "targetAmount"].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", renderTargetCalc);
+    if (el) el.addEventListener(el.tagName === "SELECT" ? "change" : "input", () => preserveFocus(renderTargetCalc));
   });
 }
 
