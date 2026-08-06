@@ -228,12 +228,13 @@ function createServer() {
     const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText)
           && /Understanding your returns/i.test(bodyText) && /Interest, asset growth, and dividends/i.test(bodyText)
           && /Cut out the middleman/i.test(bodyText);
-    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Start with an FHSA and a TFSA/i.test(bodyText);
-    const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText);
-    const sustainableSection = /Step 6/i.test(bodyText) && /Invest a sustainable amount/i.test(bodyText)
-          && /Pensions, RRSPs & LIFs/i.test(bodyText) && /Defined benefit/i.test(bodyText)
-          && /Defined contribution/i.test(bodyText) && /Choosing the right funds/i.test(bodyText)
+    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Start with an FHSA and a TFSA/i.test(bodyText)
+          && /Understanding your workplace pension/i.test(bodyText) && /Defined benefit/i.test(bodyText)
+          && /Defined contribution/i.test(bodyText) && /LIF/i.test(bodyText);
+    const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText)
+          && /Choosing pension funds/i.test(bodyText) && /Effective fund management/i.test(bodyText)
           && /path.*target-date funds/i.test(bodyText) && /Desjardins/i.test(bodyText);
+    const sustainableSection = /Step 6/i.test(bodyText) && /Invest a sustainable amount/i.test(bodyText);
     const resetNeutral = await page.evaluate(() => {
       document.getElementById('dipStart').value = 40;
       document.getElementById('dipHeight').value = -20;
