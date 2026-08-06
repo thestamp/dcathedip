@@ -285,39 +285,7 @@ description: "A complete plan for Canadian ETF investors: tackle high-interest d
           </article>
         </div>
 
-        <div id="incomeEtfSection" style="margin-top:40px">
-          <div class="section-heading center">
-            <p class="eyebrow">Income ETF comparison</p>
-            <h2>Canadian dividend ETFs at a glance.</h2>
-            <p>Compare trailing yield, growth, MER, and diversification across popular Canadian dividend ETFs. <span style="display:inline-block;margin-left:8px;background:rgba(255,209,102,0.15);color:var(--gold);padding:2px 10px;border-radius:999px;font-size:0.72rem;font-weight:900;">Work in progress</span></p>
-          </div>
-
-          <div class="dividend-table-wrap">
-            <table id="dividendTable" class="dividend-table">
-              <thead>
-                <tr>
-                  <th>Ticker</th>
-                  <th data-sort="name">Name</th>
-                  <th data-sort="trailingYield" class="sortable">Trailing yield <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="projYield" class="sortable">Proj. yield <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="return5y" class="sortable">5Y growth <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="mer" class="sortable">MER <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="roi" class="sortable">Total ROI <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="top10Pct" class="sortable">Top 10% <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="numStocks" class="sortable"># Stocks <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="canada" class="sortable">% Can <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="usa" class="sortable">% USA <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="intl" class="sortable">% Int'l <span class="sort-icon">▲▼</span></th>
-                </tr>
-              </thead>
-              <tbody id="dividendTableBody"></tbody>
-            </table>
-            <p class="section-footnote-text">Total ROI = 5-year annualized return + trailing 12-month yield − MER. Projected yield uses the most recent distribution annualized. Data sourced from fund provider websites as of Jul–Aug 2026.</p>
-          </div>
-
         </div>
-
-    </div>
   </section>
 
   <!-- STEP 4: Create the right account -->
@@ -631,6 +599,38 @@ description: "A complete plan for Canadian ETF investors: tackle high-interest d
           </div>
         </details>
       </div>
+
+      <!-- Income/Dividend ETF comparison -->
+      <div id="incomeEtfSection" style="margin-top:60px">
+          <div class="section-heading center">
+            <p class="eyebrow">Income ETF comparison</p>
+            <h2>Dividend ETFs for consistent income.</h2>
+            <p>Dividend ETFs can make sense when your primary goal is reliable cash flow — for example, if you are investing through a dedicated low-interest investment loan (like a HELOC used strictly for investing) where the dividends help cover the loan interest. <strong>Loan interest on a dedicated investment account may be tax-deductible as a cost of investing</strong> — ask your accountant whether the <a href="https://www.wealthsimple.com/en-ca/learn/smith-maneuver-canada" target="_blank" rel="nofollow noopener" style="color:var(--green);">Smith Maneuver ↗</a> fits your situation. Dividend ETFs also suit investors who prioritize steady income over maximum growth. <span style="display:inline-block;margin-left:8px;background:rgba(255,209,102,0.15);color:var(--gold);padding:2px 10px;border-radius:999px;font-size:0.72rem;font-weight:900;">Work in progress</span></p>
+          </div>
+
+          <div class="dividend-table-wrap">
+            <table id="dividendTable" class="dividend-table">
+              <thead>
+                <tr>
+                  <th>Ticker</th>
+                  <th data-sort="name">Name</th>
+                  <th data-sort="trailingYield" class="sortable">Trailing yield <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="projYield" class="sortable">Proj. yield <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="return5y" class="sortable">5Y growth <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="mer" class="sortable">MER <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="roi" class="sortable">Total ROI <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="top10Pct" class="sortable">Top 10% <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="numStocks" class="sortable"># Stocks <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="canada" class="sortable">% Can <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="usa" class="sortable">% USA <span class="sort-icon">▲▼</span></th>
+                  <th data-sort="intl" class="sortable">% Int'l <span class="sort-icon">▲▼</span></th>
+                </tr>
+              </thead>
+              <tbody id="dividendTableBody"></tbody>
+            </table>
+            <p class="section-footnote-text">Total ROI = 5-year annualized return + trailing 12-month yield − MER. Projected yield uses the most recent distribution annualized. Data sourced from fund provider websites as of Jul–Aug 2026.</p>
+          </div>
+        </div>
 
       </div>
   </section>
