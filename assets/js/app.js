@@ -970,7 +970,7 @@ function updateCrossoverResults() {
 
   // Card 1
   const yr1 = hasGrowth && i > 0 ? Math.log(2) / Math.log(1 + i) / 12 : null;
-  updateBadge("crossYr1", null, yr1, hasGrowth);
+  updateBadge("crossYr1", null, yr1, false, hasGrowth);
 
   // Card 2
   const yr2 = yearsToTarget(employmentIncome / (r / 100));
