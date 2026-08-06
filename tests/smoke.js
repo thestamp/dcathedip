@@ -206,7 +206,9 @@ function createServer() {
           && /3 crossovers to financial freedom/i.test(bodyText)
           && /Growth overtakes your contributions/i.test(bodyText)
           && /Growth overtakes your employment income/i.test(bodyText)
-          && /Investment income covers your living expenses/i.test(bodyText);
+          && /Investment income covers your living expenses/i.test(bodyText)
+          && /Try these examples/i.test(bodyText)
+          && /8% growth/i.test(bodyText) && /10% growth/i.test(bodyText);
     const incomeEtfSection = /Income ETF comparison/i.test(bodyText)
                   && /Dividend ETFs for consistent income/i.test(bodyText)
                   && /Trailing yield/i.test(bodyText) && /Proj. yield/i.test(bodyText)
