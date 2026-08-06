@@ -250,7 +250,7 @@ function createServer() {
     const broadEtfSection = /Broad ETFs make diversification simple/i.test(bodyText)
       && /Diversified building blocks/i.test(bodyText)
       && /Balanced ETFs/i.test(bodyText)
-      && /Individual stocks \/ sector ETFs/i.test(bodyText);
+      && /Broad-market ETFs/i.test(bodyText);
     const wealthsimpleGuide = /Set up recurring ETF investing with Wealthsimple/i.test(bodyText)
       && /Create your Wealthsimple profile/i.test(bodyText)
       && /Choose where cash will come from/i.test(bodyText)
