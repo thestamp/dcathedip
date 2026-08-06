@@ -223,7 +223,9 @@ function createServer() {
     // Also check the new step content exists
     const debtSection = /Step 1/i.test(bodyText) && /Tackle high-interest credit card debt first/i.test(bodyText) && /Consolidate what you can/i.test(bodyText) && /Clear the easiest one first/i.test(bodyText) && /Then attack by interest rate/i.test(bodyText);
     const emergencySection = /Step 2/i.test(bodyText) && /Build a rainy day fund/i.test(bodyText) && /Start with one month of expenses/i.test(bodyText) && /Build toward 3–6 months/i.test(bodyText);
-    const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText);
+    const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText)
+          && /Understanding your returns/i.test(bodyText) && /Interest, asset growth, and dividends/i.test(bodyText)
+          && /Cut out the middleman/i.test(bodyText);
     const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Start with an FHSA and a TFSA/i.test(bodyText);
     const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText);
     const sustainableSection = /Step 6/i.test(bodyText) && /Invest a sustainable amount/i.test(bodyText);

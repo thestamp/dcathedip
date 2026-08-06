@@ -868,7 +868,7 @@ function renderCrossoverCalc() {
   const grid = document.getElementById("crossoverGrid");
   if (!grid) return;
 
-  const growthOpts = [5, 6, 7, 8, 9, 10].map(v =>
+  const growthOpts = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(v =>
     `<option value="${v}">${v}%</option>`
   ).join("");
 
@@ -1010,7 +1010,7 @@ function renderTargetCalc() {
   const container = document.getElementById("targetCalcContent");
   if (!container) return;
 
-  const growthOpts = [5, 6, 7, 8, 9, 10].map(v =>
+  const growthOpts = [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(v =>
     `<option value="${v}">${v}%</option>`
   ).join("");
 
