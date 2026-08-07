@@ -248,6 +248,33 @@ function computeBestStandard() {
 }
 const bestStandardTicker = computeBestStandard();
 
+function renderLevGrid() {
+  const grid = document.getElementById("levGrid");
+  if (!grid) return;
+  const leveraged = [
+    ...etfsFlat.filter(e => e.type === 'leveraged'),
+    ...dividendEtfs.filter(e => e.ticker === 'HDIV' || e.ticker === 'HYLD').map(e => ({ ...e, type: 'leveraged' }))
+  ];
+  grid.innerHTML = `
+    <h3 style="margin:0 0 6px;">1.25× covered-call and equity ETFs</h3>
+    <p style="margin:0 0 18px; color:var(--muted);">These examples use approximately 1.25× leverage. HDIV and HYLD also use covered-call strategies and are designed for monthly income. Leverage can increase losses, and covered calls can limit some upside.</p>
+    <div class="etf-cards">
+      ${leveraged.map(etf => `
+        <article class="etf-card high-lev">
+          <div class="etf-card-head"><span class="ticker">${etf.ticker.replace('.TO', '')}</span><span class="etf-lev-tag">1.25×</span></div>
+          <h3>${etf.name}</h3>
+          <div class="etf-card-metrics">
+            <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
+            <span class="etf-metric">5Y/3Y <strong>${etf.return5y}%</strong></span>
+            <span class="etf-metric">Yield <strong>${etf.projYield}%</strong></span>
+          </div>
+          <p class="etf-lean">${etf.lean || (etf.ticker === 'HDIV' || etf.ticker === 'HYLD' ? 'Covered-call strategy with approximately 1.25× leverage. Review the fund facts and prospectus.' : 'Leverage increases risk. Review the fund facts and prospectus.')}</p>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
 // Color scales: bottom 30% = bright red, middle 40% = yellow, top 30% = bright green
 function tierColor(val, vals, invert) {
   if (vals.length < 2) return 'var(--green)';
@@ -849,7 +876,7 @@ function init() {
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
     renderTickers();
-
+    renderLevGrid();
     renderDividendTable();
     updateChart();
   calculateTfsaRoom();

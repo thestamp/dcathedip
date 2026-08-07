@@ -183,7 +183,11 @@ function createServer() {
         && /MER/i.test(text) && /5Y/i.test(text)
         && /leans more Canada/i.test(text);
     });
-    const leveragedSection = await page.locator('#step-5-investment .advanced-leverage-section').count().then(count => count === 0);
+    const leveragedSection = await page.locator('#step-5-investment .advanced-leverage-section').count().then(count => count === 1)
+      && /1\.25× covered-call and equity ETFs/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent())
+      && /\bHDIV\b/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent())
+      && /\bHYLD\b/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent())
+      && !/Higher-leverage 2× funds|\bHSU\b|\bHQU\b|\bHXU\b/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent());
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
@@ -317,7 +321,7 @@ function createServer() {
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
     if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
     if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and factor ETF examples for U.S., Canada, and World.');
-    if (!leveragedSection) throw new Error('Expected advanced leveraged ETF strategies to be removed from the beginner guide.');
+    if (!leveragedSection) throw new Error('Expected a 1.25× leveraged ETF section without 2× funds.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
     if (!layoutChecks.sustainableVisible) throw new Error('Expected step 6 sustainable investing section to render.');
