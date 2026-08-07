@@ -191,6 +191,34 @@ const dividendEtfs = [
     usa: 0,
     intl: 0,
     source: "BlackRock Canada | Aug 4, 2026"
+  },
+  {
+    ticker: "HDIV",
+    name: "Hamilton Enhanced Canadian Covered Call (1.25× leveraged)",
+    mer: 0,
+    trailingYield: 9.99,
+    projYield: 9.99,
+    return5y: 18.40,
+    top10Pct: 20,
+    numStocks: 8,
+    canada: 100,
+    usa: 0,
+    intl: 0,
+    source: "Hamilton ETFs | Jul 31, 2026"
+  },
+  {
+    ticker: "HYLD",
+    name: "Hamilton Enhanced U.S. Covered Call (1.25× leveraged)",
+    mer: 0,
+    trailingYield: 12.82,
+    projYield: 12.82,
+    return5y: 20.50,
+    top10Pct: 20,
+    numStocks: 8,
+    canada: 0,
+    usa: 100,
+    intl: 0,
+    source: "Hamilton ETFs | 3-year annualized return, Jul 31, 2026"
   }
 ];
 

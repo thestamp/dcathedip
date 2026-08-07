@@ -214,6 +214,8 @@ function createServer() {
                   && /Trailing yield/i.test(bodyText) && /Proj. yield/i.test(bodyText)
                   && /Total ROI/i.test(bodyText)
                   && /\bVDY\b/i.test(bodyText) && /\bXDIV\b/i.test(bodyText) && /\bXEI\b/i.test(bodyText)
+                  && /\bHDIV\b/i.test(bodyText) && /\bHYLD\b/i.test(bodyText)
+                  && /1\.25× leveraged/i.test(bodyText) && /covered-call strategies/i.test(bodyText)
                   && /Vanguard FTSE Canadian High Dividend Yield/i.test(bodyText)
                   && /iShares Core MSCI Canadian Quality Dividend/i.test(bodyText)
                   && /iShares S&P\/TSX Composite High Dividend/i.test(bodyText);
