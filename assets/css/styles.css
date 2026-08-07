@@ -1,11 +1,11 @@
 :root {
-  --bg: #08111f;
-  --bg-2: #10192f;
+  --bg: #071b1b;
+  --bg-2: #0d2927;
   --panel: rgba(255, 255, 255, 0.08);
   --panel-2: rgba(255, 255, 255, 0.12);
   --text: #f4f7fb;
   --muted: #aebbd0;
-  --green: #53e6a0;
+  --green: #9ee493;
   --blue: #6aa8ff;
   --gold: #ffd166;
   --red: #ff6b6b;
@@ -26,9 +26,9 @@ body {
   margin: 0;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(83, 230, 160, 0.18), transparent 30rem),
-    radial-gradient(circle at 85% 10%, rgba(106, 168, 255, 0.18), transparent 28rem),
-    linear-gradient(180deg, var(--bg), #0d1324 44%, #070b13);
+    radial-gradient(circle at 10% 0%, rgba(158, 228, 147, 0.20), transparent 30rem),
+    radial-gradient(circle at 90% 14%, rgba(255, 209, 102, 0.13), transparent 24rem),
+    linear-gradient(180deg, var(--bg), #0b2525 44%, #061313);
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -86,7 +86,7 @@ p { color: var(--muted); line-height: 1.65; }
   border-radius: 999px !important; white-space: nowrap; min-height: 44px;
 }
 
-.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) 420px; gap: 48px; align-items: center; padding: 86px 0 56px; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.1fr) 420px; gap: 48px; align-items: center; padding: 100px 0 72px; }
 .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.95rem; font-weight: 900; margin: 0 0 12px; }
 h1, h2, h3 { margin: 0; letter-spacing: -0.055em; line-height: 1.02; }
 h1 { font-size: clamp(3.2rem, 8vw, 6.9rem); max-width: 780px; }
@@ -117,7 +117,7 @@ h3 { font-size: 1.35rem; }
   border-radius: 28px;
   box-shadow: var(--shadow);
 }
-.hero-card { position: relative; overflow: hidden; min-height: 430px; padding: 34px; display: flex; flex-direction: column; justify-content: flex-end; }
+.hero-card { position: relative; overflow: hidden; min-height: 430px; padding: 34px; display: flex; flex-direction: column; justify-content: flex-end; background: linear-gradient(145deg, rgba(158,228,147,.20), rgba(255,255,255,.055) 65%); }
 .card-glow { position: absolute; width: 280px; height: 280px; border-radius: 50%; background: radial-gradient(circle, rgba(83,230,160,0.45), transparent 65%); top: -80px; right: -80px; }
 .card-label { color: var(--gold); font-weight: 900; margin: 0 0 10px; }
 .hero-card h2 { font-size: 3rem; }
@@ -1229,6 +1229,24 @@ input, select { min-height: 44px; }
 .journey-card span { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 999px; background: linear-gradient(135deg, var(--green), var(--blue)); color: #07111f; font-weight: 900; margin-bottom: 14px; }
 .journey-card strong { display: block; font-size: 1.25rem; margin-bottom: 8px; }
 .journey-card p { margin: 0; color: var(--muted); }
+
+/* Calm editorial polish: more air, softer surfaces, and friendlier cards. */
+.foundation-section { background: rgba(158,228,147,0.045); }
+.foundation-item { background: rgba(255,255,255,0.045); border-color: rgba(158,228,147,0.20); }
+.foundation-item:hover { border-color: var(--green); transform: translateY(-2px); }
+.benefit-card, .ticker-card, .crossover-card { transition: transform .2s ease, border-color .2s ease, background .2s ease; }
+.benefit-card:hover, .ticker-card:hover, .crossover-card:hover { transform: translateY(-3px); border-color: rgba(158,228,147,.45); }
+.section-heading p { max-width: 700px; margin-left: auto; margin-right: auto; }
+.section-nav a:hover { color: var(--green) !important; border-bottom-color: var(--green) !important; }
+.button.primary { box-shadow: 0 12px 30px rgba(158,228,147,.18); }
+
+@media (max-width: 680px) {
+  .hero { padding-top: 56px; gap: 28px; }
+  .hero-card { min-height: 320px; padding: 24px; }
+  .hero-card h2 { font-size: 2.2rem; }
+  .trust-row { gap: 8px; }
+  .trust-row span { padding: 8px 10px; }
+}
 .section-footnote { margin-top: 22px; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; background: rgba(255,255,255,0.035); color: var(--muted); }
 .section-footnote summary { cursor: pointer; color: var(--text); font-weight: 800; }
 .section-footnote p { margin: 10px 0 0; }
