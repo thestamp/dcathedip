@@ -220,7 +220,7 @@
         </div>
 
         <p style="margin:0; font-size:0.95rem; line-height:1.6; padding:14px 18px; background:rgba(255,255,255,0.045); border-radius:12px;">
-          <strong>Cut out the middleman.</strong> When you buy a GIC or deposit into a savings account, the bank takes that money, invests it into assets, and gives you a portion of its profits as guaranteed interest. By investing in assets directly, you cut the bank out of the equation. <strong>You take all the profits — but you also take on the risk.</strong> With a balanced portfolio of stocks, cash, and bonds aligned to your financial targets, plus dollar-cost averaging, you can save and profit like a bank without worrying about day-to-day noise or market swings.
+          <strong>Cut out the middleman — understand the trade-off.</strong> When you buy a GIC or deposit into a savings account, the bank pays you interest under the product’s terms. Direct investing may offer higher potential returns, but you take on the full market risk and price swings. A balanced portfolio and dollar-cost averaging can make the process easier to follow, but they cannot remove losses or volatility.
         </p>
       </div>
 
@@ -317,15 +317,15 @@
           <p style="margin:0 0 14px; font-weight:900; font-size:0.95rem;">📋 Try these examples</p>
           <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;">
             <div style="padding:14px 16px; border-radius:14px; background:rgba(83,230,160,0.05);">
-              <p style="margin:0 0 6px; font-weight:900; font-size:0.9rem; color:var(--green);">8% growth · $125/week · $50K salary · $3,500/mo</p>
-              <p style="margin:0; font-size:0.85rem; color:var(--muted);">Phase 1: <strong style="color:#ddd;">9 years</strong> · Phase 2: <strong style="color:#ddd;">27 years</strong> · Phase 3: <strong style="color:#ddd;">34 years</strong></p>
+              <p style="margin:0 0 6px; font-weight:900; font-size:0.9rem; color:var(--green);">5% planning illustration · $125/week · $50K salary · $3,500/mo</p>
+              <p style="margin:0; font-size:0.85rem; color:var(--muted);">Use the calculator to explore the timing. A lower return assumption can materially lengthen the timeline.</p>
             </div>
             <div style="padding:14px 16px; border-radius:14px; background:rgba(106,168,255,0.05);">
-              <p style="margin:0 0 6px; font-weight:900; font-size:0.9rem; color:var(--blue);">10% growth · $125/week · $50K salary · $3,500/mo</p>
-              <p style="margin:0; font-size:0.85rem; color:var(--muted);">Phase 1: <strong style="color:#ddd;">7 years</strong> · Phase 2: <strong style="color:#ddd;">22 years</strong> · Phase 3: <strong style="color:#ddd;">29 years</strong></p>
+              <p style="margin:0 0 6px; font-weight:900; font-size:0.9rem; color:var(--blue);">7% planning illustration · $125/week · $50K salary · $3,500/mo</p>
+              <p style="margin:0; font-size:0.85rem; color:var(--muted);">Use the calculator to explore the timing. Returns are estimates, not promises.</p>
             </div>
           </div>
-          <p style="margin:12px 0 0; font-size:0.78rem; color:var(--muted);">10% is a modest long-term expectation for broad market ETFs — such as international funds, XEQT, US S&P 500 (ZSP), or Canadian equities (ZIU). 8% is a more conservative estimate. Your actual results will vary — these are illustrations, not predictions.</p>
+          <p style="margin:12px 0 0; font-size:0.78rem; color:var(--muted);">For planning examples, 5–7% annualized is a more cautious forward-looking range for a diversified equity portfolio before inflation. Returns are uncertain and can be negative. Your actual results will vary — these are illustrations, not predictions.</p>
         </div>
 
         </div>
@@ -590,81 +590,13 @@
         <p class="location-note" style="margin-top:20px"><a href="#step-4-account">← Back to step 4: Create the right account</a></p>
       </div>
 
-      <!-- Leveraged ETFs — ADVANCED: for risk-tolerant investors only -->
-      <div class="advanced-leverage-section" style="margin-top:60px; border:2px solid var(--gold); border-radius:24px; padding:28px; background:rgba(255,209,102,0.06);">
-        <div class="advanced-leverage-header" style="display:flex; align-items:flex-start; gap:16px; margin-bottom:24px;">
-          <span style="font-size:2.2rem; flex-shrink:0; line-height:1;">⚠️</span>
-          <div>
-            <p class="eyebrow" style="color:var(--gold); margin-bottom:4px;">Advanced — for risk-tolerant investors only</p>
-            <h2 style="font-size:1.6rem; margin:0 0 12px;">Leveraged ETFs make gains <em>and</em> losses bigger.</h2>
-            <p style="margin:0;">A 1.25× leveraged ETF falls ~1.25× as much on down days. Over time, daily reset (compounding drift) can cause returns to differ from the simple math. <strong>If you are new to investing, skip this section entirely.</strong> These are tools for investors who understand the mechanics and can handle bigger price swings.</p>
-            <p style="margin:12px 0 0; color:var(--muted); font-size:0.9rem;"><strong>💡 Consider your full portfolio:</strong> Many people overlook their workplace pension when thinking about risk. If your pension is invested in conservative, unleveraged funds, your overall portfolio may be underweight in growth. Adding a modest 1.25× leveraged position in your TFSA — where gains compound tax-free — can help balance your total exposure without taking on extreme risk. The key is sizing: a small allocation to 1.25× funds rounds out an otherwise conservative portfolio, rather than replacing it.</p>
-          </div>
-        </div>
-
-        <details style="margin:0; padding:0; border:none; background:transparent;">
-          <summary style="cursor:pointer; font-weight:900; font-size:1.1rem; padding:12px 16px; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,0.06); display:flex; align-items:center; gap:6px;">▶ Show leveraged ETF details</summary>
-          <div style="margin-top:24px;">
-
-            <!-- 1.25× ETF cards rendered by JS -->
-            <div id="levGrid"></div>
-
-            <!-- 2× leveraged ETF reference table -->
-            <div style="margin-top:40px; border:2px solid var(--red); border-radius:20px; padding:22px; background:rgba(255,107,107,0.04);">
-              <h3 style="margin:0 0 4px;">Higher-leverage 2× funds — reference only</h3>
-              <p style="margin:0 0 18px; color:var(--muted);">These target 200% of their index's daily return. Daily reset is magnified — losses can be severe in volatile or declining markets. <strong>Most investors should not use these</strong> without a deep understanding of daily compounding mechanics.</p>
-              <div class="lev-table-wrap" style="overflow-x:auto;">
-                <table class="lev-table" style="width:100%; border-collapse:collapse; font-size:0.9rem;">
-                  <thead>
-                    <tr style="border-bottom:1px solid var(--border);">
-                      <th style="text-align:left; padding:10px 14px;">Ticker</th>
-                      <th style="text-align:left; padding:10px 14px;">Name</th>
-                      <th style="text-align:left; padding:10px 14px;">Underlying</th>
-                      <th style="text-align:right; padding:10px 14px;">Leverage</th>
-                      <th style="text-align:right; padding:10px 14px;">MER</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-                      <td style="padding:12px 14px;"><span class="ticker" style="margin:0;">HSU</span></td>
-                      <td style="padding:12px 14px; color:var(--muted);">Horizons BetaPro S&P 500 2× Daily Bull</td>
-                      <td style="padding:12px 14px; color:var(--muted);">S&P 500</td>
-                      <td style="padding:12px 14px; text-align:right;"><span class="etf-lev-tag" style="background:var(--red);">2×</span></td>
-                      <td style="padding:12px 14px; text-align:right; color:var(--muted);">1.15%</td>
-                    </tr>
-                    <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-                      <td style="padding:12px 14px;"><span class="ticker" style="margin:0;">HQU</span></td>
-                      <td style="padding:12px 14px; color:var(--muted);">Horizons BetaPro NASDAQ-100 2× Daily Bull</td>
-                      <td style="padding:12px 14px; color:var(--muted);">NASDAQ-100</td>
-                      <td style="padding:12px 14px; text-align:right;"><span class="etf-lev-tag" style="background:var(--red);">2×</span></td>
-                      <td style="padding:12px 14px; text-align:right; color:var(--muted);">1.15%</td>
-                    </tr>
-                    <tr>
-                      <td style="padding:12px 14px;"><span class="ticker" style="margin:0;">HXU</span></td>
-                      <td style="padding:12px 14px; color:var(--muted);">Horizons BetaPro TSX 60 2× Daily Bull</td>
-                      <td style="padding:12px 14px; color:var(--muted);">S&P/TSX 60</td>
-                      <td style="padding:12px 14px; text-align:right;"><span class="etf-lev-tag" style="background:var(--red);">2×</span></td>
-                      <td style="padding:12px 14px; text-align:right; color:var(--muted);">1.15%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <p class="calculator-note" style="margin-top:24px; text-align:center;">
-              Source: <a href="https://www.globalx.ca/enhanced-growth-etfs" target="_blank" rel="nofollow noopener" style="color:var(--gold);">Global X Enhanced Growth ETFs ↗</a> for 1.25× products. Review the prospectus, MER, and daily reset mechanics before investing.
-            </p>
-            <details class="section-footnote"><summary>Footnotes</summary><p>Leveraged ETFs are not suitable for all investors. Returns can deviate significantly from the stated multiple over periods longer than one day due to compounding and volatility. These are examples for research, not recommendations. Higher-leverage 2× funds carry substantially more risk than 1.25× products.</p></details>
-          </div>
-        </details>
-      </div>
 
       <!-- Income/Dividend ETF comparison -->
       <div id="incomeEtfSection" style="margin-top:60px">
           <div class="section-heading center">
             <p class="eyebrow">Income ETF comparison</p>
             <h2>Dividend ETFs for consistent income.</h2>
-            <p>Dividend ETFs can make sense when your primary goal is reliable cash flow — for example, if you are investing through a dedicated low-interest investment loan (like a HELOC used strictly for investing) where the dividends help cover the loan interest. <strong>Loan interest on a dedicated investment account may be tax-deductible as a cost of investing</strong> — ask your accountant whether the <a href="https://www.wealthsimple.com/en-ca/learn/smith-manoeuvre" target="_blank" rel="nofollow noopener" style="color:var(--green);">Smith Maneuver ↗</a> fits your situation. Dividend ETFs also suit investors who prioritize steady income over maximum growth. <span style="display:inline-block;margin-left:8px;background:rgba(255,209,102,0.15);color:var(--gold);padding:2px 10px;border-radius:999px;font-size:0.72rem;font-weight:900;">Work in progress</span></p>
+            <p>Dividend ETFs can make sense when your primary goal is reliable cash flow. They may suit investors who prioritize steady income over maximum growth, but distributions can change and do not remove market risk. <span style="display:inline-block;margin-left:8px;background:rgba(255,209,102,0.15);color:var(--gold);padding:2px 10px;border-radius:999px;font-size:0.72rem;font-weight:900;">Work in progress</span></p>
           </div>
 
           <div class="dividend-table-wrap">
@@ -712,7 +644,7 @@
 
         <div style="margin-top:24px; padding:20px 24px; border:1px solid var(--border); border-radius:18px; background:rgba(255,255,255,0.025);">
           <h3 style="margin:0 0 10px; font-size:1.05rem;">⚠️ A word on "path" or target-date funds</h3>
-          <p style="margin:0; font-size:0.9rem; color:var(--muted);">Path funds automatically shift from stocks to bonds as you near retirement — convenient, but at a cost. Many charge higher fees and may not match your personal risk tolerance. Historically, path funds often <strong>underperform self-directed portfolios in good periods</strong> while delivering the same low performance in bad periods, making their net returns overly diminished over the long run.</p>
+          <p style="margin:0; font-size:0.9rem; color:var(--muted);">Path funds automatically shift from stocks to bonds as you near retirement — convenient, but at a cost. Many charge higher fees and may not match your personal risk tolerance. Their fixed-income allocation is designed to cushion losses during severe equity market declines, so they will usually fall less than an all-equity portfolio in a crash. The trade-off is lower growth potential during strong equity markets.</p>
         </div>
 
         <div style="margin-top:20px; padding:20px 24px; border:1px solid var(--border); border-radius:18px; background:rgba(255,255,255,0.025);">
@@ -722,11 +654,11 @@
 
         <div style="margin-top:20px; padding:20px 24px; border:1px solid var(--green); border-radius:18px; background:rgba(83,230,160,0.04);">
           <h3 style="margin:0 0 10px; font-size:1.05rem;">🪞 Self-managed alternative to path funds — half the cost, same outcome</h3>
-          <p style="margin:0 0 10px; font-size:0.9rem; color:var(--muted);">Path funds charge roughly double the fees of self-managed index funds. You can replicate the same automated rebalancing yourself using Desjardins' investment instructions:</p>
+          <p style="margin:0 0 10px; font-size:0.9rem; color:var(--muted);">A self-managed approach may offer lower fees, but it requires regular review and rebalancing. If you compare options, keep the full portfolio in mind: a globally diversified mix can include Canadian, U.S., international, and emerging-market equities together with fixed income. The right balance depends on your timeline and comfort with price swings.</p>
           <ul style="margin:6px 0 12px; padding-left:22px; font-size:0.88rem; color:var(--muted); line-height:1.7;">
-            <li><strong>Early career (15+ years from retirement):</strong> Set to 50% TSX (Canadian index) and 50% S&P 500 (US index). Keep it simple — two funds, full growth.</li>
-            <li><strong>Within 15 years of retirement:</strong> Shift to 40% US index, 40% Canadian index, 20% GICs. This dials back risk while keeping most of your money working in the market.</li>
-            <li><strong>Retired:</strong> Move to 30% US / 30% Canada / 30% GICs / 10% cash each time you adjust. Adjust the allocation every few years — the market does the rest.</li>
+            <li><strong>Early career:</strong> With many years before withdrawals, investors often hold a larger share of equities, while keeping the portfolio broad across regions.</li>
+            <li><strong>Approaching retirement:</strong> Gradually consider more fixed income and cash for money needed soon. This can reduce the effect of a large market decline near a withdrawal date.</li>
+            <li><strong>Retired:</strong> Keep the portion needed soon more stable, while money for later years may remain invested. Review the mix periodically rather than reacting to headlines.</li>
           </ul>
           <p style="margin:0; font-size:0.85rem; color:var(--muted);">Desjardins <strong>automatically rebalances</strong> your percentages, so there is no micromanagement on your end. Set the allocation once and the plan maintains it.</p>
         </div>

@@ -183,7 +183,7 @@ function createServer() {
         && /MER/i.test(text) && /5Y/i.test(text)
         && /leans more Canada/i.test(text);
     });
-    const leveragedSection = await page.locator('#step-5-investment .advanced-leverage-section').count().then(count => count === 1);
+    const leveragedSection = await page.locator('#step-5-investment .advanced-leverage-section').count().then(count => count === 0);
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
@@ -208,7 +208,7 @@ function createServer() {
           && /Growth overtakes your employment income/i.test(bodyText)
           && /Investment income covers your living expenses/i.test(bodyText)
           && /Try these examples/i.test(bodyText)
-          && /8% growth/i.test(bodyText) && /10% growth/i.test(bodyText);
+          && /5% planning illustration/i.test(bodyText) && /7% planning illustration/i.test(bodyText);
     const incomeEtfSection = /Income ETF comparison/i.test(bodyText)
                   && /Dividend ETFs for consistent income/i.test(bodyText)
                   && /Trailing yield/i.test(bodyText) && /Proj. yield/i.test(bodyText)
@@ -315,7 +315,7 @@ function createServer() {
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
     if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
     if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and factor ETF examples for U.S., Canada, and World.');
-    if (!leveragedSection) throw new Error('Expected 1.25× advanced leveraged ETF section (collapsible).');
+    if (!leveragedSection) throw new Error('Expected advanced leveraged ETF strategies to be removed from the beginner guide.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
     if (!layoutChecks.sustainableVisible) throw new Error('Expected step 6 sustainable investing section to render.');

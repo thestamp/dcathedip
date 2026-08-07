@@ -389,41 +389,6 @@ function renderTickers() {
   });
 }
 
-function renderLevGrid() {
-  const grid = document.getElementById("levGrid");
-  if (!grid) return;
-
-  const leveraged = etfsFlat.filter(e => e.type === 'leveraged');
-  const bestLev = leveraged.find(e => e.market === 'World');
-
-  grid.innerHTML = `
-    <h3 style="margin:0 0 4px;">1.25× moderate leverage ETFs</h3>
-    <p style="margin:0 0 18px; color:var(--muted);">These target 125% of their index's daily return. Unlike 2×/3× products, <strong>no margin account or collateral</strong> is needed — you buy shares like any other ETF and your maximum loss is what you invested. Still, losses are amplified on down days and daily reset effects can cause drift from the simple multiple over time.</p>
-    <div class="etf-cards">
-      ${leveraged.map(etf => {
-        const isBest = etf === bestLev;
-        const displayTicker = etf.ticker.replace('.TO', '');
-        const score = totalScore(etf);
-        return `
-          <article class="etf-card high-lev${isBest ? ' etf-best-lev' : ''}">
-            <div class="etf-card-head">
-              <span class="ticker">${displayTicker}</span>
-              <span class="etf-lev-tag">1.25×</span>
-              ${isBest ? '<span class="etf-best-star etf-best-lev-star" title="Recommended: 1.25× global all-equity with moderate leverage">★</span>' : ''}
-            </div>
-            <h3>${etf.name}</h3>
-            <div class="etf-card-metrics">
-              <span class="etf-metric">MER <strong>${etf.mer}</strong></span>
-              <span class="etf-metric">5Y <strong>${etf.return5y}</strong></span>
-              <span class="etf-metric">Net <strong>${score}%</strong></span>
-            </div>
-            <p class="etf-lean">${etf.lean}</p>
-          </article>
-        `;
-      }).join('')}
-    </div>
-  `;
-}
 
 function renderDividendTable() {
   const grid = document.getElementById("dividendTableBody");
@@ -856,7 +821,7 @@ function init() {
   document.querySelectorAll("#tfsaForm input").forEach(el => el.addEventListener("input", calculateTfsaRoom));
   document.getElementById("wealthsimpleLink").href = WEALTHSIMPLE_REFERRAL_URL;
     renderTickers();
-    renderLevGrid();
+
     renderDividendTable();
     updateChart();
   calculateTfsaRoom();
