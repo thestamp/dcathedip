@@ -193,7 +193,7 @@ function createServer() {
     const bodyText = await page.locator('body').textContent();
     const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /DCA — dollar-cost averaging/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You never have to guess the right moment/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
-    const journeyStructure = /The Plan/i.test(navText) && /Tackle high-interest credit card debt/i.test(navText) && /Invest a sustainable amount/i.test(navText);
+    const journeyStructure = !/The Plan/i.test(navText) && /Sign up with Wealthsimple/i.test(navText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year.s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
@@ -223,7 +223,7 @@ function createServer() {
                   && /Vanguard FTSE Canadian High Dividend Yield/i.test(bodyText)
                   && /iShares Core MSCI Canadian Quality Dividend/i.test(bodyText)
                   && /iShares S&P\/TSX Composite High Dividend/i.test(bodyText);
-    const compoundingNav = await page.locator('.nav-dropdown-menu a[href="#step-3-target"]').count().then(count => count === 1);
+    const compoundingNav = await page.locator('.section-nav a[href="#step-3-target"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
@@ -270,7 +270,7 @@ function createServer() {
       && /Set up a recurring investment/i.test(bodyText);
     const referralPromo = /Referral link/i.test(bodyText)
       && /\$25 referral bonus/i.test(bodyText);
-    const stepByStepNav = await page.locator('.nav-links a[href="#step-5-investment"]').count().then(count => count === 1);
+    const stepByStepNav = await page.locator('.section-nav a[href="#step-5-investment"]').count().then(count => count === 1);
     const etfToStepsLink = await page.locator('a[href="#step-4-account"]').count().then(count => count >= 1);
     const removedDailyFaq = !/Is daily DCA always better than lump sum\?/i.test(bodyText);
     const removedDailyMonthlyFaq = !/Why recommend daily instead of monthly\?/i.test(bodyText);
@@ -328,7 +328,7 @@ function createServer() {
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / investing through the market.');
-    if (!journeyStructure) throw new Error('Expected nav to have The Plan dropdown and referral button.');
+    if (!journeyStructure) throw new Error('Expected the simplified navigation and Wealthsimple referral button.');
     if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
     if (!tfsaVisible) throw new Error('Expected TFSA estimated room output to be visible.');

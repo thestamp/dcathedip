@@ -84,7 +84,15 @@ p { color: var(--muted); line-height: 1.65; }
 .nav-cta {
   font-size: 0.85rem !important; padding: 10px 20px !important;
   border-radius: 999px !important; white-space: nowrap; min-height: 44px;
+  background: #ffffff !important;
+  color: #153333 !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
 }
+.nav-cta:hover { background: #f2f7f4 !important; color: #153333 !important; }
+
+/* The section links are the only sticky navigation while scrolling. */
+.site-header { position: relative; }
 
 .hero { display: grid; grid-template-columns: minmax(0, 1.1fr) 420px; gap: 48px; align-items: center; padding: 100px 0 72px; }
 .eyebrow { color: var(--green); text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.95rem; font-weight: 900; margin: 0 0 12px; }
