@@ -148,7 +148,7 @@ const etfsFlat = [
 
 // Dividend ETF comparison data — sourced from fund facts as of Jul/Aug 2026
 // trailing: 12-month trailing yield | projYield: distribution yield (forward-looking proxy)
-// return5y: annualized 5-year total return | roiTotal: 5Y return + trailing yield − MER
+// return5y: annualized 5-year total return, normally already net of fees and inclusive of distributions
 const dividendEtfs = [
   {
     ticker: "VDY",
@@ -399,7 +399,7 @@ function renderDividendTable() {
 
   function render(data) {
     grid.innerHTML = data.map(etf => {
-      const roiTotal = etf.return5y + etf.trailingYield - etf.mer;
+      const roiTotal = etf.return5y;
       const pct = (v) => `${v.toFixed(1)}%`;
       return `
         <tr>
@@ -428,7 +428,7 @@ function renderDividendTable() {
         va = a[key]; vb = b[key];
         return sortDir * va.localeCompare(vb);
       }
-      if (key === 'roi') { va = a.return5y + a.trailingYield - a.mer; vb = b.return5y + b.trailingYield - b.mer; }
+      if (key === 'roi') { va = a.return5y; vb = b.return5y; }
       else { va = a[key]; vb = b[key]; }
       return sortDir * (va - vb);
     });
