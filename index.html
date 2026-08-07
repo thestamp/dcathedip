@@ -381,9 +381,9 @@ description: "A complete plan for Canadian ETF investors: tackle high-interest d
             <tr>
               <td><strong>RESP</strong></td>
               <td>Tax-deferred</td>
-              <td>Taxed in child's hands. Grants may be clawed back if not used for education.</td>
-              <td>$50,000 lifetime — CESG grant matches 20% only on the first $2,500/year</td>
-              <td>Children's education. Contribute $2,500/year to get the full $500 government grant before adding more.</td>
+              <td>Taxed in child's hands.</td>
+              <td>Varies</td>
+              <td>Children's education. <a href="https://www.wealthsimple.com/en-ca/learn/what-is-resp" target="_blank" rel="nofollow noopener" style="color:var(--green);">Learn about RESPs ↗</a></td>
             </tr>
             <tr>
               <td><strong>Non-registered</strong></td>
@@ -396,38 +396,31 @@ description: "A complete plan for Canadian ETF investors: tackle high-interest d
         </table>
       </div>
       <p style="margin:14px 0 0; font-size:0.85rem; color:var(--muted); line-height:1.5; padding:14px 18px; background:rgba(255,255,255,0.025); border-radius:12px;">
-        <strong>📋 FHSA contribution room:</strong> $8,000 per year, $40,000 lifetime. Unused room carries forward — but annual contributions are capped at $8,000 including any carry-forward. Open the account early (even with $0) to start accumulating room. <a href="https://www.wealthsimple.com/en-ca/learn/what-is-fhsa#what_are_the_benefits_of_an_fhsa" target="_blank" rel="nofollow noopener" style="color:var(--green);">Learn about FHSA benefits ↗</a>
+        <strong>📋 FHSA contribution room:</strong> $8,000 per year, $40,000 lifetime. You can carry forward up to one year of unused room — max $16,000 in a single year ($8,000 current + $8,000 carried forward). Remaining unused funds move to your RRSP at the <strong>earliest</strong> of: the year after your first home purchase, the end of the year you turn 71, or 15 years after opening. Open early (even with $0) to start the clock. <a href="https://www.wealthsimple.com/en-ca/learn/what-is-fhsa#what_are_the_benefits_of_an_fhsa" target="_blank" rel="nofollow noopener" style="color:var(--green);">Learn about FHSA benefits ↗</a>
       </p>
 
-      <!-- TFSA section -->
-      <div class="tfsa-subsection split" style="margin-top:60px">
-        <div>
-          <p class="eyebrow">For Canadian investors and residents</p>
-          <h2>Start with an FHSA and a TFSA</h2>
-          <p>Open an FHSA as early as possible — <strong>no contribution needed.</strong> Contribution room starts building the year you open the account (even with a $0 balance), and you can carry forward unused room to future years. When you are ready to contribute, you get tax deductions and tax-free withdrawals for a first home.</p>
-          <p>Together with your FHSA, a TFSA is the most flexible account. Tax-free gains with tax-free withdrawals for any reason — no penalties, no restrictions. Unlike an FHSA (tied to a home purchase) or an RRSP (taxed on withdrawal), TFSA money is yours for any life event.</p>
-          <p>If your employer matches RRSP contributions, add the RRSP to your retirement plan alongside the FHSA and TFSA — free matching money is hard to beat.</p>
-          <p>TFSA contribution room is personal. Withdrawals generally restore room in the next calendar year. Confirm your official room with CRA My Account.</p>
+      <!-- TFSA calculator -->
+      <div class="tfsa-subsection" style="margin-top:60px">
+        <div class="section-heading center">
+          <p class="eyebrow">TFSA contribution room</p>
+          <h2>Estimate your remaining contribution room.</h2>
+          <p>Enter your eligibility year, past contributions, and last year's withdrawals. TFSA limit data last updated for 2026.</p>
         </div>
-        <div class="tfsa-card">
-          <h3>Simple TFSA room calculator</h3>
-          <p class="calculator-note">Estimate your remaining TFSA contribution room using your eligibility year, past contributions, and last year's withdrawals. TFSA limit data last updated for 2026.</p>
-          <form class="tfsa-form" id="tfsaForm">
-            <label>
-              Eligibility year
-              <input type="number" id="eligibilityYear" min="2009" max="2026" value="2013" />
-            </label>
-            <label>
-              Total TFSA contributions made
-              <input type="number" id="tfsaContributed" min="0" step="100" value="0" />
-            </label>
-            <label>
-              Withdrawals made last year
-              <input type="number" id="tfsaWithdrawals" min="0" step="100" value="0" />
-            </label>
-          </form>
-          <div class="tfsa-result" id="tfsaResult" aria-live="polite"></div>
-        </div>
+        <form class="tfsa-form" id="tfsaForm" style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:flex-end; margin-top:16px;">
+          <label style="display:flex; flex-direction:column; gap:4px; font-size:0.85rem; color:var(--muted); min-width:140px;">
+            Eligibility year
+            <input type="number" id="eligibilityYear" min="2009" max="2026" value="2013" style="padding:10px 12px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,0.05); color:var(--text); font-size:0.95rem;"/>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:4px; font-size:0.85rem; color:var(--muted); min-width:140px;">
+            Total TFSA contributions made
+            <input type="number" id="tfsaContributed" min="0" step="100" value="0" style="padding:10px 12px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,0.05); color:var(--text); font-size:0.95rem;"/>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:4px; font-size:0.85rem; color:var(--muted); min-width:140px;">
+            Withdrawals made last year
+            <input type="number" id="tfsaWithdrawals" min="0" step="100" value="0" style="padding:10px 12px; border:1px solid var(--border); border-radius:10px; background:rgba(255,255,255,0.05); color:var(--text); font-size:0.95rem;"/>
+          </label>
+        </form>
+        <div class="tfsa-result" id="tfsaResult" aria-live="polite" style="text-align:center; margin-top:16px;"></div>
         <details class="section-footnote"><summary>Footnotes</summary><p>Confirm your official TFSA contribution room and account rules with official sources such as CRA My Account. Foreign withholding tax can still apply to some foreign dividends inside a TFSA, especially U.S. dividends. Account choice depends on your goals, income, and timeline — this is educational content, not personal advice.</p></details>
       </div>
 

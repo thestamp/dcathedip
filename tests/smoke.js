@@ -228,7 +228,7 @@ function createServer() {
     const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText)
           && /Understanding your returns/i.test(bodyText) && /Interest, asset growth, and dividends/i.test(bodyText)
           && /Cut out the middleman/i.test(bodyText);
-    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Start with an FHSA and a TFSA/i.test(bodyText)
+    const accountSection = /Step 4/i.test(bodyText) && /Create the right account/i.test(bodyText) && /Estimate your remaining contribution room/i.test(bodyText)
           && /Understanding your workplace pension/i.test(bodyText) && /Defined benefit/i.test(bodyText)
           && /Defined contribution/i.test(bodyText) && /LIF/i.test(bodyText);
     const investmentSection = /Step 5/i.test(bodyText) && /Choose the right investment/i.test(bodyText)
