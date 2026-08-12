@@ -224,6 +224,7 @@ function createServer() {
                   && /iShares Core MSCI Canadian Quality Dividend/i.test(bodyText)
                   && /iShares S&P\/TSX Composite High Dividend/i.test(bodyText);
     const compoundingNav = await page.locator('.section-nav a[href="#step-3-target"]').count().then(count => count === 1);
+    const tfsaCalculatorNav = await page.locator('.section-nav a[href="#tfsa-room-calculator"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
@@ -346,6 +347,7 @@ function createServer() {
     if (!compoundingSection) throw new Error('Expected 3 crossovers section with growth milestones and compound calculator.');
     if (!incomeEtfSection) throw new Error('Expected dividend ETF comparison table with VDY, XDIV, XEI and sortable columns.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
+    if (!tfsaCalculatorNav) throw new Error('Expected section navigation link to the TFSA room calculator.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
     if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');
     if (!emergencySection) throw new Error('Expected Step 2 rainy day fund content with 1-month starter and 3-6 month target.');
