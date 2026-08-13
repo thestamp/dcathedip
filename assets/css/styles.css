@@ -561,6 +561,45 @@ h3 { font-size: 1.35rem; }
 .ticker-card { border: 1px solid var(--border); background: rgba(255,255,255,0.07); border-radius: 24px; padding: 22px; }
 .ticker-card .ticker, .etf-cell .ticker { display: inline-flex; border-radius: 999px; background: rgba(83,230,160,0.13); color: var(--green); padding: 7px 11px; font-weight: 1000; margin-bottom: 14px; }
 .ticker-card p { margin-bottom: 0; }
+.etf-learning-section { scroll-margin-top: 72px; }
+.etf-matrix-controls { display:flex; flex-wrap:wrap; gap:16px; align-items:end; justify-content:center; margin:24px 0 18px; }
+.etf-matrix-control { display:grid; gap:6px; color:var(--muted); font-size:.9rem; font-weight:800; }
+.etf-matrix-control select, .etf-matrix-control input { min-height:44px; border:1px solid var(--border); border-radius:12px; background:rgba(8,17,31,.85); color:var(--text); padding:10px 12px; font:inherit; }
+.etf-shock-value { color:var(--gold); font-variant-numeric:tabular-nums; }
+.etf-matrix-toggle { display:flex; gap:4px; padding:4px; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,.04); }
+.etf-matrix-toggle button { min-height:44px; border:0; border-radius:999px; padding:8px 13px; color:var(--muted); background:transparent; font:inherit; font-weight:800; cursor:pointer; }
+.etf-matrix-toggle button.active { background:var(--green); color:#102522; }
+.etf-learning-matrix { overflow-x:auto; border:1px solid var(--border); border-radius:24px; background:rgba(255,255,255,.035); }
+.etf-learning-grid { display:grid; grid-template-columns:150px repeat(4,minmax(190px,1fr)); min-width:930px; }
+.etf-learning-grid > div { padding:14px; border-right:1px solid var(--border); border-bottom:1px solid var(--border); }
+.etf-learning-grid > div:nth-child(5n) { border-right:0; }
+.etf-learning-head { color:var(--muted); text-transform:uppercase; letter-spacing:.08em; font-size:.75rem; font-weight:900; background:rgba(255,255,255,.06); }
+.etf-learning-row-label { display:flex; align-items:center; color:var(--text); font-weight:900; background:rgba(158,228,147,.05); }
+.etf-matrix-card { width:100%; min-height:148px; text-align:left; border:1px solid var(--border); border-radius:16px; padding:14px; background:rgba(255,255,255,.055); color:var(--text); cursor:pointer; font:inherit; transition:transform .18s,border-color .18s,background .18s; }
+.etf-matrix-card:hover, .etf-matrix-card:focus-visible { transform:translateY(-2px); border-color:var(--green); background:rgba(158,228,147,.09); outline:none; }
+.etf-matrix-card strong { display:block; color:var(--green); font-size:1.15rem; margin-bottom:7px; }
+.etf-matrix-card small { display:block; color:var(--muted); line-height:1.4; }
+.etf-matrix-card .matrix-metric { display:block; margin-top:10px; color:var(--gold); font-size:.82rem; font-weight:900; }
+.etf-matrix-card.is-leveraged { border-color:rgba(255,209,102,.45); }
+.etf-matrix-card.is-empty { cursor:default; opacity:.72; }
+.etf-matrix-card.is-empty:hover { transform:none; border-color:var(--border); background:rgba(255,255,255,.055); }
+.etf-modal[hidden] { display:none; }
+.etf-modal { position:fixed; inset:0; z-index:300; display:grid; place-items:center; padding:20px; }
+.etf-modal-backdrop { position:absolute; inset:0; background:rgba(1,9,15,.78); backdrop-filter:blur(8px); }
+.etf-modal-card { position:relative; width:min(720px,100%); max-height:min(88vh,760px); overflow:auto; padding:32px; border:1px solid var(--green); border-radius:26px; background:#102b2a; box-shadow:0 24px 100px rgba(0,0,0,.5); }
+.etf-modal-close { position:absolute; top:12px; right:14px; width:44px; height:44px; border:1px solid var(--border); border-radius:50%; background:rgba(255,255,255,.08); color:var(--text); font-size:1.7rem; cursor:pointer; }
+.etf-modal-card h2 { font-size:clamp(1.8rem,4vw,3rem); padding-right:38px; }
+.etf-modal-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:20px 0; }
+.etf-modal-metrics div { padding:13px; border:1px solid var(--border); border-radius:14px; background:rgba(255,255,255,.05); }
+.etf-modal-metrics small { display:block; color:var(--muted); margin-bottom:4px; }
+.etf-modal-metrics strong { color:var(--green); }
+.etf-modal-columns { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+.etf-modal-columns h3 { font-size:1.1rem; margin-bottom:8px; }
+.etf-modal-columns ul { color:var(--muted); padding-left:20px; line-height:1.6; }
+.etf-flow { margin-top:22px; padding:16px; border:1px solid rgba(255,209,102,.35); border-radius:16px; background:rgba(255,209,102,.06); color:var(--muted); }
+.etf-flow-bar { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+.etf-flow-bar:last-child { border-bottom:0; }
+@media (max-width:700px) { .etf-modal-card { padding:24px 18px; } .etf-modal-metrics, .etf-modal-columns { grid-template-columns:1fr; } }
 .etf-matrix {
   display: grid;
   grid-template-columns: 120px minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);

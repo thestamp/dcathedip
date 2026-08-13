@@ -62,9 +62,11 @@ function createServer() {
           }
         }
         const textTooSmall = [...document.querySelectorAll('p, li, a, button, label, input, select, summary')]
+          .filter(el => !el.closest('[hidden]'))
           .filter(el => parseFloat(getComputedStyle(el).fontSize) < 12)
           .map(el => ({ tag: el.tagName.toLowerCase(), cls: el.className, text: el.textContent.trim().slice(0, 40), size: getComputedStyle(el).fontSize }));
         const buttonsTooSmall = [...document.querySelectorAll('a.button, button')]
+          .filter(el => !el.closest('[hidden]'))
           .filter(el => {
             const r = el.getBoundingClientRect();
             return r.width < 44 || r.height < 44;

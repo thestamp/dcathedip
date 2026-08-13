@@ -275,6 +275,36 @@ function renderLevGrid() {
   `;
 }
 
+function renderEtfLearningMatrix() {
+  const matrix = document.getElementById('etfLearningMatrix');
+  const controls = document.getElementById('etfMatrixControls');
+  if (!matrix || !controls) return;
+  const funds = {
+    XIU:['XIU','iShares S&P/TSX 60 Index ETF','Canada','Growth','1×','~3%','Canadian large-cap sectors','Compare ZIU or VCN.'],
+    CNCC:['CNCC','Global X S&P/TSX 60 Covered Call ETF','Canada','Income','1×','Variable','Canadian equities plus covered calls','Compare XEI or VDY.'],
+    HCAL:['HCAL','Hamilton Enhanced Canadian Bank ETF','Canada','Leveraged growth','1.25×','Variable','Canadian banks; concentrated','Compare XIU or VCN for broader exposure.'],
+    HDIV:['HDIV','Hamilton Enhanced Canadian Covered Call ETF','Canada','Leveraged income','1.25×','Variable monthly','Canadian covered-call ETFs; approximately 25% cash leverage','Compare CNCC, XEI, or HYLD.'],
+    VFV:['VFV','Vanguard S&P 500 ETF','United States','Growth','1×','~1%','U.S. large-cap sectors','Compare ZSP or XUS.'],
+    SMAX:['SMAX','Hamilton U.S. Equity Yield Maximizer ETF','United States','Income','1×','Variable','U.S. equities plus covered calls','Compare VFV or other U.S. income ETFs.'],
+    HSU:['HSU','BetaPro S&P 500 2× Daily Bull ETF','United States','Leveraged growth','2× reference only','Not income-focused','S&P 500 daily target; daily reset','For calmer exposure, compare VFV or ZSP.'],
+    HYLD:['HYLD','Hamilton Enhanced U.S. Covered Call ETF','United States','Leveraged income','1.25×','Variable monthly','U.S. covered-call ETFs; approximately 25% cash leverage','Compare SMAX, VFV, or HDIV.'],
+    XEQT:['XEQT','iShares Core Equity ETF Portfolio','International / Global','Growth','1×','~2%','Canada, U.S., and international equities','Compare VEQT or ZEQT.'],
+    IMAX:['IMAX','Hamilton International Equity Yield Maximizer ETF','International / Global','Income','1×','Variable','International equities plus covered calls','Compare XEQT or other international income ETFs.'],
+    HEQL:['HEQL','Global X Enhanced All-Equity ETF','International / Global','Leveraged growth','1.25×','Variable','Global all-equity; daily leverage','Compare XEQT or VEQT.'],
+    EQCL:['EQCL','Global X Enhanced Covered Call All-Equity ETF','International / Global','Leveraged income','1.25×','Variable monthly','Global covered-call ETFs and leverage','Compare XEQT, IMAX, HDIV, or HYLD.']
+  };
+  const rows = [['Canada',['XIU','CNCC','HCAL','HDIV']],['United States',['VFV','SMAX',null,'HYLD']],['International / Global',['XEQT','IMAX','HEQL','EQCL']]];
+  let metric = 'yield'; let shock = 0;
+  controls.innerHTML = '<div class="etf-matrix-toggle" role="group" aria-label="Primary ETF metric"><button type="button" class="active" data-matrix-metric="yield">Distribution yield</button><button type="button" data-matrix-metric="return">Historical total return</button></div><label class="etf-matrix-control">Simulate market drop <span class="etf-shock-value" id="etfShockValue">0%</span><input id="etfShock" type="range" min="-30" max="0" step="1" value="0" aria-label="Simulate market drop percentage"></label>';
+  const card = ticker => { if (!ticker) return '<div class="etf-matrix-card is-empty"><small>Rare category — no beginner example shown</small></div>'; const f=funds[ticker]; const leveraged=f[4] !== '1×'; const drop=shock ? `<span class="matrix-metric">Shock: ${(shock*(leveraged?1.25:1)).toFixed(1)}%</span>` : ''; return `<button class="etf-matrix-card${leveraged?' is-leveraged':''}" type="button" data-etf-ticker="${ticker}" aria-label="View details for ${ticker}, ${f[1]}"><strong>${ticker}</strong><small>${f[1]}</small><span class="matrix-metric">${metric==='yield'?f[5]:'Review current fund facts'} · ${f[4]}</span>${drop}</button>`; };
+  const render = () => { matrix.innerHTML=`<div class="etf-learning-grid"><div class="etf-learning-head">Geography</div><div class="etf-learning-head">Growth<br><small>1× · no calls</small></div><div class="etf-learning-head">Income<br><small>1× · covered calls</small></div><div class="etf-learning-head">Leveraged growth</div><div class="etf-learning-head">Leveraged income</div>${rows.map(([geo,t])=>`<div class="etf-learning-row-label">${geo}</div>${t.map(card).join('')}`).join('')}</div>`; matrix.querySelectorAll('[data-etf-ticker]').forEach(b=>b.addEventListener('click',()=>openModal(b.dataset.etfTicker))); };
+  const openModal = ticker => { const f=funds[ticker]; document.getElementById('etfModalTitle').textContent=`${f[0]} — ${f[1]}`; document.getElementById('etfModalWhy').textContent=`${f[1]} is a ${f[3].toLowerCase()} example for ${f[2]} exposure. Review the structure, risk, fees, and current fund facts before choosing.`; document.getElementById('etfModalMetrics').innerHTML=`<div><small>Target yield</small><strong>${f[5]}</strong></div><div><small>MER</small><strong>Review fund facts</strong></div><div><small>Leverage</small><strong>${f[4]}</strong></div>`; document.getElementById('etfModalComposition').innerHTML=`<ul><li>${f[6]}</li><li>Check provider holdings and current distribution composition</li></ul>`; document.getElementById('etfModalAlternatives').textContent=f[7]; const flow=document.getElementById('etfModalFlow'); flow.hidden=!['HDIV','HYLD','EQCL','HEQL'].includes(ticker); flow.innerHTML=flow.hidden?'':'<strong>Composition flow</strong><div class="etf-flow-bar"><span>Investor capital</span><span>→ ETF</span></div><div class="etf-flow-bar"><span>Leverage and/or covered calls</span><span>→ underlying ETFs</span></div><div class="etf-flow-bar"><span>Underlying equities</span><span>→ market returns and distributions</span></div>'; document.getElementById('etfModal').hidden=false; document.querySelector('.etf-modal-close').focus(); };
+  controls.querySelectorAll('[data-matrix-metric]').forEach(b=>b.addEventListener('click',()=>{metric=b.dataset.matrixMetric; controls.querySelectorAll('[data-matrix-metric]').forEach(x=>x.classList.toggle('active',x===b)); render();}));
+  controls.querySelector('#etfShock').addEventListener('input',e=>{shock=Number(e.target.value); document.getElementById('etfShockValue').textContent=`${shock}%`; render();});
+  document.querySelectorAll('[data-close-etf-modal]').forEach(e=>e.addEventListener('click',()=>{document.getElementById('etfModal').hidden=true;}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') document.getElementById('etfModal').hidden=true;}); render();
+}
+
 // Color scales: bottom 30% = bright red, middle 40% = yellow, top 30% = bright green
 function tierColor(val, vals, invert) {
   if (vals.length < 2) return 'var(--green)';
@@ -878,6 +908,7 @@ function init() {
     renderTickers();
     renderLevGrid();
     renderDividendTable();
+    renderEtfLearningMatrix();
     updateChart();
   calculateTfsaRoom();
   renderCrossoverCalc();

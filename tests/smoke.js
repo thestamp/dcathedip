@@ -346,6 +346,12 @@ function createServer() {
     if (!lumpSumRiskFaq) throw new Error('Expected timing-risk section with cited source links and DCA pressure-reduction language.');
     if (!compoundingSection) throw new Error('Expected 3 crossovers section with growth milestones and compound calculator.');
     if (!incomeEtfSection) throw new Error('Expected dividend ETF comparison table with VDY, XDIV, XEI and sortable columns.');
+    const learningMatrix = await page.locator('#etfLearningMatrix .etf-learning-grid').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HDIV"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HYLD"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HSU"]').count().then(count => count === 0)
+      && await page.locator('#etfShock').count().then(count => count === 1);
+    if (!learningMatrix) throw new Error('Expected ETF learning matrix with HDIV/HYLD, shock slider, and no 2× funds.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!tfsaCalculatorNav) throw new Error('Expected section navigation link to the TFSA room calculator.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
