@@ -562,6 +562,7 @@
         </div>
         <div id="etfMatrixControls" class="etf-matrix-controls" aria-label="ETF comparison controls"></div>
         <div id="etfLearningMatrix" class="etf-learning-matrix"></div>
+        <p class="section-footnote-text">⚠️ Yellow-outlined cards use leverage. Click them to review the risks, including amplified losses and daily-reset effects. Covered-call funds may also limit some upside. Figures shown are sourced examples, not recommendations.</p>
         <div id="etfModal" class="etf-modal" hidden role="dialog" aria-modal="true" aria-labelledby="etfModalTitle">
           <div class="etf-modal-backdrop" data-close-etf-modal></div>
           <div class="etf-modal-card" role="document">
@@ -579,82 +580,6 @@
         </div>
       </div>
 
-      <!-- ETF examples -->
-      <div class="ticker-subsection" style="margin-top:60px">
-        <div class="section-heading center">
-          <p class="eyebrow">ETF examples</p>
-          <h2>Broad ETF examples for Canadian investors</h2>
-          <p>Use these as a starting point for your own research. Compare fees, holdings, risk rating, account fit, currency effects, and tax treatment before choosing. <strong>Past 5-year returns should not drive ETF selection</strong> — good past results do not mean good future results.</p>
-        </div>
-
-        <p class="location-note" id="locationNote">Canadian-listed ETF examples for research. <a href="https://decodeetf.com/" target="_blank" rel="nofollow noopener" style="color:var(--green);">Compare ETFs on decodeETF.com ↗</a></p>
-
-        <div class="ticker-grid" id="tickerGrid"></div>
-
-        <aside class="wealthsimple" id="wealthsimpleBox">
-          <div>
-            <p class="eyebrow">Canadian investors</p>
-            <h3>Need a brokerage?</h3>
-            <p>Wealthsimple is a popular Canadian platform for automating recurring ETF purchases. Compare fees, account types, foreign exchange costs, transfer rules, automation features, and current terms before choosing a brokerage.</p>
-          </div>
-          <div class="wealthsimple-actions">
-            <a class="button primary" id="wealthsimpleLink" href="#" rel="nofollow noopener">Sign up now with $25 referral bonus</a>
-          </div>
-        </aside>
-        <p class="location-note etf-risk-note">Other all-in-one ETFs, such as VEQT, may also be worth comparing. The best fit depends on your account, timeline, comfort with price swings, fees, and desired exposure.</p>
-        <details class="section-footnote"><summary>Footnotes</summary><p>These examples are not ranked recommendations. Review fund facts, MER, holdings, currency exposure, distribution history, tax treatment, and whether the fund fits your risk tolerance before choosing. ETF tickers are examples for research, not personal recommendations.</p></details>
-        <p class="location-note" style="margin-top:20px"><a href="#step-4-account">← Back to step 4: Create the right account</a></p>
-      </div>
-
-      <!-- 1.25× leveraged ETFs — advanced reference only -->
-      <div class="advanced-leverage-section" style="margin-top:60px; border:2px solid var(--gold); border-radius:24px; padding:28px; background:rgba(255,209,102,0.06);">
-        <div class="advanced-leverage-header" style="display:flex; align-items:flex-start; gap:16px; margin-bottom:24px;">
-          <span style="font-size:2.2rem; flex-shrink:0; line-height:1;">⚠️</span>
-          <div>
-            <p class="eyebrow" style="color:var(--gold); margin-bottom:4px;">Advanced — for experienced, risk-tolerant investors only</p>
-            <h2 style="font-size:1.6rem; margin:0 0 12px;">1.25× leveraged ETFs make gains and losses bigger.</h2>
-            <p style="margin:0;">These products use modest leverage and daily-reset mechanics. They can lose more than comparable unleveraged ETFs during market declines, and longer-term results may differ from 1.25 times the index. If you are new to investing, skip this section entirely.</p>
-          </div>
-        </div>
-        <details style="margin:0; padding:0; border:none; background:transparent;">
-          <summary style="cursor:pointer; font-weight:900; font-size:1.1rem; padding:12px 16px; border:1px solid var(--border); border-radius:16px; background:rgba(255,255,255,0.06); display:flex; align-items:center; gap:6px;">▶ Show 1.25× ETF details</summary>
-          <div id="levGrid" style="margin-top:24px;"></div>
-          <details class="section-footnote"><summary>Footnotes</summary><p>These are examples for research, not recommendations. Leverage increases risk and daily compounding can cause returns to differ from the stated multiple over periods longer than one day. Read the fund facts and prospectus before making any decision.</p></details>
-        </details>
-      </div>
-
-
-      <!-- Income/Dividend ETF comparison -->
-      <div id="incomeEtfSection" style="margin-top:60px">
-          <div class="section-heading center">
-            <p class="eyebrow">Income ETF comparison</p>
-            <h2>Dividend ETFs for consistent income.</h2>
-            <p>Dividend ETFs can make sense when your primary goal is reliable cash flow. They may suit investors who prioritize steady income over maximum growth, but distributions can change and do not remove market risk. <span style="display:inline-block;margin-left:8px;background:rgba(255,209,102,0.15);color:var(--gold);padding:2px 10px;border-radius:999px;font-size:0.72rem;font-weight:900;">Work in progress</span></p>
-          </div>
-
-          <div class="dividend-table-wrap">
-            <table id="dividendTable" class="dividend-table">
-              <thead>
-                <tr>
-                  <th>Ticker</th>
-                  <th data-sort="name">Name</th>
-                  <th data-sort="trailingYield" class="sortable">Trailing yield <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="projYield" class="sortable">Proj. yield <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="return5y" class="sortable">5Y growth <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="mer" class="sortable">MER <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="roi" class="sortable">Total ROI <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="top10Pct" class="sortable">Top 10% <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="numStocks" class="sortable"># Stocks <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="canada" class="sortable">% Can <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="usa" class="sortable">% USA <span class="sort-icon">▲▼</span></th>
-                  <th data-sort="intl" class="sortable">% Int'l <span class="sort-icon">▲▼</span></th>
-                </tr>
-              </thead>
-              <tbody id="dividendTableBody"></tbody>
-            </table>
-            <p class="section-footnote-text">Total ROI is shown as the fund’s published annualized total return when available. Fund-provider annualized total returns generally include reinvested distributions and are reported after fund expenses, so the yield and MER are not added or subtracted again. HDIV and HYLD are included as higher-risk income examples: both use covered-call strategies and approximately 1.25× leverage. HYLD’s displayed return uses its available 3-year annualized figure because it does not have a 5-year history. Projected yield uses the most recent distribution annualized. Data sourced from fund provider websites as of Jul–Aug 2026.</p>
-          </div>
-        </div>
 
       <!-- Choosing the right pension funds -->
       <div class="pension-funds-subsection" style="margin-top:60px">

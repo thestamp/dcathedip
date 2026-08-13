@@ -581,6 +581,9 @@ h3 { font-size: 1.35rem; }
 .etf-matrix-card small { display:block; color:var(--muted); line-height:1.4; }
 .etf-matrix-card .matrix-metric { display:block; margin-top:10px; color:var(--gold); font-size:.82rem; font-weight:900; }
 .etf-matrix-card.is-leveraged { border-color:rgba(255,209,102,.45); }
+.etf-matrix-card.is-leveraged { border-width:2px; }
+.matrix-alert { position:absolute; top:9px; right:11px; color:var(--gold); font-size:1.15rem; }
+.etf-matrix-card { position:relative; }
 .etf-matrix-card.is-empty { cursor:default; opacity:.72; }
 .etf-matrix-card.is-empty:hover { transform:none; border-color:var(--border); background:rgba(255,255,255,.055); }
 .etf-modal[hidden] { display:none; }

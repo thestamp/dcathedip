@@ -161,33 +161,12 @@ function createServer() {
         noExternalLogoImage: !externalLogoImage
       };
     });
-    const canadaEtfGrid = await page.evaluate(() => {
-      const grid = document.querySelector('#tickerGrid');
-      const text = grid.textContent;
-      const hasPieToggle = /Countries/i.test(text) && /Industries/i.test(text) && /Top 10 Stocks/i.test(text);
-      const cellCount = document.querySelectorAll('.etf-cell-card:not(.empty)').length;
-      const hasBest = /★/.test(text);
-      const hasPies = document.querySelectorAll('.etf-pie').length > 0;
-      // Table with 4 rows (BMO, iShares, Vanguard, Factor)
-      const rowCount = document.querySelectorAll('.etf-table-row').length;
-      return grid.classList.contains('etf-grid')
-        && hasPieToggle
-        && cellCount >= 10
-        && rowCount === 4
-        && hasBest
-        && hasPies
-        && /ZSP\b/i.test(text) && /VFV\b/i.test(text) && /XUS\b/i.test(text)
-        && /ZIU\b/i.test(text) && /XIU\b/i.test(text) && /VCN\b/i.test(text)
-        && /XEQT\b/i.test(text) && /VEQT\b/i.test(text) && /ZEQT\b/i.test(text)
-        && /CAUS\b/i.test(text) && /CACE\b/i.test(text) && /CAGE\b/i.test(text)
-        && /MER/i.test(text) && /5Y/i.test(text)
-        && /leans more Canada/i.test(text);
-    });
-    const leveragedSection = await page.locator('#step-5-investment .advanced-leverage-section').count().then(count => count === 1)
-      && /1\.25× covered-call and equity ETFs/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent())
-      && /\bHDIV\b/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent())
-      && /\bHYLD\b/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent())
-      && !/Higher-leverage 2× funds|\bHSU\b|\bHQU\b|\bHXU\b/i.test(await page.locator('#step-5-investment .advanced-leverage-section').textContent());
+    const canadaEtfGrid = await page.locator('#etfLearningMatrix .etf-learning-grid').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix button[data-etf-ticker="XIU"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix button[data-etf-ticker="XEQT"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix .matrix-alert').count().then(count => count >= 4);
+    const leveragedSection = await page.locator('#etfLearningMatrix .etf-matrix-card.is-leveraged').count().then(count => count >= 4)
+      && !/Income ETF comparison|ETF examples/i.test(await page.locator('body').textContent());
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
@@ -213,16 +192,7 @@ function createServer() {
           && /Investment income covers your living expenses/i.test(bodyText)
           && /Try these examples/i.test(bodyText)
           && /5% planning illustration/i.test(bodyText) && /7% planning illustration/i.test(bodyText);
-    const incomeEtfSection = /Income ETF comparison/i.test(bodyText)
-                  && /Dividend ETFs for consistent income/i.test(bodyText)
-                  && /Trailing yield/i.test(bodyText) && /Proj. yield/i.test(bodyText)
-                  && /Total ROI/i.test(bodyText)
-                  && /\bVDY\b/i.test(bodyText) && /\bXDIV\b/i.test(bodyText) && /\bXEI\b/i.test(bodyText)
-                  && /\bHDIV\b/i.test(bodyText) && /\bHYLD\b/i.test(bodyText)
-                  && /1\.25× leveraged/i.test(bodyText) && /covered-call strategies/i.test(bodyText)
-                  && /Vanguard FTSE Canadian High Dividend Yield/i.test(bodyText)
-                  && /iShares Core MSCI Canadian Quality Dividend/i.test(bodyText)
-                  && /iShares S&P\/TSX Composite High Dividend/i.test(bodyText);
+    const incomeEtfSection = !/Income ETF comparison|Dividend ETFs for consistent income|Trailing yield|Proj. yield/i.test(bodyText);
     const compoundingNav = await page.locator('.section-nav a[href="#step-3-target"]').count().then(count => count === 1);
     const tfsaCalculatorNav = await page.locator('.section-nav a[href="#tfsa-room-calculator"]').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
@@ -321,8 +291,8 @@ function createServer() {
     if (!dailyVariationControl.changesPath) throw new Error('Expected daily variation to add daily up/down movement to the price path.');
     if (!dailyVariationControl.preservesAnnualEnd) throw new Error('Expected daily variation to preserve the annualized end value.');
     if (!dailyVariationControl.statGridThreeColumns) throw new Error('Expected chart stat boxes to use a clean three-column desktop layout.');
-    if (!canadaEtfGrid) throw new Error('Expected Canadian ETF matrix with standard, tilted, and factor ETF examples for U.S., Canada, and World.');
-    if (!leveragedSection) throw new Error('Expected a 1.25× leveraged ETF section without 2× funds.');
+    if (!canadaEtfGrid) throw new Error('Expected the legacy ETF examples grid to be removed in favour of the learning matrix.');
+    if (!leveragedSection) throw new Error('Expected the legacy advanced leverage section to be removed in favour of yellow-outlined matrix cards.');
     if (!dayZeroInvested) throw new Error('Expected all modeled strategies to make their first contribution on day 0.');
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
     if (!layoutChecks.sustainableVisible) throw new Error('Expected step 6 sustainable investing section to render.');
