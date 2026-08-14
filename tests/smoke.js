@@ -209,7 +209,7 @@ function createServer() {
           && /Build up rainy day fund/i.test(bodyText)
           && /Choose the right investment/i.test(bodyText);
     // Also check the new step content exists
-    const debtSection = /Step 1/i.test(bodyText) && /Tackle high-interest credit card debt first/i.test(bodyText) && /Consolidate what you can/i.test(bodyText) && /Clear the easiest one first/i.test(bodyText) && /Then attack by interest rate/i.test(bodyText);
+    const debtSection = /Step 1/i.test(bodyText) && /Tackle high-interest credit card debt first/i.test(bodyText) && /Stop the bleeding/i.test(bodyText) && /Lower the interest rate/i.test(bodyText) && /Automate minimums, attack the target/i.test(bodyText) && /The Avalanche/i.test(bodyText) && /The Snowball/i.test(bodyText);
     const emergencySection = /Step 2/i.test(bodyText) && /Build a rainy day fund/i.test(bodyText) && /Start with one month of expenses/i.test(bodyText) && /Build toward 3–6 months/i.test(bodyText);
     const targetSection = /Step 3/i.test(bodyText) && /Set a financial target/i.test(bodyText)
           && /Understanding your returns/i.test(bodyText) && /Interest, asset growth, and dividends/i.test(bodyText)
