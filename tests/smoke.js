@@ -202,6 +202,8 @@ function createServer() {
     const incomeEtfSection = !/Income ETF comparison|Dividend ETFs for consistent income|Trailing yield|Proj. yield/i.test(bodyText);
     const compoundingNav = await page.locator('.section-nav a[href="#step-3-target"]').count().then(count => count === 1);
     const tfsaCalculatorNav = await page.locator('.section-nav a[href="#tfsa-room-calculator"]').count().then(count => count === 1);
+    const dcPensionsNav = await page.locator('.section-nav a[href="#dc-pensions"]').count().then(count => count === 1)
+      && await page.locator('#dc-pensions').count().then(count => count === 1);
     const foundationSection = /A 6-step plan for real-life investing/i.test(bodyText)
           && /Tackle high-interest credit card debt/i.test(bodyText)
           && /Build up rainy day fund/i.test(bodyText)
@@ -333,6 +335,7 @@ function createServer() {
     if (!learningMatrix) throw new Error('Expected ETF learning matrix with HDIV/HYLD, shock slider, and no 2× funds.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!tfsaCalculatorNav) throw new Error('Expected section navigation link to the TFSA room calculator.');
+    if (!dcPensionsNav) throw new Error('Expected section navigation link to the DC pensions section.');
     if (!foundationSection) throw new Error('Expected 6-step foundation checklist with all step links.');
     if (!debtSection) throw new Error('Expected Step 1 high-interest debt consolidation strategy content.');
     if (!emergencySection) throw new Error('Expected Step 2 rainy day fund content with 1-month starter and 3-6 month target.');
