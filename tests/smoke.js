@@ -170,7 +170,7 @@ function createServer() {
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
-    const seoHero = /Just Keep Investing\./i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /invest sustainably/i.test(bodyText) && /reduce anxiety regardless of what the market is doing/i.test(bodyText);
+    const seoHero = /Just Keep Investing\./i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You don't need to predict the market to build wealth/i.test(bodyText) && /clear path from managing debt to putting your savings on autopilot/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
     const journeyStructure = !/The Plan/i.test(navText) && /Sign up with Wealthsimple/i.test(navText);
     const heroStructure = await page.locator('h1').count().then(count => count === 1)
