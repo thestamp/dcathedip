@@ -282,18 +282,18 @@ function renderEtfLearningMatrix() {
   const funds = {
     XIU:['XIU','iShares S&P/TSX 60 Index ETF','Canada','Growth','1×','~3%','Canadian large-cap sectors','Compare ZIU or VCN.'],
     CNCC:['CNCC','Global X S&P/TSX 60 Covered Call ETF','Canada','Income','1×','Variable','Canadian equities plus covered calls','Compare XEI or VDY.'],
-    HCAL:['HCAL','Hamilton Enhanced Canadian Bank ETF','Canada','Leveraged growth','1.25×','Variable','Canadian banks; concentrated','Compare XIU or VCN for broader exposure.'],
+    CANL:['CANL','Global X Enhanced TSX 60','Canada','Leveraged growth','1.25×','Not an income focus','Canadian large-cap equities; daily leverage','Compare XIU or VCN for unleveraged exposure.'],
     HDIV:['HDIV','Hamilton Enhanced Canadian Covered Call ETF','Canada','Leveraged income','1.25×','Variable monthly','Canadian covered-call ETFs; approximately 25% cash leverage','Compare CNCC, XEI, or HYLD.'],
     VFV:['VFV','Vanguard S&P 500 ETF','United States','Growth','1×','~1%','U.S. large-cap sectors','Compare ZSP or XUS.'],
     SMAX:['SMAX','Hamilton U.S. Equity Yield Maximizer ETF','United States','Income','1×','Variable','U.S. equities plus covered calls','Compare VFV or other U.S. income ETFs.'],
-    HSU:['HSU','BetaPro S&P 500 2× Daily Bull ETF','United States','Leveraged growth','2× reference only','Not income-focused','S&P 500 daily target; daily reset','For calmer exposure, compare VFV or ZSP.'],
+    USSL:['USSL','Global X Enhanced S&P 500','United States','Leveraged growth','1.25×','Not an income focus','U.S. large-cap equities; daily leverage','Compare VFV or ZSP for unleveraged exposure.'],
     HYLD:['HYLD','Hamilton Enhanced U.S. Covered Call ETF','United States','Leveraged income','1.25×','Variable monthly','U.S. covered-call ETFs; approximately 25% cash leverage','Compare SMAX, VFV, or HDIV.'],
     XEQT:['XEQT','iShares Core Equity ETF Portfolio','International / Global','Growth','1×','~2%','Canada, U.S., and international equities','Compare VEQT or ZEQT.'],
     IMAX:['IMAX','Hamilton International Equity Yield Maximizer ETF','International / Global','Income','1×','Variable','International equities plus covered calls','Compare XEQT or other international income ETFs.'],
     HEQL:['HEQL','Global X Enhanced All-Equity ETF','International / Global','Leveraged growth','1.25×','Variable','Global all-equity; daily leverage','Compare XEQT or VEQT.'],
     EQCL:['EQCL','Global X Enhanced Covered Call All-Equity ETF','International / Global','Leveraged income','1.25×','Variable monthly','Global covered-call ETFs and leverage','Compare XEQT, IMAX, HDIV, or HYLD.']
   };
-  const rows = [['Canada',['XIU','CNCC','HCAL','HDIV']],['United States',['VFV','SMAX',null,'HYLD']],['International / Global',['XEQT','IMAX','HEQL','EQCL']]];
+  const rows = [['Canada',['XIU','CNCC','CANL','HDIV']],['United States',['VFV','SMAX','USSL','HYLD']],['International / Global',['XEQT','IMAX','HEQL','EQCL']]];
   let metric = 'yield';
   const actualMetrics = {
     XIU:{yield:'2.17%',mer:'0.18%',totalReturn:'14.41% (5Y annualized)',asOf:'Aug 10, 2026',source:'iShares / Yahoo Finance'},
@@ -301,8 +301,10 @@ function renderEtfLearningMatrix() {
     XEQT:{yield:'1.60%',mer:'0.20%',totalReturn:'Not shown in the retrieved provider summary',asOf:'Aug 12, 2026',source:'BlackRock Canada / Yahoo Finance'},
     CNCC:{yield:'6.61%',mer:'0.62%',totalReturn:'Not available in the retrieved provider summary',asOf:'Aug 12, 2026',source:'Global X Canada'},
     HCAL:{yield:'3.35%',mer:'0.82%',totalReturn:'24.4% (5Y annualized)',asOf:'Jul 31, 2026',source:'Hamilton ETFs'},
+    CANL:{yield:'Not an income focus',mer:'0.45%',totalReturn:'Not shown in the retrieved provider summary',asOf:'Jul 31, 2026',source:'Global X Canada'},
     HDIV:{yield:'9.99%',mer:'0.00% top-level*',totalReturn:'18.4% (5Y annualized)',asOf:'Jul 31, 2026',source:'Hamilton ETFs'},
     SMAX:{yield:'10.79%',mer:'Not shown in the retrieved provider summary',totalReturn:'25.1% (annualized since inception)',asOf:'Jul 31, 2026',source:'Hamilton ETFs'},
+    USSL:{yield:'Not an income focus',mer:'0.45%',totalReturn:'Not shown in the retrieved provider summary',asOf:'Jul 31, 2026',source:'Global X Canada'},
     HYLD:{yield:'12.82%',mer:'0.00% top-level*',totalReturn:'20.5% (3Y annualized)',asOf:'Jul 31, 2026',source:'Hamilton ETFs'},
     IMAX:{yield:'Not published yet',mer:'Not shown in the retrieved provider summary',totalReturn:'Not published yet (<1 year)',asOf:'Aug 12, 2026',source:'Hamilton ETFs'},
     HEQL:{yield:'1.97%',mer:'1.40%',totalReturn:'Not shown in the retrieved provider summary',asOf:'Aug 12, 2026',source:'Global X Canada'},
