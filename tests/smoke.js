@@ -182,6 +182,10 @@ function createServer() {
     const marginCopy = /\\bmargin\\b/i.test(bodyText) && !/\\bmargin (account|call|debt)\\b/i.test(bodyText);
     const recurringTip = /recurring investments/i.test(bodyText) && /\$1 a day/i.test(bodyText);
     const wealthsimplePromo = /Automate your recurring investments/i.test(bodyText) && /recurring ETF purchases from your bank account/i.test(bodyText);
+    const creditCardPromo = await page.locator('#wealthsimpleCreditCardBox').count().then(count => count === 1)
+      && /2% cash back on everything/i.test(await page.locator('#wealthsimpleCreditCardBox').textContent())
+      && /5% cash back for your first 30 days/i.test(await page.locator('#wealthsimpleCreditCardBox').textContent())
+      && await page.locator('#wealthsimpleCreditCardBox a[href="https://www.wealthsimple.com/en-ca/credit-card"]').count().then(count => count === 1);
     const canadaBoxNoGuide = await page.locator('#wealthsimpleBox a[href*="9544942923547-Set-up-a-recurring-investment"]').count().then(count => count === 0);
     const unitsRule = /Same dollars, more units when prices dip/i.test(bodyText) && /No guessing/i.test(bodyText);
     const lumpSumFaq = /Is DCA better than lump sum investing\?/i.test(bodyText) && /investing the full amount right away has often done better/i.test(bodyText) && /DCA may be easier emotionally/i.test(bodyText);
@@ -300,6 +304,7 @@ function createServer() {
     if (!layoutChecks.budgetTwoColumns) throw new Error('Expected budget cards to use a balanced two-column desktop layout.');
     if (!layoutChecks.sustainableVisible) throw new Error('Expected step 6 sustainable investing section to render.');
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
+    if (!creditCardPromo) throw new Error('Expected the Wealthsimple credit card referral below the rainy-day cards.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / investing through the market.');
     if (!heroStructure) throw new Error('Expected Just Keep Investing hero with one h1 and the required trust tags.');
