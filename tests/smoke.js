@@ -170,9 +170,12 @@ function createServer() {
     const tfsaVisible = await page.locator('text=Estimated room remaining').first().isVisible();
     const taxFreeCopy = await page.locator('text=tax-free').first().isVisible();
     const bodyText = await page.locator('body').textContent();
-    const seoHero = /Keep Calm and DCA On/i.test(bodyText) && /DCA — dollar-cost averaging/i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You never have to guess the right moment/i.test(bodyText);
+    const seoHero = /Just Keep Investing\./i.test(bodyText) && /A 6-step plan for Canadian ETF investors/i.test(bodyText) && /You don't need to predict the market to build wealth/i.test(bodyText);
     const navText = await page.locator('.nav-links').textContent();
     const journeyStructure = !/The Plan/i.test(navText) && /Sign up with Wealthsimple/i.test(navText);
+    const heroStructure = await page.locator('h1').count().then(count => count === 1)
+      && await page.locator('h1').textContent().then(text => text.trim() === 'Just Keep Investing.')
+      && /TFSA & FHSA friendly/i.test(bodyText) && /Set it and forget it/i.test(bodyText);
     const sectionFootnotes = !/Context:/i.test(bodyText) && /Footnotes live with each section/i.test(bodyText) && /Educational content only, not financial advice/i.test(bodyText) && /Referral links may provide a benefit/i.test(bodyText) && /ETF tickers are examples for research/i.test(bodyText) && /Confirm your official TFSA contribution room/i.test(bodyText);
     const noCaveatHero = !/The goal is not to predict market bottoms/i.test(bodyText) && !/educational guide to automated/i.test(bodyText);
     const eligibilityCopy = /Eligibility year/i.test(bodyText) && /past contributions/i.test(bodyText) && /last year.s withdrawals/i.test(bodyText) && /last updated for 2026/i.test(bodyText);
@@ -299,6 +302,7 @@ function createServer() {
     if (!layoutChecks.shortPromoCtas) throw new Error('Expected Wealthsimple promo CTA labels to be short enough for clean layout.');
     if (!layoutChecks.noExternalLogoImage) throw new Error('Expected Wealthsimple brand cue to avoid a broken external logo image.');
     if (!seoHero) throw new Error('Expected SEO-first hero around Keep Calm and DCA On / investing through the market.');
+    if (!heroStructure) throw new Error('Expected Just Keep Investing hero with one h1 and the required trust tags.');
     if (!journeyStructure) throw new Error('Expected the simplified navigation and Wealthsimple referral button.');
     if (!sectionFootnotes) throw new Error('Expected section-level Footnotes and redistributed disclosures instead of Context sections/footer bullets.');
     if (!noCaveatHero) throw new Error('Expected caveat-heavy hero language to be removed.');
