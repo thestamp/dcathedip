@@ -334,6 +334,8 @@ function createServer() {
     const learningMatrix = await page.locator('#etfLearningMatrix .etf-learning-grid').count().then(count => count === 1)
       && await page.locator('#etfLearningMatrix button[data-etf-ticker="HDIV"]').count().then(count => count === 1)
       && await page.locator('#etfLearningMatrix button[data-etf-ticker="HYLD"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HDIV"].is-recommended').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix .matrix-recommendation-star').count().then(count => count === 1)
       && await page.locator('#etfLearningMatrix button[data-etf-ticker="HSU"]').count().then(count => count === 0)
       && await page.locator('#etfShock').count().then(count => count === 0);
     if (!learningMatrix) throw new Error('Expected ETF learning matrix with HDIV/HYLD, shock slider, and no 2× funds.');
