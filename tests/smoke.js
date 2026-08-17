@@ -332,12 +332,28 @@ function createServer() {
     if (!compoundingSection) throw new Error('Expected 3 crossovers section with growth milestones and compound calculator.');
     if (!incomeEtfSection) throw new Error('Expected dividend ETF comparison table with VDY, XDIV, XEI and sortable columns.');
     const learningMatrix = await page.locator('#etfLearningMatrix .etf-learning-grid').count().then(count => count === 1)
-      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HDIV"]').count().then(count => count === 1)
-      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HYLD"]').count().then(count => count === 1)
-      && await page.locator('#etfLearningMatrix button[data-etf-ticker="HDIV"].is-recommended').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix .etf-matrix-details[data-etf-ticker="HDIV"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix .etf-matrix-details[data-etf-ticker="HYLD"]').count().then(count => count === 1)
+      && await page.locator('#etfLearningMatrix [data-etf-card="HDIV"].is-recommended').count().then(count => count === 1)
       && await page.locator('#etfLearningMatrix .matrix-recommendation-star').count().then(count => count === 1)
       && await page.locator('#etfLearningMatrix button[data-etf-ticker="HSU"]').count().then(count => count === 0)
       && await page.locator('#etfShock').count().then(count => count === 0);
+    const comparisonControls = await page.locator('#etfLearningMatrix [data-compare-ticker]').count() === 12
+      && await page.locator('#compareSelectedEtfs').count() === 1
+      && await page.locator('#compareSelectedEtfs').isDisabled();
+    await page.locator('[data-compare-ticker="HYLD"]').click();
+    await page.locator('[data-compare-ticker="HDIV"]').click();
+    const comparisonSelected = await page.locator('#compareSelectedCount').textContent() === '2 selected'
+      && !(await page.locator('#compareSelectedEtfs').isDisabled());
+    const comparisonUrl = await page.locator('#compareSelectedEtfs').evaluate(button => {
+      const originalOpen = window.open;
+      let openedUrl = '';
+      window.open = url => { openedUrl = url; return null; };
+      button.click();
+      window.open = originalOpen;
+      return openedUrl;
+    });
+    if (!comparisonControls || !comparisonSelected || comparisonUrl !== 'https://stockanalysis.com/etf/compare/tsx:hyld-vs-tsx:hdiv/?r=MAX') throw new Error('Expected ETF comparison controls and Stock Analysis URL.');
     if (!learningMatrix) throw new Error('Expected ETF learning matrix with HDIV/HYLD, shock slider, and no 2× funds.');
     if (!compoundingNav) throw new Error('Expected nav Plan dropdown to include step 3 link.');
     if (!tfsaCalculatorNav) throw new Error('Expected section navigation link to the TFSA room calculator.');
